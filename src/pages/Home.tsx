@@ -52,18 +52,18 @@ const Home = () => {
           if (entry.isIntersecting && !hasAnimated) {
             setHasAnimated(true);
             
-            // Animate experience counter (5 years)
-            animateCounter(0, 5, 2000, (value) => {
+            // Animate experience counter (3 years)
+            animateCounter(0, 3, 2000, (value) => {
               setCounters(prev => ({ ...prev, experience: value }));
             });
 
-            // Animate satisfaction counter (98%)
-            animateCounter(0, 98, 2500, (value) => {
+            // Animate satisfaction counter (90%)
+            animateCounter(0, 90, 2500, (value) => {
               setCounters(prev => ({ ...prev, satisfaction: value }));
             });
 
-            // Animate projects counter (150+)
-            animateCounter(0, 150, 3000, (value) => {
+            // Animate projects counter (10+)
+            animateCounter(0, 10, 3000, (value) => {
               setCounters(prev => ({ ...prev, projects: value }));
             });
           }
