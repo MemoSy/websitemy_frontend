@@ -54,8 +54,10 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Noto Sans Arabic', 'Cairo', 'Inter', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
+        arabic: ['Noto Sans Arabic', 'Cairo', 'sans-serif'],
+        coding: ['Noto Sans Arabic', 'JetBrains Mono', 'monospace'],
       },
       spacing: {
         '18': '4.5rem',
