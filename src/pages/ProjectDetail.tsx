@@ -325,7 +325,6 @@ const ProjectDetail = () => {
           transition={{ duration: 0.8, delay: 0.8 }}
         >
           <ReviewSystem
-          
             onAddReview={handleAddReview}
             projectId={project.id}
           />

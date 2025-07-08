@@ -26,9 +26,11 @@ const ReviewSystem: React.FC<ReviewSystemProps> = ({
   useEffect(() => {
     const fetchReviews = async () => {
       try {
+        console.log("Fetching reviews for projectId:", projectId);
         const response = await axios.get<Review[]>(
-          `https://websitemy-backend.onrender.com/review?projectId=${projectId}`
+          `https://backend-three-tawny-29.vercel.app/review/${projectId}`
         );
+        console.log(response.data);
         setReviews(response.data);
       } catch (error) {
         console.error("Error fetching reviews:", error);
@@ -53,7 +55,7 @@ const ReviewSystem: React.FC<ReviewSystemProps> = ({
       setNewReview({ author: "", email: "", rating: 5, comment: "" });
 
       axios
-        .post("https://websitemy-backend.onrender.com/review", {
+        .post("https://backend-three-tawny-29.vercel.app/review", {
           name: newReview.author,
           email: newReview.email,
           rating: newReview.rating,
