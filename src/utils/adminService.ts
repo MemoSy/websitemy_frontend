@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:3000'; // Adjust to your backend URL
+const API_BASE_URL = 'https://websitemy-backend.onrender.com'; // Adjust to your backend URL
 
 export interface AdminCredentials {
   username: string;

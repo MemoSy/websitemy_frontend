@@ -30,25 +30,25 @@ const About = () => {
     {
       name: 'أحمد المبيض',
       role: 'المدير',
-      image: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400',
+      image: 'https://scontent.fist14-1.fna.fbcdn.net/v/t39.30808-6/369793328_7202986759731811_1372148264917866247_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=vOAFYwfALOAQ7kNvwG76P-F&_nc_oc=Adn75bEqUGWLVYzVh8gLuPKxxFCwW5cigbzCr6LJxe0S-RML7QU_0U7N3mf0PORL3fU&_nc_zt=23&_nc_ht=scontent.fist14-1.fna&_nc_gid=9dozhCd9wbKuz2kQnRXl7A&oh=00_AfQVT9BydXofyDnhvB1GzYVVeZszNccYlHzeq8VsqCxKww&oe=687301B9',
       skills: ['مدير عام',]
     },
     {
       name: 'محمود المبيض ',
-      role: 'مطور أول - Full Stack',
-      image: 'https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg?auto=compress&cs=tinysrgb&w=400',
+      role: 'مطور ويب - Full Stack',
+      image: 'https://scontent.fist14-1.fna.fbcdn.net/v/t39.30808-6/514078228_619980001115631_3819133287882385004_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=ItiEqdijrA8Q7kNvwFmgEKZ&_nc_oc=AdkpglUO8oLYDQmxuh5kStkpIAH150xRaQzSa45mR79S0LXXdIIQ5p53VmQ5UfyonOc&_nc_zt=23&_nc_ht=scontent.fist14-1.fna&_nc_gid=Y-p2GAs5-kVfc5H1J-w6sw&oh=00_AfRdatTyv1NNkfXZSfhdDVUlfoC6VzniXEzXHAZEOHUcSA&oe=6873100D',
       skills: ['React', 'Node.js', 'MongoDB', 'next.js']
     },
     {
       name: ' حسن الأبرش',
       role: 'مصمم UI/UX',
-      image: 'https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=400',
+      image: 'https://scontent.fist14-1.fna.fbcdn.net/v/t39.30808-6/515014282_4123566981298767_3372271132740174068_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=0DiVU73UhhsQ7kNvwHcSDL1&_nc_oc=AdnEAu6FALvzoahddmvQ79pWf8yDaIFzMyN9VNvPU-IZlaW3BZqS8wmV18GeY2LnZYE&_nc_zt=23&_nc_ht=scontent.fist14-1.fna&_nc_gid=D5c7alJRN6zUJHrtIp0f-w&oh=00_AfSjdpEY0FNfGbTxP73KdW9Kh6DEU1fIVsmXcnjcADyQ8Q&oe=687315EE',
       skills: ['Figma', 'Adobe XD', 'User Research']
     },
     {
       name: 'سارة حلاق',
       role: 'مطورة واجهة أمامية ',
-      image: 'https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?auto=compress&cs=tinysrgb&w=400',
+      image: 'https://scontent.fist14-1.fna.fbcdn.net/v/t39.30808-6/241235530_202018728531166_4505761659028438071_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=3Jr_nPSeYOIQ7kNvwFr3T2_&_nc_oc=AdknYj_H5wneqIa3wIJH5CScNHAD5h7dKw6cROW6d43N88UqT6W27uRz6lSFbvGV4jM&_nc_zt=23&_nc_ht=scontent.fist14-1.fna&_nc_gid=x5mh2wykGHTeRKW828pi7g&oh=00_AfQX9FnNl5gpdxrzRk6g6vTEiWsuWfiAY3Tq_TllVKHeCQ&oe=68731A36',
       skills: ['React','javascrept']
     }
   ];

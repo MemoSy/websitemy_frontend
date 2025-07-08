@@ -27,7 +27,7 @@ const ReviewSystem: React.FC<ReviewSystemProps> = ({
     const fetchReviews = async () => {
       try {
         const response = await axios.get<Review[]>(
-          `http://localhost:3000/review?projectId=${projectId}`
+          `https://websitemy-backend.onrender.com/review?projectId=${projectId}`
         );
         setReviews(response.data);
       } catch (error) {
@@ -53,7 +53,7 @@ const ReviewSystem: React.FC<ReviewSystemProps> = ({
       setNewReview({ author: "", email: "", rating: 5, comment: "" });
 
       axios
-        .post("http://localhost:3000/review", {
+        .post("https://websitemy-backend.onrender.com/review", {
           name: newReview.author,
           email: newReview.email,
           rating: newReview.rating,
