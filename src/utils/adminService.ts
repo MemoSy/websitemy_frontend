@@ -36,7 +36,9 @@ export const adminLogin = async (credentials: AdminCredentials): Promise<AdminLo
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
       },
+      credentials: 'include',
       body: JSON.stringify(credentials),
     });
 
@@ -65,7 +67,9 @@ export const adminLogout = async (): Promise<boolean> => {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,
+        'X-Requested-With': 'XMLHttpRequest',
       },
+      credentials: 'include',
     });
 
     localStorage.removeItem('adminToken');
@@ -85,7 +89,9 @@ export const verifyAdminToken = async (): Promise<boolean> => {
     const response = await fetch(`${API_BASE_URL}/admin/verify`, {
       headers: {
         'Authorization': `Bearer ${token}`,
+        'X-Requested-With': 'XMLHttpRequest',
       },
+      credentials: 'include',
     });
 
     const data = await response.json();
@@ -104,7 +110,9 @@ export const getAllChats = async (): Promise<ChatData[]> => {
     const response = await fetch(`${API_BASE_URL}/admin/chats`, {
       headers: {
         'Authorization': `Bearer ${token}`,
+        'X-Requested-With': 'XMLHttpRequest',
       },
+      credentials: 'include',
     });
 
     if (!response.ok) {
@@ -127,7 +135,9 @@ export const getAdminAnalytics = async () => {
     const response = await fetch(`${API_BASE_URL}/admin/analytics`, {
       headers: {
         'Authorization': `Bearer ${token}`,
+        'X-Requested-With': 'XMLHttpRequest',
       },
+      credentials: 'include',
     });
 
     if (!response.ok) {

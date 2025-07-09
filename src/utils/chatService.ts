@@ -52,7 +52,9 @@ export const saveChatSession = async (sessionData: ChatSession): Promise<void> =
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
       },
+      credentials: 'include',
       body: JSON.stringify({
         sessionId: sessionData.sessionId,
         messages: sessionData.messages,
@@ -77,7 +79,9 @@ export const updateChatSession = async (sessionId: string, messages: ChatMessage
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
       },
+      credentials: 'include',
       body: JSON.stringify({
         messages,
         keywords,
@@ -99,7 +103,9 @@ export const addMessageToChat = async (sessionId: string, message: ChatMessage):
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
       },
+      credentials: 'include',
       body: JSON.stringify(message),
     });
 
@@ -114,7 +120,12 @@ export const addMessageToChat = async (sessionId: string, message: ChatMessage):
 // Get chat session by ID
 export const getChatSession = async (sessionId: string): Promise<ChatSession | null> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/chat/session/${sessionId}`);
+    const response = await fetch(`${API_BASE_URL}/chat/session/${sessionId}`, {
+      credentials: 'include',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+    });
     
     if (!response.ok) {
       return null;
@@ -131,7 +142,12 @@ export const getChatSession = async (sessionId: string): Promise<ChatSession | n
 // Get chat analytics
 export const getChatAnalytics = async () => {
   try {
-    const response = await fetch(`${API_BASE_URL}/chat/analytics`);
+    const response = await fetch(`${API_BASE_URL}/chat/analytics`, {
+      credentials: 'include',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+    });
     
     if (!response.ok) {
       throw new Error('Failed to fetch chat analytics');

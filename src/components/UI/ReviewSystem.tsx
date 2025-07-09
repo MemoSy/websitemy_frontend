@@ -28,7 +28,14 @@ const ReviewSystem: React.FC<ReviewSystemProps> = ({
       try {
         console.log("Fetching reviews for projectId:", projectId);
         const response = await axios.get<Review[]>(
-          `https://websitemy-backend.vercel.app/review/${projectId}`
+          `https://websitemy-backend.vercel.app/review/${projectId}`,
+          {
+            withCredentials: true,
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Requested-With': 'XMLHttpRequest',
+            },
+          }
         );
         console.log(response.data);
         setReviews(response.data);
@@ -61,6 +68,12 @@ const ReviewSystem: React.FC<ReviewSystemProps> = ({
           rating: newReview.rating,
           comment: newReview.comment,
           projectId: projectId,
+        }, {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+          },
         })
         .then(function (response) {
           console.log(response);
