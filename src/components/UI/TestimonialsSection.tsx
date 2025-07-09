@@ -55,14 +55,14 @@ const TestimonialsSection = () => {
     },
     {
       id: "3",
-      name: "خالد عبدالرحمن",
-      position: "مدير تقنية المعلومات",
-      company: "مجموعة الأعمال الذكية",
+      name: " ",
+      position: " ",
+      company: " ",
       image:
-        "https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=400",
+        " data:image/png;base64,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",
       comment:
-        "لوحة التحكم التي طوروها لنا ساعدتنا في تنظيم عملياتنا بشكل كامل. التقارير والتحليلات دقيقة ومفيدة جداً لاتخاذ القرارات الاستراتيجية.",
-      project: "نظام إدارة الأعمال",
+        " ",
+      project: "   ",
       facebookUrl: "https://www.facebook.com",
       twitterUrl: "https://www.twitter.com",
       linkedinUrl: "https://www.linkedin.com",
@@ -71,14 +71,14 @@ const TestimonialsSection = () => {
     },
     {
       id: "4",
-      name: "نورا أحمد الغامدي",
-      position: "مديرة التطوير",
-      company: "شركة الابتكار التقني",
+      name: " ",
+      position: " ",
+      company: " ",
       image:
-        "https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=400",
+        "data:image/png;base64,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",
       comment:
-        "فريق متميز ومبدع. التطبيق الذي طوروه لنا حقق نجاحاً كبيراً في السوق. التصميم جذاب والأداء ممتاز. نتطلع للتعاون معهم في مشاريع قادمة.",
-      project: "تطبيق جوال متقدم",
+        " ",
+      project: " ",
       facebookUrl: "https://www.facebook.com",
       twitterUrl: "https://www.twitter.com",
       linkedinUrl: "https://www.linkedin.com",
@@ -186,7 +186,7 @@ const TestimonialsSection = () => {
               {/* Results */}
               <div className="mt-24 space-y-6">
                 <h5 className="text-white font-semibold mb-3">
-                  النتائج المحققة:
+                   منصات التواصل
                 </h5>
                 <div className="flex flex-wrap gap-9">
                   <a

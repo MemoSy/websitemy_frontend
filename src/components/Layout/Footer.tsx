@@ -16,19 +16,19 @@ const Footer = () => {
               نحن لا نبني مواقع ويب... نبني تجارب رقمية خالدة
             </p>
             <div className="flex gap-8">
-              <a href="#" className="text-gray-400 hover:text-cyan-400 transition-colors">
+              <a href="https://github.com/MemoSy" className="text-gray-400 hover:text-cyan-400 transition-colors">
                 <Github className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-cyan-400 transition-colors">
+              <a href="https://www.linkedin.com/in/mahmudalmubayed/" className="text-gray-400 hover:text-cyan-400 transition-colors">
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-cyan-400 transition-colors">
+              <a href="https://x.com/Memosy2009" className="text-gray-400 hover:text-cyan-400 transition-colors">
                 <Twitter className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-cyan-400 transition-colors">
+              <a href="https://www.facebook.com/websitemyy" className="text-gray-400 hover:text-cyan-400 transition-colors">
                 <Facebook className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-cyan-400 transition-colors">
+              <a href="https://www.youtube.com/@codelam" className="text-gray-400 hover:text-cyan-400 transition-colors">
                 <Youtube className="w-5 h-5" />
               </a>
             </div>

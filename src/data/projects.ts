@@ -634,6 +634,60 @@ export const projects: Project[] = [
     ],
   },
 
+
+  {
+    id: "national-network-media",
+    title: "الشبكة الوطنية للإعلام",
+    description: "منصة إعلامية متكاملة لدعم التحول الرقمي في سوريا",
+    fullDescription:
+      "منصة إعلامية متطورة تهدف لدعم التحول الرقمي في سوريا. تتميز بتصميم استثنائي وواجهة متجاوبة مع جميع أحجام الشاشات، وتقدم محتوى إعلامي هادف عبر مقالات وصور وفيديوهات وبودكاست.",
+    image:
+      "https://scontent.fist14-1.fna.fbcdn.net/v/t39.30808-6/495157847_575674358879529_7216978117534140260_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=102&ccb=1-7&_nc_sid=127cfc&_nc_ohc=uOBVHjlVbGUQ7kNvwEsyrQ9&_nc_oc=AdlVfLjZLJgeXllVBFQIMA0HI8OKbAe4ji_OwHRRJrS9T5tn9LN5xSNL_lyTa9RXfJo&_nc_zt=23&_nc_ht=scontent.fist14-1.fna&_nc_gid=vRXfuN3RlgTkMD72jlRofw&oh=00_AfS5Gjb_6Y_vyS99S_0I2OgZGl9Hhagc_E12J8ZEZlvWWg&oe=6870AE35",
+    youtubeVideo: "https://www.youtube.com/embed/Hlw4cJAAqGk",
+    category: "opensource",
+    technologies: ["nextjs", "TypeScript", "Tailwind CSS", "mongodb"],
+    duration: "شهرين",
+    rating: 4.9,
+    aiData: {
+      price: "500$",
+      clientType: " منصة اخبارية سورية",
+      complexity: "متقدم",
+      teamSize: "3 مطورين",
+      keyFeatures: [
+        "نظام ادارة محتوى متقدم",
+        "دعم مرئيات متكامل",
+        "لوحة تحكم سهلة ",
+        "نظام تعليقات بدون تسجيل دخول",
+        "مشاركة المقالات على منصات التواصل الاجتماعي",
+      ],
+      clientFeedback:
+        "زيادة الطلبات الدولية بنسبة 60% وتحسين الكفاءة التشغيلية",
+    },
+    reviews: [],
+    liveUrl: "https://www.nationalsy.com/",
+    githubUrl: "https://www.nationalsy.com",
+    objectives: [
+      "تطوير واجهة مستخدم حديثة وسهلة الاستخدام",
+      "تحسين تجربة المستخدم وزيادة معدل التحويل",
+      "ضمان الأداء العالي والاستجابة السريعة",
+      "تطبيق أفضل ممارسات الأمان والحماية",
+    ],
+    challenges: [
+      "تحسين أداء التطبيق للتعامل مع حجم كبير من البيانات",
+      "ضمان التوافق مع جميع المتصفحات والأجهزة",
+      "تطبيق نظام أمان متقدم لحماية بيانات المستخدمين",
+      "تطوير واجهة برمجة تطبيقات قابلة للتوسع",
+    ],
+    features: [
+      "تصميم متجاوب يعمل على جميع الأجهزة",
+      "نظام إدارة محتوى متقدم",
+      "تحليلات وتقارير في الوقت الفعلي",
+      "نظام دفع آمن ومتعدد الطرق",
+      "تحسين محركات البحث (SEO)",
+      "نظام إشعارات ذكي",
+    ],
+  },
+
   {
     id: "saas-platform",
     title: "مرافقي للذكي",
