@@ -38,7 +38,6 @@ export const adminLogin = async (credentials: AdminCredentials): Promise<AdminLo
         'Content-Type': 'application/json',
         'X-Requested-With': 'XMLHttpRequest',
       },
-      credentials: 'include',
       body: JSON.stringify(credentials),
     });
 
@@ -69,7 +68,6 @@ export const adminLogout = async (): Promise<boolean> => {
         'Authorization': `Bearer ${token}`,
         'X-Requested-With': 'XMLHttpRequest',
       },
-      credentials: 'include',
     });
 
     localStorage.removeItem('adminToken');
@@ -91,7 +89,6 @@ export const verifyAdminToken = async (): Promise<boolean> => {
         'Authorization': `Bearer ${token}`,
         'X-Requested-With': 'XMLHttpRequest',
       },
-      credentials: 'include',
     });
 
     const data = await response.json();
@@ -112,7 +109,6 @@ export const getAllChats = async (): Promise<ChatData[]> => {
         'Authorization': `Bearer ${token}`,
         'X-Requested-With': 'XMLHttpRequest',
       },
-      credentials: 'include',
     });
 
     if (!response.ok) {
@@ -137,7 +133,6 @@ export const getAdminAnalytics = async () => {
         'Authorization': `Bearer ${token}`,
         'X-Requested-With': 'XMLHttpRequest',
       },
-      credentials: 'include',
     });
 
     if (!response.ok) {

@@ -30,7 +30,6 @@ const ReviewSystem: React.FC<ReviewSystemProps> = ({
         const response = await axios.get<Review[]>(
           `https://websitemy-backend.vercel.app/review/${projectId}`,
           {
-            withCredentials: true,
             headers: {
               'Content-Type': 'application/json',
               'X-Requested-With': 'XMLHttpRequest',
@@ -69,7 +68,6 @@ const ReviewSystem: React.FC<ReviewSystemProps> = ({
           comment: newReview.comment,
           projectId: projectId,
         }, {
-          withCredentials: true,
           headers: {
             'Content-Type': 'application/json',
             'X-Requested-With': 'XMLHttpRequest',

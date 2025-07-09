@@ -54,7 +54,6 @@ export const saveChatSession = async (sessionData: ChatSession): Promise<void> =
         'Content-Type': 'application/json',
         'X-Requested-With': 'XMLHttpRequest',
       },
-      credentials: 'include',
       body: JSON.stringify({
         sessionId: sessionData.sessionId,
         messages: sessionData.messages,
@@ -81,7 +80,6 @@ export const updateChatSession = async (sessionId: string, messages: ChatMessage
         'Content-Type': 'application/json',
         'X-Requested-With': 'XMLHttpRequest',
       },
-      credentials: 'include',
       body: JSON.stringify({
         messages,
         keywords,
@@ -105,7 +103,6 @@ export const addMessageToChat = async (sessionId: string, message: ChatMessage):
         'Content-Type': 'application/json',
         'X-Requested-With': 'XMLHttpRequest',
       },
-      credentials: 'include',
       body: JSON.stringify(message),
     });
 
@@ -121,7 +118,6 @@ export const addMessageToChat = async (sessionId: string, message: ChatMessage):
 export const getChatSession = async (sessionId: string): Promise<ChatSession | null> => {
   try {
     const response = await fetch(`${API_BASE_URL}/chat/session/${sessionId}`, {
-      credentials: 'include',
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
       },
@@ -143,7 +139,6 @@ export const getChatSession = async (sessionId: string): Promise<ChatSession | n
 export const getChatAnalytics = async () => {
   try {
     const response = await fetch(`${API_BASE_URL}/chat/analytics`, {
-      credentials: 'include',
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
       },
