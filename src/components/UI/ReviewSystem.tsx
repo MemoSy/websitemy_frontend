@@ -28,7 +28,7 @@ const ReviewSystem: React.FC<ReviewSystemProps> = ({
       try {
         console.log("Fetching reviews for projectId:", projectId);
         const response = await axios.get<Review[]>(
-          `https://backend-three-tawny-29.vercel.app/review/${projectId}`
+          `https://websitemy-backend.vercel.app/review/${projectId}`
         );
         console.log(response.data);
         setReviews(response.data);
@@ -55,7 +55,7 @@ const ReviewSystem: React.FC<ReviewSystemProps> = ({
       setNewReview({ author: "", email: "", rating: 5, comment: "" });
 
       axios
-        .post("https://backend-three-tawny-29.vercel.app/review", {
+        .post("https://websitemy-backend.vercel.app/review", {
           name: newReview.author,
           email: newReview.email,
           rating: newReview.rating,
