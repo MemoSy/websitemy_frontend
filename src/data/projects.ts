@@ -268,19 +268,11 @@ export const projects: Project[] = [
     },
 
     reviews: [
-      {
-        id: "1",
-        author: "أحمد محمد",
-        email: "ahmed@example.com",
-        rating: 5,
-        comment:
-          "موقع رائع جداً، التصميم احترافي والأداء ممتاز. تجربة التسوق سلسة ومريحة جداً.",
-        date: "2024-01-15",
-      },
+   
 
     ],
-    liveUrl: "https://camera-shop-teal.vercel.app/ar",
-    githubUrl: "https://camera-shop-teal.vercel.app/ar",
+    liveUrl: "https://www.sharekna.online",
+    githubUrl: "https://www.sharekna.online",
     objectives: [
       "تطوير واجهة مستخدم حديثة وسهلة الاستخدام",
       "تحسين تجربة المستخدم وزيادة معدل التحويل",
