@@ -9,8 +9,8 @@ import TestimonialsSection from '../components/UI/TestimonialsSection';
 
 const Home = () => {
   const typewriterTexts = [
-    ' WebSiteMy',
-    'نحن نبدع لأجلك'
+    ' لا تدع منافسيك يسبقونك',
+    'ابدأ الآن '
   ];
 
   // State for animated counters

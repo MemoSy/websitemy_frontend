@@ -39,17 +39,17 @@ const TestimonialsSection = () => {
     },
     {
       id: "2",
-      name: "فاطمة علي الزهراني",
-      position: "مؤسسة ومديرة تنفيذية",
-      company: "أكاديمية المستقبل التعليمية",
+      name: "Emine Özkan‏",
+      position: "İnsan Kaynakları Müdürü",
+      company: "Hyper Company",
       image:
-        "https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg?auto=compress&cs=tinysrgb&w=400",
+        "https://media.licdn.com/dms/image/v2/D4D03AQFP-NHJqw66tQ/profile-displayphoto-shrink_200_200/B4DZWUHLRVGcAg-/0/1741946664856?e=1757548800&v=beta&t=j18tLOHYFkG-tDAXN2UUzBDBjTJfcZY_XmIqEGESX5w",
       comment:
-        "منصة تعليمية رائعة غيرت طريقة تقديم التعليم لدينا. الطلاب أصبحوا أكثر تفاعلاً والمعلمون يجدون سهولة في إدارة المحتوى. نظام التتبع والتحليلات مفيد جداً.",
+        "Mahmut, hayallerinin peşinden azimle koşan, vizyoner ve çalışkan bir genç. Onu ofisimizde ağırlama fırsatı buldum ve o gün heyecanını, gözlerindeki ışığı yakından gördüm. Kısa zamanda kendisini web tasarım ve yazılım alanında geliştirmesi, bence onu gelecekte çok daha büyük başarılara taşıyacak. Türkiye’de ona yol arkadaşlığı yapmaktan ve destek olmaktan gurur duyuyorum. Başarılarının devamını tüm kalbimle diliyorum.",
       project: "منصة تعليمية تفاعلية",
       facebookUrl: "https://www.facebook.com",
       twitterUrl: "https://www.twitter.com",
-      linkedinUrl: "https://www.linkedin.com",
+      linkedinUrl: "https://www.linkedin.com/in/emine-%C3%B6zkan16/",
       githubUrl: "https://www.github.com",
       youtubeUrl: "https://www.youtube.com",
     },
