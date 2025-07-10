@@ -88,15 +88,15 @@ const   ProjectTabs = () => {
               <button
                 key={category.id}
                 onClick={() => handleTabChange(category.id)}
-                className={`relative px-6 py-3 rounded-xl font-medium transition-all duration-300 w-full md:w-fit transform hover:scale-105 ${
+                className={`relative px-3 py-1.5 md:px-6 md:py-3 rounded-xl font-medium transition-all duration-300 md:w-fit transform hover:scale-105 ${
                   activeTab === category.id
                     ? 'text-white bg-gradient-to-r from-cyan-500 to-purple-500 shadow-lg shadow-cyan-500/25'
                     : 'text-gray-400 bg-gray-800/50 border border-gray-700 hover:text-cyan-300 hover:border-cyan-500/50'
                 }`}
               >
                 <span className="flex items-center space-x-2">
-                  <span className="text-lg">{category.icon}</span>
-                  <span>{category.title}</span>
+                  <span className="text-base md:text-lg">{category.icon}</span>
+                  <span className='text-[14px] md:text-[16px]'>{category.title}</span>
                 </span>
                 
                 {activeTab === category.id && (

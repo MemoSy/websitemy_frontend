@@ -30,7 +30,7 @@ const About = () => {
     {
       name: 'أحمد المبيض',
       role: 'المدير',
-      image: 'https://scontent.fist14-1.fna.fbcdn.net/v/t39.30808-6/369793328_7202986759731811_1372148264917866247_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=vOAFYwfALOAQ7kNvwG76P-F&_nc_oc=Adn75bEqUGWLVYzVh8gLuPKxxFCwW5cigbzCr6LJxe0S-RML7QU_0U7N3mf0PORL3fU&_nc_zt=23&_nc_ht=scontent.fist14-1.fna&_nc_gid=9dozhCd9wbKuz2kQnRXl7A&oh=00_AfQVT9BydXofyDnhvB1GzYVVeZszNccYlHzeq8VsqCxKww&oe=687301B9',
+      image: 'https://scontent.fist14-1.fna.fbcdn.net/v/t39.30808-6/509606060_24538410302429521_5576451676817606581_n.jpg?stp=c120.0.720.720a_dst-jpg_s206x206_tt6&_nc_cat=103&ccb=1-7&_nc_sid=6439a4&_nc_ohc=yMZriAYL8XsQ7kNvwH9z_d5&_nc_oc=AdkydfkbbTOeKgF6lpog2K_aLn_GwAQTjDP8BlHl-TkX6S5TbYoKLSqeqeMkU572AJk&_nc_zt=23&_nc_ht=scontent.fist14-1.fna&_nc_gid=Q_o8bDEE51slXmAODNgvtQ&oh=00_AfSWnA6_0DSJJmrWA7Gt6A4jlQ8CrH__16l5s06VS47M_A&oe=6875C774',
       skills: ['مدير عام',]
     },
     {

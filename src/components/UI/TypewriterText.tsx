@@ -39,7 +39,7 @@ const TypewriterText: React.FC<TypewriterTextProps> = ({
   }, [currentText, isDeleting, currentTextIndex, texts, speed, delay]);
 
   return (
-    <span className={className}>
+    <span className='text-[24px] md:text-[64px]'>
       {currentText}
       <span className="animate-pulse">|</span>
     </span>

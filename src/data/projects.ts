@@ -491,8 +491,8 @@ export const projects: Project[] = [
         date: "2024-02-05",
       },
     ],
-    liveUrl: "https://codelam.tech",
-    githubUrl: "https://codelam.tech",
+    liveUrl: "https://codelam.site",
+    githubUrl: "https://codelam.site",
     objectives: [
       "تطوير واجهة مستخدم حديثة وسهلة الاستخدام",
       "تحسين تجربة المستخدم وزيادة معدل التحويل",
@@ -753,7 +753,7 @@ export const projects: Project[] = [
 export const serviceCategories: ServiceCategory[] = [
   {
     id: "opensource",
-    title: "مشاريع مفتوحة المصدر",
+    title: "مفتوحة المصدر",
     subtitle: "كود يلهم العالم",
     icon: "🚀",
     description: "مشاريع برمجية مفتوحة المصدر تساهم في تطوير المجتمع التقني",
