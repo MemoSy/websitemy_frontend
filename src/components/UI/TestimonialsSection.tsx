@@ -55,13 +55,13 @@ const TestimonialsSection = () => {
     },
     {
       id: "3",
-      name: "Adrian ",
-      position: "JavaScript Mastery ",
+      name: "JavaScript Mastery",
+      position: "Adrian ",
       company: "Founder @jsmastery.pro, GitHub Star , software engineer & educator.",
       image:
         "https://media.licdn.com/dms/image/v2/C4E0BAQFqpbBFqA1_ig/company-logo_200_200/company-logo_200_200/0/1654634977357/javascript_mastery_logo?e=1757548800&v=beta&t=JAiRfNAh4H_dKKUSbxO7ueNxIciw87PRvQq32d_ackA",
       comment:
-        " Keep building, keep sharing - big things start exactly like this. Cheering you on all the way, Mahmoud, You can achieve anything you put your mind to! 🙌 ",
+        " Keep building, keep sharing - big things start exactly like this. Cheering you on all the way, Mahmoud.You can achieve anything you put your mind to! 🙌 ",
       project: "   ",
       facebookUrl: "https://www.facebook.com",
       twitterUrl: "https://x.com/jsmasterypro",
@@ -177,7 +177,7 @@ const TestimonialsSection = () => {
               </div>
 
               {/* Comment */}
-              <blockquote className="text-lg md:text-xl text-gray-300 leading-relaxed mb-8 relative z-10 mt-4" style={{
+              <blockquote className="text-[17px] text-gray-300 leading-relaxed mb-8 relative z-10 mt-4" style={{
                 lineHeight: "1.6",
               }}>
                 "{activeTestimonial.comment}"
