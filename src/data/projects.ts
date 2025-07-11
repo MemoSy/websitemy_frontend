@@ -9,7 +9,7 @@ export const projects: Project[] = [
     fullDescription:
       "تم تطوير هذا المتجر الإلكتروني باستخدام أحدث التقنيات لضمان تجربة تسوق سلسة ومرضية. يتضمن نظام إدارة محتوى قوي، نظام ذكي، وتحليلات مبيعات متقدمة. المشروع يهدف إلى توفير منصة شاملة للتجارة الإلكترونية مع واجهة مستخدم حديثة وسهلة الاستخدام، بالإضافة إلى نظام إدارة متقدم للمنتجات والطلبات.",
     image:
-      "https://ibb.co/ns0KpGF7",
+      "https://i.ibb.co/6RZqQMkH/1.webp",
     youtubeVideo: "https://www.youtube.com/embed/LtP5HDSfcmw",
     category: "ecommerce",
     technologies: ["nextjs", "MongoDB", "TailwindCSS", "typescript"],
@@ -91,7 +91,7 @@ export const projects: Project[] = [
     fullDescription:
       "Bu çevrimiçi mağaza, sorunsuz ve tatmin edici bir alışveriş deneyimi sağlamak için en son teknolojiler kullanılarak geliştirildi. Sağlam bir içerik yönetim sistemi, akıllı bir sistem ve gelişmiş satış analitiği içerir. Proje, modern ve kullanımı kolay bir kullanıcı arayüzüne sahip kapsamlı bir e-ticaret platformu ve gelişmiş bir ürün ve sipariş yönetim sistemi sağlamayı amaçlamaktadır.",
     image:
-      "https://ibb.co/d0RFz2z8",
+      "https://i.ibb.co/VWsRPSPf/Fire-Shot-Capture-022-Home-Page-www-artwin-store.png",
     youtubeVideo: "https://www.youtube.com/embed/LtP5HDSfcmw",
     category: "ecommerce",
     technologies: ["nextjs", "MongoDB", "TailwindCSS", "typescript"],
