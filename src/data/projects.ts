@@ -9,7 +9,7 @@ export const projects: Project[] = [
     fullDescription:
       "تم تطوير هذا المتجر الإلكتروني باستخدام أحدث التقنيات لضمان تجربة تسوق سلسة ومرضية. يتضمن نظام إدارة محتوى قوي، نظام ذكي، وتحليلات مبيعات متقدمة. المشروع يهدف إلى توفير منصة شاملة للتجارة الإلكترونية مع واجهة مستخدم حديثة وسهلة الاستخدام، بالإضافة إلى نظام إدارة متقدم للمنتجات والطلبات.",
     image:
-      "https://scontent.fist14-1.fna.fbcdn.net/v/t39.30808-6/508320313_24497356569868228_8666842211716543680_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=127cfc&_nc_ohc=uXop0GSff2kQ7kNvwHMQOYw&_nc_oc=Adku94XwPikm_95aR4tGZdFuo9TFbfiF_PruY1NSvkRjdZcc98RHE7z5_9n3t1rowuM&_nc_zt=23&_nc_ht=scontent.fist14-1.fna&_nc_gid=Mo0FFxHPYglIgvjFyKa5XQ&oh=00_AfSPyuMTmQLO2-vEN3X_PsYgso8dgyzB3r072cedOAS2kQ&oe=6870A168",
+      "https://ibb.co/ns0KpGF7",
     youtubeVideo: "https://www.youtube.com/embed/LtP5HDSfcmw",
     category: "ecommerce",
     technologies: ["nextjs", "MongoDB", "TailwindCSS", "typescript"],
@@ -91,7 +91,7 @@ export const projects: Project[] = [
     fullDescription:
       "Bu çevrimiçi mağaza, sorunsuz ve tatmin edici bir alışveriş deneyimi sağlamak için en son teknolojiler kullanılarak geliştirildi. Sağlam bir içerik yönetim sistemi, akıllı bir sistem ve gelişmiş satış analitiği içerir. Proje, modern ve kullanımı kolay bir kullanıcı arayüzüne sahip kapsamlı bir e-ticaret platformu ve gelişmiş bir ürün ve sipariş yönetim sistemi sağlamayı amaçlamaktadır.",
     image:
-      "https://scontent.fist14-1.fna.fbcdn.net/v/t39.30808-6/516749284_24662635610006989_4709968631134916215_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_ohc=io_9W1tymLcQ7kNvwFgoibo&_nc_oc=AdkSOriu7FRVq6HGi7ya7a8eW1e3fIZ4kCclSDeEmEZN89Zh3ADVvcMEY-bdnbH8l9U&_nc_zt=23&_nc_ht=scontent.fist14-1.fna&_nc_gid=vREQoXneEk1A-_AokG174g&oh=00_AfQfahZBBT0MCx32akAyEjoh4RSM8kFKHcMJkWvtesMjJQ&oe=6870BFBD",
+      "https://ibb.co/d0RFz2z8",
     youtubeVideo: "https://www.youtube.com/embed/LtP5HDSfcmw",
     category: "ecommerce",
     technologies: ["nextjs", "MongoDB", "TailwindCSS", "typescript"],
@@ -366,84 +366,7 @@ export const projects: Project[] = [
       "إمكانية مشاركة الذكريات والتقدير",
     ],
   },
-  // {
-  //   id: "learning-platform",
-  //   title: "منصة  الذكية",
-  //   description: "منصة تعليمية تفاعلية مع نظام تتبع التقدم والتقييمات الذكية",
-  //   fullDescription:
-  //     "منصة تعليمية حديثة تستخدم الذكاء الاصطناعي لتخصيص تجربة التعلم. تتضمن دروس تفاعلية، اختبارات ذكية، وتتبع شامل للتقدم. المنصة مصممة لتوفير تجربة تعليمية شخصية ومتقدمة مع أدوات تفاعلية متنوعة وإمكانيات تتبع دقيقة لأداء الطلاب.",
-  //   image:
-  //     "https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg?auto=compress&cs=tinysrgb&w=800",
-  //   youtubeVideo: "https://www.youtube.com/embed/bcTyXAuDjWg",
-  //   category: "education",
-  //   technologies: [
-  //     "React",
-  //     "Python",
-  //     "TensorFlow",
-  //     "Redis",
-  //     "WebRTC",
-  //     "Socket.io",
-  //     "FastAPI",
-  //   ],
-  //   duration: "5 أشهر",
-  //   rating: 4.7,
-  //   aiData: {
-  //     price: "800$",
-  //     clientType: "شركة أثاث تركية",
-  //     complexity: "متقدم",
-  //     teamSize: "4 مطورين",
-  //     keyFeatures: [
-  //       "كتالوج منتجات تفاعلي ثلاثي الأبعاد",
-  //       "نظام ذكي",
-  //       "دعم اللغة التركية والإنجليزية",
-  //       "تكامل مع أنظمة الشحن المحلية",
-  //       "نظام إدارة الموردين"
-  //     ],
-  //     clientFeedback: "زيادة الطلبات الدولية بنسبة 60% وتحسين الكفاءة التشغيلية"
-  //   },
-  //   reviews: [
-  //     {
-  //       id: "6",
-  //       author: "سارة أحمد",
-  //       email: "sara@example.com",
-  //       rating: 5,
-  //       comment:
-  //         "منصة رائعة للتعلم، واجهة سهلة ومحتوى ممتاز. التفاعل مع المحتوى مذهل.",
-  //       date: "2024-01-25",
-  //     },
-  //     {
-  //       id: "7",
-  //       author: "يوسف محمد",
-  //       email: "youssef@example.com",
-  //       rating: 4,
-  //       comment:
-  //         "نظام التتبع مفيد جداً ويساعد في متابعة التقدم. تجربة تعليمية متميزة.",
-  //       date: "2024-02-01",
-  //     },
-  //   ],
-  //   liveUrl: "https://example.com",
-  //   githubUrl: "https://github.com/example/project",
-  //   objectives: [
-  //     "تطوير واجهة مستخدم حديثة وسهلة الاستخدام",
-  //     "تحسين تجربة المستخدم وزيادة معدل التحويل",
-  //     "ضمان الأداء العالي والاستجابة السريعة",
-  //     "تطبيق أفضل ممارسات الأمان والحماية",
-  //   ],
-  //   challenges: [
-  //     "تحسين أداء التطبيق للتعامل مع حجم كبير من البيانات",
-  //     "ضمان التوافق مع جميع المتصفحات والأجهزة",
-  //     "تطبيق نظام أمان متقدم لحماية بيانات المستخدمين",
-  //     "تطوير واجهة برمجة تطبيقات قابلة للتوسع",
-  //   ],
-  //   features: [
-  //     "تصميم متجاوب يعمل على جميع الأجهزة",
-  //     "نظام إدارة محتوى متقدم",
-  //     "تحليلات وتقارير في الوقت الفعلي",
-  //     "نظام دفع آمن ومتعدد الطرق",
-  //     "تحسين محركات البحث (SEO)",
-  //     "نظام إشعارات ذكي",
-  //   ],
-  // },
+  
   {
     id: "social-network",
     title: "منصة  codelam",
