@@ -61,7 +61,7 @@ const TestimonialsSection = () => {
       image:
         "https://media.licdn.com/dms/image/v2/C4E0BAQFqpbBFqA1_ig/company-logo_200_200/company-logo_200_200/0/1654634977357/javascript_mastery_logo?e=1757548800&v=beta&t=JAiRfNAh4H_dKKUSbxO7ueNxIciw87PRvQq32d_ackA",
       comment:
-        " Keep building, keep sharing - big things start exactly like this. Cheering you on all the way, Mahmoud ",
+        " Keep building, keep sharing - big things start exactly like this. Cheering you on all the way, Mahmoud, You can achieve anything you put your mind to! 🙌 ",
       project: "   ",
       facebookUrl: "https://www.facebook.com",
       twitterUrl: "https://x.com/jsmasterypro",
