@@ -177,7 +177,7 @@ const TestimonialsSection = () => {
               </div>
 
               {/* Comment */}
-              <blockquote className="text-[17px] text-gray-300 leading-relaxed mb-8 relative z-10 mt-4" style={{
+              <blockquote className="text-[18px] text-gray-300 leading-relaxed mb-8 relative z-10 mt-4" style={{
                 lineHeight: "1.6",
               }}>
                 "{activeTestimonial.comment}"
