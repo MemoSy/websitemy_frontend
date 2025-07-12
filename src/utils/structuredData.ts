@@ -36,7 +36,7 @@ export const getOrganizationSchema = () => ({
     {
       "@type": "Service",
       "name": "تطوير المواقع الإلكترونية",
-      "description": "تطوير مواقع ويب احترافية ومتجاوبة",
+      "description": "تطوير مواقع ويب احترافية و متجاوبة",
       "provider": {
         "@type": "Organization",
         "name": "WebSiteMy"

@@ -557,7 +557,7 @@ export const projects: Project[] = [
     fullDescription:
       "منصة إعلامية متطورة تهدف لدعم التحول الرقمي في سوريا. تتميز بتصميم استثنائي وواجهة متجاوبة مع جميع أحجام الشاشات، وتقدم محتوى إعلامي هادف عبر مقالات وصور وفيديوهات وبودكاست.",
     image:
-      "https://scontent.fist14-1.fna.fbcdn.net/v/t39.30808-6/495157847_575674358879529_7216978117534140260_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=102&ccb=1-7&_nc_sid=127cfc&_nc_ohc=uOBVHjlVbGUQ7kNvwEsyrQ9&_nc_oc=AdlVfLjZLJgeXllVBFQIMA0HI8OKbAe4ji_OwHRRJrS9T5tn9LN5xSNL_lyTa9RXfJo&_nc_zt=23&_nc_ht=scontent.fist14-1.fna&_nc_gid=vRXfuN3RlgTkMD72jlRofw&oh=00_AfS5Gjb_6Y_vyS99S_0I2OgZGl9Hhagc_E12J8ZEZlvWWg&oe=6870AE35",
+      "https://i.ibb.co/Q7s64W2X/495157847-575674358879529-7216978117534140260-n.jpg",
     youtubeVideo: "https://www.youtube.com/embed/Hlw4cJAAqGk",
     category: "opensource",
     technologies: ["nextjs", "TypeScript", "Tailwind CSS", "mongodb"],
