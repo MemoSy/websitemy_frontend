@@ -10,7 +10,7 @@ const Footer = () => {
           {/* Company Info */}
           <div className="space-y-5">
             <div className="flex items-center space-x-2">
-              <img src="/images/logo.png" alt="Company Logo" className="w-32" />
+              <img src="/images/logo.png" alt="شعار WebSiteMy - شركة تطوير المواقع الإلكترونية" className="w-32" />
             </div>
             <p className="text-gray-400 leading-relaxed">
               نحن لا نبني مواقع ويب... نبني تجارب رقمية خالدة

@@ -55,7 +55,7 @@ const Header = () => {
           <Link to="/" className="flex items-center space-x-2 group">
             <img
               src="/images/logo.png"
-              alt="Logo"
+              alt="شعار موقع WebSiteMy لتطوير المواقع الإلكترونية"
               className="w-36 "
             />
           </Link>

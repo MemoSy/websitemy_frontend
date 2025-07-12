@@ -1,0 +1,35 @@
+{
+  "name": "WebSiteMy - تطوير المواقع",
+  "short_name": "WebSiteMy",
+  "description": "شركة تطوير ويب متخصصة في إنشاء مواقع إلكترونية وتطبيقات ويب متقدمة",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#00d4ff",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/logo1.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo1.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "lang": "ar",
+  "dir": "rtl",
+  "categories": ["business", "productivity", "developer"],
+  "screenshots": [
+    {
+      "src": "/logo1.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ]
+}

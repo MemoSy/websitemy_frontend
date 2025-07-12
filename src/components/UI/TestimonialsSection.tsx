@@ -162,7 +162,7 @@ const TestimonialsSection = () => {
               <div className="flex items-center gap-4 mb-6">
                 <img
                   src={activeTestimonial.image}
-                  alt={activeTestimonial.name}
+                  alt={`صورة ${activeTestimonial.name} - ${activeTestimonial.position} في ${activeTestimonial.company}`}
                   className="w-16 h-16 rounded-full object-cover border-4 border-gray-700"
                 />
                 <div className="space-y-1">
@@ -247,7 +247,7 @@ const TestimonialsSection = () => {
                 <div className="flex items-center space-x-3">
                   <img
                     src={testimonial.image}
-                    alt={testimonial.name}
+                    alt={`صورة ${testimonial.name} - ${testimonial.position} في ${testimonial.company}`}
                     className="w-12 h-12 rounded-full object-cover"
                   />
                   <div className="flex-1 space-y-3">
