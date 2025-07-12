@@ -57,7 +57,6 @@ function App() {
         
         <div className="relative z-10">
           <Header />
-          <Breadcrumbs />
           <main>
             <Suspense fallback={<PageLoader />}>
               <Routes>

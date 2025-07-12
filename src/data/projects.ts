@@ -445,7 +445,7 @@ export const projects: Project[] = [
     fullDescription:
       'منصة "صوت حلب" تهدف إلى تحسين التواصل بين المواطنين والجهات المعنية، ومعالجة القضايا الخدمية بكفاءة وسرعة. تم تنفيذ المشروع في مدة قياسية بلغت أربعة أيام كمرحلة أولى، ويشمل خيارات مبتكرة لتقديم الشكاوى وإضافات فريدة لتحسين تجربة المستخدم',
     image:
-      "https://scontent.fist14-1.fna.fbcdn.net/v/t39.30808-6/516404357_24662499733353910_2641557888058806741_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=127cfc&_nc_ohc=FTp_ik5FP9sQ7kNvwHX-KLN&_nc_oc=Adk9jyhUCueF0p5p10sW-mLsxIeuibH7ZI6sESylssB8wgiU5-ThC_2uc5bTux_S9SM&_nc_zt=23&_nc_ht=scontent.fist14-1.fna&_nc_gid=CS4aGQtStH_Vu_621BRl1A&oh=00_AfTVxLOrUZoTVg3noaYxcsjC5xyRoBPK2zRPiQXB2srBsA&oe=6870B44D",
+      "https://i.ibb.co/zTPsP3HK/ww.png",
     youtubeVideo: "https://www.youtube.com/embed/pAZlIZjtQUk",
     category: "opensource",
     technologies: ["nextjs", "TypeScript", "Tailwind CSS", "mongodb", "Vercel"],
@@ -503,7 +503,7 @@ export const projects: Project[] = [
     fullDescription:
       "منصة إعلامية متطورة تهدف لدعم التحول الرقمي في سوريا. تتميز بتصميم استثنائي وواجهة متجاوبة مع جميع أحجام الشاشات، وتقدم محتوى إعلامي هادف عبر مقالات وصور وفيديوهات وبودكاست.",
     image:
-      "https://scontent.fist14-1.fna.fbcdn.net/v/t39.30808-6/495157847_575674358879529_7216978117534140260_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=102&ccb=1-7&_nc_sid=127cfc&_nc_ohc=uOBVHjlVbGUQ7kNvwEsyrQ9&_nc_oc=AdlVfLjZLJgeXllVBFQIMA0HI8OKbAe4ji_OwHRRJrS9T5tn9LN5xSNL_lyTa9RXfJo&_nc_zt=23&_nc_ht=scontent.fist14-1.fna&_nc_gid=vRXfuN3RlgTkMD72jlRofw&oh=00_AfS5Gjb_6Y_vyS99S_0I2OgZGl9Hhagc_E12J8ZEZlvWWg&oe=6870AE35",
+      "https://i.ibb.co/Q7s64W2X/495157847-575674358879529-7216978117534140260-n.jpg",
     youtubeVideo: "https://www.youtube.com/embed/Hlw4cJAAqGk",
     category: "news",
     technologies: ["nextjs", "TypeScript", "Tailwind CSS", "mongodb"],
