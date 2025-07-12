@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import {
   ArrowLeft,
@@ -22,6 +22,7 @@ import ImageGallery from "../components/UI/ImageGallery";
 import ReviewSystem from "../components/UI/ReviewSystem";
 import SEO from "../components/SEO/SEO";
 import ProjectStructuredData from "../components/SEO/ProjectStructuredData";
+import { trackProjectView } from "../components/Analytics/GoogleAnalytics";
 
 const ProjectDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -29,6 +30,13 @@ const ProjectDetail = () => {
   const [projectReviews, setProjectReviews] = useState<Review[]>(
     project?.reviews || []
   );
+
+  // تتبع زيارة المشروع
+  useEffect(() => {
+    if (project) {
+      trackProjectView(project.id, project.title);
+    }
+  }, [project]);
 
   if (!project) {
     return (
