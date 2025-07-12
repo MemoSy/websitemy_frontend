@@ -4,6 +4,7 @@ import { Search, Filter, Grid, List } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { projects, serviceCategories } from '../data/projects';
 import ProjectCard from '../components/UI/ProjectCard';
+import SEO from '../components/SEO/SEO';
 
 const Projects = () => {
   const [searchParams] = useSearchParams();
@@ -45,6 +46,12 @@ const Projects = () => {
 
   return (
     <div className="min-h-screen py-20">
+      <SEO 
+        title="مشاريعنا - أعمال WebSiteMy في تطوير المواقع"
+        description="استكشف مجموعة متنوعة من مشاريع التطوير التي نفذناها في WebSiteMy. من المواقع الشخصية إلى المتاجر الإلكترونية والتطبيقات المتقدمة باستخدام React و TypeScript."
+        keywords="مشاريع تطوير, أعمال سابقة, مواقع مطورة, تطبيقات ويب, معرض أعمال, portfolio"
+        url="/projects"
+      />
       <div className="container mx-auto px-4">
         {/* Header */}
         <motion.div

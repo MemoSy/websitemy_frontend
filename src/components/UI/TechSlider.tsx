@@ -158,7 +158,7 @@ const TechSlider = () => {
               >
                 <img
                   src={`/images${tech.icon}`}
-                  alt={tech.name}
+                  alt={`شعار تقنية ${tech.name} - أداة تطوير الويب`}
                   className="w-12 h-12 md:w-16 md:h-16 object-contain"
                 />
               </div>

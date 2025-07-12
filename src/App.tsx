@@ -1,5 +1,6 @@
 import { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer';
 import AnimatedBackground from './components/UI/AnimatedBackground';
@@ -7,6 +8,7 @@ import ParticleBackground from './components/UI/ParticleBackground';
 import CustomCursor from './components/UI/CustomCursor';
 import LoadingSpinner from './components/UI/LoadingSpinner';
 import PerformanceMonitor from './components/UI/PerformanceMonitor';
+import Breadcrumbs from './components/UI/Breadcrumbs';
 
 // Lazy loading للصفحات
 const Home = lazy(() => import('./pages/Home'));
@@ -17,6 +19,7 @@ const Contact = lazy(() => import('./pages/Contact'));
 const AIChat = lazy(() => import('./pages/AIChat'));
 const ChatAnalytics = lazy(() => import('./pages/ChatAnalytics'));
 const AdminPage = lazy(() => import('./pages/AdminPage'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 // مكون Loading مخصص
 const PageLoader = () => (
@@ -27,20 +30,22 @@ const PageLoader = () => (
 
 function App() {
   return (
-    <Router>
-      <div className="min-h-screen bg-black text-white relative overflow-x-hidden">
-        {/* خلفيات متحركة */}
-        <AnimatedBackground />
-        <ParticleBackground />
-        
-        {/* مؤشر مخصص */}
-        <CustomCursor />
-        
-        {/* مراقب الأداء */}
+    <HelmetProvider>
+      <Router>
+        <div className="min-h-screen bg-black text-white relative overflow-x-hidden">
+          {/* خلفيات متحركة */}
+          <AnimatedBackground />
+          <ParticleBackground />
+          
+          {/* مؤشر مخصص */}
+          <CustomCursor />
+          
+          {/* مراقب الأداء */}
         <PerformanceMonitor />
         
         <div className="relative z-10">
           <Header />
+          <Breadcrumbs />
           <main>
             <Suspense fallback={<PageLoader />}>
               <Routes>
@@ -52,13 +57,15 @@ function App() {
                 <Route path="/ai-chat" element={<AIChat />} />
                 <Route path="/chat-analytics" element={<ChatAnalytics />} />
                 <Route path="/admin" element={<AdminPage />} />
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
           </main>
           <Footer />
         </div>
-      </div>
-    </Router>
+        </div>
+      </Router>
+    </HelmetProvider>
   );
 }
 

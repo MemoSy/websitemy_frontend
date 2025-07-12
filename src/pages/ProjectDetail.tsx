@@ -20,6 +20,8 @@ import { projects } from "../data/projects";
 import { Review } from "../types";
 import ImageGallery from "../components/UI/ImageGallery";
 import ReviewSystem from "../components/UI/ReviewSystem";
+import SEO from "../components/SEO/SEO";
+import ProjectStructuredData from "../components/SEO/ProjectStructuredData";
 
 const ProjectDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -63,8 +65,24 @@ const ProjectDetail = () => {
         projectReviews.length
       : project.rating;
 
+  // بيانات SEO للمشروع
+  const projectSEO = {
+    title: `${project.title} - مشروع تطوير ويب احترافي | WebSiteMy`,
+    description: `${project.description}. مشروع مطور باستخدام ${project.technologies.join(', ')} في مدة ${project.duration}. تقييم العملاء: ${averageRating.toFixed(1)}/5`,
+    keywords: `${project.title}, ${project.technologies.join(', ')}, تطوير ويب, برمجة, ${project.category}, مشاريع برمجة`,
+    url: `/project/${project.id}`
+  };
+
   return (
-    <div className="min-h-screen py-20">
+    <>
+      <SEO {...projectSEO} />
+      <ProjectStructuredData 
+        project={project} 
+        averageRating={averageRating} 
+        reviewCount={projectReviews.length} 
+      />
+      
+      <div className="min-h-screen py-20">
       <div className="container mx-auto px-4">
         {/* Back Button */}
         <motion.div
@@ -331,6 +349,7 @@ const ProjectDetail = () => {
         </motion.div>
       </div>
     </div>
+    </>
   );
 };
 

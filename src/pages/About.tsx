@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Users, Target, Award, Lightbulb } from 'lucide-react';
+import SEO from '../components/SEO/SEO';
 
 const About = () => {
   const values = [
@@ -55,6 +56,12 @@ const About = () => {
 
   return (
     <div className="min-h-screen py-20">
+      <SEO 
+        title="من نحن - فريق WebSiteMy للتطوير"
+        description="تعرف على فريق WebSiteMy المتخصص في تطوير المواقع الإلكترونية. نحن فريق من المطورين المحترفين نسعى لتحويل أفكارك إلى واقع رقمي متميز باستخدام أحدث التقنيات."
+        keywords="فريق تطوير, مطورين محترفين, شركة تطوير مواقع, خبرة في التطوير, فريق عمل متخصص"
+        url="/about"
+      />
       <div className="container mx-auto px-4">
         {/* Header */}
         <motion.div
@@ -136,7 +143,7 @@ const About = () => {
                 <div className="relative mb-4">
                   <img
                     src={member.image}
-                    alt={member.name}
+                    alt={`صورة ${member.name} - ${member.role} في فريق WebSiteMy`}
                     className="w-24 h-24 rounded-full mx-auto object-cover border-4 border-gray-700 group-hover:border-cyan-500/50 transition-all"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-cyan-500/20 to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>

@@ -6,6 +6,9 @@ import TypewriterText from "../components/UI/TypewriterText";
 import ProjectTabs from "../components/UI/ProjectTabs";
 import TechSlider from "../components/UI/TechSlider";
 import TestimonialsSection from "../components/UI/TestimonialsSection";
+import SEO from "../components/SEO/SEO";
+import StructuredData from "../components/SEO/StructuredData";
+import { getOrganizationSchema, getWebSiteSchema } from "../utils/structuredData";
 
 const Home = () => {
   const typewriterTexts = [" لا تدع منافسيك يسبقونك", "إبدأ الآن "];
@@ -83,6 +86,14 @@ const Home = () => {
 
   return (
     <div className="relative">
+      <SEO 
+        title="websitemy ➡ لتطوير الويب - شركة تطوير المواقع الإلكترونية"
+        description="نحن في WebSiteMy متخصصون في تطوير المواقع الإلكترونية وتطبيقات الويب المتقدمة باستخدام أحدث التقنيات مثل React و TypeScript و NestJS. نحول أفكارك إلى واقع رقمي احترافي."
+        keywords="تطوير مواقع, تطوير تطبيقات ويب, شركة برمجة, تصميم مواقع, React, TypeScript, NestJS, تطوير واجهات, برمجة مواقع, تطوير متاجر إلكترونية"
+        url="/"
+        image="/logo1.png"
+      />
+      <StructuredData data={[getOrganizationSchema(), getWebSiteSchema()]} />
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
         {/* Background Elements */}
