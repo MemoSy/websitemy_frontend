@@ -164,7 +164,7 @@ export const projects: Project[] = [
     fullDescription:
       "تم تطوير هذا المتجر الإلكتروني باستخدام أحدث التقنيات لضمان تجربة تسوق سلسة ومرضية. يتضمن نظام إدارة محتوى قوي، نظام ذكي، وتحليلات مبيعات متقدمة. المشروع يهدف إلى توفير منصة شاملة للتجارة الإلكترونية مع واجهة مستخدم حديثة وسهلة الاستخدام، بالإضافة إلى نظام إدارة متقدم للمنتجات والطلبات.",
     image:
-      "https://scontent.fist14-1.fna.fbcdn.net/v/t39.30808-6/508320313_24497356569868228_8666842211716543680_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=127cfc&_nc_ohc=uXop0GSff2kQ7kNvwHMQOYw&_nc_oc=Adku94XwPikm_95aR4tGZdFuo9TFbfiF_PruY1NSvkRjdZcc98RHE7z5_9n3t1rowuM&_nc_zt=23&_nc_ht=scontent.fist14-1.fna&_nc_gid=Mo0FFxHPYglIgvjFyKa5XQ&oh=00_AfSPyuMTmQLO2-vEN3X_PsYgso8dgyzB3r072cedOAS2kQ&oe=6870A168",
+      "https://i.ibb.co/JjJXxd5r/Fire-Shot-Capture-040-Untitled-Figma-www-figma-com.png",
     youtubeVideo: "https://www.youtube.com/embed/bcTyXAuDjWg",
     category: "ecommerce",
     technologies: ["nextjs", "nesjs", "MongoDB", "TailwindCSS", "typescript"],
@@ -179,8 +179,8 @@ export const projects: Project[] = [
         "كتالوج منتجات تفاعلي ثلاثي الأبعاد",
         "نظام ذكي",
         "دعم اللغة التركية والإنجليزية",
-        "تكامل مع أنظمة الشحن المحلية",
-        "نظام إدارة الموردين",
+
+        "نظام إدارة المحتوى",
       ],
       clientFeedback:
         "زيادة الطلبات الدولية بنسبة 60% وتحسين الكفاءة التشغيلية",
@@ -301,7 +301,7 @@ export const projects: Project[] = [
     fullDescription:
       "موقع ويب مخصص لحفظ ذكريات وقصص شهدائنا الأبطال، حيث يمكن لأي شخص مشاركة قصة شهيد عزيز عليه والاحتفاظ بذكراه للأبد.",
     image:
-      "https://scontent.fist14-1.fna.fbcdn.net/v/t39.30808-6/517409080_626449267135371_7841475971420964745_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=127cfc&_nc_ohc=3ilNCB_voVMQ7kNvwFWOI3e&_nc_oc=Adm_skX-FojKWb1FuXyDvp6EVOFSDYbkecCYat6cSlsuAAfyyGCNyZMQHgrmqcG6iws&_nc_zt=23&_nc_ht=scontent.fist14-1.fna&_nc_gid=flthZgnLKwTSLk_HqEw7ZQ&oh=00_AfTeT6rd_i5M0EqY1DxPOTN9TFRRn8gyIgAjtFBX-CAhFg&oe=68720365",
+      "https://i.ibb.co/p6kpyRfx/Fire-Shot-Capture-025-You-Tube-www-youtube-com.png",
     youtubeVideo: "https://www.youtube.com/embed/yQmvvSDn8lM",
     category: "service",
     technologies: ["nextjs", "nestjs", "mongodb", "tailwindcss", "typescript"],
@@ -343,8 +343,8 @@ export const projects: Project[] = [
       clientFeedback:
         "زيادة الطلبات الدولية بنسبة 60% وتحسين الكفاءة التشغيلية",
     },
-    liveUrl: "https://example.com",
-    githubUrl: "https://github.com/example/project",
+    liveUrl: "https://websitemy.com",
+    githubUrl: "https://websitemy.com",
     objectives: [
       "تطوير واجهة مستخدم حديثة وسهلة الاستخدام",
       "تحسين تجربة المستخدم وزيادة معدل التحويل",
