@@ -37,13 +37,13 @@ const About = () => {
     {
       name: 'محمود المبيض ',
       role: 'مطور ويب - Full Stack',
-      image: 'https://scontent.fist14-1.fna.fbcdn.net/v/t39.30808-6/514078228_619980001115631_3819133287882385004_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=ItiEqdijrA8Q7kNvwFmgEKZ&_nc_oc=AdkpglUO8oLYDQmxuh5kStkpIAH150xRaQzSa45mR79S0LXXdIIQ5p53VmQ5UfyonOc&_nc_zt=23&_nc_ht=scontent.fist14-1.fna&_nc_gid=Y-p2GAs5-kVfc5H1J-w6sw&oh=00_AfRdatTyv1NNkfXZSfhdDVUlfoC6VzniXEzXHAZEOHUcSA&oe=6873100D',
+      image: 'websitemyhttps://i.ibb.co/bV9rq0z/514078228-619980001115631-3819133287882385004-n.png',
       skills: ['React', 'Node.js', 'MongoDB', 'next.js']
     },
     {
       name: ' حسن الأبرش',
       role: 'مصمم UI/UX',
-      image: 'https://scontent.fist14-1.fna.fbcdn.net/v/t39.30808-6/515014282_4123566981298767_3372271132740174068_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=0DiVU73UhhsQ7kNvwHcSDL1&_nc_oc=AdnEAu6FALvzoahddmvQ79pWf8yDaIFzMyN9VNvPU-IZlaW3BZqS8wmV18GeY2LnZYE&_nc_zt=23&_nc_ht=scontent.fist14-1.fna&_nc_gid=D5c7alJRN6zUJHrtIp0f-w&oh=00_AfSjdpEY0FNfGbTxP73KdW9Kh6DEU1fIVsmXcnjcADyQ8Q&oe=687315EE',
+      image: 'https://i.ibb.co/skk9YLL/515014282-4123566981298767-3372271132740174068-n.png',
       skills: ['Figma', 'Adobe XD', 'User Research']
     },
     {
@@ -175,7 +175,7 @@ const About = () => {
           <div className="bg-gradient-to-r from-cyan-500/10 to-purple-500/10 rounded-2xl p-8 md:p-12 border border-cyan-500/30">
             <h2 className="text-3xl font-bold text-white mb-6">هل لديك مشروع؟</h2>
             <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
-              نحن هنا لمساعدتك في تحويل فكرتك إلى واقع رقمي متميز. دعنا نتحدث عن مشروعك القادم!
+              نحن هنا لمساعدتك في تحويل فكرتك إلى واقع رقمي متميز. دعنا نتحدث عن مشروعك القادم
             </p>
             <motion.button
               whileHover={{ scale: 1.05 }}
