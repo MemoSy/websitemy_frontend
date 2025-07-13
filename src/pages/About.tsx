@@ -37,7 +37,7 @@ const About = () => {
     {
       name: 'محمود المبيض ',
       role: 'مطور ويب - Full Stack',
-      image: 'websitemyhttps://i.ibb.co/bV9rq0z/514078228-619980001115631-3819133287882385004-n.png',
+      image: 'https://i.ibb.co/bV9rq0z/514078228-619980001115631-3819133287882385004-n.png',
       skills: ['React', 'Node.js', 'MongoDB', 'next.js']
     },
     {
