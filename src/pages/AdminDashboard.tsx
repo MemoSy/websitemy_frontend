@@ -5,8 +5,7 @@ import {
   MessageSquare, 
   Search,
   Filter,
-  RefreshCw,
-  Download
+  RefreshCw
 } from "lucide-react";
 import { 
   getAllChats, 
@@ -165,11 +164,17 @@ const AdminDashboard = ({ onLogout }: AdminDashboardProps) => {
                     {chat.totalMessages} رسائل
                   </span>
                 </div>
+                <div className="flex items-center justify-between mb-2">
+                  <div className="text-xs text-green-400 flex items-center space-x-1 space-x-reverse">
+                    <span>📍</span>
+                    <span>{chat.city}, {chat.country}</span>
+                  </div>
+                </div>
                 <div className="text-sm text-gray-300 mb-2 line-clamp-2">
                   {chat.messages[chat.messages.length - 1]?.text.substring(0, 100)}...
                 </div>
                 <div className="flex items-center justify-between text-xs text-gray-500">
-                  <span>{new Date(chat.createdAt).toLocaleDateString('ar-SA')}</span>
+                  <span>{new Date(chat.createdAt).toLocaleDateString('us-US')}</span>
                   <div className="flex space-x-1 space-x-reverse">
                     {chat.keywords.slice(0, 2).map((keyword) => (
                       <span key={keyword} className="bg-gray-700 px-2 py-1 rounded">
@@ -195,9 +200,15 @@ const AdminDashboard = ({ onLogout }: AdminDashboardProps) => {
                       معرف الجلسة: {selectedChat.sessionId}
                     </h2>
                     <div className="text-sm text-gray-400 space-y-1">
-                      <div>IP: {selectedChat.userIP}</div>
-                      <div>تاريخ الإنشاء: {new Date(selectedChat.createdAt).toLocaleString('ar-SA')}</div>
-                      <div>آخر نشاط: {new Date(selectedChat.lastActivity).toLocaleString('ar-SA')}</div>
+                      <div className="flex items-center space-x-2 space-x-reverse">
+                        <span>📍</span>
+                        <span className="text-green-400 font-medium">
+                          {selectedChat.city}, {selectedChat.country}
+                        </span>
+                      </div>
+
+                      <div>تاريخ الإنشاء: {new Date(selectedChat.createdAt).toLocaleString('us-US')}</div>
+                      <div>آخر نشاط: {new Date(selectedChat.lastActivity).toLocaleString('us-US')}</div>
                     </div>
                   </div>
                   <div className="text-left">

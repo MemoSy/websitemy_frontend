@@ -67,7 +67,7 @@ function App() {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/ai-chat" element={<AIChat />} />
                 <Route path="/chat-analytics" element={<ChatAnalytics />} />
-                <Route path="/admin" element={<AdminPage />} />
+                <Route path="/memo-admin" element={<AdminPage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>

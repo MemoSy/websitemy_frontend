@@ -16,6 +16,8 @@ export interface ChatData {
   sessionId: string;
   userIP: string;
   userAgent: string;
+  country: string;
+  city: string;
   messages: Array<{
     id: string;
     text: string;

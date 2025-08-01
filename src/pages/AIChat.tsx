@@ -8,6 +8,7 @@ import {
   updateChatSession, 
   ChatMessage 
 } from "../utils/chatService";
+import { getCachedUserLocation, LocationData } from "../utils/locationService";
 
 interface Message {
   id: string;
@@ -18,6 +19,8 @@ interface Message {
 
 const AIChat = () => {
   const [sessionId] = useState<string>(() => generateSessionId());
+  const [userLocation, setUserLocation] = useState<LocationData | null>(null);
+  const [currentContext, setCurrentContext] = useState<string>(''); // لحفظ السياق الحالي
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
@@ -31,15 +34,57 @@ const AIChat = () => {
   const [isChatSaved, setIsChatSaved] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  // Get user location on component mount
+  useEffect(() => {
+    const getLocation = async () => {
+      try {
+        const location = await getCachedUserLocation();
+        setUserLocation(location);
+      } catch (error) {
+        console.error('Error getting user location:', error);
+        // Set default location if geolocation fails
+        setUserLocation({ country: 'Unknown', city: 'Unknown' });
+      }
+    };
+
+    getLocation();
+  }, []);
+
+  // دالة لتحديث السياق الحالي بناءً على آخر رسائل المستخدم
+  const updateCurrentContext = (userMessage: string) => {
+    const message = userMessage.toLowerCase();
+    let newContext = currentContext;
+    
+    if (message.includes('أخبار') || message.includes('إعلام') || message.includes('صحافة')) {
+      newContext = 'news';
+    } else if (message.includes('متجر') || message.includes('تجارة') || message.includes('متجر إلكتروني')) {
+      newContext = 'ecommerce';
+    } else if (message.includes('تعليم') || message.includes('منصة تعليمية') || message.includes('دورات')) {
+      newContext = 'education';
+    } else if (message.includes('شخصي') || message.includes('بروفايل') || message.includes('سيرة ذاتية')) {
+      newContext = 'personal';
+    } else if (message.includes('اجتماعي') || message.includes('شبكة اجتماعية')) {
+      newContext = 'social';
+    }
+    
+    if (newContext !== currentContext) {
+      setCurrentContext(newContext);
+    }
+    
+    return newContext;
+  };
+
   // Save chat to database when messages change (but not on first load)
   useEffect(() => {
     const saveChat = async () => {
-      if (messages.length > 1) { // Only save if there are more than just the initial message
+      if (messages.length > 1 && userLocation) { // Only save if there are more than just the initial message and location is available
         if (!isChatSaved) {
           // First time saving this chat session
           await saveChatSession({
             sessionId,
             messages: messages as ChatMessage[],
+            country: userLocation.country,
+            city: userLocation.city,
           });
           setIsChatSaved(true);
         } else {
@@ -50,10 +95,13 @@ const AIChat = () => {
     };
 
     saveChat();
-  }, [messages, sessionId, isChatSaved]);
+  }, [messages, sessionId, isChatSaved, userLocation]);
 
   const handleSendMessage = async () => {
     if (!inputText.trim() || isLoading) return;
+
+    // تحديث السياق الحالي بناءً على رسالة المستخدم
+    updateCurrentContext(inputText);
 
     const userMessage: Message = {
       id: Date.now().toString(),
@@ -66,9 +114,24 @@ const AIChat = () => {
     setInputText("");
     setIsLoading(true);
 
+    // تحضير تاريخ المحادثة للذكاء الاصطناعي (نستثني الرسالة الترحيبية الأولى)
+    const conversationHistory = messages
+      .slice(1) // نتجاهل الرسالة الترحيبية الأولى
+      .map(msg => ({
+        text: msg.text,
+        isUser: msg.isUser
+      }));
+
+    // إضافة الرسالة الحالية للتاريخ
+    conversationHistory.push({
+      text: inputText,
+      isUser: true
+    });
+
     const aiResponseText = await callGeminiAPI(
       inputText,
-      generateKnowledgeBase()
+      generateKnowledgeBase(),
+      conversationHistory
     );
     const aiResponse: Message = {
       id: (Date.now() + 1).toString(),
@@ -114,6 +177,17 @@ const AIChat = () => {
           {isChatSaved && (
             <p className="text-green-400 text-xs mt-2 opacity-75">
               💾 تم حفظ المحادثة تلقائياً
+            </p>
+          )}
+          {currentContext && (
+            <p className="text-blue-400 text-xs mt-1 opacity-75">
+              🧠 السياق الحالي: {
+                currentContext === 'news' ? 'مواقع الأخبار' :
+                currentContext === 'ecommerce' ? 'المتاجر الإلكترونية' :
+                currentContext === 'education' ? 'المنصات التعليمية' :
+                currentContext === 'personal' ? 'المواقع الشخصية' :
+                currentContext === 'social' ? 'الشبكات الاجتماعية' : currentContext
+              }
             </p>
           )}
         </motion.div>

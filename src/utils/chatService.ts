@@ -11,6 +11,8 @@ export interface ChatSession {
   sessionId: string;
   messages: ChatMessage[];
   keywords?: string[];
+  country?: string;
+  city?: string;
 }
 
 // Generate a unique session ID
@@ -58,6 +60,8 @@ export const saveChatSession = async (sessionData: ChatSession): Promise<void> =
         sessionId: sessionData.sessionId,
         messages: sessionData.messages,
         keywords,
+        country: sessionData.country,
+        city: sessionData.city,
       }),
     });
 
