@@ -11,6 +11,7 @@ import PerformanceMonitor from './components/UI/PerformanceMonitor';
 import Breadcrumbs from './components/UI/Breadcrumbs';
 import GoogleAnalytics from './components/Analytics/GoogleAnalytics';
 import GoogleSearchConsole from './components/Analytics/GoogleSearchConsole';
+import AIAssistantButton from './components/UI/AIAssistantButton';
 
 // Lazy loading للصفحات
 const Home = lazy(() => import('./pages/Home'));
@@ -73,6 +74,9 @@ function App() {
             </Suspense>
           </main>
           <Footer />
+          
+          {/* مساعد ذكي ثابت في جميع الصفحات */}
+          <AIAssistantButton />
         </div>
         </div>
       </Router>

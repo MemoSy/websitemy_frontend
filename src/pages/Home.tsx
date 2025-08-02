@@ -330,9 +330,9 @@ const Home = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 1.2 }}
             >
-              افتح بابك للعالم… خلّي مشروعك يبلّش صح ، بموقع يعرّف الناس عليك و
-              يوصلك للعالمية ، ونحن هون، لحتى نساعدك تحقّق هالشي بخطوات
-              بسيطة وسعر مناسب
+              افتح بابك للعالم … و خلّي مشروعك يبلّش صح ، و يوصل للعالمية نحن
+              موجودين في شركة websitemy هدفنا نساعدك ضمن خطوات بسيطة وسعر منافس
+              جداً
             </motion.p>
 
             {/* Action Buttons */}
@@ -745,7 +745,6 @@ const Home = () => {
                       </h4>
                       <p className="text-gray-300 text-xs md:text-sm mb-0 sm:mb-4">
                         تواصل معنا لمناقشة مشروعك وتحويل فكرتك إلى واقع رقمي
-                        
                       </p>
                     </div>
                     <div className="flex-shrink-0 w-full sm:w-auto sm:mr-4">

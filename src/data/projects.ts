@@ -9,7 +9,7 @@ export const projects: Project[] = [
     fullDescription:
       "تم تطوير هذا المتجر الإلكتروني باستخدام أحدث التقنيات لضمان تجربة تسوق سلسة ومرضية. يتضمن نظام إدارة محتوى قوي، نظام ذكي، وتحليلات مبيعات متقدمة. المشروع يهدف إلى توفير منصة شاملة للتجارة الإلكترونية مع واجهة مستخدم حديثة وسهلة الاستخدام، بالإضافة إلى نظام إدارة متقدم للمنتجات والطلبات.",
     image:
-      "https://i.ibb.co/6RZqQMkH/1.webp",
+      "https://i.ibb.co/rGVgX71r/f483bd1d-bcd4-4068-9212-02273dee5499.png",
     youtubeVideo: "https://www.youtube.com/embed/LtP5HDSfcmw",
     category: "ecommerce",
     technologies: ["nextjs", "MongoDB", "TailwindCSS", "typescript"],
@@ -160,11 +160,11 @@ export const projects: Project[] = [
   {
     id: "pro-camz",
     title: "Pro Camz ",
-    description: "متجر الكتروني لبيع الكميرات و مستلزماتها",
+    description: "متجر الكتروني متكامل لبيع الكميرات و مستلزماتها متعدد اللغات",
     fullDescription:
       "تم تطوير هذا المتجر الإلكتروني باستخدام أحدث التقنيات لضمان تجربة تسوق سلسة ومرضية. يتضمن نظام إدارة محتوى قوي، نظام ذكي، وتحليلات مبيعات متقدمة. المشروع يهدف إلى توفير منصة شاملة للتجارة الإلكترونية مع واجهة مستخدم حديثة وسهلة الاستخدام، بالإضافة إلى نظام إدارة متقدم للمنتجات والطلبات.",
     image:
-      "https://i.ibb.co/JjJXxd5r/Fire-Shot-Capture-040-Untitled-Figma-www-figma-com.png",
+      "https://i.ibb.co/6RZqQMkH/1.webp",
     youtubeVideo: "https://www.youtube.com/embed/bcTyXAuDjWg",
     category: "ecommerce",
     technologies: ["nextjs", "nesjs", "MongoDB", "TailwindCSS", "typescript"],
