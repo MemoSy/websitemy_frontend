@@ -31,7 +31,7 @@ const About = () => {
     {
       name: 'أحمد المبيض',
       role: 'المدير',
-      image: 'https://scontent.fist14-1.fna.fbcdn.net/v/t39.30808-6/509606060_24538410302429521_5576451676817606581_n.jpg?stp=c120.0.720.720a_dst-jpg_s206x206_tt6&_nc_cat=103&ccb=1-7&_nc_sid=6439a4&_nc_ohc=yMZriAYL8XsQ7kNvwH9z_d5&_nc_oc=AdkydfkbbTOeKgF6lpog2K_aLn_GwAQTjDP8BlHl-TkX6S5TbYoKLSqeqeMkU572AJk&_nc_zt=23&_nc_ht=scontent.fist14-1.fna&_nc_gid=Q_o8bDEE51slXmAODNgvtQ&oh=00_AfSWnA6_0DSJJmrWA7Gt6A4jlQ8CrH__16l5s06VS47M_A&oe=6875C774',
+      image: 'https://i.ibb.co/JjSPfzWc/509606060-24538410302429521-5576451676817606581-n.jpg',
       skills: ['مدير عام',]
     },
     {
