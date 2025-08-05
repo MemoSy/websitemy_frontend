@@ -8,8 +8,7 @@ export const projects: Project[] = [
       "منصة تجارة إلكترونية متطورة بتصميم حديث وتجربة مستخدم استثنائية",
     fullDescription:
       "تم تطوير هذا المتجر الإلكتروني باستخدام أحدث التقنيات لضمان تجربة تسوق سلسة ومرضية. يتضمن نظام إدارة محتوى قوي، نظام ذكي، وتحليلات مبيعات متقدمة. المشروع يهدف إلى توفير منصة شاملة للتجارة الإلكترونية مع واجهة مستخدم حديثة وسهلة الاستخدام، بالإضافة إلى نظام إدارة متقدم للمنتجات والطلبات.",
-    image:
-      "https://i.ibb.co/rGVgX71r/f483bd1d-bcd4-4068-9212-02273dee5499.png",
+    image: "https://i.ibb.co/rGVgX71r/f483bd1d-bcd4-4068-9212-02273dee5499.png",
     youtubeVideo: "https://www.youtube.com/embed/LtP5HDSfcmw",
     category: "ecommerce",
     technologies: ["nextjs", "MongoDB", "TailwindCSS", "typescript"],
@@ -18,11 +17,12 @@ export const projects: Project[] = [
     // AI-relevant data
     aiData: {
       price: "650$",
-      clientType: " متجر للكتروني ذكي",
+      clientType: " متجر الكتروني ذكي",
       complexity: "متقدم",
       teamSize: "3 مطورين",
       keyFeatures: [
-        "لغات متعددة",
+        "واجهة مستخدم احترافية  ",
+        "اضافة منتخ بسعر مخفض   ",
         "لوحة تحكم متقدمة جدا",
         "نظام تبديل الاستايلات",
         "نظام تقييم المنتجات",
@@ -163,8 +163,7 @@ export const projects: Project[] = [
     description: "متجر الكتروني متكامل لبيع الكميرات و مستلزماتها متعدد اللغات",
     fullDescription:
       "تم تطوير هذا المتجر الإلكتروني باستخدام أحدث التقنيات لضمان تجربة تسوق سلسة ومرضية. يتضمن نظام إدارة محتوى قوي، نظام ذكي، وتحليلات مبيعات متقدمة. المشروع يهدف إلى توفير منصة شاملة للتجارة الإلكترونية مع واجهة مستخدم حديثة وسهلة الاستخدام، بالإضافة إلى نظام إدارة متقدم للمنتجات والطلبات.",
-    image:
-      "https://i.ibb.co/6RZqQMkH/1.webp",
+    image: "https://i.ibb.co/6RZqQMkH/1.webp",
     youtubeVideo: "https://www.youtube.com/embed/bcTyXAuDjWg",
     category: "ecommerce",
     technologies: ["nextjs", "nesjs", "MongoDB", "TailwindCSS", "typescript"],
@@ -174,13 +173,14 @@ export const projects: Project[] = [
       price: "550$",
       clientType: "متجر الكتروني لبيع الكميرات ومستلزماتها  ",
       complexity: "متوسط",
-      teamSize: "3 مطورين",
+      teamSize: "2 مطورين",
       keyFeatures: [
-        "كتالوج منتجات تفاعلي ثلاثي الأبعاد",
-        "نظام ذكي",
-        "دعم اللغة التركية والإنجليزية",
-
-        "نظام إدارة المحتوى",
+        "تصميم متجاوب يعمل على جميع الأجهزة",
+        " تواصل مباشر عبر الوتساب",
+        "لوحة تحكم بسيطة",
+        "نشر واضافة المقالات",
+        "تحسين محركات البحث (SEO)",
+        "متعدد اللغات",
       ],
       clientFeedback:
         "زيادة الطلبات الدولية بنسبة 60% وتحسين الكفاءة التشغيلية",
@@ -267,10 +267,7 @@ export const projects: Project[] = [
       clientFeedback: " تحسين الكفاءة التشغيلية",
     },
 
-    reviews: [
-   
-
-    ],
+    reviews: [],
     liveUrl: "https://www.sharekna.online",
     githubUrl: "https://www.sharekna.online",
     objectives: [
@@ -366,7 +363,7 @@ export const projects: Project[] = [
       "إمكانية مشاركة الذكريات والتقدير",
     ],
   },
-  
+
   {
     id: "social-network",
     title: "منصة  codelam",
@@ -444,8 +441,7 @@ export const projects: Project[] = [
       "منصة لتقديم الشكاوى وتحسين التواصل بين المواطنين والجهات المعنية",
     fullDescription:
       'منصة "صوت حلب" تهدف إلى تحسين التواصل بين المواطنين والجهات المعنية، ومعالجة القضايا الخدمية بكفاءة وسرعة. تم تنفيذ المشروع في مدة قياسية بلغت أربعة أيام كمرحلة أولى، ويشمل خيارات مبتكرة لتقديم الشكاوى وإضافات فريدة لتحسين تجربة المستخدم',
-    image:
-      "https://i.ibb.co/zTPsP3HK/ww.png",
+    image: "https://i.ibb.co/zTPsP3HK/ww.png",
     youtubeVideo: "https://www.youtube.com/embed/pAZlIZjtQUk",
     category: "opensource",
     technologies: ["nextjs", "TypeScript", "Tailwind CSS", "mongodb", "Vercel"],
@@ -520,6 +516,7 @@ export const projects: Project[] = [
         "لوحة تحكم سهلة ",
         "نظام تعليقات بدون تسجيل دخول",
         "مشاركة المقالات على منصات التواصل الاجتماعي",
+        "تحسين محركات البحث (SEO)",
       ],
       clientFeedback:
         "زيادة الطلبات الدولية بنسبة 60% وتحسين الكفاءة التشغيلية",
@@ -540,15 +537,14 @@ export const projects: Project[] = [
       "تطوير واجهة برمجة تطبيقات قابلة للتوسع",
     ],
     features: [
-      "تصميم متجاوب يعمل على جميع الأجهزة",
-      "نظام إدارة محتوى متقدم",
-      "تحليلات وتقارير في الوقت الفعلي",
-      "نظام دفع آمن ومتعدد الطرق",
+      "نظام ادارة محتوى متقدم",
+      "دعم مرئيات متكامل",
+      "لوحة تحكم سهلة ",
+      "نظام تعليقات بدون تسجيل دخول",
+      "مشاركة المقالات على منصات التواصل الاجتماعي",
       "تحسين محركات البحث (SEO)",
-      "نظام إشعارات ذكي",
     ],
   },
-
 
   {
     id: "national-network-media",
