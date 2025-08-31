@@ -282,7 +282,7 @@ const TestimonialsSection = () => {
               <div className="text-gray-400">رضا العملاء</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-purple-400 mb-2">10+</div>
+              <div className="text-3xl font-bold text-purple-400 mb-2">12+</div>
               <div className="text-gray-400">مشروع ناجح</div>
             </div>
             <div>

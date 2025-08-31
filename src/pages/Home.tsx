@@ -200,12 +200,12 @@ const Home = () => {
             });
 
             // Animate satisfaction counter (90%)
-            animateCounter(0, 90, 2500, (value) => {
+            animateCounter(0, 85, 2500, (value) => {
               setCounters((prev) => ({ ...prev, satisfaction: value }));
             });
 
             // Animate projects counter (10+)
-            animateCounter(0, 10, 3000, (value) => {
+            animateCounter(0, 12, 3000, (value) => {
               setCounters((prev) => ({ ...prev, projects: value }));
             });
           }

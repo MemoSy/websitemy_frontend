@@ -154,13 +154,13 @@ export const projects: Project[] = [
   youtubeVideo: "https://www.youtube.com/embed/7CkTvbUweG0",
   category: "saas",
   technologies: ["react", "nestjs", "MongoDB", "TailwindCSS", "typescript"],
-  duration: "3 أشهر",
-  rating: 4.9,
+  duration: "شهرين ",
+  rating: 4.8,
   aiData: {
-    price: "1200$",
+    price: "600$",
     clientType: "موقع شركة تطوير مواقع إلكترونية",
-    complexity: "متقدم",
-    teamSize: "3 مطورين",
+    complexity: "متوسط",
+    teamSize: "2 مطورين",
     keyFeatures: [
       "مساعد ذكي متطور بتقنية الذكاء الاصطناعي",
       "معرض تفاعلي لعرض المشاريع والإنجازات",
