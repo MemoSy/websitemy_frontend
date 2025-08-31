@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, Bot, User, Loader2, Brain } from "lucide-react";
-import { callGeminiAPI, generateKnowledgeBase } from "../utils/aiUtils";
+import { callChatGPT, generateKnowledgeBase } from "../utils/aiUtils";
 import { 
   generateSessionId, 
   saveChatSession, 
@@ -128,7 +128,7 @@ const AIChat = () => {
       isUser: true
     });
 
-    const aiResponseText = await callGeminiAPI(
+    const aiResponseText = await callChatGPT(
       inputText,
       generateKnowledgeBase(),
       conversationHistory

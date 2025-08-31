@@ -141,6 +141,64 @@ export const projects: Project[] = [
     ],
   },
 
+
+
+
+  {
+  id: "websitemy-portfolio",
+  title: "موقع WebSiteMy الرسمي",
+  description: "موقع شركة تطوير المواقع الإلكترونية - معرض إنجازات تقنية احترافي",
+  fullDescription:
+    "تم تطوير الموقع الرسمي لشركة WebSiteMy باستخدام أحدث التقنيات لعرض خدمات الشركة ومشاريعها بطريقة احترافية. يتضمن الموقع مساعد ذكي متطور، معرض تفاعلي للمشاريع، ونظام إدارة محتوى متقدم. المشروع يهدف إلى توفير تجربة مستخدم استثنائية مع واجهة حديثة وسهلة الاستخدام، بالإضافة إلى تحسين محركات البحث للوصول لأكبر عدد من العملاء المحتملين.",
+  image: "https://www.websitemy.com/images/logo.png",
+  youtubeVideo: "https://www.youtube.com/embed/7CkTvbUweG0",
+  category: "saas",
+  technologies: ["react", "nestjs", "MongoDB", "TailwindCSS", "typescript"],
+  duration: "3 أشهر",
+  rating: 4.9,
+  aiData: {
+    price: "1200$",
+    clientType: "موقع شركة تطوير مواقع إلكترونية",
+    complexity: "متقدم",
+    teamSize: "3 مطورين",
+    keyFeatures: [
+      "مساعد ذكي متطور بتقنية الذكاء الاصطناعي",
+      "معرض تفاعلي لعرض المشاريع والإنجازات",
+      "نظام إدارة محتوى متقدم ولوحة تحكم",
+      "تصميم متجاوب مع جميع أحجام الشاشات",
+      "تحسين محركات البحث (SEO) المتقدم",
+      "نظام تقييمات وآراء العملاء",
+    ],
+    clientFeedback:
+      "تحسين الوصول للعملاء بنسبة 85% وزيادة الطلبات بنسبة 60%",
+  },
+  reviews: [
+
+  ],
+  liveUrl: "https://www.websitemy.com",
+  githubUrl: "https://github.com/MemoSy",
+  objectives: [
+    "تطوير موقع احترافي يعكس هوية الشركة التقنية",
+    "عرض المشاريع والخدمات بطريقة تفاعلية وجذابة",
+    "تطبيق مساعد ذكي لتحسين تجربة العملاء",
+    "تحسين الوصول والظهور في محركات البحث",
+  ],
+  challenges: [
+    "تطوير مساعد ذكي يفهم السياق ويقدم إجابات دقيقة",
+    "تصميم واجهة مستخدم احترافية تعكس هوية الشركة",
+    "تطبيق نظام إدارة محتوى مرن وقابل للتوسع",
+    "ضمان الأداء العالي وسرعة التحميل",
+  ],
+  features: [
+    "مساعد ذكي متطور بتقنية الذكاء الاصطناعي",
+    "معرض تفاعلي لعرض المشاريع والإنجازات",
+    "نظام إدارة محتوى متقدم ولوحة تحكم",
+    "تصميم متجاوب مع جميع أحجام الشاشات",
+    "تحسين محركات البحث (SEO) المتقدم",
+    "نظام تقييمات وآراء العملاء",
+  ],
+},
+
   {
     id: "pro-camz",
     title: "Pro Camz ",
@@ -213,7 +271,7 @@ export const projects: Project[] = [
     fullDescription:
       "منصة اجتماعية مبتكرة تتيح للمستخدمين التعبير بحرية في بيئة خالية من التنمر والتقييمات السطحية. تعتمد على نظام ذكي يبرز التعليقات المفيدة ويقدم تلخيصات فورية للمحتوى، مما يوفر تجربة تواصل أكثر عمقًا وسرعة.",
     image:
-      "https://media.licdn.com/dms/image/v2/D4D22AQGUvd0rRP6wIg/feedshare-shrink_800/B4DZU.tmg9GcAk-/0/1740513897144?e=1755129600&v=beta&t=E-HGyvPEdziUkVAJshCPZwCChodk45Ki4QxNmIjDHwU",
+      "https://media.licdn.com/dms/image/v2/D4D22AQGUvd0rRP6wIg/feedshare-shrink_2048_1536/B4DZU.tmg9GcAs-/0/1740513897150?e=1759363200&v=beta&t=G_hvP1CYXBYix0sIP8_aRJw0JYCD0anuFUjAWNZa88k",
     youtubeVideo: "https://www.youtube.com/embed/z_F3Gg7wU9U",
     category: "social",
     technologies: ["nextjs", "MongoDB", "TailwindCSS", "typescript"],
@@ -556,7 +614,7 @@ export const projects: Project[] = [
     fullDescription:
       "مرافقي الذكي ليس مجرد تطبيق عادي ... رفيقك الصحي الشخصي الذي يرافقك في رحلتك نحو حياة أكثر صحة وسعادة 💖",
     image:
-      "https://media.licdn.com/dms/image/v2/D4D22AQGk2gmnQyo7Fg/feedshare-shrink_2048_1536/B4DZW_V9UYHYAo-/0/1742671959987?e=1754524800&v=beta&t=bdpeYC7d0WsO3Hy090bbfG_yJo65Uh7jWhEqJ7NNrEI",
+      "https://scontent.fist14-1.fna.fbcdn.net/v/t39.30808-6/486236260_544696361977329_6887452373071879288_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=127cfc&_nc_ohc=LqREc9LIJI8Q7kNvwGQHR62&_nc_oc=AdkTOzgfVu8Nof44AUIJuMMICkZotWCr5IxsAYjtJgDlFzia6u0BCakkgCs7bEyEylY&_nc_zt=23&_nc_ht=scontent.fist14-1.fna&_nc_gid=OELJaIb19gzt0HqtGcZOBA&oh=00_AfXKq3SlGJXrXd53dIE3mEqn1jw6HEvDHqM3LBThGcyDNw&oe=68BA33E4",
     youtubeVideo: "https://www.youtube.com/embed/WZCu-RzEQBY",
     category: "saas",
     technologies: ["Next.js", "Prisma", "Vercel", "TypeScript", "Tailwind"],

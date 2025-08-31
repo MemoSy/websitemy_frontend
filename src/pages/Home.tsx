@@ -692,7 +692,7 @@ const Home = () => {
                       مستوى التقدم
                     </span>
                     <span className="text-cyan-400 font-bold text-xl md:text-2xl">
-                      85%
+                      93%
                     </span>
                   </div>
 

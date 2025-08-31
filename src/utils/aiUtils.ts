@@ -1,7 +1,10 @@
 import { projects, serviceCategories } from "../data/projects";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import OpenAI from "openai";
 
-const genAI = new GoogleGenerativeAI("AIzaSyBKhvS66Ly1vvaohyyywqsqmkX4glcJIlw");
+const openai = new OpenAI({
+  apiKey: "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",
+  dangerouslyAllowBrowser: true // Note: In production, you should use a backend proxy for API calls
+});
 
 export interface CompanyInfo {
   name: string;
@@ -184,16 +187,12 @@ const analyzeContext = (conversationHistory: Array<{text: string, isUser: boolea
   return { currentTopic, lastMentionedProject };
 };
 
-export const callGeminiAPI = async (
+export const callChatGPT = async (
   currentMessage: string,
   context: AIKnowledgeBase,
   conversationHistory: Array<{text: string, isUser: boolean}> = []
 ) => {
   try {
-    const model = genAI.getGenerativeModel({
-      model: "gemini-2.5-flash-lite-preview-06-17",
-    });
-
     // تحليل السياق
     const contextAnalysis = analyzeContext(conversationHistory);
 
@@ -211,14 +210,12 @@ ${conversationHistory.map((msg, index) =>
 السؤال الحالي: ${currentMessage}`
       : `السؤال: ${currentMessage}`;
 
-    const prompt = `أنت سكرتير محترف لشركة WebSiteMy المتخصصة في تطوير مواقع الويب والتطبيقات. تتحدث بطبيعية كما يتحدث أي سكرتير حقيقي مع العملاء.
+    const systemPrompt = `أنت سكرتير محترف لشركة WebSiteMy المتخصصة في تطوير مواقع الويب والتطبيقات. تتحدث بطبيعية كما يتحدث أي سكرتير حقيقي مع العملاء.
 
 لديك الوصول إلى المعلومات التالية:
 - معلومات الشركة: ${JSON.stringify(context.companyInfo, null, 2)}
 - المشاريع المنجزة: ${JSON.stringify(context.projects, null, 2)}
 - فئات الخدمات: ${JSON.stringify(context.categories, null, 2)}
-
-${conversationContext}
 
 قواعد الرد الأساسية:
 
@@ -262,13 +259,41 @@ ${conversationContext}
 7. للاستفسارات المعقدة:
 إذا احتاج تفاصيل أكثر تخصصاً، قل: "دعني أوصلك بالمدير للحصول على تفاصيل أكثر دقة +905313345111"
 
-المطلوب: كن سكرتير ذكي يتذكر كل تفاصيل المحادثة ويفهم السياق بعمق، ويتابع من حيث انتهى الحديث، مع الحفاظ على السياق والهدف من المحادثة بدقة تامة.
-    `;
+المطلوب: كن سكرتير ذكي يتذكر كل تفاصيل المحادثة ويفهم السياق بعمق، ويتابع من حيث انتهى الحديث، مع الحفاظ على السياق والهدف من المحادثة بدقة تامة.`;
 
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    return response.text();
-  } catch (error) {
-    console.error("Gemini API Error:", error);
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4o",
+      messages: [
+        {
+          role: "system",
+          content: systemPrompt
+        },
+        {
+          role: "user", 
+          content: conversationContext
+        }
+      ],
+      max_tokens: 1500,
+      temperature: 0.7,
+    });
+
+    return completion.choices[0]?.message?.content || "آسف، لم أتمكن من الحصول على إجابة دقيقة. يرجى المحاولة مرة أخرى.";
+    
+  } catch (error: any) {
+    console.error("ChatGPT API Error:", error);
+    
+    // More specific error handling
+    if (error?.status === 401) {
+      return "عذراً، مفتاح API غير صحيح. يرجى التحقق من صحة المفتاح.";
+    } else if (error?.status === 429) {
+      return "عذراً، تم تجاوز حد الاستخدام. يرجى المحاولة مرة أخرى لاحقاً.";
+    } else if (error?.status === 400) {
+      return "عذراً، هناك خطأ في الطلب. يرجى المحاولة مرة أخرى.";
+    } else if (error?.message) {
+      console.error("Detailed error:", error.message);
+      return `عذراً، حدث خطأ: ${error.message}`;
+    }
+    
+    return "آسف، حدث خطأ في الاتصال بالخدمة. يرجى المحاولة مرة أخرى.";
   }
 };
