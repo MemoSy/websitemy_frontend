@@ -1,0 +1,10 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad-placeholder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#94a3b8" />
+      <stop offset="100%" stop-color="#1f2937" />
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="40" fill="url(#grad-placeholder)" />
+  <text x="100" y="112" font-size="60" fill="#e2e8f0" font-family="'Segoe UI', Tahoma, sans-serif" text-anchor="middle" font-weight="700">★</text>
+</svg>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png+xml" href="/logo1.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#00d4ff" />
+    <!-- Google Search Console Verification - ضع كودك هنا -->
+    <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE_HERE" />
+    <title>websitemy ➡ لتطوير الويب</title>
+    <meta
+      name="description"
+      content="شركة تطوير ويب متخصصة في إنشاء مواقع إلكترونية وتطبيقات ويب متقدمة. نحول أفكارك إلى واقع رقمي بأحدث التقنيات."
+    />
+    
+    <!-- SEO Meta Tags -->
+    <meta name="keywords" content="تطوير مواقع, تطبيقات ويب, برمجة, تصميم مواقع, تطوير واجهات, React, TypeScript, NestJS, WebSiteMy" />
+    <meta name="author" content="WebSiteMy" />
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="bingbot" content="index, follow" />
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="WebSiteMy - شركة تطوير الويب الرائدة" />
+    <meta property="og:description" content="نحول أفكارك إلى مواقع ويب احترافية بأحدث التقنيات. React، TypeScript، NestJS وأكثر." />
+    <meta property="og:url" content="https://www.websitemy.com" />
+    <meta property="og:site_name" content="WebSiteMy" />
+    <meta property="og:image" content="https://www.websitemy.com/images/logo.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ar_AR" />
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="WebSiteMy - شركة تطوير الويب الرائدة" />
+    <meta name="twitter:description" content="نحول أفكارك إلى مواقع ويب احترافية بأحدث التقنيات." />
+    <meta name="twitter:image" content="https://www.websitemy.com/images/logo.png" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.websitemy.com" />
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Additional Meta Tags -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    
+    <!-- SPA Redirect Script -->
+    <script>
+      // Store the current path before redirect
+      sessionStorage.setItem('redirect', location.pathname + location.search + location.hash);
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- SPA Redirect Handler -->
+    <script>
+      // Handle SPA routing on reload
+      (function() {
+        var redirect = sessionStorage.getItem('redirect');
+        sessionStorage.removeItem('redirect');
+        if (redirect && redirect !== location.pathname) {
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
+  </body>
+</html>

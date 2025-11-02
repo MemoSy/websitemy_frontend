@@ -1,0 +1,10 @@
+      {/* Projects Tabs Section */}
+      <ProjectTabs />
+
+      {/* Testimonials Section */}
+      <TestimonialsSection />
+    </div>
+  );
+};
+
+export default Home;

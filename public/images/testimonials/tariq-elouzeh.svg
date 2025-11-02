@@ -1,0 +1,13 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad-tariq" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0ea5e9" />
+      <stop offset="50%" stop-color="#2563eb" />
+      <stop offset="100%" stop-color="#7c3aed" />
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="40" fill="url(#grad-tariq)" />
+  <circle cx="100" cy="80" r="44" fill="rgba(15,23,42,0.85)" />
+  <rect x="48" y="122" width="104" height="52" rx="26" fill="rgba(15,23,42,0.9)" />
+  <text x="100" y="94" font-size="42" fill="#e0f2fe" font-family="'Segoe UI', Tahoma, sans-serif" text-anchor="middle" font-weight="700">TE</text>
+</svg>

@@ -1,0 +1,13 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad-jsm" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="50%" stop-color="#4ade80" />
+      <stop offset="100%" stop-color="#22d3ee" />
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="40" fill="url(#grad-jsm)" />
+  <circle cx="100" cy="80" r="44" fill="rgba(15,23,42,0.85)" />
+  <rect x="48" y="122" width="104" height="52" rx="26" fill="rgba(15,23,42,0.9)" />
+  <text x="100" y="94" font-size="38" fill="#fef08a" font-family="'Segoe UI', Tahoma, sans-serif" text-anchor="middle" font-weight="700">JSM</text>
+</svg>
