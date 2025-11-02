@@ -247,15 +247,29 @@ const Home = () => {
 
   // GSAP animations setup
   useEffect(() => {
+    // Skip heavy animations on mobile for better performance
+    const isMobile = window.innerWidth < 768;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
+    if (prefersReducedMotion) {
+      return; // Skip animations if user prefers reduced motion
+    }
+
     // Current Project Section Animation
     if (currentProjectRef.current) {
-      // Set initial states
+      // Set initial states with reduced complexity on mobile
+      const animationDuration = isMobile ? 0.6 : 1.2;
+      const staggerDelay = isMobile ? 0.05 : 0.1;
+
       gsap.set(".project-left", { x: -100, opacity: 0 });
       gsap.set(".project-right", { x: 100, opacity: 0 });
       gsap.set(".tech-card", { scale: 0.8, opacity: 0 });
       gsap.set(".feature-item", { y: 30, opacity: 0 });
-  gsap.set(".progress-fill", { scaleX: 0, transformOrigin: "left center" });
-      gsap.set(".floating-element", { scale: 0, rotation: 0 });
+      gsap.set(".progress-fill", { scaleX: 0, transformOrigin: "left center" });
+      
+      if (!isMobile) {
+        gsap.set(".floating-element", { scale: 0, rotation: 0 });
+      }
 
       // Create timeline
       const tl = gsap.timeline({
@@ -271,7 +285,7 @@ const Home = () => {
       tl.to(".project-left", {
         x: 0,
         opacity: 1,
-        duration: 1.2,
+        duration: animationDuration,
         ease: "power3.out",
       })
         .to(
@@ -279,7 +293,7 @@ const Home = () => {
           {
             x: 0,
             opacity: 1,
-            duration: 1.2,
+            duration: animationDuration,
             ease: "power3.out",
           },
           "-=0.8"
@@ -290,7 +304,7 @@ const Home = () => {
             scale: 1,
             opacity: 1,
             duration: 0.6,
-            stagger: 0.1,
+            stagger: staggerDelay,
             ease: "back.out(1.7)",
           },
           "-=0.6"
@@ -301,7 +315,7 @@ const Home = () => {
             y: 0,
             opacity: 1,
             duration: 0.8,
-            stagger: 0.15,
+            stagger: staggerDelay * 1.5,
             ease: "power2.out",
           },
           "-=0.4"
@@ -314,8 +328,11 @@ const Home = () => {
             ease: "power2.out",
           },
           "-=0.6"
-        )
-        .to(
+        );
+
+      // Only add floating animations on desktop
+      if (!isMobile) {
+        tl.to(
           ".floating-element",
           {
             scale: 1,
@@ -327,44 +344,43 @@ const Home = () => {
           "-=0.3"
         );
 
-      // Continuous floating animation for background elements
-      gsap.to(".bg-float-1", {
-        y: -20,
-        x: 15,
-        rotation: 10,
-        duration: 4,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      });
+        // Continuous floating animation for background elements (desktop only)
+        gsap.to(".bg-float-1", {
+          y: -20,
+          x: 15,
+          rotation: 10,
+          duration: 4,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        });
 
-      gsap.to(".bg-float-2", {
-        y: 25,
-        x: -20,
-        rotation: -15,
-        duration: 5,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      });
+        gsap.to(".bg-float-2", {
+          y: 25,
+          x: -20,
+          rotation: -15,
+          duration: 5,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        });
 
-      gsap.to(".bg-float-3", {
-        y: -15,
-        x: 10,
-        rotation: 8,
-        duration: 6,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      });
+        gsap.to(".bg-float-3", {
+          y: -15,
+          x: 10,
+          rotation: 8,
+          duration: 6,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        });
+      }
     }
 
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
-  }, []);
-
-  // Animated counter function
+  }, []);  // Animated counter function
   const animateCounter = (
     start: number,
     end: number,
@@ -606,13 +622,11 @@ const Home = () => {
 
       {/* Tech Slider Section */}
       <TechSlider />
-      <br />
-      <br />
 
       {/* Current Development Project Section */}
       <section
         ref={currentProjectRef}
-        className="pt-10 pb-12 md:pt-14 md:pb-16 lg:pt-16 lg:pb-20 bg-gradient-to-br from-gray-900 via-black to-gray-900 relative overflow-hidden"
+        className="py-16 md:py-20 lg:py-24 bg-gradient-to-br from-gray-900 via-black to-gray-900 relative overflow-hidden"
       >
         {/* Enhanced Background Elements */}
         <div className="absolute inset-0 opacity-20 md:opacity-30">
@@ -638,7 +652,7 @@ const Home = () => {
           </div>
 
           {/* Projects Tabs */}
-          <div className="mx-auto grid w-full max-w-3xl grid-cols-1 gap-3 md:max-w-4xl md:grid-cols-3 md:gap-4 mb-8 md:mb-10">
+          <div className="mx-auto flex w-full max-w-3xl gap-2 md:max-w-4xl md:gap-4 mb-8 md:mb-10">
             {currentProjects.map((project) => {
               const isActive = project.id === activeProjectId;
               return (
@@ -652,21 +666,29 @@ const Home = () => {
                   }}
                   whileHover={{ y: -2 }}
                   whileTap={{ scale: 0.97 }}
-                  className={`group relative flex w-full flex-col items-end gap-1 overflow-hidden rounded-xl border px-4 py-2 text-sm md:px-5 md:py-3 md:text-base transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 ${
+                  animate={{
+                    flex: isActive ? '2' : '1',
+                  }}
+                  transition={{
+                    duration: 0.3,
+                    ease: 'easeInOut',
+                  }}
+                  className={`group relative flex flex-col items-end gap-1 overflow-hidden rounded-xl border px-3 py-2 text-xs md:px-5 md:py-3 md:text-base transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 ${
                     isActive
                       ? "border-cyan-500/60 bg-gradient-to-r from-cyan-500/15 via-purple-500/10 to-purple-500/20 text-white shadow-lg shadow-cyan-500/20"
                       : "border-gray-700/60 bg-gray-900/30 text-gray-300 hover:border-cyan-500/40 hover:text-white"
                   }`}
                   aria-pressed={isActive}
+                  style={{ minWidth: '60px' }}
                 >
-                  <span className="font-semibold leading-tight">
+                  <span className="font-semibold leading-tight whitespace-nowrap overflow-hidden text-ellipsis w-full">
                     {project.shortTitle}
                   </span>
-                  <span className="text-xs text-gray-400 transition-colors group-hover:text-gray-300">
+                  <span className={`text-[10px] md:text-xs text-gray-400 transition-all group-hover:text-gray-300 whitespace-nowrap overflow-hidden text-ellipsis w-full ${!isActive ? 'opacity-0 h-0' : 'opacity-100'}`}>
                     {project.tagline}
                   </span>
                   {isActive && (
-                    <span className="absolute inset-x-4 bottom-1 h-[2px] rounded-full bg-gradient-to-r from-cyan-400 to-purple-500"></span>
+                    <span className="absolute inset-x-3 md:inset-x-4 bottom-1 h-[2px] rounded-full bg-gradient-to-r from-cyan-400 to-purple-500"></span>
                   )}
                 </motion.button>
               );
@@ -889,8 +911,8 @@ const Home = () => {
                   </div>
                 </div>
 
-                {/* Call to Action - Now horizontally aligned */}
-                <div className="bg-gradient-to-r from-cyan-500/10 via-purple-500/5 to-pink-500/10 border border-cyan-500/30 rounded-2xl p-4 md:p-6 backdrop-blur-sm mt-auto">
+                {/* Call to Action - Now horizontally aligned - Hidden on mobile */}
+                <div className="hidden md:block bg-gradient-to-r from-cyan-500/10 via-purple-500/5 to-pink-500/10 border border-cyan-500/30 rounded-2xl p-4 md:p-6 backdrop-blur-sm mt-auto">
                   <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                     <div className="flex-1">
                       <h4 className="text-white font-bold mb-2 text-base md:text-lg">

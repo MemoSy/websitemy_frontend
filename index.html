@@ -6,6 +6,45 @@
     <link rel="manifest" href="/manifest.json" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#00d4ff" />
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/images/hero-poster.jpg" as="image" type="image/jpeg" />
+    
+    <!-- Font optimization with font-display swap -->
+    <style>
+      /* Critical CSS - Above the fold */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: system-ui, -apple-system, sans-serif;
+        background: #000;
+        color: #fff;
+        overflow-x: hidden;
+      }
+      
+      /* Prevent layout shift */
+      #root {
+        min-height: 100vh;
+      }
+      
+      /* Loading indicator */
+      .page-loader {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background: linear-gradient(to bottom right, #111827, #000, #111827);
+      }
+    </style>
+    
     <!-- Google Search Console Verification - ضع كودك هنا -->
     <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE_HERE" />
     <title>websitemy ➡ لتطوير الويب</title>

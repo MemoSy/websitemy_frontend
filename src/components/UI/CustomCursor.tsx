@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
+import { throttle } from '../../utils/performanceOptimizer';
 
 const CustomCursor = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
@@ -17,7 +18,8 @@ const CustomCursor = () => {
     // إخفاء المؤشر الافتراضي
     document.body.style.cursor = 'none';
 
-    const moveCursor = (e: MouseEvent) => {
+    // Throttle mouse move for better performance
+    const moveCursor = throttle((e: MouseEvent) => {
       gsap.to(cursor, {
         x: e.clientX,
         y: e.clientY,
@@ -31,7 +33,7 @@ const CustomCursor = () => {
         duration: 0.3,
         ease: "power2.out"
       });
-    };
+    }, 16); // ~60fps
 
     const handleMouseEnter = (e: Event) => {
       const target = e.target as HTMLElement;

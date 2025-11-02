@@ -1,12 +1,11 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
-import { Code, Mail, Phone, MapPin, Github, Linkedin, Twitter, Facebook, Youtube } from 'lucide-react';
+import { Mail, Phone, MapPin, Github, Linkedin, Twitter, Facebook, Youtube } from 'lucide-react';
 
 const Footer = () => {
   return (
     <footer className="bg-gray-900 border-t border-gray-800">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Company Info */}
           <div className="space-y-5">
             <div className="flex items-center space-x-2">
@@ -53,16 +52,6 @@ const Footer = () => {
                   من نحن
                 </Link>
               </li>
-            </ul>
-          </div>
-
-          {/* Services */}
-          <div className="space-y-3">
-            <h3 className="text-lg font-semibold text-white">خدماتنا</h3>
-            <ul className="space-y-2">
-              <li className="text-gray-400">تطوير المواقع الإلكترونية</li>
-              <li className="text-gray-400">تطبيقات الهاتف المحمول</li>
-              <li className="text-gray-400">التجارة الإلكترونية</li>
             </ul>
           </div>
 

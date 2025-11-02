@@ -106,7 +106,7 @@ const TestimonialsSection = () => {
   };
 
   return (
-    <section className="py-20">
+    <section className="py-16 md:py-20 lg:py-24">
   <div className="mx-auto w-full max-w-[1288px] px-4 sm:px-8">
         {/* Section Header */}
         <motion.div
@@ -144,11 +144,14 @@ const TestimonialsSection = () => {
               </div>
 
               {/* Client Info */}
-              <div className="flex items-center gap-4 mb-6">
+              <div className="flex gap-6 items-start mb-8">
                 <img
                   src={activeTestimonial.image}
                   alt={`صورة ${activeTestimonial.name} - ${activeTestimonial.position} في ${activeTestimonial.company}`}
                   className="w-16 h-16 rounded-full object-cover border-4 border-gray-700"
+                  width={64}
+                  height={64}
+                  loading="lazy"
                 />
                 <div className="space-y-1">
                   <h4 className="text-xl font-bold text-white">
@@ -234,6 +237,9 @@ const TestimonialsSection = () => {
                     src={testimonial.image}
                     alt={`صورة ${testimonial.name} - ${testimonial.position} في ${testimonial.company}`}
                     className="w-12 h-12 rounded-full object-cover"
+                    width={48}
+                    height={48}
+                    loading="lazy"
                   />
                   <div className="flex-1 space-y-3">
                     <h4 className="text-white font-medium text-sm">

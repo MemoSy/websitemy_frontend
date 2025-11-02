@@ -3,15 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer';
-import AnimatedBackground from './components/UI/AnimatedBackground';
-import ParticleBackground from './components/UI/ParticleBackground';
-import CustomCursor from './components/UI/CustomCursor';
 import LoadingSpinner from './components/UI/LoadingSpinner';
-import PerformanceMonitor from './components/UI/PerformanceMonitor';
 import GoogleAnalytics from './components/Analytics/GoogleAnalytics';
 import GoogleSearchConsole from './components/Analytics/GoogleSearchConsole';
-import AIAssistantButton from './components/UI/AIAssistantButton';
-import FloatingWhatsAppButton from './components/UI/FloatingWhatsAppButton';
 
 // Lazy loading للصفحات
 const Home = lazy(() => import('./pages/Home'));
@@ -23,6 +17,14 @@ const AIChat = lazy(() => import('./pages/AIChat'));
 const ChatAnalytics = lazy(() => import('./pages/ChatAnalytics'));
 const AdminPage = lazy(() => import('./pages/AdminPage'));
 const NotFound = lazy(() => import('./pages/NotFound'));
+
+// Lazy load heavy UI components after initial render
+const AnimatedBackground = lazy(() => import('./components/UI/AnimatedBackground'));
+const ParticleBackground = lazy(() => import('./components/UI/ParticleBackground'));
+const CustomCursor = lazy(() => import('./components/UI/CustomCursor'));
+const PerformanceMonitor = lazy(() => import('./components/UI/PerformanceMonitor'));
+const AIAssistantButton = lazy(() => import('./components/UI/AIAssistantButton'));
+const FloatingWhatsAppButton = lazy(() => import('./components/UI/FloatingWhatsAppButton'));
 
 // مكون Loading مخصص
 const PageLoader = () => (
@@ -46,15 +48,23 @@ function App() {
         {GOOGLE_SEARCH_CONSOLE_CODE && <GoogleSearchConsole verificationCode={GOOGLE_SEARCH_CONSOLE_CODE} />}
         
         <div className="min-h-screen bg-black text-white relative overflow-x-hidden">
-          {/* خلفيات متحركة */}
-          <AnimatedBackground />
-          <ParticleBackground />
+          {/* خلفيات متحركة - Lazy loaded */}
+          <Suspense fallback={null}>
+            <AnimatedBackground />
+            <ParticleBackground />
+          </Suspense>
           
-          {/* مؤشر مخصص */}
-          <CustomCursor />
+          {/* مؤشر مخصص - Lazy loaded */}
+          <Suspense fallback={null}>
+            <CustomCursor />
+          </Suspense>
           
-          {/* مراقب الأداء */}
-        <PerformanceMonitor />
+          {/* مراقب الأداء - Only in development */}
+          {import.meta.env.DEV && (
+            <Suspense fallback={null}>
+              <PerformanceMonitor />
+            </Suspense>
+          )}
         
         <div className="relative z-10">
           <Header />
@@ -75,9 +85,11 @@ function App() {
           </main>
           <Footer />
           
-          {/* مساعد ذكي ثابت في جميع الصفحات */}
-          <AIAssistantButton />
-          <FloatingWhatsAppButton />
+          {/* مساعد ذكي ثابت في جميع الصفحات - Lazy loaded */}
+          <Suspense fallback={null}>
+            <AIAssistantButton />
+            <FloatingWhatsAppButton />
+          </Suspense>
         </div>
         </div>
       </Router>

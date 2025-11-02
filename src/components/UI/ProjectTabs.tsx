@@ -101,7 +101,7 @@ const ProjectTabs = () => {
   };
 
   return (
-    <section ref={sectionRef} className="py-20 relative overflow-hidden">
+    <section ref={sectionRef} className="py-16 md:py-20 lg:py-24 relative overflow-hidden">
       {/* Interactive Background */}
       <div ref={backgroundRef} className="absolute inset-0">
         {/* Gradient Background */}
@@ -144,11 +144,11 @@ const ProjectTabs = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+          <h2 className="text-2xl md:text-5xl font-bold text-white mb-6">
             ✨ معرض إنجازاتنا التقنية
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            مجموعة متنوعة من المشاريع التي طورناها ونفذناها بامتياز
+          مجموعة متنوعة من المشاريع التي طورناها  
           </p>
         </motion.div>
 

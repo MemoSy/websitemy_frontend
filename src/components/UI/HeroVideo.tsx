@@ -5,12 +5,29 @@ import { Pause, Play, Volume2, VolumeX } from "lucide-react";
 const HeroVideo = () => {
 	const videoRef = useRef<HTMLVideoElement>(null);
 	const [isMuted, setIsMuted] = useState(true);
-	const [isPlaying, setIsPlaying] = useState(true);
+	const [isPlaying, setIsPlaying] = useState(false);
 	const [isReady, setIsReady] = useState(false);
+	const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+
+	// Detect if user is on mobile or slow connection
+	const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+	const isSlowConnection = 
+		'connection' in navigator && 
+		(navigator as any).connection?.effectiveType === '2g' || 
+		(navigator as any).connection?.effectiveType === 'slow-2g';
+
+	useEffect(() => {
+		// Delay video loading slightly to prioritize critical content
+		const timer = setTimeout(() => {
+			setShouldLoadVideo(true);
+		}, 100);
+
+		return () => clearTimeout(timer);
+	}, []);
 
 	useEffect(() => {
 		const video = videoRef.current;
-		if (!video) {
+		if (!video || !shouldLoadVideo) {
 			return;
 		}
 
@@ -22,10 +39,12 @@ const HeroVideo = () => {
 		video.addEventListener("play", handlePlay);
 		video.addEventListener("pause", handlePause);
 
-		// Try to start playback immediately; browsers require muted autoplay.
-		const playPromise = video.play();
-		if (playPromise && typeof playPromise.catch === "function") {
-			playPromise.catch(() => setIsPlaying(false));
+		// Only autoplay on desktop with good connection
+		if (!isMobile && !isSlowConnection) {
+			const playPromise = video.play();
+			if (playPromise && typeof playPromise.catch === "function") {
+				playPromise.catch(() => setIsPlaying(false));
+			}
 		}
 
 		return () => {
@@ -33,7 +52,7 @@ const HeroVideo = () => {
 			video.removeEventListener("play", handlePlay);
 			video.removeEventListener("pause", handlePause);
 		};
-	}, []);
+	}, [shouldLoadVideo, isMobile, isSlowConnection]);
 
 	const toggleMute = () => {
 		const video = videoRef.current;
@@ -70,19 +89,31 @@ const HeroVideo = () => {
 			className="relative w-full max-w-5xl mx-auto"
 		>
 			<div className="relative aspect-video w-full overflow-hidden rounded-3xl border border-cyan-500/20 bg-black shadow-[0_30px_120px_-40px_rgba(14,165,233,0.6)]">
-				<video
-					ref={videoRef}
-					autoPlay
-					loop
-					muted
-					playsInline
-					preload="metadata"
-					  poster="/images/placeholder.svg"
-					className="h-full w-full object-cover"
-				>
-					<source src="/videos/hero-intro.webm" type="video/webm" />
-					<source src="/videos/hero-intro.mp4" type="video/mp4" />
-				</video>
+				{shouldLoadVideo ? (
+					<video
+						ref={videoRef}
+						autoPlay={!isMobile && !isSlowConnection}
+						loop
+						muted
+						playsInline
+						preload={isMobile ? "none" : "metadata"}
+						poster="/images/hero-poster.jpg"
+						className="h-full w-full object-cover"
+					>
+						<source src="/videos/hero-intro.mp4" type="video/mp4" />
+						{/* Fallback text */}
+						<p className="text-white text-center p-8">
+							متصفحك لا يدعم تشغيل الفيديو. يرجى تحديث المتصفح.
+						</p>
+					</video>
+				) : (
+					// Show poster while video is loading
+					<img 
+						src="/images/hero-poster.jpg" 
+						alt="WebSiteMy Preview" 
+						className="h-full w-full object-cover"
+					/>
+				)}
 
 				{/* Lightweight overlay to preserve readability on desktop */}
 				<div
