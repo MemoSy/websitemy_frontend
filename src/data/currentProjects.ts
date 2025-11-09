@@ -163,15 +163,15 @@ export const currentProjectsData: CurrentProject[] = [
       },
       {
         name: "mongoDB",
-        color: "from-blue-400/20 to-blue-600/20",
-        icon: "💧",
-        border: "border-blue-300/30",
+        color: "from-indigo-500/20 to-purple-700/20",
+        icon: "🔷",
+        border: "border-indigo-400/30",
       },
       {
-        name: "typeScript",
-        color: "from-red-400/20 to-red-700/20",
-        icon: "🛑",
-        border: "border-red-300/30",
+        name: "tailwind CSS",
+        color: "from-purple-500/20 to-pink-600/20",
+        icon: "🎨",
+        border: "border-purple-400/30",
       },
     ],
     features: [

@@ -101,7 +101,7 @@ const ProjectTabs = () => {
   };
 
   return (
-    <section ref={sectionRef} className="py-16 md:py-20 lg:py-24 relative overflow-hidden">
+    <section ref={sectionRef} className="py-20 md:py-24 relative overflow-hidden">
       {/* Interactive Background */}
       <div ref={backgroundRef} className="absolute inset-0">
         {/* Gradient Background */}

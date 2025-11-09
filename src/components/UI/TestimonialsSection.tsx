@@ -81,7 +81,7 @@ const TestimonialsSection = () => {
   };
 
   return (
-    <section className="py-32 bg-[#0A0E27] relative overflow-hidden">
+    <section className="py-20 md:py-24 bg-[#0A0E27] relative overflow-hidden">
       {/* خلفية متحركة */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 -left-32 w-96 h-96 bg-[#6C5CE7]/10 rounded-full blur-3xl"></div>

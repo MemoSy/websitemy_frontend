@@ -192,57 +192,57 @@ const StackCards: React.FC = () => {
       </div>
 
       {/* العنوان */}
-      <div className="container mx-auto px-6 pt-32 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 pt-20 md:pt-24 relative z-10">
         <div className="text-center max-w-4xl mx-auto">
-          <div className="inline-block px-4 py-2 bg-[#6C5CE7]/10 border border-[#6C5CE7]/30 rounded-full mb-6">
+          <div className="inline-block px-4 py-2 bg-[#6C5CE7]/10 border border-[#6C5CE7]/30 rounded-full mb-4">
             <span className="text-[#6C5CE7] font-semibold text-sm">خطوات العمل</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-4 leading-tight px-4">
             كيف نحول شركتك إلى{' '}
             <span className="bg-gradient-to-r from-[#6C5CE7] via-[#00D9FF] to-[#00FFA3] bg-clip-text text-transparent">
               واقع ناجح
             </span>
             ؟
           </h2>
-          <p className="text-[#A0AEC0] text-xl leading-relaxed">
+          <p className="text-[#A0AEC0] text-base sm:text-lg md:text-xl leading-relaxed px-4">
             عملية واضحة ومنظمة من البداية إلى النهاية مع التزام تام بالمواعيد
           </p>
         </div>
       </div>
 
       {/* البطاقات المكدسة */}
-      <div className="relative">
+      <div className="relative pb-20 md:pb-24">
         {cards.map((card, index) => (
           <div
             key={card.id}
             ref={(el) => {
               cardsRef.current[index] = el;
             }}
-            className="h-screen flex items-center justify-center px-6"
+            className="h-screen flex items-center justify-center px-4 sm:px-6"
           >
             <div className="max-w-5xl w-full">
               <div 
-                className="bg-gradient-to-br from-[#1A1F3A]/95 to-[#0F1729]/95 backdrop-blur-xl border border-white/10 rounded-3xl p-12 shadow-2xl"
+                className="bg-gradient-to-br from-[#1A1F3A]/95 to-[#0F1729]/95 backdrop-blur-xl border border-white/10 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 lg:p-12 shadow-2xl"
                 style={{
                   transform: `scale(${1 - (index * 0.05)})`,
                   transformOrigin: 'center top',
                 }}
               >
                 {/* رقم الخطوة */}
-                <div className="flex items-start justify-between mb-8">
+                <div className="flex items-start justify-between mb-6 sm:mb-8">
                   <div 
-                    className="w-24 h-24 rounded-2xl flex items-center justify-center shadow-lg transition-all duration-300"
+                    className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg transition-all duration-300"
                     style={{
                       background: `linear-gradient(135deg, ${card.iconColor}20, ${card.iconColor}05)`,
                       border: `2px solid ${card.iconColor}40`
                     }}
                   >
-                    <div style={{ color: card.iconColor }}>
+                    <div style={{ color: card.iconColor }} className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12">
                       {card.icon}
                     </div>
                   </div>
                   <div 
-                    className="card-number text-8xl font-black transition-all duration-300"
+                    className="card-number text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black transition-all duration-300"
                     style={{ 
                       color: card.iconColor,
                       textShadow: '0 0 40px currentColor, 0 0 60px currentColor, 0 0 80px currentColor'
@@ -253,43 +253,23 @@ const StackCards: React.FC = () => {
                 </div>
 
                 {/* المحتوى */}
-                <div className="space-y-6">
-                  <h3 className="text-4xl font-bold text-white leading-tight">
+                <div className="space-y-3 sm:space-y-4 md:space-y-6">
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight">
                     {card.title}
                   </h3>
-                  <p className="text-[#A0AEC0] text-2xl leading-relaxed">
+                  <p className="text-[#A0AEC0] text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed">
                     {card.description}
                   </p>
                 </div>
 
                 {/* خط الفاصل */}
                 <div 
-                  className={`h-1 w-full bg-gradient-to-r ${card.gradient} opacity-30 rounded-full mt-10`}
+                  className={`h-1 w-full bg-gradient-to-r ${card.gradient} opacity-30 rounded-full mt-6 sm:mt-8 md:mt-10`}
                 ></div>
               </div>
             </div>
           </div>
         ))}
-      </div>
-
-      {/* CTA في الأسفل */}
-      <div className="container mx-auto px-6  pb-32 relative z-10">
-        <div className="text-center">
-          <div className="inline-flex flex-col sm:flex-row gap-6">
-            <a
-              href="#contact"
-              className="px-12 py-6 bg-gradient-to-r from-[#6C5CE7] to-[#00D9FF] text-white font-bold text-xl rounded-2xl hover:shadow-[0_0_40px_rgba(108,92,231,0.6)] transition-all duration-300 hover:-translate-y-1"
-            >
-              ابدأ مشروعك الآن
-            </a>
-            <a
-              href="#projects"
-              className="px-12 py-6 bg-[#1A1F3A] text-white font-bold text-xl rounded-2xl border-2 border-white/10 hover:border-[#6C5CE7] transition-all duration-300 hover:-translate-y-1"
-            >
-              شاهد أعمالنا السابقة
-            </a>
-          </div>
-        </div>
       </div>
     </div>
   );

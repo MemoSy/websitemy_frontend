@@ -10,7 +10,7 @@ const CurrentProjectsSection = () => {
 
   return (
     <section
-      className="py-16 md:py-24 bg-black relative overflow-hidden"
+      className="py-20 md:py-24 bg-black relative overflow-hidden"
       id="current-projects"
     >
       {/* Enhanced Background Elements */}
@@ -27,16 +27,16 @@ const CurrentProjectsSection = () => {
         <div className="floating-element absolute top-1/2 right-10 md:right-20 w-2 h-2 md:w-4 md:h-4 bg-gradient-to-r from-cyan-500 to-purple-500 rotate-45"></div>
       </div>
 
-      <div className="mx-auto w-full max-w-[1288px] px-5 relative z-10 sm:px-8">
+      <div className="mx-auto w-full max-w-[1288px] px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-6 md:mb-8">
-          <h2 className="text-3xl md:-translate-y-3 md:text-4xl lg:text-[44px] font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent py-2">
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
             مشاريع قيد التنفيذ
           </h2>
         </div>
 
         {/* Projects Tabs */}
-        <div className="mx-auto flex w-full max-w-3xl gap-2 md:max-w-4xl md:gap-4 mb-8 md:mb-10">
+        <div className="mx-auto flex w-full max-w-3xl gap-2 md:max-w-4xl md:gap-4 mb-10 md:mb-12">
           {currentProjectsData.map((project) => {
             const isActive = project.id === activeProjectId;
             return (

@@ -101,7 +101,7 @@ const ServicesSection = () => {
   return (
     <section 
       ref={sectionRef}
-      className="max-sm:!py-4 py-24 bg-[#131829] relative overflow-x-hidden" 
+      className="py-20 md:py-24 bg-[#131829] relative overflow-x-hidden" 
       id="services"
     >
       {/* Background Effects */}
@@ -109,16 +109,16 @@ const ServicesSection = () => {
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_50%,rgba(0,217,255,0.03)_0%,transparent_50%),radial-gradient(circle_at_80%_80%,rgba(108,92,231,0.03)_0%,transparent_50%)]"></div>
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-10 max-w-3xl mx-auto">
+        <div className="text-center mb-12 md:mb-16 max-w-3xl mx-auto">
           <span className="inline-block px-6 py-2 bg-[#00D9FF]/10 border border-[#00D9FF]/30 rounded-full text-[#00D9FF] font-semibold text-sm uppercase tracking-wider mb-4">
             خدماتنا
           </span>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-4 leading-tight">
             حلول ويب متكاملة لنجاح أعمالك
           </h2>
-          <p className="text-[#A0AEC0] text-lg leading-relaxed">
+          <p className="text-[#A0AEC0] text-base sm:text-lg leading-relaxed">
             نقدم خدمات تطوير ويب شاملة مصممة خصيصاً لتحقيق أهدافك التجارية
           </p>
         </div>

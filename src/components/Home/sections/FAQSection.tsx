@@ -6,17 +6,17 @@ const FAQSection = () => {
   const [activeFaqIndex, setActiveFaqIndex] = useState<number | null>(null);
 
   return (
-    <section className="relative py-24 bg-[#0F1729] overflow-hidden" id="faq">
-      <div className="container mx-auto px-4 relative z-10">
+    <section className="relative py-20 md:py-24 bg-[#0F1729] overflow-hidden" id="faq">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         {/* Section Header */}
-        <div className="text-center md:mb-16 mb-8">
+        <div className="text-center mb-12 md:mb-16">
           <span className="inline-block px-4 py-2 bg-[#00D9FF]/10 border border-[#00D9FF]/30 rounded-full text-[#00D9FF] text-sm font-semibold mb-4">
             الأسئلة الشائعة
           </span>
-          <h2 className="text-xl md:text-5xl font-black text-white mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-4">
             كل ما تحتاج <span className="bg-gradient-to-r from-[#00D9FF] to-[#6C5CE7] bg-clip-text text-transparent">معرفته</span>
           </h2>
-          <p className="text-[#A0AEC0] text-xs md:text-lg max-w-2xl mx-auto">
+          <p className="text-[#A0AEC0] text-base sm:text-lg max-w-2xl mx-auto">
             إجابات واضحة على أكثر الأسئلة تكراراً
           </p>
         </div>
