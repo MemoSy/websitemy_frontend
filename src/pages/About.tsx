@@ -31,25 +31,25 @@ const About = () => {
     {
       name: 'أحمد المبيض',
       role: 'المدير',
-      image: 'https://i.ibb.co/JjSPfzWc/509606060-24538410302429521-5576451676817606581-n.jpg',
+      image: '/images/team/member-1.webp',
       skills: ['مدير عام',]
     },
     {
       name: 'محمود المبيض ',
       role: 'مطور ويب - Full Stack',
-      image: 'https://i.ibb.co/bV9rq0z/514078228-619980001115631-3819133287882385004-n.png',
+      image: '/images/team/member-2.webp',
       skills: ['React', 'Node.js', 'MongoDB', 'next.js']
     },
     {
       name: '  أسماء الجمعة',
       role: 'مصمم UI/UX',
-      image: 'https://i.ibb.co/qFWWqKV7/1743791652252.jpg',
+      image: '/images/team/member-3.webp',
       skills: ['Figma', 'Adobe XD', 'User Research']
     },
     {
       name: 'سارة حلاق',
       role: 'مطورة واجهة أمامية ',
-      image: 'https://i.ibb.co/Jjs56RvK/sara-logo-2-pdf-2.png',
+      image: '/images/team/member-4.webp',
       skills: ['React','javascrept']
     }
   ];

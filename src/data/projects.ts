@@ -8,7 +8,7 @@ export const projects: Project[] = [
       "منصة تجارة إلكترونية متطورة بتصميم حديث وتجربة مستخدم استثنائية",
     fullDescription:
       "تم تطوير هذا المتجر الإلكتروني باستخدام أحدث التقنيات لضمان تجربة تسوق سلسة ومرضية. يتضمن نظام إدارة محتوى قوي، نظام ذكي، وتحليلات مبيعات متقدمة. المشروع يهدف إلى توفير منصة شاملة للتجارة الإلكترونية مع واجهة مستخدم حديثة وسهلة الاستخدام، بالإضافة إلى نظام إدارة متقدم للمنتجات والطلبات.",
-    image: "https://i.ibb.co/rGVgX71r/f483bd1d-bcd4-4068-9212-02273dee5499.png",
+    image: "/images/projects/local/project-artwin-main.webp",
     youtubeVideo: "https://www.youtube.com/embed/LtP5HDSfcmw",
     category: "ecommerce",
     technologies: ["nextjs", "MongoDB", "TailwindCSS", "typescript"],
@@ -75,7 +75,7 @@ export const projects: Project[] = [
     fullDescription:
       "Bu çevrimiçi mağaza, sorunsuz ve tatmin edici bir alışveriş deneyimi sağlamak için en son teknolojiler kullanılarak geliştirildi. Sağlam bir içerik yönetim sistemi, akıllı bir sistem ve gelişmiş satış analitiği içerir. Proje, modern ve kullanımı kolay bir kullanıcı arayüzüne sahip kapsamlı bir e-ticaret platformu ve gelişmiş bir ürün ve sipariş yönetim sistemi sağlamayı amaçlamaktadır.",
     image:
-      "https://i.ibb.co/VWsRPSPf/Fire-Shot-Capture-022-Home-Page-www-artwin-store.png",
+      "/images/projects/local/project-artwin-screenshot.webp",
     youtubeVideo: "https://www.youtube.com/embed/LtP5HDSfcmw",
     category: "ecommerce",
     technologies: ["nextjs", "MongoDB", "TailwindCSS", "typescript"],
@@ -205,7 +205,7 @@ export const projects: Project[] = [
     description: "متجر الكتروني متكامل لبيع الكميرات و مستلزماتها متعدد اللغات",
     fullDescription:
       "تم تطوير هذا المتجر الإلكتروني باستخدام أحدث التقنيات لضمان تجربة تسوق سلسة ومرضية. يتضمن نظام إدارة محتوى قوي، نظام ذكي، وتحليلات مبيعات متقدمة. المشروع يهدف إلى توفير منصة شاملة للتجارة الإلكترونية مع واجهة مستخدم حديثة وسهلة الاستخدام، بالإضافة إلى نظام إدارة متقدم للمنتجات والطلبات.",
-    image: "https://i.ibb.co/6RZqQMkH/1.webp",
+    image: "/images/projects/local/project-1.webp",
     youtubeVideo: "https://www.youtube.com/embed/bcTyXAuDjWg",
     category: "ecommerce",
     technologies: ["nextjs", "nesjs", "MongoDB", "TailwindCSS", "typescript"],
@@ -323,7 +323,7 @@ export const projects: Project[] = [
     fullDescription:
       "موقع ويب مخصص لحفظ ذكريات وقصص شهدائنا الأبطال، حيث يمكن لأي شخص مشاركة قصة شهيد عزيز عليه والاحتفاظ بذكراه للأبد.",
     image:
-      "https://i.ibb.co/p6kpyRfx/Fire-Shot-Capture-025-You-Tube-www-youtube-com.png",
+      "/images/projects/local/project-youtube.webp",
     youtubeVideo: "https://www.youtube.com/embed/yQmvvSDn8lM",
     category: "service",
     technologies: ["nextjs", "nestjs", "mongodb", "tailwindcss", "typescript"],
@@ -450,7 +450,7 @@ export const projects: Project[] = [
       "منصة لتقديم الشكاوى وتحسين التواصل بين المواطنين والجهات المعنية",
     fullDescription:
       'منصة "صوت حلب" تهدف إلى تحسين التواصل بين المواطنين والجهات المعنية، ومعالجة القضايا الخدمية بكفاءة وسرعة. تم تنفيذ المشروع في مدة قياسية بلغت أربعة أيام كمرحلة أولى، ويشمل خيارات مبتكرة لتقديم الشكاوى وإضافات فريدة لتحسين تجربة المستخدم',
-    image: "https://i.ibb.co/zTPsP3HK/ww.png",
+    image: "/images/projects/local/project-ww.webp",
     youtubeVideo: "https://www.youtube.com/embed/pAZlIZjtQUk",
     category: "opensource",
     technologies: ["nextjs", "TypeScript", "Tailwind CSS", "mongodb", "Vercel"],
@@ -507,7 +507,7 @@ export const projects: Project[] = [
     fullDescription:
       "منصة إعلامية متطورة تهدف لدعم التحول الرقمي في سوريا. تتميز بتصميم استثنائي وواجهة متجاوبة مع جميع أحجام الشاشات، وتقدم محتوى إعلامي هادف عبر مقالات وصور وفيديوهات وبودكاست.",
     image:
-      "https://i.ibb.co/Q7s64W2X/495157847-575674358879529-7216978117534140260-n.jpg",
+      "/images/projects/local/project-sara.webp",
     youtubeVideo: "https://www.youtube.com/embed/Hlw4cJAAqGk",
     category: "news",
     technologies: ["nextjs", "TypeScript", "Tailwind CSS", "mongodb"],
@@ -561,7 +561,7 @@ export const projects: Project[] = [
     fullDescription:
       "منصة إعلامية متطورة تهدف لدعم التحول الرقمي في سوريا. تتميز بتصميم استثنائي وواجهة متجاوبة مع جميع أحجام الشاشات، وتقدم محتوى إعلامي هادف عبر مقالات وصور وفيديوهات وبودكاست.",
     image:
-      "https://i.ibb.co/Q7s64W2X/495157847-575674358879529-7216978117534140260-n.jpg",
+      "/images/projects/local/project-sara-2.webp",
     youtubeVideo: "https://www.youtube.com/embed/Hlw4cJAAqGk",
     category: "opensource",
     technologies: ["nextjs", "TypeScript", "Tailwind CSS", "mongodb"],

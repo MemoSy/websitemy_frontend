@@ -1,4 +1,4 @@
-import { Gift, Calculator, CheckCircle, Star, Headphones, Rocket, TrendingUp, Shield } from "lucide-react";
+import { Gift, Calculator, CheckCircle, Star, Rocket, TrendingUp, Shield } from "lucide-react";
 
 const HeroSection = () => {
   return (
@@ -91,7 +91,7 @@ const HeroSection = () => {
                 <span>4.8/5 تقييم العملاء</span>
               </div>
               <div className="flex items-center md:gap-2 gap-1.5 text-[#A0AEC0] md:text-sm text-xs">
-                <Headphones className="md:w-5 md:h-5 h-3.5 w-3.5 text-[#00FFA3]" />
+                <Shield className="md:w-5 md:h-5 h-3.5 w-3.5 text-[#00FFA3]" />
                 <span>دعم فني مستمر</span>
               </div>
             </div>

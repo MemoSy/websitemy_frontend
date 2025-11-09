@@ -7,7 +7,6 @@ import StackCards from "../components/UI/StackCards";
 import {
   HeroSection,
   ServicesSection,
-  WhyChooseUsSection,
   CurrentProjectsSection,
   FAQSection,
 } from "../components/Home/sections";
@@ -27,9 +26,6 @@ const HomeNew = () => {
 
       {/* Services Section - قسم الخدمات */}
       <ServicesSection />
-
-      {/* Why Choose Us Section - لماذا نحن */}
-      {/* <WhyChooseUsSection /> */}
 
       {/* How We Work - Stack Cards Effect */}
       <StackCards />
