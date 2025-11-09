@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import {
   Phone,
@@ -22,42 +22,49 @@ const ServicesSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const cardsContainerRef = useRef<HTMLDivElement>(null);
   const cardsRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     // التأكد من وجود العناصر
     if (!sectionRef.current || !cardsContainerRef.current) return;
 
     const cards = cardsRefs.current;
-    if (cards.length !== 6) return;
+    if (cards.length !== 5) return;
 
     // Horizontal Scroll Animation
     const container = cardsContainerRef.current;
+    const section = sectionRef.current;
 
     // إعداد الحاوية والبطاقات
     gsap.set(container, {
       display: 'flex',
       flexDirection: 'row',
-      gap: '2rem', // زيادة المسافة بين البطاقات
+      gap: '2rem',
       width: '100%',
-      overflowX: 'visible', // تغيير إلى visible لرؤية جميع البطاقات
+      overflowX: 'visible',
     });
 
-    // تطبيق الأنيميشن الأفقي (التمرير لليسار عند النزول للأسفل)
+    // تطبيق الأنيميشن الأفقي مع pin (التمرير لليسار)
     const horizontalScroll = gsap.to(container, {
-      x: () => +(container.scrollWidth - container.offsetWidth), // التمرير لليسار (سالب)
+      x: () => +(container.scrollWidth - container.offsetWidth), // قيمة موجبة للتمرير لليسار في RTL
       ease: "none",
       scrollTrigger: {
-        trigger: sectionRef.current,
+        trigger: section,
         start: "center center",
         end: () => `+=${container.scrollWidth - container.offsetWidth}`,
         scrub: 1,
         pin: true,
-        pinType: 'transform',
+        pinSpacing: true,
         anticipatePin: 1,
         invalidateOnRefresh: true,
         markers: false,
+        onRefresh: (self) => {
+          scrollTriggerRef.current = self;
+        }
       },
     });
+
+    scrollTriggerRef.current = horizontalScroll.scrollTrigger!;
 
     // Refresh ScrollTrigger on resize
     const handleResize = () => {
@@ -66,11 +73,28 @@ const ServicesSection = () => {
 
     window.addEventListener('resize', handleResize);
 
-    // تنظيف عند إلغاء التحميل
+    // تنظيف فوري ومتزامن قبل إلغاء التحميل
     return () => {
       window.removeEventListener('resize', handleResize);
-      horizontalScroll.kill();
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      
+      // إيقاف ScrollTrigger فوراً وإرجاع العناصر
+      if (scrollTriggerRef.current) {
+        scrollTriggerRef.current.kill(true);
+        scrollTriggerRef.current = null;
+      }
+      
+      if (horizontalScroll) {
+        horizontalScroll.kill();
+      }
+      
+      // إعادة تعيين جميع الأنماط بشكل متزامن
+      if (container) {
+        gsap.set(container, { clearProps: 'all' });
+      }
+      
+      if (section) {
+        gsap.set(section, { clearProps: 'all' });
+      }
     };
   }, []);
 
@@ -142,14 +166,14 @@ const ServicesSection = () => {
               </ul>
               <div className="flex items-baseline justify-between mb-4 pt-4 border-t border-white/10">
                 <span className="text-[#A0AEC0] text-xs">يبدأ من</span>
-                <span className="text-2xl font-extrabold bg-gradient-to-r from-[#00D9FF] to-[#6C5CE7] bg-clip-text text-transparent">$250</span>
+                <span className="text-2xl font-extrabold bg-gradient-to-r from-[#00D9FF] to-[#6C5CE7] bg-clip-text text-transparent">$300</span>
               </div>
               <div className="space-y-2">
                 <button className="w-full py-3 bg-transparent border-2 border-[#00D9FF] text-[#00D9FF] rounded-lg text-sm font-semibold transition-all hover:bg-gradient-to-r hover:from-[#00D9FF] hover:to-[#6C5CE7] hover:text-white hover:shadow-[0_0_20px_rgba(0,217,255,0.4)]">
                   اطلب عرض سعر
                 </button>
                 <Link
-                  to="/projects?category=personal-websites"
+                  to="https://websitemy.com/"
                   className="w-full py-2.5 flex items-center justify-center gap-2 text-[#A0AEC0] hover:text-[#00D9FF] text-xs font-medium transition-all group"
                 >
                   <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-[-2px] transition-transform" />
@@ -202,7 +226,7 @@ const ServicesSection = () => {
                   اطلب عرض سعر
                 </button>
                 <Link
-                  to="/projects?category=e-commerce"
+                  to="https://camera-shop-teal.vercel.app/ar"
                   className="w-full py-2.5 flex items-center justify-center gap-2 text-[#A0AEC0] hover:text-[#00D9FF] text-xs font-medium transition-all group"
                 >
                   <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-[-2px] transition-transform" />
@@ -224,7 +248,7 @@ const ServicesSection = () => {
                 <Code className="w-7 h-7 text-[#00D9FF]" />
               </div>
               <h3 className="text-xl font-bold text-white mb-3">
-                تطبيقات Startup جاهزة للنمو
+                تطبيقات Startup  
               </h3>
               <p className="text-[#A0AEC0] text-sm leading-relaxed mb-4">
                 نحول فكرتك إلى تطبيق احترافي جاهز للانطلاق في السوق
@@ -252,7 +276,7 @@ const ServicesSection = () => {
                   اطلب عرض سعر
                 </button>
                 <Link
-                  to="/projects?category=startup-apps"
+                  to="https://www.comprevende.com"
                   className="w-full py-2.5 flex items-center justify-center gap-2 text-[#A0AEC0] hover:text-[#00D9FF] text-xs font-medium transition-all group"
                 >
                   <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-[-2px] transition-transform" />
@@ -274,35 +298,35 @@ const ServicesSection = () => {
                 <FileText className="w-7 h-7 text-[#00D9FF]" />
               </div>
               <h3 className="text-xl font-bold text-white mb-3">
-                لوحات تحكم تفاعلية
+                 تجديد الهوية البصرية 
               </h3>
               <p className="text-[#A0AEC0] text-sm leading-relaxed mb-4">
-                أنظمة إدارة محتوى وبيانات قوية تسهل عملك اليومي
+                نحدّث موقعك بتصميم عصري احترافي يعكس تطور علامتك التجارية
               </p>
               <ul className="space-y-2 mb-5">
                 <li className="flex items-start gap-2 text-[#A0AEC0] text-xs">
                   <CheckCircle className="w-4 h-4 text-[#00FFA3] flex-shrink-0 mt-0.5" />
-                  <span>واجهة سهلة الاستخدام</span>
+                  <span>فريق متخصص في UI/UX</span>
                 </li>
                 <li className="flex items-start gap-2 text-[#A0AEC0] text-xs">
                   <CheckCircle className="w-4 h-4 text-[#00FFA3] flex-shrink-0 mt-0.5" />
-                  <span>تقارير وإحصائيات متقدمة</span>
+                  <span>تحليل شامل للهوية الحالية</span>
                 </li>
                 <li className="flex items-start gap-2 text-[#A0AEC0] text-xs">
                   <CheckCircle className="w-4 h-4 text-[#00FFA3] flex-shrink-0 mt-0.5" />
-                  <span>صلاحيات ومستخدمين متعددة</span>
+                  <span>مراجعات متعددة حتى الرضا التام</span>
                 </li>
               </ul>
               <div className="flex items-baseline justify-between mb-4 pt-4 border-t border-white/10">
                 <span className="text-[#A0AEC0] text-xs">يبدأ من</span>
-                <span className="text-2xl font-extrabold bg-gradient-to-r from-[#00D9FF] to-[#6C5CE7] bg-clip-text text-transparent">$400</span>
+                <span className="text-2xl font-extrabold bg-gradient-to-r from-[#00D9FF] to-[#6C5CE7] bg-clip-text text-transparent">$250</span>
               </div>
               <div className="space-y-2">
                 <button className="w-full py-3 bg-transparent border-2 border-[#00D9FF] text-[#00D9FF] rounded-lg text-sm font-semibold transition-all hover:bg-gradient-to-r hover:from-[#00D9FF] hover:to-[#6C5CE7] hover:text-white hover:shadow-[0_0_20px_rgba(0,217,255,0.4)]">
                   اطلب عرض سعر
                 </button>
                 <Link
-                  to="/projects?category=dashboards"
+                  to="https://www.arabiaswim.com"
                   className="w-full py-2.5 flex items-center justify-center gap-2 text-[#A0AEC0] hover:text-[#00D9FF] text-xs font-medium transition-all group"
                 >
                   <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-[-2px] transition-transform" />
@@ -324,35 +348,35 @@ const ServicesSection = () => {
                 <Zap className="w-7 h-7 text-[#00D9FF]" />
               </div>
               <h3 className="text-xl font-bold text-white mb-3">
-                تحسين الأداء والسرعة
+                مبادرة العطاء المجتمعي
               </h3>
               <p className="text-[#A0AEC0] text-sm leading-relaxed mb-4">
-                نجعل موقعك أسرع وأكثر كفاءة لتجربة مستخدم مثالية
+                نقدم خدماتنا مجاناً للمؤسسات والجمعيات التي تخدم المجتمع
               </p>
               <ul className="space-y-2 mb-5">
                 <li className="flex items-start gap-2 text-[#A0AEC0] text-xs">
                   <CheckCircle className="w-4 h-4 text-[#00FFA3] flex-shrink-0 mt-0.5" />
-                  <span>تحليل شامل للأداء</span>
+                  <span>تطوير موقع مجاني</span>
                 </li>
                 <li className="flex items-start gap-2 text-[#A0AEC0] text-xs">
                   <CheckCircle className="w-4 h-4 text-[#00FFA3] flex-shrink-0 mt-0.5" />
-                  <span>تحسين سرعة التحميل 50%+</span>
+                  <span>دعم فني لمدة 3 أشهر</span>
                 </li>
                 <li className="flex items-start gap-2 text-[#A0AEC0] text-xs">
                   <CheckCircle className="w-4 h-4 text-[#00FFA3] flex-shrink-0 mt-0.5" />
-                  <span>تقنيات Caching متقدمة</span>
+                  <span>استضافة مجانية للسنة الأولى</span>
                 </li>
               </ul>
               <div className="flex items-baseline justify-between mb-4 pt-4 border-t border-white/10">
-                <span className="text-[#A0AEC0] text-xs">يبدأ من</span>
-                <span className="text-2xl font-extrabold bg-gradient-to-r from-[#00D9FF] to-[#6C5CE7] bg-clip-text text-transparent">$300</span>
+                <span className="text-[#A0AEC0] text-xs"> مجانا</span>
+                <span className="text-2xl font-extrabold bg-gradient-to-r from-[#00D9FF] to-[#6C5CE7] bg-clip-text text-transparent">$0</span>
               </div>
               <div className="space-y-2">
                 <button className="w-full py-3 bg-transparent border-2 border-[#00D9FF] text-[#00D9FF] rounded-lg text-sm font-semibold transition-all hover:bg-gradient-to-r hover:from-[#00D9FF] hover:to-[#6C5CE7] hover:text-white hover:shadow-[0_0_20px_rgba(0,217,255,0.4)]">
-                  اطلب عرض سعر
+                  اطلب  التفاصيل
                 </button>
                 <Link
-                  to="/projects?category=performance"
+                  to="https://www.nationalsy.com/"
                   className="w-full py-2.5 flex items-center justify-center gap-2 text-[#A0AEC0] hover:text-[#00D9FF] text-xs font-medium transition-all group"
                 >
                   <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-[-2px] transition-transform" />
@@ -362,55 +386,7 @@ const ServicesSection = () => {
             </div>
           </div>
 
-          {/* Service 6 - الصيانة والدعم */}
-          <div 
-            ref={(el) => (cardsRefs.current[5] = el)}
-            className="service-card bg-[#1A1F3A] border border-[#00D9FF]/10 rounded-xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#00D9FF] hover:shadow-[0_10px_30px_rgba(0,217,255,0.2)] group relative overflow-hidden flex-shrink-0 w-[85vw] sm:w-[70vw] md:w-[50vw] lg:w-[calc(28%-1rem)]"
-            style={{ minWidth: '280px', willChange: 'transform, opacity' }}
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-[#00D9FF]/5 to-[#6C5CE7]/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            <div className="relative z-10">
-              <div className="w-14 h-14 bg-gradient-to-br from-[#00D9FF]/20 to-[#6C5CE7]/20 border-2 border-[#00D9FF]/30 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:border-[#00D9FF] group-hover:shadow-[0_0_20px_rgba(0,217,255,0.4)] transition-all">
-                <Headphones className="w-7 h-7 text-[#00D9FF]" />
-              </div>
-              <h3 className="text-xl font-bold text-white mb-3">
-                الصيانة والدعم الفني
-              </h3>
-              <p className="text-[#A0AEC0] text-sm leading-relaxed mb-4">
-                دعم مستمر لضمان عمل موقعك بشكل مثالي على مدار الساعة
-              </p>
-              <ul className="space-y-2 mb-5">
-                <li className="flex items-start gap-2 text-[#A0AEC0] text-xs">
-                  <CheckCircle className="w-4 h-4 text-[#00FFA3] flex-shrink-0 mt-0.5" />
-                  <span>دعم فني 24/7</span>
-                </li>
-                <li className="flex items-start gap-2 text-[#A0AEC0] text-xs">
-                  <CheckCircle className="w-4 h-4 text-[#00FFA3] flex-shrink-0 mt-0.5" />
-                  <span>تحديثات أمنية دورية</span>
-                </li>
-                <li className="flex items-start gap-2 text-[#A0AEC0] text-xs">
-                  <CheckCircle className="w-4 h-4 text-[#00FFA3] flex-shrink-0 mt-0.5" />
-                  <span>نسخ احتياطي تلقائي يومي</span>
-                </li>
-              </ul>
-              <div className="flex items-baseline justify-between mb-4 pt-4 border-t border-white/10">
-                <span className="text-[#A0AEC0] text-xs">يبدأ من</span>
-                <span className="text-2xl font-extrabold bg-gradient-to-r from-[#00D9FF] to-[#6C5CE7] bg-clip-text text-transparent">$150/شهر</span>
-              </div>
-              <div className="space-y-2">
-                <button className="w-full py-3 bg-transparent border-2 border-[#00D9FF] text-[#00D9FF] rounded-lg text-sm font-semibold transition-all hover:bg-gradient-to-r hover:from-[#00D9FF] hover:to-[#6C5CE7] hover:text-white hover:shadow-[0_0_20px_rgba(0,217,255,0.4)]">
-                  اطلب عرض سعر
-                </button>
-                <Link
-                  to="/projects?category=support"
-                  className="w-full py-2.5 flex items-center justify-center gap-2 text-[#A0AEC0] hover:text-[#00D9FF] text-xs font-medium transition-all group"
-                >
-                  <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-[-2px] transition-transform" />
-                  <span>شاهد محتوى مشابه</span>
-                </Link>
-              </div>
-            </div>
-          </div>
+
 
         </div>
 

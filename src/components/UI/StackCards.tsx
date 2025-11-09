@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
@@ -25,6 +25,7 @@ interface Card {
 const StackCards: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const triggersRef = useRef<ScrollTrigger[]>([]);
 
   const cards: Card[] = [
     {
@@ -85,9 +86,12 @@ const StackCards: React.FC = () => {
     }
   ];
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!sectionRef.current) return;
 
+    const section = sectionRef.current;
+    const triggers: ScrollTrigger[] = [];
+    
     const ctx = gsap.context(() => {
       const validCards = cardsRef.current.filter((card): card is HTMLDivElement => card !== null);
       
@@ -96,37 +100,30 @@ const StackCards: React.FC = () => {
         const numberElement = card.querySelector('.card-number');
         
         if (index < validCards.length - 1) {
-          // تثبيت البطاقة
-          ScrollTrigger.create({
+          // تثبيت البطاقة مع pin
+          const pinTrigger = ScrollTrigger.create({
             trigger: card,
             start: 'top 100px',
             end: 'bottom 0px',
             pin: true,
             pinSpacing: false,
-            pinType: 'transform',
+            anticipatePin: 1,
             invalidateOnRefresh: true,
             onUpdate: (self) => {
               if (numberElement) {
                 const progress = self.progress;
                 
-                // المرحلة 1: الظهور (0 -> 0.2) = إضاءة 100%
-                // المرحلة 2: في المنتصف (0.2 -> 0.8) = إضاءة 50%
-                // المرحلة 3: الاختفاء (0.8 -> 1) = إضاءة 0%
-                
                 let glowIntensity = 0;
                 let numberOpacity = 0;
                 
                 if (progress < 0.2) {
-                  // مرحلة الظهور: من 0% إلى 100%
                   const fadeInProgress = progress / 0.2;
                   glowIntensity = fadeInProgress * 40;
                   numberOpacity = fadeInProgress;
                 } else if (progress < 0.8) {
-                  // مرحلة الثبات: 50%
                   glowIntensity = 20;
                   numberOpacity = 0.5;
                 } else {
-                  // مرحلة الاختفاء: من 50% إلى 0%
                   const fadeOutProgress = (progress - 0.8) / 0.2;
                   glowIntensity = 20 * (1 - fadeOutProgress);
                   numberOpacity = 0.5 * (1 - fadeOutProgress);
@@ -141,9 +138,11 @@ const StackCards: React.FC = () => {
               }
             }
           });
+          
+          triggers.push(pinTrigger);
 
           // تأثير التلاشي (fade out) عندما تصعد البطاقة للأعلى
-          gsap.to(card, {
+          const fadeAnimation = gsap.to(card, {
             opacity: 0,
             scale: 0.9,
             scrollTrigger: {
@@ -154,6 +153,10 @@ const StackCards: React.FC = () => {
               invalidateOnRefresh: true,
             },
           });
+          
+          if (fadeAnimation.scrollTrigger) {
+            triggers.push(fadeAnimation.scrollTrigger);
+          }
         } else {
           // البطاقة الأخيرة: إضاءة كاملة دائمًا
           if (numberElement) {
@@ -164,11 +167,19 @@ const StackCards: React.FC = () => {
           }
         }
       });
-    }, sectionRef);
+      
+      triggersRef.current = triggers;
+    }, section);
 
     return () => {
+      // إيقاف جميع ScrollTriggers فوراً بترتيب عكسي
+      [...triggersRef.current].reverse().forEach(trigger => {
+        trigger.kill(true);
+      });
+      triggersRef.current = [];
+      
+      // إعادة تعيين السياق
       ctx.revert();
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, []);
 

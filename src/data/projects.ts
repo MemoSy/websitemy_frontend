@@ -555,7 +555,7 @@ export const projects: Project[] = [
   },
 
   {
-    id: "national-network-media",
+    id: "national-network-media-opensource",
     title: "الشبكة الوطنية للإعلام",
     description: "منصة إعلامية اخبارية ",
     fullDescription:

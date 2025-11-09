@@ -16,34 +16,34 @@ const HomeNew = () => {
   return (
     <>
       <SEO
-        title="WebsiteMy - ����� ������ ��� ����� ��� ���� ������ ����� 40%"
-        description="����� ������ ������� �� ���� ���� ��� ����� ����� | ����� + ����� + ������� + ����� 24/7"
-        keywords="����� �����, ����� �����, ������� �����, ���� ����� ���"
+        title="WebsiteMy - تصميم مواقع ويب احترافية مع خصم يصل لـ 40%"
+        description="نصمم ونطور مواقع ويب عصرية وسريعة لنمو أعمالك | تصميم + برمجة + استضافة + دعم فني 24/7"
+        keywords="تصميم مواقع, برمجة مواقع, تطوير الويب, مواقع تجارية احترافية"
         url="/"
       />
 
-      {/* Hero Section - ��� ����� */}
+      {/* Hero Section - الرئيسية  */}
       <HeroSection />
 
-      {/* Services Section - ��� ����� */}
+      {/* Services Section - قسم الخدمات */}
       <ServicesSection />
 
-      {/* Why Choose Us Section - ��� ����� */}
+      {/* Why Choose Us Section - لماذا نحن */}
       {/* <WhyChooseUsSection /> */}
 
       {/* How We Work - Stack Cards Effect */}
       <StackCards />
 
-      {/* Current Projects Section - ��� ����� */}
+      {/* Current Projects Section - المشاريع الحالية */}
       <CurrentProjectsSection />
 
-      {/* Portfolio - ���� ������� */}
+      {/* Portfolio - معرض الأعمال */}
       <ProjectTabs />
 
-      {/* Testimonials - ����� ����� */}
+      {/* Testimonials - آراء العملاء */}
       <TestimonialsSection />
 
-      {/* FAQ Section - ��� ����� */}
+      {/* FAQ Section - الأسئلة الشائعة */}
       <FAQSection />
     </>
   );
