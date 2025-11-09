@@ -170,7 +170,7 @@ const AIChat = () => {
         />
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 sm:px-4 py-4 sm:py-8 max-w-4xl h-screen flex flex-col pt-20 sm:pt-8">
+      <div className="relative z-10 container mx-auto px-4 sm:px-4 py-4 sm:py-8 max-w-4xl h-screen flex flex-col pt-24 sm:pt-24">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}

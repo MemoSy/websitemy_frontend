@@ -5,7 +5,7 @@ import { searchFAQ } from "../data/faqData";
 import OpenAI from "openai";
 
 const openai = new OpenAI({
-  apiKey: "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",
+  apiKey: "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",
   dangerouslyAllowBrowser: true // Note: In production, you should use a backend proxy for API calls
 });
 
@@ -291,7 +291,7 @@ ${faqContext}
     if (error?.status === 401) {
       return "عذراً، مفتاح API غير صحيح. يرجى التحقق من صحة المفتاح.";
     } else if (error?.status === 429) {
-      return "عذراً، تم تجاوز حد الاستخدام. يرجى المحاولة مرة أخرى لاحقاً.";
+      return "⚠️ **عذراً، الخدمة غير متوفرة مؤقتاً**\n\nنفذ رصيد OpenAI API للموقع.\n\n📞 **للحصول على إجابات فورية:**\n- اتصل بنا: **+905313345111** (واتساب)\n- البريد: info@websitemy.com\n\n💡 سنكون سعداء بالإجابة على جميع أسئلتك!";
     } else if (error?.status === 400) {
       return "عذراً، هناك خطأ في الطلب. يرجى المحاولة مرة أخرى.";
     } else if (error?.message) {
