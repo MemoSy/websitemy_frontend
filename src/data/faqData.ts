@@ -79,30 +79,29 @@ export const faqData: FAQItem[] = [
     answer: `نعمل بأحدث التقنيات الحديثة والموثوقة:
 
 **Frontend (الواجهة الأمامية):**
-• React.js & Next.js - للمواقع التفاعلية السريعة
-• TypeScript - للكود الآمن والمنظم
-• Tailwind CSS - للتصميم الاحترافي
-• Vue.js - خيار بديل حسب المشروع
+• React.js - مكتبة قوية لبناء واجهات تفاعلية
+• Next.js - إطار عمل React متقدم للأداء العالي
+• TypeScript & JavaScript - للكود الآمن والمنظم
+• Tailwind CSS - لتصاميم عصرية ومتجاوبة
 
 **Backend (الخادم الخلفي):**
-• Node.js & Express.js - للأداء العالي
-• NestJS - للمشاريع الكبيرة والمعقدة
-• MongoDB & PostgreSQL - قواعد بيانات قوية
-• RESTful APIs - للتكامل السلس
+• NestJS - إطار عمل Node.js احترافي
+• MongoDB - قاعدة بيانات NoSQL مرنة وسريعة
+• Prisma - ORM حديث لإدارة قواعد البيانات
+• RESTful APIs - للتكامل السلس بين الأنظمة
 
-**DevOps & Hosting:**
-• Docker - للنشر السهل
-• Vercel & AWS - استضافة موثوقة
-• Git & GitHub - إدارة الكود
+**Hosting & Deployment:**
+• Vercel - استضافة سريعة وموثوقة
+• Git & GitHub - إدارة الكود المصدري
 • CI/CD - التحديث التلقائي
 
 **الأمان:**
-• SSL Certificates
-• JWT Authentication
-• Data Encryption
-• Regular Security Updates
+• SSL Certificates - تشفير HTTPS
+• JWT Authentication - مصادقة آمنة
+• Data Encryption - حماية البيانات
+• Regular Security Updates - تحديثات أمنية دورية
 
-نختار التقنية المناسبة لكل مشروع حسب متطلباته وميزانيته.`
+هذه التقنيات مستخدمة فعلياً في جميع مشاريعنا المنشورة - يمكنك معاينتها مباشرة!`
   },
 
   {

@@ -1,13 +1,12 @@
 import { projects, serviceCategories } from "../data/projects";
 import { faqData } from "../data/faqData";
-import { generateAdvancedSystemPrompt, validateAIResponse, trackOffTopicAttempts, aiGuardRails } from "./aiSystemPrompt";
+import { generateAdvancedSystemPrompt, validateAIResponse, trackOffTopicAttempts } from "./aiSystemPrompt";
 import { searchFAQ } from "../data/faqData";
-import OpenAI from "openai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const openai = new OpenAI({
-  apiKey: "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",
-  dangerouslyAllowBrowser: true // Note: In production, you should use a backend proxy for API calls
-});
+// Initialize Google Gemini AI
+const genAI = new GoogleGenerativeAI("AIzaSyCjvHw9OEVKSnOeu1andptpv4AU7eMpJok");
+const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
 export interface CompanyInfo {
   name: string;
@@ -31,33 +30,28 @@ export interface AIKnowledgeBase {
 
 export const companyInfo: CompanyInfo = {
   name: "WebSiteMy",
-  expertise: "تطوير مواقع الويب والتطبيقات الحديثة",
-  experience: "5+ سنوات",
-  satisfaction: "98% عملاء راضون",
-  completedProjects: "150+ مشروع منجز",
+  expertise: "تطوير مواقع الويب والتطبيقات الحديثة باستخدام أحدث التقنيات",
+  experience: "5+ سنوات خبرة في تطوير المشاريع الاحترافية",
+  satisfaction: "98% من عملائنا راضون عن خدماتنا",
+  completedProjects: "9+ مشاريع منجزة ومنشورة",
   technologies: [
     "React.js",
     "Next.js",
-    "Vue.js",
-    "Node.js",
-    "Express.js",
+    "NestJS",
     "MongoDB",
-    "PostgreSQL",
     "TypeScript",
     "JavaScript",
     "Tailwind CSS",
-    "Bootstrap",
-    "Docker",
-    "AWS",
+    "Prisma",
     "Vercel",
   ],
   specialties: [
-    "التجارة الإلكترونية",
-    "المنصات التعليمية",
+    "المواقع التعريفية الشخصية والاحترافية",
+    "المتاجر الإلكترونية",
+    "المنصات التعليمية والأكاديميات",
     "الشبكات الاجتماعية",
-    "المشاريع مفتوحة المصدر",
     "المنصات الإخبارية",
-    "الصفحات الشخصية",
+    "المدونات الشخصية والمحافظ",
   ],
 };
 
@@ -88,25 +82,29 @@ export const commonQuestions = [
   },
   {
     question: "ما هي التقنيات التي تستخدمونها؟",
-    answer: `نحن نعمل بأحدث التقنيات الحديثة:
+    answer: `نحن نستخدم أحدث التقنيات الموجودة فعلياً في مشاريعنا المنشورة:
 
-**Frontend:**
-• React.js & Next.js
-• Vue.js
-• TypeScript/JavaScript
-• Tailwind CSS & Bootstrap
+**Frontend (الواجهة الأمامية):**
+• React.js - مكتبة قوية لبناء واجهات تفاعلية
+• Next.js - إطار عمل React متقدم للأداء العالي والـ SEO
+• TypeScript & JavaScript - للكود الآمن والمنظم
+• Tailwind CSS - لتصاميم عصرية ومتجاوبة
 
-**Backend:**
-• Node.js & Express.js
-• Python & FastAPI
-• MongoDB & PostgreSQL
+**Backend (الخادم):**
+• NestJS - إطار عمل Node.js احترافي للـ Backend
+• MongoDB - قاعدة بيانات NoSQL مرنة وسريعة
+• Prisma - ORM حديث لإدارة قواعد البيانات
 
-**DevOps & Hosting:**
-• Docker
-• AWS & Vercel
-• Git & GitHub
+**Hosting (الاستضافة):**
+• Vercel - استضافة سريعة وموثوقة
 
-نختار التقنية المناسبة لكل مشروع حسب متطلباته.`,
+**لماذا هذه التقنيات بالذات؟**
+• ✅ مستخدمة فعلياً في جميع مشاريعنا المنشورة
+• ✅ سريعة وآمنة ومثبتة في الإنتاج
+• ✅ سهلة الصيانة والتطوير المستقبلي
+• ✅ مدعومة بمجتمع كبير ومستمرة التحديث
+
+يمكنك معاينة مشاريعنا الحية لترى هذه التقنيات تعمل في الواقع!`,
   },
 ];
 
@@ -247,23 +245,16 @@ ${faqContext}
       faqData.slice(0, 10) // أول 10 أسئلة شائعة
     );
 
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4o",
-      messages: [
-        {
-          role: "system",
-          content: systemPrompt
-        },
-        {
-          role: "user", 
-          content: conversationContext
-        }
-      ],
-      max_tokens: aiGuardRails.maxResponseLength,
-      temperature: 0.7,
-    });
+    // استخدام Google Gemini بدلاً من OpenAI
+    const fullPrompt = `${systemPrompt}
 
-    const response = completion.choices[0]?.message?.content || 
+---
+
+${conversationContext}`;
+
+    const result = await model.generateContent(fullPrompt);
+    const geminiResponse = result.response;
+    const response = geminiResponse.text() || 
       "آسف، لم أتمكن من الحصول على إجابة دقيقة. يرجى المحاولة مرة أخرى.";
     
     // التحقق من صحة الرد
@@ -285,20 +276,20 @@ ${faqContext}
     return response;
     
   } catch (error: any) {
-    console.error("ChatGPT API Error:", error);
+    console.error("Google Gemini API Error:", error);
     
-    // More specific error handling
-    if (error?.status === 401) {
+    // معالجة أخطاء Gemini
+    if (error?.message?.includes('API key')) {
       return "عذراً، مفتاح API غير صحيح. يرجى التحقق من صحة المفتاح.";
-    } else if (error?.status === 429) {
-      return "⚠️ **عذراً، الخدمة غير متوفرة مؤقتاً**\n\nنفذ رصيد OpenAI API للموقع.\n\n📞 **للحصول على إجابات فورية:**\n- اتصل بنا: **+905313345111** (واتساب)\n- البريد: info@websitemy.com\n\n💡 سنكون سعداء بالإجابة على جميع أسئلتك!";
-    } else if (error?.status === 400) {
-      return "عذراً، هناك خطأ في الطلب. يرجى المحاولة مرة أخرى.";
+    } else if (error?.message?.includes('quota') || error?.message?.includes('limit')) {
+      return "⚠️ **عذراً، الخدمة غير متوفرة مؤقتاً**\n\nتم تجاوز حد الاستخدام المسموح.\n\n📞 **للحصول على إجابات فورية:**\n- اتصل بنا: **+905313345111** (واتساب)\n- البريد: info@websitemy.com\n\n💡 سنكون سعداء بالإجابة على جميع أسئلتك!";
+    } else if (error?.message?.includes('blocked') || error?.message?.includes('safety')) {
+      return "عذراً، لا أستطيع الإجابة على هذا السؤال. هل يمكنك إعادة صياغته بطريقة أخرى؟\n\n📱 للمساعدة المباشرة: +905313345111";
     } else if (error?.message) {
       console.error("Detailed error:", error.message);
-      return `عذراً، حدث خطأ: ${error.message}`;
+      return `عذراً، حدث خطأ في الاتصال. يرجى المحاولة مرة أخرى.\n\n📱 للدعم الفوري: +905313345111`;
     }
     
-    return "آسف، حدث خطأ في الاتصال بالخدمة. يرجى المحاولة مرة أخرى.";
+    return "آسف، حدث خطأ في الاتصال بالخدمة. يرجى المحاولة مرة أخرى.\n\n📱 تواصل معنا: +905313345111";
   }
 };
