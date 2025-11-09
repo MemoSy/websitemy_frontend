@@ -142,12 +142,12 @@ const ProjectTabs = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center md:mb-16 mb-8"
         >
-          <h2 className="text-2xl md:text-5xl font-bold text-white mb-6">
-            ✨ معرض إنجازاتنا التقنية
+          <h2 className="text-xl md:text-5xl font-bold text-white mb-6">
+            معرض إنجازاتنا التقنية
           </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+          <p className="text-xs md:text-xl text-gray-400 max-w-2xl mx-auto">
           مجموعة متنوعة من المشاريع التي طورناها  
           </p>
         </motion.div>
@@ -172,11 +172,8 @@ const ProjectTabs = () => {
                     : "text-gray-400 bg-gray-800/50 border border-gray-700 hover:text-cyan-300 hover:border-cyan-500/50"
                 }`}
               >
-                <span className="flex items-center justify-center gap-2 gap-reverse">
-                  <span className="text-base md:text-lg">{category.icon}</span>
-                  <span className="text-[14px] md:text-[16px]">
-                    {category.title}
-                  </span>
+                <span className="text-[14px] md:text-[16px]">
+                  {category.title}
                 </span>
 
                 {activeTab === category.id && (
@@ -204,10 +201,10 @@ const ProjectTabs = () => {
               {/* Category Header with View More Button */}
               <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-12 gap-6 mx-auto max-w-[1288px]">
                 <div className="text-center lg:text-right flex-1">
-                  <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                  <h3 className="text-xl md:text-4xl font-bold text-white mb-4">
                     {activeCategory.title}
                   </h3>
-                  <p className="text-gray-400 text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                  <p className="text-gray-400 text-xs md:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
                     {activeCategory.description}
                   </p>
                 </div>

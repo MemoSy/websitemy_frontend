@@ -41,9 +41,9 @@ const About = () => {
       skills: ['React', 'Node.js', 'MongoDB', 'next.js']
     },
     {
-      name: ' حسن الأبرش',
+      name: '  أسماء الجمعة',
       role: 'مصمم UI/UX',
-      image: 'https://i.ibb.co/skk9YLL/515014282-4123566981298767-3372271132740174068-n.png',
+      image: 'https://i.ibb.co/qFWWqKV7/1743791652252.jpg',
       skills: ['Figma', 'Adobe XD', 'User Research']
     },
     {

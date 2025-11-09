@@ -48,11 +48,6 @@ function App() {
         {GOOGLE_SEARCH_CONSOLE_CODE && <GoogleSearchConsole verificationCode={GOOGLE_SEARCH_CONSOLE_CODE} />}
         
         <div className="min-h-screen bg-black text-white relative overflow-x-hidden">
-          {/* خلفيات متحركة - Lazy loaded */}
-          <Suspense fallback={null}>
-            <AnimatedBackground />
-            <ParticleBackground />
-          </Suspense>
           
           {/* مؤشر مخصص - Lazy loaded */}
           <Suspense fallback={null}>

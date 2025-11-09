@@ -5,9 +5,9 @@ import { throttle } from '../../utils/performanceOptimizer';
 const CustomCursor = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
   const followerRef = useRef<HTMLDivElement>(null);
+  const trailRef = useRef<SVGSVGElement>(null);
   const [isHovering, setIsHovering] = useState(false);
-  const [cursorText, setCursorText] = useState('');
-  const [cursorType, setCursorType] = useState<'default' | 'hover' | 'click' | 'text'>('default');
+  const [mouseTrail, setMouseTrail] = useState<{x: number, y: number}[]>([]);
 
   useEffect(() => {
     const cursor = cursorRef.current;
@@ -33,6 +33,13 @@ const CustomCursor = () => {
         duration: 0.3,
         ease: "power2.out"
       });
+
+      // إضافة نقطة جديدة للمسار
+      setMouseTrail(prev => {
+        const newTrail = [...prev, { x: e.clientX, y: e.clientY }];
+        // الحفاظ على آخر 10 نقاط فقط (نصف القيمة السابقة)
+        return newTrail.slice(-10);
+      });
     }, 16); // ~60fps
 
     const handleMouseEnter = (e: Event) => {
@@ -40,12 +47,6 @@ const CustomCursor = () => {
       
       if (target instanceof Element && target.matches('a, button, [role="button"], .cursor-pointer')) {
         setIsHovering(true);
-        setCursorType('hover');
-        
-        const text = target.getAttribute('data-cursor-text');
-        if (text) {
-          setCursorText(text);
-        }
 
         gsap.to(cursor, {
           scale: 0.5,
@@ -59,7 +60,6 @@ const CustomCursor = () => {
           ease: "power2.out"
         });
       } else if (target instanceof Element && target.matches('input, textarea')) {
-        setCursorType('text');
         gsap.to(cursor, {
           scaleX: 0.1,
           scaleY: 1.2,
@@ -74,8 +74,6 @@ const CustomCursor = () => {
       
       if (target instanceof Element && target.matches('a, button, [role="button"], .cursor-pointer, input, textarea')) {
         setIsHovering(false);
-        setCursorText('');
-        setCursorType('default');
 
         gsap.to(cursor, {
           scale: 1,
@@ -94,7 +92,6 @@ const CustomCursor = () => {
     };
 
     const handleMouseDown = () => {
-      setCursorType('click');
       gsap.to(cursor, {
         scale: 0.8,
         duration: 0.1,
@@ -103,7 +100,6 @@ const CustomCursor = () => {
     };
 
     const handleMouseUp = () => {
-      setCursorType(isHovering ? 'hover' : 'default');
       gsap.to(cursor, {
         scale: isHovering ? 0.5 : 1,
         duration: 0.1,
@@ -128,39 +124,111 @@ const CustomCursor = () => {
     };
   }, [isHovering]);
 
+  // تأثير لحذف نقاط المسار القديمة تدريجيًا
+  useEffect(() => {
+    if (mouseTrail.length > 0) {
+      const timer = setTimeout(() => {
+        setMouseTrail(prev => prev.slice(1));
+      }, 25); // حذف نقطة كل 25ms (أسرع بالنصف)
+      return () => clearTimeout(timer);
+    }
+  }, [mouseTrail]);
+
+  // إخفاء المؤشر على الأجهزة اللمسية
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    return null;
+  }
+
   return (
     <>
-      {/* المؤشر الرئيسي */}
+      {/* خط المسار - يظهر ويختفي مع حركة الماوس */}
+      <svg
+        ref={trailRef}
+        className="fixed top-0 left-0 w-full h-full pointer-events-none z-[9998]"
+        style={{ willChange: 'contents' }}
+      >
+        <defs>
+          {/* تدرج لوني - أزرق نيون عادي، أخضر عند الـ hover */}
+          <linearGradient id="trailGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style={{ 
+              stopColor: isHovering ? 'rgb(34, 197, 94)' : 'rgb(59, 130, 246)', 
+              stopOpacity: 0 
+            }} />
+            <stop offset="50%" style={{ 
+              stopColor: isHovering ? 'rgb(34, 197, 94)' : 'rgb(59, 130, 246)', 
+              stopOpacity: 0.6 
+            }} />
+            <stop offset="100%" style={{ 
+              stopColor: isHovering ? 'rgb(34, 197, 94)' : 'rgb(59, 130, 246)', 
+              stopOpacity: 1 
+            }} />
+          </linearGradient>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+        {mouseTrail.length > 1 && (
+          <path
+            d={`M ${mouseTrail.map(point => `${point.x} ${point.y}`).join(' L ')}`}
+            stroke="url(#trailGradient)"
+            strokeWidth="2"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            filter="url(#glow)"
+            style={{
+              opacity: mouseTrail.length / 10
+            }}
+          />
+        )}
+      </svg>
+
+      {/* النقطة الصغيرة - تتبع الماوس مباشرة مع تأثير وهج أزرق/أخضر */}
       <div
         ref={cursorRef}
-        className="fixed top-0 left-0 w-4 h-4 pointer-events-none z-[9999] mix-blend-difference"
-        style={{ transform: 'translate(-50%, -50%)' }}
+        className="fixed top-0 left-0 w-1.5 h-1.5 pointer-events-none z-[10000]"
+        style={{ 
+          transform: 'translate(-50%, -50%)',
+          willChange: 'transform'
+        }}
       >
-        <div className={`w-full h-full rounded-full transition-all duration-300 ${
-          cursorType === 'text' 
-            ? 'bg-cyan-400' 
-            : 'bg-white'
-        }`} />
+        <div 
+          className={`w-full h-full rounded-full transition-all duration-300 ${
+            isHovering ? 'bg-green-500' : 'bg-blue-500'
+          }`}
+          style={{
+            boxShadow: isHovering 
+              ? '0 0 20px rgba(34, 197, 94, 0.8), 0 0 40px rgba(34, 197, 94, 0.6), 0 0 60px rgba(34, 197, 94, 0.4)'
+              : '0 0 15px rgba(59, 130, 246, 0.8), 0 0 30px rgba(59, 130, 246, 0.6), 0 0 45px rgba(59, 130, 246, 0.4)'
+          }}
+        />
       </div>
 
-      {/* المتابع */}
+      {/* الدائرة الكبيرة - تتبع الماوس بتأخير سلس مع تأثير وهج أزرق/أخضر */}
       <div
         ref={followerRef}
-        className="fixed top-0 left-0 w-8 h-8 pointer-events-none z-[9998]"
-        style={{ transform: 'translate(-50%, -50%)' }}
+        className="fixed top-0 left-0 w-8 h-8 pointer-events-none z-[9999]"
+        style={{ 
+          transform: 'translate(-50%, -50%)',
+          willChange: 'transform'
+        }}
       >
-        <div className={`w-full h-full rounded-full border-2 transition-all duration-300 ${
-          isHovering 
-            ? 'border-cyan-400 bg-cyan-400/10' 
-            : 'border-white/30'
-        }`} />
-        
-        {/* نص المؤشر */}
-        {cursorText && (
-          <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-2 py-1 bg-black/80 text-white text-xs rounded whitespace-nowrap">
-            {cursorText}
-          </div>
-        )}
+        <div 
+          className={`w-full h-full rounded-full border transition-all duration-300 ${
+            isHovering 
+              ? 'border-green-500/60 bg-green-500/10' 
+              : 'border-blue-500/60 bg-blue-500/10'
+          }`}
+          style={{
+            boxShadow: isHovering 
+              ? '0 0 30px rgba(34, 197, 94, 0.6), 0 0 60px rgba(34, 197, 94, 0.4), inset 0 0 20px rgba(34, 197, 94, 0.2)'
+              : '0 0 25px rgba(59, 130, 246, 0.5), 0 0 50px rgba(59, 130, 246, 0.3), inset 0 0 15px rgba(59, 130, 246, 0.2)'
+          }}
+        />
       </div>
     </>
   );

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Quote, Github, Linkedin, Twitter, Facebook, Youtube } from "lucide-react";
-import { gsap } from "gsap";
+import { Github, Linkedin, Twitter, Facebook, Youtube, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface Testimonial {
   id: string;
@@ -11,6 +10,7 @@ interface Testimonial {
   image: string;
   comment: string;
   project: string;
+  language: 'ar' | 'en' | 'tr'; // إضافة اللغة
   facebookUrl?: string;
   twitterUrl?: string;
   linkedinUrl?: string;
@@ -27,14 +27,14 @@ const TestimonialsSection = () => {
       company: "Senior Software Automation",
       image: "/images/testimonials/tark.jpeg",
       comment:
-        "محمود شاب مبدع ومستقبلو واعد بمجال التكنولوجيا. كنت سعيد جداً اني استضفتو بواحدة من حلقات 'مقابلة البرمجة' على قناتي باليوتيوب وابدع بالمقابلة بالرغم من سنه الصغير ونقص الخبرة بالمقابلات البرمجية. كل التوفيق لمحمود في الارتقاء بالمستوى التكنولوجي بالوطن العربي.",
+        "محمود شاب مبدع ومستقبلو واعد بمجال التكنولوجيا. كنت سعيد جداً اني استضفتو بواحدة من حلقات 'مقابلة البرمجة' على قناتي باليوتيوب وابدع بالمقابلة بالرغم من سنه الصغير ونقص الخبرة بالمقابلات البرمجية.",
       project: "متجر إلكتروني متكامل",
+      language: 'ar',
       facebookUrl: "#",
       twitterUrl: "https://www.instagram.com/tariqelouzeh",
       linkedinUrl: "https://www.linkedin.com/in/tariqelouzeh/",
       githubUrl: "#",
       youtubeUrl: "https://www.youtube.com/@tariqelouzeh",
-
     },
     {
       id: "2",
@@ -43,8 +43,9 @@ const TestimonialsSection = () => {
       company: "Hyper Company",
       image: "/images/testimonials/amina.jpeg",
       comment:
-        "Mahmut, hayallerinin peşinden azimle koşan, vizyoner ve çalışkan bir genç. Onu ofisimizde ağırlama fırsatı buldum ve o gün heyecanını, gözlerindeki ışığı yakından gördüm. Kısa zamanda kendisini web tasarım ve yazılım alanında geliştirmesi, bence onu gelecekte çok daha büyük başarılara taşıyacak. Türkiye’de ona yol arkadaşlığı yapmaktan ve destek olmaktan gurur duyuyorum. Başarılarının devamını tüm kalbimle diliyorum.",
+        "Mahmut, hayallerinin peşinden azimle koşan, vizyoner ve çalışkan bir genç. Onu ofisimizde ağırlama fırsatı buldum ve o gün heyecanını, gözlerindeki ışığı yakından gördüm. Kısa zamanda kendisini web tasarım ve yazılım alanında geliştirmesi çok etkileyici.",
       project: "منصة تعليمية تفاعلية",
+      language: 'tr',
       facebookUrl: "https://www.facebook.com",
       twitterUrl: "https://www.twitter.com",
       linkedinUrl: "https://www.linkedin.com/in/emine-%C3%B6zkan16/",
@@ -54,238 +55,301 @@ const TestimonialsSection = () => {
     {
       id: "3",
       name: "JavaScript Mastery",
-      position: "Adrian ",
-      company: "Founder @jsmastery.pro, GitHub Star , software engineer & educator.",
+      position: "Adrian",
+      company: "Founder @jsmastery.pro, GitHub Star",
       image: "/images/testimonials/java.jpeg",
       comment:
-        " Keep building, keep sharing - big things start exactly like this. Cheering you on all the way, Mahmoud.You can achieve anything you put your mind to! 🙌 ",
-      project: "   ",
+        "Keep building, keep sharing - big things start exactly like this. Cheering you on all the way, Mahmoud. You can achieve anything you put your mind to! 🙌",
+      project: " ",
+      language: 'en',
       facebookUrl: "https://www.facebook.com",
       twitterUrl: "https://x.com/jsmasterypro",
       linkedinUrl: "https://www.linkedin.com/company/javascriptmastery/",
       githubUrl: "https://github.com/adrianhajdin",
       youtubeUrl: "https://www.youtube.com/c/JavaScriptMastery",
     },
-    {
-      id: "4",
-      name: " ",
-      position: " ",
-      company: " ",
-      image: "/images/testimonials/placeholder.svg",
-      comment:
-        " ",
-      project: " ",
-      facebookUrl: "https://www.facebook.com",
-      twitterUrl: "https://www.twitter.com",
-      linkedinUrl: "https://www.linkedin.com",
-      githubUrl: "https://www.github.com",
-      youtubeUrl: "https://www.youtube.com",
-    },
   ];
 
-  const [activeTestimonial, setActiveTestimonial] = useState(testimonials[0]);
+  const [activeIndex, setActiveIndex] = useState(1);
 
-  const handleTestimonialChange = (testimonial: Testimonial) => {
-    if (testimonial.id !== activeTestimonial.id) {
-      // GSAP animation for smooth transition
-      gsap.to(".testimonial-content", {
-        opacity: 0,
-        y: 20,
-        duration: 0.3,
-        onComplete: () => {
-          setActiveTestimonial(testimonial);
-          gsap.to(".testimonial-content", {
-            opacity: 1,
-            y: 0,
-            duration: 0.5,
-            ease: "power2.out",
-          });
-        },
-      });
-    }
+  const handlePrev = () => {
+    setActiveIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
+  };
+
+  const handleNext = () => {
+    setActiveIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
   };
 
   return (
-    <section className="py-16 md:py-20 lg:py-24">
-  <div className="mx-auto w-full max-w-[1288px] px-4 sm:px-8">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            قائمة الشرف
+    <section className="py-32 bg-[#0A0E27] relative overflow-hidden">
+      {/* خلفية متحركة */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-[#6C5CE7]/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-[#00FFA3]/10 rounded-full blur-3xl"></div>
+      </div>
+
+      <div className="container mx-auto px-6 relative z-10">
+        {/* العنوان */}
+        <div className="text-center mb-20">
+          <div className="inline-block px-4 py-2 bg-[#00FFA3]/10 border border-[#00FFA3]/30 rounded-full mb-6">
+            <span className="text-[#00FFA3] font-semibold text-sm">قائمة الشرف</span>
+          </div>
+          <h2 className="text-xl md:text-5xl font-black text-white mb-6 leading-tight">
+            ما يقوله{' '}
+            <span className="bg-gradient-to-r from-[#6C5CE7] via-[#00D9FF] to-[#00FFA3] bg-clip-text text-transparent">
+              خبراء البرمجة
+            </span>
           </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+          <p className="text-[#A0AEC0] text-xs md:text-xl max-w-3xl mx-auto">
             مساحة مخصصة لعرض آراء نخبة من أساتذة البرمجة ومطوري الويب
           </p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Testimonial Card */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="lg:col-span-2"
-          >
-            <div className="testimonial-content h-full bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl p-8 md:p-12 md:pt-8 border border-gray-700 relative overflow-hidden">
-              {/* Background Pattern */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 rounded-full blur-3xl"></div>
-              <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-purple-500/10 to-cyan-500/10 rounded-full blur-2xl"></div>
-
-              {/* Quote Icon */}
-              <div className="absolute top-8 left-6 w-12 h-12 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full flex items-center justify-center">
-                <Quote className="w-6 h-6 text-white" />
-              </div>
-
-              {/* Client Info */}
-              <div className="flex gap-6 items-start mb-8">
-                <img
-                  src={activeTestimonial.image}
-                  alt={`صورة ${activeTestimonial.name} - ${activeTestimonial.position} في ${activeTestimonial.company}`}
-                  className="w-16 h-16 rounded-full object-cover border-4 border-gray-700"
-                  width={64}
-                  height={64}
-                  loading="lazy"
-                />
-                <div className="space-y-1">
-                  <h4 className="text-xl font-bold text-white">
-                    {activeTestimonial.name}
-                  </h4>
-                  <p className="text-cyan-400">{activeTestimonial.position}</p>
-                  <p className="text-gray-400 text-sm">
-                    {activeTestimonial.company}
-                  </p>
-                </div>
-              </div>
-
-              {/* Comment */}
-              <blockquote className="text-[18px] text-gray-300 leading-relaxed mb-8 relative z-10 mt-4" style={{
-                lineHeight: "1.6",
-              }}>
-                "{activeTestimonial.comment}"
-              </blockquote>
-
-              {/* Results */}
-              <div className="mt-24 space-y-6">
-                <h5 className="text-white font-semibold mb-3">
-                   منصات التواصل
-                </h5>
-                <div className="flex flex-wrap gap-9">
-                  <a
-                    href={activeTestimonial.facebookUrl}
-                    className="text-gray-400 hover:text-cyan-400 transition-colors"
-                  >
-                    <Github className="w-8 h-8" />
-                  </a>
-                  <a
-                    href={activeTestimonial.linkedinUrl}
-                    className="text-gray-400 hover:text-cyan-400 transition-colors"
-                  >
-                    <Linkedin className="w-8 h-8" />
-                  </a>
-                  <a
-                    href={activeTestimonial.twitterUrl}
-                    className="text-gray-400 hover:text-cyan-400 transition-colors"
-                  >
-                    <Twitter className="w-8 h-8" />
-                  </a>
-                  <a
-                    href={activeTestimonial.githubUrl}
-                    className="text-gray-400 hover:text-cyan-400 transition-colors"
-                  >
-                    <Facebook className="w-8 h-8" />
-                  </a>
-                  <a
-                    href={activeTestimonial.youtubeUrl}
-                    className="text-gray-400 hover:text-cyan-400 transition-colors"
-                  >
-                    <Youtube className="w-8 h-8" />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Testimonial Thumbnails */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="space-y-[42px]"
-          >
-            {testimonials.map((testimonial) => (
-              <motion.button
-                key={testimonial.id}
-                onClick={() => handleTestimonialChange(testimonial)}
-                className={`w-full text-left p-4 rounded-xl transition-all duration-300 ${
-                  activeTestimonial.id === testimonial.id
-                    ? "bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border border-cyan-500/50"
-                    : "bg-gray-800/50 border border-gray-700 hover:border-cyan-500/30"
-                }`}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <div className="flex items-center space-x-3">
-                  <img
-                    src={testimonial.image}
-                    alt={`صورة ${testimonial.name} - ${testimonial.position} في ${testimonial.company}`}
-                    className="w-12 h-12 rounded-full object-cover"
-                    width={48}
-                    height={48}
-                    loading="lazy"
-                  />
-                  <div className="flex-1 space-y-3">
-                    <h4 className="text-white font-medium text-sm">
-                      {testimonial.name}
-                    </h4>
-                    <p className="text-gray-400 text-xs">
-                      {testimonial.company}
-                    </p>
-                  </div>
-                </div>
-              </motion.button>
-            ))}
-          </motion.div>
         </div>
 
-        {/* Stats Summary */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="mt-16 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 rounded-2xl p-8 border border-cyan-500/30"
-        >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <div>
-              <div className="text-3xl font-bold text-cyan-400 mb-2">4.9/5</div>
-              <div className="text-gray-400">متوسط التقييم</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-green-400 mb-2">98%</div>
-              <div className="text-gray-400">رضا العملاء</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-purple-400 mb-2">12+</div>
-              <div className="text-gray-400">مشروع ناجح</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-yellow-400 mb-2">
-                24/7
-              </div>
-              <div className="text-gray-400">دعم فني</div>
+        {/* البطاقات - Desktop */}
+        <div className="relative max-w-7xl mx-auto hidden md:block">
+          <div className="flex items-center justify-center gap-8">
+            {testimonials.map((testimonial, index) => {
+              const isActive = index === activeIndex;
+              const offset = index - activeIndex;
+              
+              return (
+                <motion.div
+                  key={testimonial.id}
+                  onClick={() => setActiveIndex(index)}
+                  className="cursor-pointer relative"
+                  style={{
+                    zIndex: isActive ? 10 : 5 - Math.abs(offset),
+                  }}
+                  animate={{
+                    scale: isActive ? 1 : 0.85,
+                    opacity: isActive ? 1 : 0.5,
+                    x: offset * 20,
+                  }}
+                  transition={{
+                    duration: 0.5,
+                    ease: [0.4, 0, 0.2, 1],
+                  }}
+                >
+                  <TestimonialCard testimonial={testimonial} isActive={isActive} />
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* البطاقات - Mobile */}
+        <div className="relative md:hidden">
+          {/* Container للبطاقات */}
+          <div className="overflow-hidden">
+            <div 
+              className="flex transition-transform duration-500 ease-out"
+              style={{
+                transform: `translateX(${activeIndex * 100}%)`,
+              }}
+            >
+              {testimonials.map((testimonial) => (
+                <div
+                  key={testimonial.id}
+                  className="w-full flex-shrink-0 px-4"
+                >
+                  <div className="bg-gradient-to-br from-[#1A1F3A]/95 to-[#0F1729]/95 backdrop-blur-xl border border-white/10 rounded-3xl p-6 shadow-2xl">
+                    {/* معلومات الشخص - من اليسار لليمين */}
+                    <div className="flex items-center gap-3 mb-6" dir="ltr">
+                      <img
+                        src={testimonial.image}
+                        alt={testimonial.name}
+                        className="w-16 h-16 rounded-full object-cover border-2 border-[#6C5CE7]/50"
+                      />
+                      <div className="flex-1 min-w-0 text-left">
+                        <h4 className="text-white font-bold text-lg truncate">
+                          {testimonial.name}
+                        </h4>
+                        <p className="text-[#A0AEC0] text-xs truncate">
+                          {testimonial.position}
+                        </p>
+                        <p className="text-[#6C5CE7] text-xs truncate">
+                          {testimonial.company}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* التعليق */}
+                    <p 
+                      className={`text-[#A0AEC0] text-sm leading-relaxed mb-6 ${
+                        testimonial.language === 'ar' ? 'text-right' : 'text-left'
+                      }`}
+                      dir={testimonial.language === 'ar' ? 'rtl' : 'ltr'}
+                    >
+                      {testimonial.comment}
+                    </p>
+
+                    {/* أيقونات التواصل */}
+                    <div className="flex items-center justify-center gap-2 flex-wrap pt-4 border-t border-white/10">
+                      {testimonial.githubUrl && testimonial.githubUrl !== "#" && (
+                        <a href={testimonial.githubUrl} target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
+                          <Github className="w-4 h-4 text-white" />
+                        </a>
+                      )}
+                      {testimonial.linkedinUrl && (
+                        <a href={testimonial.linkedinUrl} target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
+                          <Linkedin className="w-4 h-4 text-white" />
+                        </a>
+                      )}
+                      {testimonial.twitterUrl && (
+                        <a href={testimonial.twitterUrl} target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
+                          <Twitter className="w-4 h-4 text-white" />
+                        </a>
+                      )}
+                      {testimonial.youtubeUrl && (
+                        <a href={testimonial.youtubeUrl} target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
+                          <Youtube className="w-4 h-4 text-white" />
+                        </a>
+                      )}
+                      {testimonial.facebookUrl && testimonial.facebookUrl !== "#" && (
+                        <a href={testimonial.facebookUrl} target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
+                          <Facebook className="w-4 h-4 text-white" />
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-        </motion.div>
+
+          {/* أزرار التنقل - Mobile */}
+          <div className="flex items-center justify-center gap-4 mt-8">
+            <button
+              onClick={handlePrev}
+              className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#6C5CE7]/20 hover:border-[#6C5CE7] transition-all duration-300 active:scale-95"
+            >
+              <ChevronRight className="w-5 h-5 text-white" />
+            </button>
+            <div className="text-white/60 text-sm font-semibold">
+              {activeIndex + 1} / {testimonials.length}
+            </div>
+            <button
+              onClick={handleNext}
+              className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#6C5CE7]/20 hover:border-[#6C5CE7] transition-all duration-300 active:scale-95"
+            >
+              <ChevronLeft className="w-5 h-5 text-white" />
+            </button>
+          </div>
+        </div>
+
+        {/* مؤشرات البطاقات */}
+        <div className="flex items-center justify-center gap-3 mt-8">
+          {testimonials.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveIndex(index)}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                index === activeIndex
+                  ? 'w-12 bg-gradient-to-r from-[#6C5CE7] to-[#00D9FF]'
+                  : 'w-2 bg-white/20 hover:bg-white/40'
+              }`}
+            />
+          ))}
+        </div>
       </div>
     </section>
+  );
+};
+
+// مكون البطاقة المنفصل
+const TestimonialCard: React.FC<{ testimonial: Testimonial; isActive: boolean }> = ({ 
+  testimonial
+}) => {
+  const isRTL = testimonial.language === 'ar';
+  
+  return (
+    <div className="w-full md:w-[400px] bg-gradient-to-br from-[#1A1F3A]/95 to-[#0F1729]/95 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl hover:border-[#6C5CE7]/50 transition-all duration-300">
+      {/* معلومات الشخص - في الأعلى من اليسار إلى اليمين */}
+      <div className="flex flex-row-reverse items-center gap-4 mb-6 pb-6 border-b border-white/10">
+        <img
+          src={testimonial.image}
+          alt={testimonial.name}
+          className="w-20 h-20 rounded-full object-cover border-2 border-[#6C5CE7]/50 shadow-lg"
+        />
+        <div className="flex-1 text-right">
+          <h4 className="text-white font-bold text-xl mb-1">
+            {testimonial.name}
+          </h4>
+          <p className="text-[#A0AEC0] text-sm line-clamp-1">
+            {testimonial.position}
+          </p>
+          <p className="text-[#6C5CE7] text-xs mt-1 line-clamp-1">
+            {testimonial.company}
+          </p>
+        </div>
+      </div>
+
+      {/* التعليق */}
+      <div className="mb-8">
+        <p 
+          className={`text-[#A0AEC0] text-base leading-relaxed min-h-[140px] ${
+            isRTL ? 'text-right' : 'text-left'
+          }`}
+          dir={isRTL ? 'rtl' : 'ltr'}
+        >
+          {testimonial.comment}
+        </p>
+      </div>
+
+      {/* أيقونات التواصل الاجتماعي */}
+      <div className="flex items-center justify-center gap-3 flex-wrap pt-4 border-t border-white/10">
+        {testimonial.githubUrl && testimonial.githubUrl !== "#" && (
+          <a
+            href={testimonial.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#6C5CE7]/20 hover:border-[#6C5CE7] transition-all duration-300"
+          >
+            <Github className="w-4 h-4 text-white" />
+          </a>
+        )}
+        {testimonial.linkedinUrl && (
+          <a
+            href={testimonial.linkedinUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#00D9FF]/20 hover:border-[#00D9FF] transition-all duration-300"
+          >
+            <Linkedin className="w-4 h-4 text-white" />
+          </a>
+        )}
+        {testimonial.twitterUrl && (
+          <a
+            href={testimonial.twitterUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#00D9FF]/20 hover:border-[#00D9FF] transition-all duration-300"
+          >
+            <Twitter className="w-4 h-4 text-white" />
+          </a>
+        )}
+        {testimonial.youtubeUrl && (
+          <a
+            href={testimonial.youtubeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#FF0000]/20 hover:border-[#FF0000] transition-all duration-300"
+          >
+            <Youtube className="w-4 h-4 text-white" />
+          </a>
+        )}
+        {testimonial.facebookUrl && testimonial.facebookUrl !== "#" && (
+          <a
+            href={testimonial.facebookUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#1877F2]/20 hover:border-[#1877F2] transition-all duration-300"
+          >
+            <Facebook className="w-4 h-4 text-white" />
+          </a>
+        )}
+      </div>
+    </div>
   );
 };
 

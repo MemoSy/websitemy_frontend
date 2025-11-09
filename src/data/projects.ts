@@ -392,7 +392,7 @@ export const projects: Project[] = [
     youtubeVideo: "https://www.youtube.com/embed/bcTyXAuDjWg",
     category: "social",
     technologies: ["nextjs", "mongodb", "javascript", "tailwindcss"],
-    duration: "3 أشهر",
+    duration: "",
     aiData: {
       price: "1500$",
       clientType: "منصة اجتماعية",
@@ -665,7 +665,7 @@ export const serviceCategories: ServiceCategory[] = [
     id: "opensource",
     title: "مفتوحة المصدر",
     subtitle: "كود يلهم العالم",
-    icon: "🚀",
+    icon: "",
     description: "مشاريع برمجية مفتوحة المصدر تساهم في تطوير المجتمع التقني",
     projects: projects.filter((p) => p.category === "opensource"),
   },
