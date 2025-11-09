@@ -1,4 +1,7 @@
 import { projects, serviceCategories } from "../data/projects";
+import { faqData } from "../data/faqData";
+import { generateAdvancedSystemPrompt, validateAIResponse, trackOffTopicAttempts, aiGuardRails } from "./aiSystemPrompt";
+import { searchFAQ } from "../data/faqData";
 import OpenAI from "openai";
 
 const openai = new OpenAI({
@@ -139,7 +142,10 @@ export const generateKnowledgeBase = (): AIKnowledgeBase => {
         complexity: p.aiData?.complexity,
       })),
     })),
-    commonQuestions,
+    commonQuestions: faqData.map(faq => ({
+      question: faq.question,
+      answer: faq.shortAnswer || faq.answer.substring(0, 200),
+    })),
   };
 };
 
@@ -195,71 +201,51 @@ export const callChatGPT = async (
   try {
     // تحليل السياق
     const contextAnalysis = analyzeContext(conversationHistory);
+    
+    // تتبع المحاولات الخارجة عن الموضوع
+    const offTopicAttempts = trackOffTopicAttempts(conversationHistory);
+    if (offTopicAttempts > 3) {
+      return `أعتذر، لكني مختص فقط بالإجابة على أسئلة حول خدمات ومشاريع WebSiteMy.
 
-    // بناء تاريخ المحادثة لإرساله مع الطلب
+كيف يمكنني مساعدتك في معرفة المزيد عن:
+• المشاريع والأسعار
+• التقنيات المستخدمة
+• مدة التطوير
+• الفريق التقني
+
+📱 للاستفسارات الأخرى: +905313345111`;
+    }
+
+    // البحث في الـ FAQ أولاً
+    const relevantFAQs = searchFAQ(currentMessage);
+    let faqContext = '';
+    if (relevantFAQs.length > 0) {
+      faqContext = `\n\nأسئلة شائعة ذات صلة:\n${relevantFAQs.slice(0, 3).map(faq => 
+        `Q: ${faq.question}\nA: ${faq.shortAnswer}`
+      ).join('\n\n')}`;
+    }
+
+    // بناء تاريخ المحادثة
     const conversationContext = conversationHistory.length > 0 
       ? `تاريخ المحادثة السابقة:
-${conversationHistory.map((msg, index) => 
+${conversationHistory.slice(-6).map((msg, index) => 
   `${index + 1}. ${msg.isUser ? 'المستخدم' : 'المساعد'}: ${msg.text}`
 ).join('\n')}
 
 تحليل السياق:
-- الموضوع الحالي: ${contextAnalysis.currentTopic}
-- آخر مشروع مذكور: ${contextAnalysis.lastMentionedProject}
+- الموضوع الحالي: ${contextAnalysis.currentTopic || 'عام'}
+- آخر مشروع مذكور: ${contextAnalysis.lastMentionedProject || 'لا يوجد'}
+${faqContext}
 
 السؤال الحالي: ${currentMessage}`
-      : `السؤال: ${currentMessage}`;
+      : `السؤال: ${currentMessage}${faqContext}`;
 
-    const systemPrompt = `أنت سكرتير محترف لشركة WebSiteMy المتخصصة في تطوير مواقع الويب والتطبيقات. تتحدث بطبيعية كما يتحدث أي سكرتير حقيقي مع العملاء.
-
-لديك الوصول إلى المعلومات التالية:
-- معلومات الشركة: ${JSON.stringify(context.companyInfo, null, 2)}
-- المشاريع المنجزة: ${JSON.stringify(context.projects, null, 2)}
-- فئات الخدمات: ${JSON.stringify(context.categories, null, 2)}
-
-قواعد الرد الأساسية:
-
-1. تذكر المحادثة السابقة تماماً:
-- اقرأ تاريخ المحادثة بعناية وافهم السياق الكامل
-- استخدم تحليل السياق لفهم الموضوع الحالي وآخر مشروع مذكور
-- إذا تم الحديث عن نوع معين من المشاريع، تابع الحديث عن نفس النوع
-- إذا سأل المستخدم عن "سعر" أو "تكلفة"، اربط ذلك بآخر نوع مشروع تم مناقشته
-- إذا طلب "رابط المعاينة"، أعطه رابط آخر مشروع تحدثتم عنه
-
-2. الفهم السياقي الذكي:
-- عندما يسأل عن موقع أخبار ثم يسأل عن السعر، يقصد سعر موقع الأخبار
-- عندما يسأل عن متجر ثم يسأل عن المدة، يقصد مدة تطوير المتجر
-- عندما يقول "كم السعر؟" بدون تحديد، يقصد سعر آخر نوع مشروع تحدثتم عنه
-- عندما يقول "أريد رابط المعاينة" يقصد رابط آخر مشروع ذكرته له
-- لا تخلط بين أنواع المشاريع - ابق ضمن نفس السياق
-
-3. عدم التكرار والطبيعية:
-- لا تكرر العبارات الترحيبية في كل رد
-- تحدث بشكل طبيعي كما لو كانت محادثة مستمرة
-- لا تعيد تقديم نفسك في كل رد
-- استخدم عبارات ربط مثل "كما ذكرت سابقاً" أو "بناءً على ما تحدثنا عنه"
-
-4. الدقة في الإجابة:
-- اختر المشروع المناسب تماماً للسياق
-- إذا كانت المحادثة عن الأخبار، ابحث في مشاريع الأخبار فقط
-- إذا كانت عن التجارة الإلكترونية، ابحث في المتاجر فقط
-- إذا كانت عن التعليم، ابحث في المنصات التعليمية فقط
-
-5. استمرارية المحادثة:
-- بناءً على السياق، قدم معلومات إضافية مفيدة
-- إذا أعطيت سعراً، اقترح الخطوة التالية
-- احتفظ بنبرة المحادثة نفسها
-- اجعل كل رد يبني على الردود السابقة
-
-6. أمثلة للسياق المتقدم:
-- إذا سأل عن "موقع أخبار" ثم "كم السعر؟" → "موقع الأخبار مثل الشبكة الوطنية للإعلام يكلف 500 دولار"
-- إذا سأل عن "متجر إلكتروني" ثم "رابط المعاينة؟" → "تفضل رابط المتجر الذكي الذي تحدثنا عنه"
-- إذا سأل عن "منصة تعليمية" ثم "المدة؟" → "منصة التعليم تحتاج حوالي 6 أسابيع للتطوير"
-
-7. للاستفسارات المعقدة:
-إذا احتاج تفاصيل أكثر تخصصاً، قل: "دعني أوصلك بالمدير للحصول على تفاصيل أكثر دقة +905313345111"
-
-المطلوب: كن سكرتير ذكي يتذكر كل تفاصيل المحادثة ويفهم السياق بعمق، ويتابع من حيث انتهى الحديث، مع الحفاظ على السياق والهدف من المحادثة بدقة تامة.`;
+    // استخدام System Prompt المتقدم
+    const systemPrompt = generateAdvancedSystemPrompt(
+      context.companyInfo,
+      context.projects.slice(0, 10), // أول 10 مشاريع لتقليل الحجم
+      faqData.slice(0, 10) // أول 10 أسئلة شائعة
+    );
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4o",
@@ -273,11 +259,30 @@ ${conversationHistory.map((msg, index) =>
           content: conversationContext
         }
       ],
-      max_tokens: 1500,
+      max_tokens: aiGuardRails.maxResponseLength,
       temperature: 0.7,
     });
 
-    return completion.choices[0]?.message?.content || "آسف، لم أتمكن من الحصول على إجابة دقيقة. يرجى المحاولة مرة أخرى.";
+    const response = completion.choices[0]?.message?.content || 
+      "آسف، لم أتمكن من الحصول على إجابة دقيقة. يرجى المحاولة مرة أخرى.";
+    
+    // التحقق من صحة الرد
+    const validation = validateAIResponse(response);
+    if (!validation.isValid) {
+      console.error('AI Response Validation Failed:', validation.errors);
+      return `عذراً، هناك مشكلة في تكوين الرد. دعني أوصلك بالفريق للمساعدة:
+
+📱 واتساب: +905313345111
+☎️ اتصال: +905313345111
+
+كيف يمكنني مساعدتك بطريقة أخرى؟`;
+    }
+    
+    if (validation.warnings.length > 0) {
+      console.warn('AI Response Warnings:', validation.warnings);
+    }
+
+    return response;
     
   } catch (error: any) {
     console.error("ChatGPT API Error:", error);

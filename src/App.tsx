@@ -1,5 +1,5 @@
 import { Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer';
@@ -32,6 +32,32 @@ const PageLoader = () => (
     <LoadingSpinner size="lg" text="جاري التحميل..." />
   </div>
 );
+
+// مكون لإدارة الأزرار العائمة حسب الصفحة
+const FloatingButtons = () => {
+  const location = useLocation();
+  const isAIChatPage = location.pathname === '/ai-chat';
+  
+  // إخفاء الأزرار في صفحة AI Chat على الموبايل فقط
+  if (isAIChatPage) {
+    return (
+      <>
+        <div className="hidden md:block">
+          <AIAssistantButton />
+          <FloatingWhatsAppButton />
+        </div>
+      </>
+    );
+  }
+  
+  // عرض الأزرار في باقي الصفحات
+  return (
+    <>
+      <AIAssistantButton />
+      <FloatingWhatsAppButton />
+    </>
+  );
+};
 
 function App() {
   // متغيرات التكوين - يمكنك تحديثها عند الحصول على IDs من Google
@@ -82,8 +108,7 @@ function App() {
           
           {/* مساعد ذكي ثابت في جميع الصفحات - Lazy loaded */}
           <Suspense fallback={null}>
-            <AIAssistantButton />
-            <FloatingWhatsAppButton />
+            <FloatingButtons />
           </Suspense>
         </div>
         </div>
