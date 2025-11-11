@@ -2,15 +2,27 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { Code, CheckCircle, Calendar, TrendingUp, ArrowDown } from "lucide-react";
+import {
+  Code,
+  CheckCircle,
+  Calendar,
+  TrendingUp,
+  ArrowDown,
+} from "lucide-react";
 import { getCurrentProjectsData } from "../../../data/currentProjects";
 
 const CurrentProjectsSection = () => {
   const { t, i18n } = useTranslation();
-  const isRTL = i18n.dir() === 'rtl';
-  const [currentProjectsData, setCurrentProjectsData] = useState(getCurrentProjectsData());
-  const [activeProjectId, setActiveProjectId] = useState(currentProjectsData[0].id);
-  const activeProject = currentProjectsData.find(p => p.id === activeProjectId) || currentProjectsData[0];
+  const isRTL = i18n.dir() === "rtl";
+  const [currentProjectsData, setCurrentProjectsData] = useState(
+    getCurrentProjectsData()
+  );
+  const [activeProjectId, setActiveProjectId] = useState(
+    currentProjectsData[0].id
+  );
+  const activeProject =
+    currentProjectsData.find((p) => p.id === activeProjectId) ||
+    currentProjectsData[0];
 
   // Update projects data when language changes
   useEffect(() => {
@@ -39,8 +51,12 @@ const CurrentProjectsSection = () => {
       <div className="mx-auto w-full max-w-[1288px] px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">
-          <h2 className={`text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent ${isRTL ? 'text-right' : 'text-left'}`}>
-            {t('currentProjects.title')}
+          <h2
+            className={`text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent ${
+              isRTL ? "text-right" : "text-left"
+            }`}
+          >
+            {t("currentProjects.title")}
           </h2>
         </div>
 
@@ -60,11 +76,11 @@ const CurrentProjectsSection = () => {
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.97 }}
                 animate={{
-                  flex: isActive ? '2' : '1',
+                  flex: isActive ? "2" : "1",
                 }}
                 transition={{
                   duration: 0.3,
-                  ease: 'easeInOut',
+                  ease: "easeInOut",
                 }}
                 className={`group relative flex flex-col items-end gap-1 overflow-hidden rounded-xl border px-3 py-2 text-xs md:px-5 md:py-3 md:text-base transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 ${
                   isActive
@@ -72,12 +88,16 @@ const CurrentProjectsSection = () => {
                     : "border-gray-700/60 bg-gray-900/30 text-gray-300 hover:border-cyan-500/40 hover:text-white"
                 }`}
                 aria-pressed={isActive}
-                style={{ minWidth: '60px' }}
+                style={{ minWidth: "60px" }}
               >
                 <span className="font-semibold leading-tight whitespace-nowrap overflow-hidden text-ellipsis w-full">
                   {project.shortTitle}
                 </span>
-                <span className={`text-[10px] md:text-xs text-gray-400 transition-all group-hover:text-gray-300 whitespace-nowrap overflow-hidden text-ellipsis w-full ${!isActive ? 'opacity-0 h-0' : 'opacity-100'}`}>
+                <span
+                  className={`text-[10px] md:text-xs text-gray-400 transition-all group-hover:text-gray-300 whitespace-nowrap overflow-hidden text-ellipsis w-full ${
+                    !isActive ? "opacity-0 h-0" : "opacity-100"
+                  }`}
+                >
                   {project.tagline}
                 </span>
                 {isActive && (
@@ -100,9 +120,13 @@ const CurrentProjectsSection = () => {
           >
             {/* Technologies Used */}
             <div className="!mt-2">
-              <h3 className={`text-xl md:text-2xl font-bold text-white mb-4 md:mb-6 flex items-center gap-2 ${isRTL ? 'gap-reverse' : ''}`}>
+              <h3
+                className={`text-xl md:text-2xl font-bold text-white mb-4 md:mb-6 flex items-center gap-2 ${
+                  isRTL ? "gap-reverse" : ""
+                }`}
+              >
                 <Code className="w-5 h-5 md:w-6 md:h-6 text-cyan-400 flex-shrink-0" />
-                <span>{t('currentProjects.sections.technologies')}</span>
+                <span>{t("currentProjects.sections.technologies")}</span>
               </h3>
 
               <div className="grid grid-cols-2 gap-3 md:gap-4">
@@ -126,9 +150,13 @@ const CurrentProjectsSection = () => {
 
             {/* Key Features */}
             <div className="flex-1 !mt-12">
-              <h3 className={`text-xl md:text-2xl font-bold text-white mb-4 md:mb-6 flex items-center gap-2 ${isRTL ? 'gap-reverse' : ''}`}>
+              <h3
+                className={`text-xl md:text-2xl font-bold text-white mb-4 md:mb-6 flex items-center gap-2 ${
+                  isRTL ? "gap-reverse" : ""
+                }`}
+              >
                 <CheckCircle className="w-5 h-5 md:w-6 md:h-6 text-green-400 flex-shrink-0" />
-                <span>{t('currentProjects.sections.features')}</span>
+                <span>{t("currentProjects.sections.features")}</span>
               </h3>
 
               <div className="space-y-3 md:space-y-7">
@@ -242,8 +270,14 @@ const CurrentProjectsSection = () => {
 
                 {/* Additional project info */}
                 <div className="mt-3 md:mt-4 p-3 md:p-4 bg-gray-400/40 rounded-lg border border-gray-700/30">
-                  <div className={`flex items-center justify-between text-xs md:text-sm ${isRTL ? 'flex-row-reverse' : ''}`}>
-                    <span className="text-gray-400">{t('currentProjects.sections.projectName')}:</span>
+                  <div
+                    className={`flex items-center justify-between text-xs md:text-sm ${
+                      isRTL ? "flex-row-reverse" : ""
+                    }`}
+                  >
+                    <span className="text-gray-400">
+                      {t("currentProjects.sections.projectName")}:
+                    </span>
                     <span className="text-white font-medium">
                       {activeProject.name}
                     </span>
@@ -253,9 +287,13 @@ const CurrentProjectsSection = () => {
 
               {/* Progress Section */}
               <div className="bg-gray-900/40 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-4 md:p-6">
-                <div className={`flex items-center justify-between mb-3 md:mb-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                <div
+                  className={`flex items-center justify-between mb-3 md:mb-4 ${
+                    isRTL ? "flex-row-reverse" : ""
+                  }`}
+                >
                   <span className="text-white font-semibold text-sm md:text-base">
-                    {t('currentProjects.sections.progress')}
+                    {t("currentProjects.sections.progress")}
                   </span>
                   <span className="text-cyan-400 font-bold text-xl md:text-2xl">
                     {activeProject.progress}%
@@ -275,26 +313,34 @@ const CurrentProjectsSection = () => {
 
                 {/* Timeline Info */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 text-xs md:text-sm">
-                  <div className={`flex items-center gap-2 md:gap-3 text-gray-300 ${isRTL ? 'gap-reverse' : ''}`}>
+                  <div
+                    className={`flex items-center gap-2 md:gap-3 text-gray-300 ${
+                      isRTL ? "gap-reverse" : ""
+                    }`}
+                  >
                     <div className="p-1.5 md:p-2 bg-cyan-500/20 rounded-lg border border-cyan-500/30 flex-shrink-0">
                       <Calendar className="w-3 h-3 md:w-4 md:h-4 text-cyan-400" />
                     </div>
                     <div className="min-w-0">
                       <div className="text-gray-400 text-xs mb-0.5 md:mb-1">
-                        {t('currentProjects.sections.startDate')}
+                        {t("currentProjects.sections.startDate")}
                       </div>
                       <div className="font-medium text-white text-xs md:text-sm">
                         {activeProject.startDate}
                       </div>
                     </div>
                   </div>
-                  <div className={`flex items-center gap-2 md:gap-3 text-gray-300 ${isRTL ? 'gap-reverse' : ''}`}>
+                  <div
+                    className={`flex items-center gap-2 md:gap-3 text-gray-300 ${
+                      isRTL ? "gap-reverse" : ""
+                    }`}
+                  >
                     <div className="p-1.5 md:p-2 bg-green-500/20 rounded-lg border border-green-500/30 flex-shrink-0">
                       <TrendingUp className="w-3 h-3 md:w-4 md:h-4 text-green-400" />
                     </div>
                     <div className="min-w-0">
                       <div className="text-gray-400 text-xs mb-0.5 md:mb-1">
-                        {t('currentProjects.sections.expectedDuration')}
+                        {t("currentProjects.sections.expectedDuration")}
                       </div>
                       <div className="font-medium text-white text-xs md:text-sm">
                         {activeProject.expectedDuration}
@@ -306,22 +352,44 @@ const CurrentProjectsSection = () => {
 
               {/* Call to Action */}
               <div className="hidden md:block bg-gradient-to-r from-cyan-500/10 via-purple-500/5 to-pink-500/10 border border-cyan-500/30 rounded-2xl p-4 md:p-6 backdrop-blur-sm mt-auto">
-                <div className={`flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 ${isRTL ? 'sm:flex-row-reverse' : ''}`}>
+                <div
+                  className={`flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 ${
+                    isRTL ? "sm:flex-row-reverse" : ""
+                  }`}
+                >
                   <div className="flex-1">
-                    <h4 className={`text-white font-bold mb-2 text-base md:text-lg ${isRTL ? 'text-right' : 'text-left'}`}>
-                      {t('currentProjects.cta.title')}
+                    <h4
+                      className={`text-white font-bold mb-2 text-base md:text-lg ${
+                        isRTL ? "text-right" : "text-left"
+                      }`}
+                    >
+                      {t("currentProjects.cta.title")}
                     </h4>
-                    <p className={`text-gray-300 text-xs md:text-sm mb-0 sm:mb-4 ${isRTL ? 'text-right' : 'text-left'}`}>
-                      {t('currentProjects.cta.description')}
+                    <p
+                      className={`text-gray-300 text-xs md:text-sm mb-0 sm:mb-4 ${
+                        isRTL ? "text-right" : "text-left"
+                      }`}
+                    >
+                      {t("currentProjects.cta.description")}
                     </p>
                   </div>
-                  <div className={`flex-shrink-0 w-full sm:w-auto ${isRTL ? 'sm:ml-4' : 'sm:mr-4'}`}>
+                  <div
+                    className={`flex-shrink-0 w-full sm:w-auto ${
+                      isRTL ? "sm:ml-4" : "sm:mr-4"
+                    }`}
+                  >
                     <Link
                       to="/contact"
-                      className={`inline-flex items-center justify-center w-full sm:w-auto gap-2 bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-4 md:px-6 py-2.5 md:py-3 rounded-xl hover:from-cyan-600 hover:to-purple-600 transition-all text-xs md:text-sm font-medium hover:scale-105 transform shadow-lg hover:shadow-cyan-500/25 ${isRTL ? 'gap-reverse' : ''}`}
+                      className={`inline-flex items-center justify-center w-full sm:w-auto gap-2 bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-4 md:px-6 py-2.5 md:py-3 rounded-xl hover:from-cyan-600 hover:to-purple-600 transition-all text-xs md:text-sm font-medium hover:scale-105 transform shadow-lg hover:shadow-cyan-500/25 ${
+                        isRTL ? "gap-reverse" : ""
+                      }`}
                     >
-                      <span>{t('currentProjects.cta.button')}</span>
-                      <ArrowDown className={`w-3 h-3 md:w-4 md:h-4 ${isRTL ? 'rotate-[135deg]' : 'rotate-[-45deg]'}`} />
+                      <span>{t("currentProjects.cta.button")}</span>
+                      <ArrowDown
+                        className={`w-3 h-3 md:w-4 md:h-4 ${
+                          isRTL ? "rotate-[135deg]" : "rotate-[-45deg]"
+                        }`}
+                      />
                     </Link>
                   </div>
                 </div>

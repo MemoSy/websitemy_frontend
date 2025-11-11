@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -9,14 +9,14 @@
 * {
   margin: 0;
   padding: 0;
-font-family: "Noto Kufi Arabic", sans-serif;
+  font-family: "Noto Kufi Arabic", sans-serif;
   box-sizing: border-box;
 }
 
 body {
-  font-family: 'Noto Sans Arabic', 'Cairo', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "Noto Sans Arabic", "Cairo", "Inter", -apple-system,
+    BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #0a0a0a;
@@ -51,7 +51,8 @@ html {
 
 /* Custom Animations for HomeNew */
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0, 0) scale(1);
   }
   33% {
@@ -63,7 +64,8 @@ html {
 }
 
 @keyframes float-delayed {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0, 0) scale(1);
   }
   33% {
@@ -74,10 +76,9 @@ html {
   }
 }
 
-
-
 @keyframes float-slow {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0, 0) scale(1);
   }
   50% {
@@ -86,7 +87,8 @@ html {
 }
 
 @keyframes pulse-glow {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 0 0 rgba(0, 217, 255, 0.7);
   }
   50% {
@@ -109,7 +111,8 @@ html {
 }
 
 @keyframes float-mockup {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -150,7 +153,8 @@ html {
 }
 
 @keyframes float-element {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0) rotate(0deg);
   }
   50% {
@@ -266,7 +270,8 @@ html {
 
 /* Glow animation محسن */
 @keyframes glow {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
   }
   50% {
@@ -280,7 +285,8 @@ html {
 
 /* Floating animation محسن */
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px);
   }
   50% {
@@ -294,7 +300,8 @@ html {
 
 /* Pulse animation محسن */
 @keyframes pulse-glow {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
   }
   50% {
@@ -317,7 +324,8 @@ html {
 }
 
 @keyframes gradient-shift {
-  0%, 100% {
+  0%,
+  100% {
     background-position: 0% 50%;
   }
   50% {
@@ -362,7 +370,9 @@ html {
 }
 
 /* Focus styles محسن */
-input:focus, textarea:focus, select:focus {
+input:focus,
+textarea:focus,
+select:focus {
   outline: none;
   border-color: #00d4ff;
   box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
@@ -383,13 +393,18 @@ input:focus, textarea:focus, select:focus {
 }
 
 .btn-primary::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
   transition: left 0.5s;
 }
 
@@ -404,7 +419,11 @@ input:focus, textarea:focus, select:focus {
 
 /* Card styles محسن */
 .card {
-  background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(38, 38, 38, 0.9));
+  background: linear-gradient(
+    135deg,
+    rgba(26, 26, 26, 0.9),
+    rgba(38, 38, 38, 0.9)
+  );
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
   backdrop-filter: blur(10px);
@@ -414,13 +433,17 @@ input:focus, textarea:focus, select:focus {
 }
 
 .card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(99, 102, 241, 0.1));
+  background: linear-gradient(
+    135deg,
+    rgba(0, 212, 255, 0.1),
+    rgba(99, 102, 241, 0.1)
+  );
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -445,8 +468,12 @@ input:focus, textarea:focus, select:focus {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* تحسينات الأداء */
@@ -492,7 +519,7 @@ input:focus, textarea:focus, select:focus {
     padding-left: 1rem;
     padding-right: 1rem;
   }
-  
+
   .text-responsive {
     font-size: 1.5rem;
   }
@@ -517,7 +544,7 @@ input:focus, textarea:focus, select:focus {
     cursor: auto;
     direction: ltr;
   }
-  
+
   .no-print {
     display: none;
   }
@@ -529,7 +556,7 @@ input:focus, textarea:focus, select:focus {
     background: #000;
     color: #fff;
   }
-  
+
   .card {
     border: 2px solid #fff;
   }
@@ -542,7 +569,7 @@ input:focus, textarea:focus, select:focus {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  
+
   .animate-shimmer,
   .glow-animation,
   .float-animation,
@@ -558,7 +585,7 @@ input:focus, textarea:focus, select:focus {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  
+
   .animate-shimmer,
   .glow-animation,
   .float-animation,
@@ -636,16 +663,16 @@ img {
 
 /* Arabic Font Utilities */
 .font-arabic {
-  font-family: 'Noto Sans Arabic', 'Cairo', sans-serif;
-  font-feature-settings: 'liga' on, 'calt' on;
-  -webkit-font-feature-settings: 'liga' on, 'calt' on;
+  font-family: "Noto Sans Arabic", "Cairo", sans-serif;
+  font-feature-settings: "liga" on, "calt" on;
+  -webkit-font-feature-settings: "liga" on, "calt" on;
   text-rendering: optimizeLegibility;
 }
 
 .font-coding-arabic {
-  font-family: 'Noto Sans Arabic', 'Cairo', 'JetBrains Mono', monospace;
-  font-feature-settings: 'liga' on, 'calt' on;
-  -webkit-font-feature-settings: 'liga' on, 'calt' on;
+  font-family: "Noto Sans Arabic", "Cairo", "JetBrains Mono", monospace;
+  font-feature-settings: "liga" on, "calt" on;
+  -webkit-font-feature-settings: "liga" on, "calt" on;
   text-rendering: optimizeLegibility;
   letter-spacing: 0.025em;
 }
@@ -666,9 +693,9 @@ img {
 
 /* Enhanced Arabic Typography */
 .typography-arabic {
-  font-family: 'Noto Sans Arabic', 'Cairo', sans-serif;
-  font-feature-settings: 'liga' on, 'calt' on, 'kern' on;
-  -webkit-font-feature-settings: 'liga' on, 'calt' on, 'kern' on;
+  font-family: "Noto Sans Arabic", "Cairo", sans-serif;
+  font-feature-settings: "liga" on, "calt" on, "kern" on;
+  -webkit-font-feature-settings: "liga" on, "calt" on, "kern" on;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -678,9 +705,9 @@ img {
 
 /* Headers with Arabic fonts */
 .heading-arabic {
-  font-family: 'Cairo', 'Noto Sans Arabic', sans-serif;
+  font-family: "Cairo", "Noto Sans Arabic", sans-serif;
   font-weight: 600;
-  font-feature-settings: 'liga' on, 'calt' on, 'kern' on;
+  font-feature-settings: "liga" on, "calt" on, "kern" on;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -688,9 +715,9 @@ img {
 
 /* Code blocks with Arabic support */
 .code-arabic {
-  font-family: 'Noto Sans Arabic', 'JetBrains Mono', 'Courier New', monospace;
-  font-feature-settings: 'liga' on, 'calt' on;
-  -webkit-font-feature-settings: 'liga' on, 'calt' on;
+  font-family: "Noto Sans Arabic", "JetBrains Mono", "Courier New", monospace;
+  font-feature-settings: "liga" on, "calt" on;
+  -webkit-font-feature-settings: "liga" on, "calt" on;
   text-rendering: optimizeLegibility;
   direction: ltr;
   unicode-bidi: embed;
@@ -698,8 +725,8 @@ img {
 
 /* Mixed content (Arabic + English) */
 .mixed-content {
-  font-family: 'Noto Sans Arabic', 'Cairo', 'Inter', sans-serif;
-  font-feature-settings: 'liga' on, 'calt' on;
+  font-family: "Noto Sans Arabic", "Cairo", "Inter", sans-serif;
+  font-feature-settings: "liga" on, "calt" on;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -710,7 +737,6 @@ img {
   line-height: 1.75;
   letter-spacing: 0.015em;
   word-spacing: 0.1em;
-  font-feature-settings: 'liga' on, 'calt' on, 'kern' on;
+  font-feature-settings: "liga" on, "calt" on, "kern" on;
   text-rendering: optimizeLegibility;
 }
-

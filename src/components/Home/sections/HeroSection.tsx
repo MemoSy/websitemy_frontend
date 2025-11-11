@@ -1,10 +1,18 @@
-import { Gift, Calculator, CheckCircle, Star, Rocket, TrendingUp, Shield } from "lucide-react";
-import { useTranslation } from 'react-i18next';
+import {
+  Gift,
+  Calculator,
+  CheckCircle,
+  Star,
+  Rocket,
+  TrendingUp,
+  Shield,
+} from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const HeroSection = () => {
   const { t, i18n } = useTranslation();
-  const isRTL = i18n.dir() === 'rtl';
-  
+  const isRTL = i18n.dir() === "rtl";
+
   return (
     <section
       id="home"
@@ -12,75 +20,113 @@ const HeroSection = () => {
     >
       {/* Animated Background Shapes */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className={`absolute w-[400px] h-[400px] bg-[#00D9FF] rounded-full blur-[120px] opacity-30 top-[10%] animate-float ${isRTL ? '-left-[10%]' : '-right-[10%]'}`}></div>
-        <div className={`absolute w-[500px] h-[500px] bg-[#6C5CE7] rounded-full blur-[120px] opacity-30 top-[50%] animate-float-delayed ${isRTL ? '-right-[15%]' : '-left-[15%]'}`}></div>
+        <div
+          className={`absolute w-[400px] h-[400px] bg-[#00D9FF] rounded-full blur-[120px] opacity-30 top-[10%] animate-float ${
+            isRTL ? "-left-[10%]" : "-right-[10%]"
+          }`}
+        ></div>
+        <div
+          className={`absolute w-[500px] h-[500px] bg-[#6C5CE7] rounded-full blur-[120px] opacity-30 top-[50%] animate-float-delayed ${
+            isRTL ? "-right-[15%]" : "-left-[15%]"
+          }`}
+        ></div>
         <div className="absolute w-[350px] h-[350px] bg-[#00FFA3] rounded-full blur-[120px] opacity-30 bottom-[10%] left-[30%] animate-float-slow"></div>
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Hero Text */}
-          <div className={`space-y-5 ${isRTL ? 'text-right' : 'text-left'}`}>
+          <div className={`space-y-5 ${isRTL ? "text-right" : "text-left"}`}>
             {/* Badge */}
             <div className="inline-flex max-md:mt-5 items-center gap-2 px-4 py-2 bg-[#00D9FF]/10 border border-[#00D9FF]/30 rounded-full mb-6 animate-pulse-glow">
               <span className="text-xl">🚀</span>
               <span className="text-[#00D9FF] font-semibold text-sm">
-                {t('hero.badge')}
+                {t("hero.badge")}
               </span>
             </div>
 
             {/* Main Title */}
             <h1 className="text-[17px] md:text-5xl lg:text-3xl font-extrabold text-white leading-tight mb-6">
-              {t('hero.title.part1')}{" "}
+              {t("hero.title.part1")}{" "}
               <span className="bg-gradient-to-r from-[#00D9FF] to-[#6C5CE7] bg-clip-text text-transparent">
-                {t('hero.title.highlight')}
+                {t("hero.title.highlight")}
               </span>{" "}
-              {t('hero.title.part2')}{" "}
+              {t("hero.title.part2")}{" "}
               <span className="text-[#00FFA3] text-[17px] md:text-4xl animate-number-pop inline-block">
-                {t('hero.title.percentage')}
+                {t("hero.title.percentage")}
               </span>
             </h1>
 
             {/* Subtitle */}
             <p className="text-sm md:text-xl text-[#A0AEC0] leading-relaxed md:!mb-8 !mb-6">
-              {t('hero.subtitle.main')}
+              {t("hero.subtitle.main")}
               <br />
               <span className="text-[#00D9FF] font-semibold">
-                {t('hero.subtitle.services')}
+                {t("hero.subtitle.services")}
               </span>
             </p>
 
             {/* Features List */}
             <ul className="space-y-3 !mb-8">
-              <li className={`flex items-center gap-3 text-[#A0AEC0] ${isRTL ? 'flex-row' : 'flex-row'}`}>
+              <li
+                className={`flex items-center gap-3 text-[#A0AEC0] ${
+                  isRTL ? "flex-row" : "flex-row"
+                }`}
+              >
                 <div className="w-6 h-6 rounded-full bg-gradient-to-r from-[#00D9FF] to-[#6C5CE7] flex items-center justify-center flex-shrink-0 shadow-[0_0_20px_rgba(0,217,255,0.5)]">
                   <CheckCircle className="w-4 h-4 text-white" />
                 </div>
-                <span className="text-sm md:text-base">{t('hero.features.delivery')}</span>
+                <span className="text-sm md:text-base">
+                  {t("hero.features.delivery")}
+                </span>
               </li>
-              <li className={`flex items-center gap-3 text-[#A0AEC0] ${isRTL ? 'flex-row' : 'flex-row'}`}>
+              <li
+                className={`flex items-center gap-3 text-[#A0AEC0] ${
+                  isRTL ? "flex-row" : "flex-row"
+                }`}
+              >
                 <div className="w-6 h-6 rounded-full bg-gradient-to-r from-[#00D9FF] to-[#6C5CE7] flex items-center justify-center flex-shrink-0 shadow-[0_0_20px_rgba(0,217,255,0.5)]">
                   <CheckCircle className="w-4 h-4 text-white" />
                 </div>
-                <span className="text-sm md:text-base">{t('hero.features.quality')}</span>
+                <span className="text-sm md:text-base">
+                  {t("hero.features.quality")}
+                </span>
               </li>
-              <li className={`flex items-center gap-3 text-[#A0AEC0] ${isRTL ? 'flex-row' : 'flex-row'}`}>
+              <li
+                className={`flex items-center gap-3 text-[#A0AEC0] ${
+                  isRTL ? "flex-row" : "flex-row"
+                }`}
+              >
                 <div className="w-6 h-6 rounded-full bg-gradient-to-r from-[#00D9FF] to-[#6C5CE7] flex items-center justify-center flex-shrink-0 shadow-[0_0_20px_rgba(0,217,255,0.5)]">
                   <CheckCircle className="w-4 h-4 text-white" />
                 </div>
-                <span className="text-sm md:text-base">{t('hero.features.support')}</span>
+                <span className="text-sm md:text-base">
+                  {t("hero.features.support")}
+                </span>
               </li>
             </ul>
 
             {/* CTA Buttons */}
-            <div className={`flex flex-col sm:flex-row gap-4 !mb-8 ${isRTL ? '' : 'sm:flex-row-reverse'}`}>
-              <button className={`flex items-center justify-center gap-2 bg-gradient-to-r from-[#00D9FF] to-[#6C5CE7] text-white px-8 py-4 rounded-xl text-sm md:text-base 2xl:text-lg font-semibold hover:shadow-[0_0_40px_rgba(0,217,255,0.8)] transition-all hover:-translate-y-1 ${isRTL ? 'flex-row' : 'flex-row-reverse'}`}>
+            <div
+              className={`flex flex-col sm:flex-row gap-4 !mb-8 ${
+                isRTL ? "" : "sm:flex-row-reverse"
+              }`}
+            >
+              <button
+                className={`flex items-center justify-center gap-2 bg-gradient-to-r from-[#00D9FF] to-[#6C5CE7] text-white px-8 py-4 rounded-xl text-sm md:text-base 2xl:text-lg font-semibold hover:shadow-[0_0_40px_rgba(0,217,255,0.8)] transition-all hover:-translate-y-1 ${
+                  isRTL ? "flex-row" : "flex-row-reverse"
+                }`}
+              >
                 <Gift className="w-5 h-5" />
-                <span>{t('hero.cta.consultation')}</span>
+                <span>{t("hero.cta.consultation")}</span>
               </button>
-              <button className={`flex items-center justify-center gap-2 bg-transparent border-2 border-[#00D9FF] text-[#00D9FF] px-8 py-4 rounded-xl text-sm md:text-base 2xl:text-lg font-semibold hover:bg-[#00D9FF]/10 transition-all hover:-translate-y-1 ${isRTL ? 'flex-row' : 'flex-row-reverse'}`}>
+              <button
+                className={`flex items-center justify-center gap-2 bg-transparent border-2 border-[#00D9FF] text-[#00D9FF] px-8 py-4 rounded-xl text-sm md:text-base 2xl:text-lg font-semibold hover:bg-[#00D9FF]/10 transition-all hover:-translate-y-1 ${
+                  isRTL ? "flex-row" : "flex-row-reverse"
+                }`}
+              >
                 <Calculator className="w-5 h-5" />
-                <span>{t('hero.cta.calculator')}</span>
+                <span>{t("hero.cta.calculator")}</span>
               </button>
             </div>
 
@@ -88,15 +134,15 @@ const HeroSection = () => {
             <div className="flex flex-wrap gap-6 pt-8 border-t border-white/10">
               <div className="flex items-center md:gap-2 gap-1.5 text-[#A0AEC0] md:text-sm text-xs">
                 <CheckCircle className="md:w-5 md:h-5 h-3.5 w-3.5 text-[#00FFA3]" />
-                <span>{t('hero.trust.projects')}</span>
+                <span>{t("hero.trust.projects")}</span>
               </div>
               <div className="flex items-center md:gap-2 gap-1.5 text-[#A0AEC0] md:text-sm text-xs">
                 <Star className="md:w-5 md:h-5 h-3.5 w-3.5 text-[#00FFA3]" />
-                <span>{t('hero.trust.rating')}</span>
+                <span>{t("hero.trust.rating")}</span>
               </div>
               <div className="flex items-center md:gap-2 gap-1.5 text-[#A0AEC0] md:text-sm text-xs">
                 <Shield className="md:w-5 md:h-5 h-3.5 w-3.5 text-[#00FFA3]" />
-                <span>{t('hero.trust.support')}</span>
+                <span>{t("hero.trust.support")}</span>
               </div>
             </div>
           </div>
@@ -123,11 +169,26 @@ const HeroSection = () => {
                   <div className="text-center">
                     {/* Growth Chart */}
                     <div className="flex items-end justify-center gap-3 h-48 mb-8">
-                      <div className="w-10 bg-gradient-to-t from-[#00D9FF] to-[#6C5CE7] rounded-t-lg animate-grow-bar" style={{ height: '40%' }}></div>
-                      <div className="w-10 bg-gradient-to-t from-[#00D9FF] to-[#6C5CE7] rounded-t-lg animate-grow-bar animation-delay-200" style={{ height: '55%' }}></div>
-                      <div className="w-10 bg-gradient-to-t from-[#00D9FF] to-[#6C5CE7] rounded-t-lg animate-grow-bar animation-delay-400" style={{ height: '70%' }}></div>
-                      <div className="w-10 bg-gradient-to-t from-[#00D9FF] to-[#6C5CE7] rounded-t-lg animate-grow-bar animation-delay-600" style={{ height: '85%' }}></div>
-                      <div className="w-10 bg-gradient-to-t from-[#00D9FF] to-[#6C5CE7] rounded-t-lg animate-grow-bar animation-delay-800 shadow-[0_0_20px_rgba(0,217,255,0.5)]" style={{ height: '100%' }}></div>
+                      <div
+                        className="w-10 bg-gradient-to-t from-[#00D9FF] to-[#6C5CE7] rounded-t-lg animate-grow-bar"
+                        style={{ height: "40%" }}
+                      ></div>
+                      <div
+                        className="w-10 bg-gradient-to-t from-[#00D9FF] to-[#6C5CE7] rounded-t-lg animate-grow-bar animation-delay-200"
+                        style={{ height: "55%" }}
+                      ></div>
+                      <div
+                        className="w-10 bg-gradient-to-t from-[#00D9FF] to-[#6C5CE7] rounded-t-lg animate-grow-bar animation-delay-400"
+                        style={{ height: "70%" }}
+                      ></div>
+                      <div
+                        className="w-10 bg-gradient-to-t from-[#00D9FF] to-[#6C5CE7] rounded-t-lg animate-grow-bar animation-delay-600"
+                        style={{ height: "85%" }}
+                      ></div>
+                      <div
+                        className="w-10 bg-gradient-to-t from-[#00D9FF] to-[#6C5CE7] rounded-t-lg animate-grow-bar animation-delay-800 shadow-[0_0_20px_rgba(0,217,255,0.5)]"
+                        style={{ height: "100%" }}
+                      ></div>
                     </div>
 
                     {/* Percentage */}

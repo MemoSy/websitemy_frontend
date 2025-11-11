@@ -23,41 +23,41 @@ export const aiGuardRails: AIGuardRails = {
   strictMode: true,
   maxResponseLength: 2000, // عدد الأحرف
   allowedTopics: [
-    'مشاريع',
-    'أسعار',
-    'تقنيات',
-    'مدة التطوير',
-    'دعم فني',
-    'استضافة',
-    'تصميم',
-    'برمجة',
-    'فريق العمل',
-    'خدمات',
-    'SEO',
-    'بوابات دفع'
+    "مشاريع",
+    "أسعار",
+    "تقنيات",
+    "مدة التطوير",
+    "دعم فني",
+    "استضافة",
+    "تصميم",
+    "برمجة",
+    "فريق العمل",
+    "خدمات",
+    "SEO",
+    "بوابات دفع",
   ],
   blockedTopics: [
-    'سياسة',
-    'دين',
-    'أمور شخصية',
-    'قضايا حساسة',
-    'مواضيع خارج نطاق العمل'
+    "سياسة",
+    "دين",
+    "أمور شخصية",
+    "قضايا حساسة",
+    "مواضيع خارج نطاق العمل",
   ],
   escalationTriggers: [
-    'تواصل',
-    'اتصال',
-    'رقم',
-    'مدير',
-    'مسؤول',
-    'صاحب',
-    'تحدث مع',
-    'أريد التحدث'
+    "تواصل",
+    "اتصال",
+    "رقم",
+    "مدير",
+    "مسؤول",
+    "صاحب",
+    "تحدث مع",
+    "أريد التحدث",
   ],
   contactInfo: {
-    phone: '+905313345111',
-    whatsapp: '+905313345111',
-    email: 'ahmeddalhalabi1@gmail.com'
-  }
+    phone: "+905313345111",
+    whatsapp: "+905313345111",
+    email: "ahmeddalhalabi1@gmail.com",
+  },
 };
 
 /**
@@ -110,11 +110,15 @@ ${JSON.stringify(projects.slice(0, 5), null, 2)}
 ... وأكثر من 15+ مشروع آخر
 
 ### الأسئلة الشائعة (FAQ):
-${faqData.map((faq, index) => `
+${faqData
+  .map(
+    (faq, index) => `
 ${index + 1}. السؤال: ${faq.question}
    الإجابة المختصرة: ${faq.shortAnswer}
-   الكلمات المفتاحية: ${faq.keywords.join(', ')}
-`).join('\n')}
+   الكلمات المفتاحية: ${faq.keywords.join(", ")}
+`
+  )
+  .join("\n")}
 
 ---
 
@@ -392,7 +396,9 @@ ${index + 1}. السؤال: ${faq.question}
 /**
  * دالة للتحقق من محتوى الرد قبل إرساله
  */
-export const validateAIResponse = (response: string): {
+export const validateAIResponse = (
+  response: string
+): {
   isValid: boolean;
   errors: string[];
   warnings: string[];
@@ -403,17 +409,17 @@ export const validateAIResponse = (response: string): {
 
   // التحقق من الطول
   if (response.length > 2500) {
-    warnings.push('الرد طويل جداً - يفضل اختصاره');
+    warnings.push("الرد طويل جداً - يفضل اختصاره");
   }
 
   if (response.length < 20) {
-    errors.push('الرد قصير جداً');
+    errors.push("الرد قصير جداً");
     isValid = false;
   }
 
   // التحقق من المواضيع الممنوعة
-  const blockedWords = ['سياسة', 'سياسي', 'حزب', 'انتخابات', 'دين', 'طائفة'];
-  blockedWords.forEach(word => {
+  const blockedWords = ["سياسة", "سياسي", "حزب", "انتخابات", "دين", "طائفة"];
+  blockedWords.forEach((word) => {
     if (response.toLowerCase().includes(word)) {
       errors.push(`يحتوي على كلمة ممنوعة: ${word}`);
       isValid = false;
@@ -421,8 +427,8 @@ export const validateAIResponse = (response: string): {
   });
 
   // التحقق من وجود معلومات تواصل صحيحة
-  if (response.includes('+90') && !response.includes('+905313345111')) {
-    warnings.push('رقم هاتف غير صحيح');
+  if (response.includes("+90") && !response.includes("+905313345111")) {
+    warnings.push("رقم هاتف غير صحيح");
   }
 
   return { isValid, errors, warnings };
@@ -435,22 +441,31 @@ export const trackOffTopicAttempts = (
   conversationHistory: Array<{ text: string; isUser: boolean }>
 ): number => {
   let offTopicCount = 0;
-  
-  conversationHistory.forEach(msg => {
+
+  conversationHistory.forEach((msg) => {
     if (!msg.isUser) return;
-    
+
     const offTopicKeywords = [
-      'سياسة', 'حرب', 'انتخابات', 'رئيس', 'حكومة',
-      'دين', 'مذهب', 'طائفة', 'صلاة',
-      'طقس', 'رياضة', 'كرة قدم'
+      "سياسة",
+      "حرب",
+      "انتخابات",
+      "رئيس",
+      "حكومة",
+      "دين",
+      "مذهب",
+      "طائفة",
+      "صلاة",
+      "طقس",
+      "رياضة",
+      "كرة قدم",
     ];
-    
-    offTopicKeywords.forEach(keyword => {
+
+    offTopicKeywords.forEach((keyword) => {
       if (msg.text.toLowerCase().includes(keyword)) {
         offTopicCount++;
       }
     });
   });
-  
+
   return offTopicCount;
 };

@@ -13,8 +13,10 @@ gsap.registerPlugin(ScrollTrigger);
 
 const ProjectTabs = () => {
   const { t, i18n } = useTranslation();
-  const isRTL = i18n.dir() === 'rtl';
-  const [serviceCategories, setServiceCategories] = useState(getServiceCategories());
+  const isRTL = i18n.dir() === "rtl";
+  const [serviceCategories, setServiceCategories] = useState(
+    getServiceCategories()
+  );
   const [activeTab, setActiveTab] = useState(serviceCategories[0].id);
   const projectsRef = useRef<HTMLDivElement>(null);
   const tabsRef = useRef<HTMLDivElement>(null);
@@ -110,7 +112,10 @@ const ProjectTabs = () => {
   };
 
   return (
-    <section ref={sectionRef} className="py-20 md:py-24 relative overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="py-20 md:py-24 relative overflow-hidden"
+    >
       {/* Interactive Background */}
       <div ref={backgroundRef} className="absolute inset-0">
         {/* Gradient Background */}
@@ -144,7 +149,7 @@ const ProjectTabs = () => {
         </div>
       </div>
 
-  <div className="mx-auto w-full max-w-[1288px] px-4 relative z-10 sm:px-8">
+      <div className="mx-auto w-full max-w-[1288px] px-4 relative z-10 sm:px-8">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -154,10 +159,10 @@ const ProjectTabs = () => {
           className="text-center md:mb-16 mb-8"
         >
           <h2 className="text-xl md:text-5xl font-bold text-white mb-6">
-            {t('projectTabs.title')}
+            {t("projectTabs.title")}
           </h2>
           <p className="text-xs md:text-xl text-gray-400 max-w-2xl mx-auto">
-            {t('projectTabs.subtitle')}
+            {t("projectTabs.subtitle")}
           </p>
         </motion.div>
 
@@ -208,27 +213,48 @@ const ProjectTabs = () => {
               transition={{ duration: 0.2 }}
             >
               {/* Category Header with View More Button */}
-              <div className={`flex flex-col lg:flex-row lg:items-center lg:justify-between mb-12 gap-6 mx-auto max-w-[1288px] ${isRTL ? 'lg:flex-row-reverse' : ''}`}>
+              <div
+                className={`flex flex-col lg:flex-row lg:items-center lg:justify-between mb-12 gap-6 mx-auto max-w-[1288px] ${
+                  isRTL ? "lg:flex-row-reverse" : ""
+                }`}
+              >
                 <div className="flex-1">
-                  <h3 className={`text-xl md:text-4xl font-bold text-white mb-4 text-center ${isRTL ? 'lg:text-right' : 'lg:text-left'}`}>
+                  <h3
+                    className={`text-xl md:text-4xl font-bold text-white mb-4 text-center ${
+                      isRTL ? "lg:text-right" : "lg:text-left"
+                    }`}
+                  >
                     {activeCategory.title}
                   </h3>
-                  <p className={`text-gray-400 text-xs md:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed text-center ${isRTL ? 'lg:text-right' : 'lg:text-left'}`}>
+                  <p
+                    className={`text-gray-400 text-xs md:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed text-center ${
+                      isRTL ? "lg:text-right" : "lg:text-left"
+                    }`}
+                  >
                     {activeCategory.description}
                   </p>
                 </div>
-                
+
                 {/* View More Button - Always show if there are projects */}
                 {activeCategory.projects.length > 0 && (
                   <div className="flex-shrink-0 text-center lg:text-left">
                     <Link
                       to={`/projects?category=${activeCategory.id}`}
-                      className={`inline-flex items-center justify-center gap-3 px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border-2 border-cyan-500/50 rounded-xl hover:from-cyan-500/20 hover:to-purple-500/20 hover:border-cyan-400 transition-all duration-300 text-cyan-300 hover:text-cyan-200 group transform hover:scale-105 shadow-lg hover:shadow-cyan-500/25 ${isRTL ? 'flex-row-reverse' : ''}`}
+                      className={`inline-flex items-center justify-center gap-3 px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border-2 border-cyan-500/50 rounded-xl hover:from-cyan-500/20 hover:to-purple-500/20 hover:border-cyan-400 transition-all duration-300 text-cyan-300 hover:text-cyan-200 group transform hover:scale-105 shadow-lg hover:shadow-cyan-500/25 ${
+                        isRTL ? "flex-row-reverse" : ""
+                      }`}
                     >
                       <span className="font-semibold text-base md:text-lg">
-                        {t('projectTabs.viewMore')} ({activeCategory.projects.length})
+                        {t("projectTabs.viewMore")} (
+                        {activeCategory.projects.length})
                       </span>
-                      <ArrowLeft className={`w-4 h-4 md:w-5 md:h-5 transition-transform ${isRTL ? 'rotate-180 group-hover:-translate-x-1' : 'group-hover:translate-x-1'}`} />
+                      <ArrowLeft
+                        className={`w-4 h-4 md:w-5 md:h-5 transition-transform ${
+                          isRTL
+                            ? "rotate-180 group-hover:-translate-x-1"
+                            : "group-hover:translate-x-1"
+                        }`}
+                      />
                     </Link>
                   </div>
                 )}
@@ -241,13 +267,14 @@ const ProjectTabs = () => {
                     ref={projectsRef}
                     className={`
                       mx-auto max-w-[1288px]
-                      ${featuredProjects.length === 1 
-                        ? 'grid grid-cols-1 gap-6'
-                        : featuredProjects.length === 2 
-                        ? 'grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8'
-                        : featuredProjects.length === 3
-                        ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8'
-                        : 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8'
+                      ${
+                        featuredProjects.length === 1
+                          ? "grid grid-cols-1 gap-6"
+                          : featuredProjects.length === 2
+                          ? "grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8"
+                          : featuredProjects.length === 3
+                          ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+                          : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8"
                       }
                     `}
                   >
@@ -262,7 +289,6 @@ const ProjectTabs = () => {
                   </div>
                 )}
               </div>
-
             </motion.div>
           )}
         </AnimatePresence>

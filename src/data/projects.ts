@@ -1,4 +1,4 @@
-import i18n from '../i18n';
+import i18n from "../i18n";
 import { Project, ServiceCategory } from "../types";
 
 export const projects: Project[] = [
@@ -32,7 +32,6 @@ export const projects: Project[] = [
       clientFeedback: "تجربة ممتازة وزيادة في المبيعات بنسبة 40%",
     },
     reviews: [
-
       {
         id: "2",
         author: "فاطمة علي",
@@ -42,7 +41,6 @@ export const projects: Project[] = [
           "تجربة مستخدم رائعة، سهولة في الاستخدام وتصميم جذاب. أنصح بالتعامل مع هذا الفريق.",
         date: "2024-01-10",
       },
-
     ],
     liveUrl: "https://www.shapeshop.store/",
     githubUrl: "https://www.shapeshop.store",
@@ -59,12 +57,12 @@ export const projects: Project[] = [
       "تطوير واجهة برمجة تطبيقات قابلة للتوسع",
     ],
     features: [
-        "واجهة مستخدم احترافية  ",
-        "اضافة منتخ بسعر مخفض   ",
-        "لوحة تحكم متقدمة جدا",
-        "نظام تبديل الاستايلات",
-        "نظام تقييم المنتجات",
-        "نظام تعليقات دون تسجيل",
+      "واجهة مستخدم احترافية  ",
+      "اضافة منتخ بسعر مخفض   ",
+      "لوحة تحكم متقدمة جدا",
+      "نظام تبديل الاستايلات",
+      "نظام تقييم المنتجات",
+      "نظام تعليقات دون تسجيل",
     ],
   },
 
@@ -75,8 +73,7 @@ export const projects: Project[] = [
       "Modern tasarıma ve olağanüstü kullanıcı deneyimine sahip, gelişmiş .",
     fullDescription:
       "Bu çevrimiçi mağaza, sorunsuz ve tatmin edici bir alışveriş deneyimi sağlamak için en son teknolojiler kullanılarak geliştirildi. Sağlam bir içerik yönetim sistemi, akıllı bir sistem ve gelişmiş satış analitiği içerir. Proje, modern ve kullanımı kolay bir kullanıcı arayüzüne sahip kapsamlı bir e-ticaret platformu ve gelişmiş bir ürün ve sipariş yönetim sistemi sağlamayı amaçlamaktadır.",
-    image:
-      "/images/projects/local/project-artwin-screenshot.webp",
+    image: "/images/projects/local/project-artwin-screenshot.webp",
     youtubeVideo: "https://www.youtube.com/embed/LtP5HDSfcmw",
     category: "ecommerce",
     technologies: ["nextjs", "MongoDB", "TailwindCSS", "typescript"],
@@ -142,27 +139,50 @@ export const projects: Project[] = [
     ],
   },
 
-
-
-
   {
-  id: "websitemy-portfolio",
-  title: "موقع WebSiteMy الرسمي",
-  description: "موقع شركة تطوير المواقع الإلكترونية - معرض إنجازات تقنية احترافي",
-  fullDescription:
-    "تم تطوير الموقع الرسمي لشركة WebSiteMy باستخدام أحدث التقنيات لعرض خدمات الشركة ومشاريعها بطريقة احترافية. يتضمن الموقع مساعد ذكي متطور، معرض تفاعلي للمشاريع، ونظام إدارة محتوى متقدم. المشروع يهدف إلى توفير تجربة مستخدم استثنائية مع واجهة حديثة وسهلة الاستخدام، بالإضافة إلى تحسين محركات البحث للوصول لأكبر عدد من العملاء المحتملين.",
-  image: "https://www.websitemy.com/images/logo.png",
-  youtubeVideo: "https://www.youtube.com/embed/7CkTvbUweG0",
-  category: "saas",
-  technologies: ["react", "nestjs", "MongoDB", "TailwindCSS", "typescript"],
-  duration: "شهرين ",
-  rating: 4.8,
-  aiData: {
-    price: "600$",
-    clientType: "موقع شركة تطوير مواقع إلكترونية",
-    complexity: "متوسط",
-    teamSize: "2 مطورين",
-    keyFeatures: [
+    id: "websitemy-portfolio",
+    title: "موقع WebSiteMy الرسمي",
+    description:
+      "موقع شركة تطوير المواقع الإلكترونية - معرض إنجازات تقنية احترافي",
+    fullDescription:
+      "تم تطوير الموقع الرسمي لشركة WebSiteMy باستخدام أحدث التقنيات لعرض خدمات الشركة ومشاريعها بطريقة احترافية. يتضمن الموقع مساعد ذكي متطور، معرض تفاعلي للمشاريع، ونظام إدارة محتوى متقدم. المشروع يهدف إلى توفير تجربة مستخدم استثنائية مع واجهة حديثة وسهلة الاستخدام، بالإضافة إلى تحسين محركات البحث للوصول لأكبر عدد من العملاء المحتملين.",
+    image: "https://www.websitemy.com/images/logo.png",
+    youtubeVideo: "https://www.youtube.com/embed/7CkTvbUweG0",
+    category: "saas",
+    technologies: ["react", "nestjs", "MongoDB", "TailwindCSS", "typescript"],
+    duration: "شهرين ",
+    rating: 4.8,
+    aiData: {
+      price: "600$",
+      clientType: "موقع شركة تطوير مواقع إلكترونية",
+      complexity: "متوسط",
+      teamSize: "2 مطورين",
+      keyFeatures: [
+        "مساعد ذكي متطور بتقنية الذكاء الاصطناعي",
+        "معرض تفاعلي لعرض المشاريع والإنجازات",
+        "نظام إدارة محتوى متقدم ولوحة تحكم",
+        "تصميم متجاوب مع جميع أحجام الشاشات",
+        "تحسين محركات البحث (SEO) المتقدم",
+        "نظام تقييمات وآراء العملاء",
+      ],
+      clientFeedback: "تحسين الوصول للعملاء بنسبة 85% وزيادة الطلبات بنسبة 60%",
+    },
+    reviews: [],
+    liveUrl: "https://www.websitemy.com",
+    githubUrl: "https://github.com/MemoSy",
+    objectives: [
+      "تطوير موقع احترافي يعكس هوية الشركة التقنية",
+      "عرض المشاريع والخدمات بطريقة تفاعلية وجذابة",
+      "تطبيق مساعد ذكي لتحسين تجربة العملاء",
+      "تحسين الوصول والظهور في محركات البحث",
+    ],
+    challenges: [
+      "تطوير مساعد ذكي يفهم السياق ويقدم إجابات دقيقة",
+      "تصميم واجهة مستخدم احترافية تعكس هوية الشركة",
+      "تطبيق نظام إدارة محتوى مرن وقابل للتوسع",
+      "ضمان الأداء العالي وسرعة التحميل",
+    ],
+    features: [
       "مساعد ذكي متطور بتقنية الذكاء الاصطناعي",
       "معرض تفاعلي لعرض المشاريع والإنجازات",
       "نظام إدارة محتوى متقدم ولوحة تحكم",
@@ -170,35 +190,7 @@ export const projects: Project[] = [
       "تحسين محركات البحث (SEO) المتقدم",
       "نظام تقييمات وآراء العملاء",
     ],
-    clientFeedback:
-      "تحسين الوصول للعملاء بنسبة 85% وزيادة الطلبات بنسبة 60%",
   },
-  reviews: [
-
-  ],
-  liveUrl: "https://www.websitemy.com",
-  githubUrl: "https://github.com/MemoSy",
-  objectives: [
-    "تطوير موقع احترافي يعكس هوية الشركة التقنية",
-    "عرض المشاريع والخدمات بطريقة تفاعلية وجذابة",
-    "تطبيق مساعد ذكي لتحسين تجربة العملاء",
-    "تحسين الوصول والظهور في محركات البحث",
-  ],
-  challenges: [
-    "تطوير مساعد ذكي يفهم السياق ويقدم إجابات دقيقة",
-    "تصميم واجهة مستخدم احترافية تعكس هوية الشركة",
-    "تطبيق نظام إدارة محتوى مرن وقابل للتوسع",
-    "ضمان الأداء العالي وسرعة التحميل",
-  ],
-  features: [
-    "مساعد ذكي متطور بتقنية الذكاء الاصطناعي",
-    "معرض تفاعلي لعرض المشاريع والإنجازات",
-    "نظام إدارة محتوى متقدم ولوحة تحكم",
-    "تصميم متجاوب مع جميع أحجام الشاشات",
-    "تحسين محركات البحث (SEO) المتقدم",
-    "نظام تقييمات وآراء العملاء",
-  ],
-},
 
   {
     id: "pro-camz",
@@ -239,7 +231,6 @@ export const projects: Project[] = [
           "موقع رائع جداً، التصميم احترافي والأداء ممتاز. تجربة التسوق سلسة ومريحة جداً.",
         date: "2024-01-15",
       },
-
     ],
     liveUrl: "https://camera-shop-teal.vercel.app/ar",
     githubUrl: "https://camera-shop-teal.vercel.app/ar",
@@ -323,15 +314,13 @@ export const projects: Project[] = [
     description: "ذاكرة الشهداء - مشروع من القلب إلى القلب",
     fullDescription:
       "موقع ويب مخصص لحفظ ذكريات وقصص شهدائنا الأبطال، حيث يمكن لأي شخص مشاركة قصة شهيد عزيز عليه والاحتفاظ بذكراه للأبد.",
-    image:
-      "/images/projects/local/project-youtube.webp",
+    image: "/images/projects/local/project-youtube.webp",
     youtubeVideo: "https://www.youtube.com/embed/yQmvvSDn8lM",
     category: "service",
     technologies: ["nextjs", "nestjs", "mongodb", "tailwindcss", "typescript"],
     duration: "3 اسابيع",
     rating: 4.6,
     reviews: [
-   
       {
         id: "5",
         author: "نورا أحمد",
@@ -420,7 +409,6 @@ export const projects: Project[] = [
           "تطبيق مميز مع أمان عالي وتجربة رائعة. الخصوصية محمية بشكل ممتاز.",
         date: "2024-01-30",
       },
-
     ],
     liveUrl: "https://codelam.site",
     githubUrl: "https://codelam.site",
@@ -437,11 +425,11 @@ export const projects: Project[] = [
       "تطوير واجهة برمجة تطبيقات قابلة للتوسع",
     ],
     features: [
-        "الصفحة الرئيسية التفاعلية بموجز ذكي للمقالات والمنشورات والأخبار في الوقت الفعلي ",
-        "صفحة مشاريع البرمجة لتبادل وحل مشكلات الترميز مع المجتمع ",
-        "متعدد لللغات ، نظام الالوان ، نظام التقييم",
-        "صفحة المتجر لاستبدال النقاط بأشياء رائعة (قيد الإنشاء) ",
-        "صفحة الملف الشخصي لعرض درجاتك وتصنيفاتك واتصالاتك وأصدقائك وكل نشاطك في مكان واحد ",
+      "الصفحة الرئيسية التفاعلية بموجز ذكي للمقالات والمنشورات والأخبار في الوقت الفعلي ",
+      "صفحة مشاريع البرمجة لتبادل وحل مشكلات الترميز مع المجتمع ",
+      "متعدد لللغات ، نظام الالوان ، نظام التقييم",
+      "صفحة المتجر لاستبدال النقاط بأشياء رائعة (قيد الإنشاء) ",
+      "صفحة الملف الشخصي لعرض درجاتك وتصنيفاتك واتصالاتك وأصدقائك وكل نشاطك في مكان واحد ",
     ],
   },
   {
@@ -494,11 +482,11 @@ export const projects: Project[] = [
       "تطوير واجهة برمجة تطبيقات قابلة للتوسع",
     ],
     features: [
-        "نظام تقديم الشكاوى التفاعلي",
-        "تتبع حالة الشكوى في الوقت الفعلي",
-        "لوحة تحكم للجهات المعنية",
-        "إشعارات فورية",
-        "تصنيف الشكاوى حسب النوع والمنطقة",
+      "نظام تقديم الشكاوى التفاعلي",
+      "تتبع حالة الشكوى في الوقت الفعلي",
+      "لوحة تحكم للجهات المعنية",
+      "إشعارات فورية",
+      "تصنيف الشكاوى حسب النوع والمنطقة",
     ],
   },
   {
@@ -507,8 +495,7 @@ export const projects: Project[] = [
     description: "منصة إعلامية اخبارية",
     fullDescription:
       "منصة إعلامية متطورة تهدف لدعم التحول الرقمي في سوريا. تتميز بتصميم استثنائي وواجهة متجاوبة مع جميع أحجام الشاشات، وتقدم محتوى إعلامي هادف عبر مقالات وصور وفيديوهات وبودكاست.",
-    image:
-      "/images/projects/local/project-sara.webp",
+    image: "/images/projects/local/project-sara.webp",
     youtubeVideo: "https://www.youtube.com/embed/Hlw4cJAAqGk",
     category: "news",
     technologies: ["nextjs", "TypeScript", "Tailwind CSS", "mongodb"],
@@ -546,12 +533,12 @@ export const projects: Project[] = [
       "تطوير واجهة برمجة تطبيقات قابلة للتوسع",
     ],
     features: [
-        "نظام ادارة محتوى متقدم",
-        "دعم مرئيات متكامل",
-        "لوحة تحكم سهلة ",
-        "نظام تعليقات بدون تسجيل دخول",
-        "مشاركة المقالات على منصات التواصل الاجتماعي",
-        "تحسين محركات البحث (SEO)",
+      "نظام ادارة محتوى متقدم",
+      "دعم مرئيات متكامل",
+      "لوحة تحكم سهلة ",
+      "نظام تعليقات بدون تسجيل دخول",
+      "مشاركة المقالات على منصات التواصل الاجتماعي",
+      "تحسين محركات البحث (SEO)",
     ],
   },
 
@@ -561,8 +548,7 @@ export const projects: Project[] = [
     description: "منصة إعلامية اخبارية ",
     fullDescription:
       "منصة إعلامية متطورة تهدف لدعم التحول الرقمي في سوريا. تتميز بتصميم استثنائي وواجهة متجاوبة مع جميع أحجام الشاشات، وتقدم محتوى إعلامي هادف عبر مقالات وصور وفيديوهات وبودكاست.",
-    image:
-      "/images/projects/local/project-sara-2.webp",
+    image: "/images/projects/local/project-sara-2.webp",
     youtubeVideo: "https://www.youtube.com/embed/Hlw4cJAAqGk",
     category: "opensource",
     technologies: ["nextjs", "TypeScript", "Tailwind CSS", "mongodb"],
@@ -599,11 +585,11 @@ export const projects: Project[] = [
       "تطوير واجهة برمجة تطبيقات قابلة للتوسع",
     ],
     features: [
-        "نظام ادارة محتوى متقدم",
-        "دعم مرئيات متكامل",
-        "لوحة تحكم سهلة ",
-        "نظام تعليقات بدون تسجيل دخول",
-        "مشاركة المقالات على منصات التواصل الاجتماعي",
+      "نظام ادارة محتوى متقدم",
+      "دعم مرئيات متكامل",
+      "لوحة تحكم سهلة ",
+      "نظام تعليقات بدون تسجيل دخول",
+      "مشاركة المقالات على منصات التواصل الاجتماعي",
     ],
   },
 
@@ -621,9 +607,7 @@ export const projects: Project[] = [
     technologies: ["Next.js", "Prisma", "Vercel", "TypeScript", "Tailwind"],
     duration: "شهرين",
     rating: 4.8,
-    reviews: [
-
-    ],
+    reviews: [],
     aiData: {
       price: "999$",
       clientType: " منصة رعاية صحية ذكية ",
@@ -664,54 +648,54 @@ export const projects: Project[] = [
 // Function to get translated service categories
 export const getServiceCategories = (): ServiceCategory[] => {
   const t = i18n.t.bind(i18n);
-  
+
   return [
     {
       id: "opensource",
-      title: t('projectTabs.categories.opensource.title'),
+      title: t("projectTabs.categories.opensource.title"),
       subtitle: "كود يلهم العالم",
       icon: "",
-      description: t('projectTabs.categories.opensource.description'),
+      description: t("projectTabs.categories.opensource.description"),
       projects: projects.filter((p) => p.category === "opensource"),
     },
     {
       id: "ecommerce",
-      title: t('projectTabs.categories.ecommerce.title'),
+      title: t("projectTabs.categories.ecommerce.title"),
       subtitle: "منصات تجارية تحقق الأرباح",
       icon: "🛒",
-      description: t('projectTabs.categories.ecommerce.description'),
+      description: t("projectTabs.categories.ecommerce.description"),
       projects: projects.filter((p) => p.category === "ecommerce"),
     },
     {
       id: "social",
-      title: t('projectTabs.categories.social.title'),
+      title: t("projectTabs.categories.social.title"),
       subtitle: "ربط العالم بالابتكار",
       icon: "🌐",
-      description: t('projectTabs.categories.social.description'),
+      description: t("projectTabs.categories.social.description"),
       projects: projects.filter((p) => p.category === "social"),
     },
     {
       id: "saas",
-      title: t('projectTabs.categories.saas.title'),
+      title: t("projectTabs.categories.saas.title"),
       subtitle: "حلول متقدمة",
       icon: "💰",
-      description: t('projectTabs.categories.saas.description'),
+      description: t("projectTabs.categories.saas.description"),
       projects: projects.filter((p) => p.category === "saas"),
     },
     {
       id: "news",
-      title: t('projectTabs.categories.news.title'),
+      title: t("projectTabs.categories.news.title"),
       subtitle: "اخبار و مقالات ",
       icon: "📰",
-      description: t('projectTabs.categories.news.description'),
+      description: t("projectTabs.categories.news.description"),
       projects: projects.filter((p) => p.category === "news"),
     },
     {
       id: "service",
-      title: t('projectTabs.categories.service.title'),
+      title: t("projectTabs.categories.service.title"),
       subtitle: "خدمي",
       icon: "💚",
-      description: t('projectTabs.categories.service.description'),
+      description: t("projectTabs.categories.service.description"),
       projects: projects.filter((p) => p.category === "service"),
     },
   ];

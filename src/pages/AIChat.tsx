@@ -4,11 +4,11 @@ import { Send, Bot, User, Loader2, Brain } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { useTranslation } from "react-i18next";
 import { callChatGPT, generateKnowledgeBase } from "../utils/aiUtils";
-import { 
-  generateSessionId, 
-  saveChatSession, 
-  updateChatSession, 
-  ChatMessage 
+import {
+  generateSessionId,
+  saveChatSession,
+  updateChatSession,
+  ChatMessage,
 } from "../utils/chatService";
 import { getCachedUserLocation, LocationData } from "../utils/locationService";
 
@@ -21,15 +21,15 @@ interface Message {
 
 const AIChat = () => {
   const { t, i18n } = useTranslation();
-  const isRTL = i18n.dir() === 'rtl';
-  
+  const isRTL = i18n.dir() === "rtl";
+
   const [sessionId] = useState<string>(() => generateSessionId());
   const [userLocation, setUserLocation] = useState<LocationData | null>(null);
-  const [currentContext, setCurrentContext] = useState<string>(''); // لحفظ السياق الحالي
+  const [currentContext, setCurrentContext] = useState<string>(""); // لحفظ السياق الحالي
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
-      text: t('aiChat.welcomeMessage'),
+      text: t("aiChat.welcomeMessage"),
       isUser: false,
       timestamp: new Date(),
     },
@@ -46,9 +46,9 @@ const AIChat = () => {
         const location = await getCachedUserLocation();
         setUserLocation(location);
       } catch (error) {
-        console.error('Error getting user location:', error);
+        console.error("Error getting user location:", error);
         // Set default location if geolocation fails
-        setUserLocation({ country: 'Unknown', city: 'Unknown' });
+        setUserLocation({ country: "Unknown", city: "Unknown" });
       }
     };
 
@@ -59,30 +59,50 @@ const AIChat = () => {
   const updateCurrentContext = (userMessage: string) => {
     const message = userMessage.toLowerCase();
     let newContext = currentContext;
-    
-    if (message.includes('أخبار') || message.includes('إعلام') || message.includes('صحافة')) {
-      newContext = 'news';
-    } else if (message.includes('متجر') || message.includes('تجارة') || message.includes('متجر إلكتروني')) {
-      newContext = 'ecommerce';
-    } else if (message.includes('تعليم') || message.includes('منصة تعليمية') || message.includes('دورات')) {
-      newContext = 'education';
-    } else if (message.includes('شخصي') || message.includes('بروفايل') || message.includes('سيرة ذاتية')) {
-      newContext = 'personal';
-    } else if (message.includes('اجتماعي') || message.includes('شبكة اجتماعية')) {
-      newContext = 'social';
+
+    if (
+      message.includes("أخبار") ||
+      message.includes("إعلام") ||
+      message.includes("صحافة")
+    ) {
+      newContext = "news";
+    } else if (
+      message.includes("متجر") ||
+      message.includes("تجارة") ||
+      message.includes("متجر إلكتروني")
+    ) {
+      newContext = "ecommerce";
+    } else if (
+      message.includes("تعليم") ||
+      message.includes("منصة تعليمية") ||
+      message.includes("دورات")
+    ) {
+      newContext = "education";
+    } else if (
+      message.includes("شخصي") ||
+      message.includes("بروفايل") ||
+      message.includes("سيرة ذاتية")
+    ) {
+      newContext = "personal";
+    } else if (
+      message.includes("اجتماعي") ||
+      message.includes("شبكة اجتماعية")
+    ) {
+      newContext = "social";
     }
-    
+
     if (newContext !== currentContext) {
       setCurrentContext(newContext);
     }
-    
+
     return newContext;
   };
 
   // Save chat to database when messages change (but not on first load)
   useEffect(() => {
     const saveChat = async () => {
-      if (messages.length > 1 && userLocation) { // Only save if there are more than just the initial message and location is available
+      if (messages.length > 1 && userLocation) {
+        // Only save if there are more than just the initial message and location is available
         if (!isChatSaved) {
           // First time saving this chat session
           await saveChatSession({
@@ -122,15 +142,15 @@ const AIChat = () => {
     // تحضير تاريخ المحادثة للذكاء الاصطناعي (نستثني الرسالة الترحيبية الأولى)
     const conversationHistory = messages
       .slice(1) // نتجاهل الرسالة الترحيبية الأولى
-      .map(msg => ({
+      .map((msg) => ({
         text: msg.text,
-        isUser: msg.isUser
+        isUser: msg.isUser,
       }));
 
     // إضافة الرسالة الحالية للتاريخ
     conversationHistory.push({
       text: inputText,
-      isUser: true
+      isUser: true,
     });
 
     const aiResponseText = await callChatGPT(
@@ -140,7 +160,7 @@ const AIChat = () => {
     );
     const aiResponse: Message = {
       id: (Date.now() + 1).toString(),
-      text: aiResponseText || t('aiChat.errorMessage'),
+      text: aiResponseText || t("aiChat.errorMessage"),
       isUser: false,
       timestamp: new Date(),
     };
@@ -181,28 +201,39 @@ const AIChat = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-4 sm:mb-6 flex-shrink-0"
         >
-          <div className={`flex items-center justify-center gap-2 sm:gap-3 ${isRTL ? 'space-x-reverse' : ''} mb-2 sm:mb-3`}>
+          <div
+            className={`flex items-center justify-center gap-2 sm:gap-3 ${
+              isRTL ? "space-x-reverse" : ""
+            } mb-2 sm:mb-3`}
+          >
             <div className="w-10 h-10 sm:w-16 sm:h-16 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-2xl flex items-center justify-center">
               <Brain className="w-5 h-5 sm:w-8 sm:h-8 text-white" />
             </div>
-            <div className={isRTL ? 'text-right' : 'text-left'}>
+            <div className={isRTL ? "text-right" : "text-left"}>
               <h1 className="text-xl sm:text-3xl md:text-4xl font-bold text-white">
-                {t('aiChat.title')}
+                {t("aiChat.title")}
               </h1>
-              <p className="text-cyan-400 text-xs sm:text-base">{t('aiChat.subtitle')}</p>
+              <p className="text-cyan-400 text-xs sm:text-base">
+                {t("aiChat.subtitle")}
+              </p>
             </div>
           </div>
-          <p className={`text-gray-400 max-w-2xl mx-auto text-xs sm:text-base px-2 ${isRTL ? 'text-right' : 'text-left'}`}>
-            {t('aiChat.description')}
+          <p
+            className={`text-gray-400 max-w-2xl mx-auto text-xs sm:text-base px-2 ${
+              isRTL ? "text-right" : "text-left"
+            }`}
+          >
+            {t("aiChat.description")}
           </p>
           {isChatSaved && (
             <p className="text-green-400 text-xs mt-2 opacity-75">
-              💾 {t('aiChat.chatSaved')}
+              💾 {t("aiChat.chatSaved")}
             </p>
           )}
           {currentContext && (
             <p className="text-blue-400 text-xs mt-1 opacity-75">
-              🧠 {t('aiChat.currentContext')}: {t(`aiChat.contexts.${currentContext}`, currentContext)}
+              🧠 {t("aiChat.currentContext")}:{" "}
+              {t(`aiChat.contexts.${currentContext}`, currentContext)}
             </p>
           )}
         </motion.div>
@@ -256,22 +287,34 @@ const AIChat = () => {
                         <ReactMarkdown
                           components={{
                             p: ({ children }) => (
-                              <p className="text-sm sm:text-base mb-2 last:mb-0 leading-relaxed">{children}</p>
+                              <p className="text-sm sm:text-base mb-2 last:mb-0 leading-relaxed">
+                                {children}
+                              </p>
                             ),
                             strong: ({ children }) => (
-                              <strong className="font-bold text-cyan-400">{children}</strong>
+                              <strong className="font-bold text-cyan-400">
+                                {children}
+                              </strong>
                             ),
                             em: ({ children }) => (
-                              <em className="italic text-gray-300">{children}</em>
+                              <em className="italic text-gray-300">
+                                {children}
+                              </em>
                             ),
                             ul: ({ children }) => (
-                              <ul className="list-disc list-inside my-2 space-y-1.5">{children}</ul>
+                              <ul className="list-disc list-inside my-2 space-y-1.5">
+                                {children}
+                              </ul>
                             ),
                             ol: ({ children }) => (
-                              <ol className="list-decimal list-inside my-2 space-y-1.5">{children}</ol>
+                              <ol className="list-decimal list-inside my-2 space-y-1.5">
+                                {children}
+                              </ol>
                             ),
                             li: ({ children }) => (
-                              <li className="text-sm sm:text-base leading-relaxed">{children}</li>
+                              <li className="text-sm sm:text-base leading-relaxed">
+                                {children}
+                              </li>
                             ),
                             code: ({ children }) => (
                               <code className="bg-gray-900 px-1.5 py-0.5 rounded text-cyan-400 text-xs sm:text-sm">
@@ -317,9 +360,15 @@ const AIChat = () => {
                     <Bot className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" />
                   </div>
                   <div className="bg-gray-800 text-gray-100 border border-gray-700 rounded-2xl px-3 py-2.5 sm:px-4 sm:py-3">
-                    <div className={`flex items-center ${isRTL ? 'space-x-reverse' : ''} space-x-2`}>
+                    <div
+                      className={`flex items-center ${
+                        isRTL ? "space-x-reverse" : ""
+                      } space-x-2`}
+                    >
                       <Loader2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 animate-spin" />
-                      <span className="text-sm sm:text-base">{t('aiChat.typing')}</span>
+                      <span className="text-sm sm:text-base">
+                        {t("aiChat.typing")}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -330,7 +379,11 @@ const AIChat = () => {
 
           {/* Input */}
           <div className="border-t border-gray-700 p-3 sm:p-4 flex-shrink-0">
-            <div className={`flex items-start gap-2 sm:gap-3 ${isRTL ? 'space-x-reverse' : ''} space-x-2 sm:space-x-3`}>
+            <div
+              className={`flex items-start gap-2 sm:gap-3 ${
+                isRTL ? "space-x-reverse" : ""
+              } space-x-2 sm:space-x-3`}
+            >
               <button
                 onClick={handleSendMessage}
                 disabled={!inputText.trim() || isLoading}
@@ -343,8 +396,10 @@ const AIChat = () => {
                   value={inputText}
                   onChange={(e) => setInputText(e.target.value)}
                   onKeyPress={handleKeyPress}
-                  placeholder={t('aiChat.inputPlaceholder')}
-                  className={`w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-2.5 sm:px-4 sm:py-3 text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-500 focus:border-transparent resize-none max-h-32 text-sm sm:text-base leading-relaxed ${isRTL ? 'text-right' : 'text-left'}`}
+                  placeholder={t("aiChat.inputPlaceholder")}
+                  className={`w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-2.5 sm:px-4 sm:py-3 text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-500 focus:border-transparent resize-none max-h-32 text-sm sm:text-base leading-relaxed ${
+                    isRTL ? "text-right" : "text-left"
+                  }`}
                   rows={1}
                 />
               </div>
@@ -359,22 +414,27 @@ const AIChat = () => {
           transition={{ delay: 0.4 }}
           className="mt-3 sm:mt-6 flex-shrink-0"
         >
-          <p className={`text-gray-400 text-center mb-2 sm:mb-3 text-xs sm:text-base ${isRTL ? 'text-right' : 'text-left'}`}>
-            {t('aiChat.quickQuestions.title')}
+          <p
+            className={`text-gray-400 text-center mb-2 sm:mb-3 text-xs sm:text-base ${
+              isRTL ? "text-right" : "text-left"
+            }`}
+          >
+            {t("aiChat.quickQuestions.title")}
           </p>
           <div className="grid grid-cols-2 gap-2 sm:gap-3">
-            {[
-              t('aiChat.quickQuestions.q1'),
-              t('aiChat.quickQuestions.q2'),
-            ].map((question, index) => (
-              <button
-                key={index}
-                onClick={() => setInputText(question)}
-                className={`bg-gray-800 hover:bg-gray-700 border border-gray-700 hover:border-cyan-500/50 rounded-xl px-3 py-2.5 sm:px-4 sm:py-3 text-gray-300 hover:text-cyan-300 transition-all text-xs sm:text-sm font-medium ${isRTL ? 'text-right' : 'text-left'}`}
-              >
-                {question}
-              </button>
-            ))}
+            {[t("aiChat.quickQuestions.q1"), t("aiChat.quickQuestions.q2")].map(
+              (question, index) => (
+                <button
+                  key={index}
+                  onClick={() => setInputText(question)}
+                  className={`bg-gray-800 hover:bg-gray-700 border border-gray-700 hover:border-cyan-500/50 rounded-xl px-3 py-2.5 sm:px-4 sm:py-3 text-gray-300 hover:text-cyan-300 transition-all text-xs sm:text-sm font-medium ${
+                    isRTL ? "text-right" : "text-left"
+                  }`}
+                >
+                  {question}
+                </button>
+              )
+            )}
           </div>
         </motion.div>
       </div>

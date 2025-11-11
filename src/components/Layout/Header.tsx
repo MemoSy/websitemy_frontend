@@ -1,14 +1,23 @@
-import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Home, Briefcase, Phone, FileText, ChevronDown, Brain } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { serviceCategories } from '../../data/projects';
-import LanguageSwitcher from '../UI/LanguageSwitcher';
-import { useTranslation } from 'react-i18next';
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import {
+  Menu,
+  X,
+  Home,
+  Briefcase,
+  Phone,
+  FileText,
+  ChevronDown,
+  Brain,
+} from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { serviceCategories } from "../../data/projects";
+import LanguageSwitcher from "../UI/LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
   const { t, i18n } = useTranslation();
-  const isRTL = i18n.dir() === 'rtl';
+  const isRTL = i18n.dir() === "rtl";
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProjectsDropdownOpen, setIsProjectsDropdownOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -19,61 +28,63 @@ const Header = () => {
       setIsScrolled(window.scrollY > 50);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Get translated service categories
   const getTranslatedCategories = () => {
-    const translatedCats = t('projectTabs.categories', { returnObjects: true }) as any;
+    const translatedCats = t("projectTabs.categories", {
+      returnObjects: true,
+    }) as any;
     return serviceCategories.map((category, index) => {
       const categoryKeys = Object.keys(translatedCats);
       const translatedCategory = translatedCats[categoryKeys[index]];
       return {
         path: `/projects?category=${category.id}`,
         label: translatedCategory?.title || category.title,
-        icon: category.icon
+        icon: category.icon,
       };
     });
   };
 
   const navItems = [
-    { path: '/', label: t('header.nav.home'), icon: Home },
-    { 
-      path: '/projects', 
-      label: t('header.nav.projects'), 
+    { path: "/", label: t("header.nav.home"), icon: Home },
+    {
+      path: "/projects",
+      label: t("header.nav.projects"),
       icon: Briefcase,
       hasDropdown: true,
-      dropdownItems: getTranslatedCategories()
+      dropdownItems: getTranslatedCategories(),
     },
-    { path: '/about', label: t('header.nav.about'), icon: FileText },
-    { path: '/contact', label: t('header.nav.contact'), icon: Phone },
-    { path: '/ai-chat', label: t('header.nav.aiChat'), icon: Brain }
+    { path: "/about", label: t("header.nav.about"), icon: FileText },
+    { path: "/contact", label: t("header.nav.contact"), icon: Phone },
+    { path: "/ai-chat", label: t("header.nav.aiChat"), icon: Brain },
   ];
 
   return (
-  <motion.header
+    <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.8 }}
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-black/80 backdrop-blur-xl border-b border-cyan-500/20' 
-          : 'bg-transparent'
+        isScrolled
+          ? "bg-black/80 backdrop-blur-xl border-b border-cyan-500/20"
+          : "bg-transparent"
       }`}
     >
       <div className="mx-auto w-full max-w-[1288px] px-4 py-4 sm:px-8">
         <nav className="flex items-center justify-between">
           {/* RTL: الرئيسية (يمين) | الشعار (يسار) */}
           {/* LTR: HOME (يسار) | الشعار (يمين) */}
-          
+
           {isRTL ? (
             <>
               {/* Desktop Navigation - Right Side (Arabic) */}
               <div className="hidden md:flex items-center gap-4">
                 {navItems.map((item) => {
                   const Icon = item.icon;
-                  
+
                   if (item.hasDropdown) {
                     return (
                       <div
@@ -85,16 +96,21 @@ const Header = () => {
                         <Link
                           to={item.path}
                           className={`flex items-center flex-row-reverse gap-2 px-4 py-2 rounded-lg transition-all duration-300 group ${
-                            location.pathname === item.path || location.pathname.startsWith('/project')
-                              ? 'text-cyan-300 bg-cyan-500/10 border border-cyan-500/30'
-                              : 'text-gray-300 hover:text-cyan-300 hover:bg-cyan-500/5'
+                            location.pathname === item.path ||
+                            location.pathname.startsWith("/project")
+                              ? "text-cyan-300 bg-cyan-500/10 border border-cyan-500/30"
+                              : "text-gray-300 hover:text-cyan-300 hover:bg-cyan-500/5"
                           }`}
                         >
                           <Icon className="w-4 h-4" />
                           <span className="font-medium">{item.label}</span>
-                          <ChevronDown className={`w-4 h-4 transition-transform ${isProjectsDropdownOpen ? 'rotate-180' : ''}`} />
+                          <ChevronDown
+                            className={`w-4 h-4 transition-transform ${
+                              isProjectsDropdownOpen ? "rotate-180" : ""
+                            }`}
+                          />
                         </Link>
-                        
+
                         {/* Dropdown Menu */}
                         <AnimatePresence>
                           {isProjectsDropdownOpen && (
@@ -111,7 +127,7 @@ const Header = () => {
                                   className="flex items-center flex-row-reverse gap-3 px-4 py-3 rounded-lg hover:bg-cyan-500/10 transition-all text-right text-gray-300 hover:text-cyan-300"
                                 >
                                   <Briefcase className="w-4 h-4" />
-                                  <span>{t('header.nav.allProjects')}</span>
+                                  <span>{t("header.nav.allProjects")}</span>
                                 </Link>
                                 <div className="border-t border-gray-700 my-2"></div>
                                 {item.dropdownItems?.map((dropdownItem) => (
@@ -120,8 +136,12 @@ const Header = () => {
                                     to={dropdownItem.path}
                                     className="flex items-center flex-row-reverse gap-3 px-4 py-3 rounded-lg hover:bg-cyan-500/10 transition-all text-right text-gray-300 hover:text-cyan-300"
                                   >
-                                    <span className="text-lg">{dropdownItem.icon}</span>
-                                    <span className="text-sm">{dropdownItem.label}</span>
+                                    <span className="text-lg">
+                                      {dropdownItem.icon}
+                                    </span>
+                                    <span className="text-sm">
+                                      {dropdownItem.label}
+                                    </span>
                                   </Link>
                                 ))}
                               </div>
@@ -138,8 +158,8 @@ const Header = () => {
                       to={item.path}
                       className={`flex items-center flex-row-reverse gap-2 px-4 py-2 rounded-lg transition-all duration-300 group ${
                         location.pathname === item.path
-                          ? 'text-cyan-300 bg-cyan-500/10 border border-cyan-500/30'
-                          : 'text-gray-300 hover:text-cyan-300 hover:bg-cyan-500/5'
+                          ? "text-cyan-300 bg-cyan-500/10 border border-cyan-500/30"
+                          : "text-gray-300 hover:text-cyan-300 hover:bg-cyan-500/5"
                       }`}
                     >
                       <Icon className="w-4 h-4" />
@@ -179,7 +199,7 @@ const Header = () => {
               <div className="hidden md:flex items-center gap-4">
                 {navItems.map((item) => {
                   const Icon = item.icon;
-                  
+
                   if (item.hasDropdown) {
                     return (
                       <div
@@ -191,16 +211,21 @@ const Header = () => {
                         <Link
                           to={item.path}
                           className={`flex items-center flex-row gap-2 px-4 py-2 rounded-lg transition-all duration-300 group ${
-                            location.pathname === item.path || location.pathname.startsWith('/project')
-                              ? 'text-cyan-300 bg-cyan-500/10 border border-cyan-500/30'
-                              : 'text-gray-300 hover:text-cyan-300 hover:bg-cyan-500/5'
+                            location.pathname === item.path ||
+                            location.pathname.startsWith("/project")
+                              ? "text-cyan-300 bg-cyan-500/10 border border-cyan-500/30"
+                              : "text-gray-300 hover:text-cyan-300 hover:bg-cyan-500/5"
                           }`}
                         >
                           <Icon className="w-4 h-4" />
                           <span className="font-medium">{item.label}</span>
-                          <ChevronDown className={`w-4 h-4 transition-transform ${isProjectsDropdownOpen ? 'rotate-180' : ''}`} />
+                          <ChevronDown
+                            className={`w-4 h-4 transition-transform ${
+                              isProjectsDropdownOpen ? "rotate-180" : ""
+                            }`}
+                          />
                         </Link>
-                        
+
                         {/* Dropdown Menu */}
                         <AnimatePresence>
                           {isProjectsDropdownOpen && (
@@ -217,7 +242,7 @@ const Header = () => {
                                   className="flex items-center flex-row gap-3 px-4 py-3 rounded-lg hover:bg-cyan-500/10 transition-all text-left text-gray-300 hover:text-cyan-300"
                                 >
                                   <Briefcase className="w-4 h-4" />
-                                  <span>{t('header.nav.allProjects')}</span>
+                                  <span>{t("header.nav.allProjects")}</span>
                                 </Link>
                                 <div className="border-t border-gray-700 my-2"></div>
                                 {item.dropdownItems?.map((dropdownItem) => (
@@ -226,8 +251,12 @@ const Header = () => {
                                     to={dropdownItem.path}
                                     className="flex items-center flex-row gap-3 px-4 py-3 rounded-lg hover:bg-cyan-500/10 transition-all text-left text-gray-300 hover:text-cyan-300"
                                   >
-                                    <span className="text-lg">{dropdownItem.icon}</span>
-                                    <span className="text-sm">{dropdownItem.label}</span>
+                                    <span className="text-lg">
+                                      {dropdownItem.icon}
+                                    </span>
+                                    <span className="text-sm">
+                                      {dropdownItem.label}
+                                    </span>
                                   </Link>
                                 ))}
                               </div>
@@ -244,8 +273,8 @@ const Header = () => {
                       to={item.path}
                       className={`flex items-center flex-row gap-2 px-4 py-2 rounded-lg transition-all duration-300 group ${
                         location.pathname === item.path
-                          ? 'text-cyan-300 bg-cyan-500/10 border border-cyan-500/30'
-                          : 'text-gray-300 hover:text-cyan-300 hover:bg-cyan-500/5'
+                          ? "text-cyan-300 bg-cyan-500/10 border border-cyan-500/30"
+                          : "text-gray-300 hover:text-cyan-300 hover:bg-cyan-500/5"
                       }`}
                     >
                       <Icon className="w-4 h-4" />
@@ -275,7 +304,7 @@ const Header = () => {
           {isMenuOpen && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
+              animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
               className="md:hidden mt-4 overflow-hidden"
@@ -283,29 +312,36 @@ const Header = () => {
               <div className="bg-gray-900/90 backdrop-blur-xl rounded-lg border border-gray-800 p-4">
                 {navItems.map((item) => {
                   const Icon = item.icon;
-                  
+
                   if (item.hasDropdown) {
                     return (
                       <div key={item.path}>
                         <Link
                           to={item.path}
                           onClick={() => setIsMenuOpen(false)}
-                          className={`flex items-center ${isRTL ? 'flex-row-reverse' : 'flex-row'} gap-3 px-4 py-3 rounded-lg transition-all duration-300 mb-2 ${
-                            location.pathname === item.path || location.pathname.startsWith('/project')
-                              ? 'text-cyan-300 bg-cyan-500/10 border border-cyan-500/30'
-                              : 'text-gray-300 hover:text-cyan-300 hover:bg-cyan-500/5'
+                          className={`flex items-center ${
+                            isRTL ? "flex-row-reverse" : "flex-row"
+                          } gap-3 px-4 py-3 rounded-lg transition-all duration-300 mb-2 ${
+                            location.pathname === item.path ||
+                            location.pathname.startsWith("/project")
+                              ? "text-cyan-300 bg-cyan-500/10 border border-cyan-500/30"
+                              : "text-gray-300 hover:text-cyan-300 hover:bg-cyan-500/5"
                           }`}
                         >
                           <Icon className="w-5 h-5" />
                           <span className="font-medium">{item.label}</span>
                         </Link>
-                        <div className={`${isRTL ? 'mr-8' : 'ml-8'} mb-2`}>
+                        <div className={`${isRTL ? "mr-8" : "ml-8"} mb-2`}>
                           {item.dropdownItems?.map((dropdownItem) => (
                             <Link
                               key={dropdownItem.path}
                               to={dropdownItem.path}
                               onClick={() => setIsMenuOpen(false)}
-                              className={`flex items-center ${isRTL ? 'flex-row-reverse' : 'flex-row'} gap-3 px-4 py-2 rounded-lg hover:bg-cyan-500/10 transition-all ${isRTL ? 'text-right' : 'text-left'} text-gray-400 hover:text-cyan-300 text-sm`}
+                              className={`flex items-center ${
+                                isRTL ? "flex-row-reverse" : "flex-row"
+                              } gap-3 px-4 py-2 rounded-lg hover:bg-cyan-500/10 transition-all ${
+                                isRTL ? "text-right" : "text-left"
+                              } text-gray-400 hover:text-cyan-300 text-sm`}
                             >
                               <span>{dropdownItem.icon}</span>
                               <span>{dropdownItem.label}</span>
@@ -321,10 +357,12 @@ const Header = () => {
                       key={item.path}
                       to={item.path}
                       onClick={() => setIsMenuOpen(false)}
-                      className={`flex items-center ${isRTL ? 'flex-row-reverse' : 'flex-row'} gap-3 px-4 py-3 rounded-lg transition-all duration-300 mb-2 last:mb-0 ${
+                      className={`flex items-center ${
+                        isRTL ? "flex-row-reverse" : "flex-row"
+                      } gap-3 px-4 py-3 rounded-lg transition-all duration-300 mb-2 last:mb-0 ${
                         location.pathname === item.path
-                          ? 'text-cyan-300 bg-cyan-500/10 border border-cyan-500/30'
-                          : 'text-gray-300 hover:text-cyan-300 hover:bg-cyan-500/5'
+                          ? "text-cyan-300 bg-cyan-500/10 border border-cyan-500/30"
+                          : "text-gray-300 hover:text-cyan-300 hover:bg-cyan-500/5"
                       }`}
                     >
                       <Icon className="w-5 h-5" />
@@ -332,7 +370,7 @@ const Header = () => {
                     </Link>
                   );
                 })}
-                
+
                 {/* Language Switcher for Mobile */}
                 <div className="mt-4 pt-4 border-t border-gray-800">
                   <div className="px-4">

@@ -1,7 +1,15 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { Github, Linkedin, Twitter, Facebook, Youtube, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  Github,
+  Linkedin,
+  Twitter,
+  Facebook,
+  Youtube,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 
 interface Testimonial {
   id: string;
@@ -11,7 +19,7 @@ interface Testimonial {
   image: string;
   comment: string;
   project: string;
-  language: 'ar' | 'en' | 'tr'; // إضافة اللغة
+  language: "ar" | "en" | "tr"; // إضافة اللغة
   facebookUrl?: string;
   twitterUrl?: string;
   linkedinUrl?: string;
@@ -21,8 +29,8 @@ interface Testimonial {
 
 const TestimonialsSection = () => {
   const { t, i18n } = useTranslation();
-  const isRTL = i18n.dir() === 'rtl';
-  
+  const isRTL = i18n.dir() === "rtl";
+
   const testimonials: Testimonial[] = [
     {
       id: "1",
@@ -33,7 +41,7 @@ const TestimonialsSection = () => {
       comment:
         "محمود شاب مبدع ومستقبلو واعد بمجال التكنولوجيا. كنت سعيد جداً اني استضفتو بواحدة من حلقات 'مقابلة البرمجة' على قناتي باليوتيوب وابدع بالمقابلة بالرغم من سنه الصغير ونقص الخبرة بالمقابلات البرمجية.",
       project: "متجر إلكتروني متكامل",
-      language: 'ar',
+      language: "ar",
       facebookUrl: "#",
       twitterUrl: "https://www.instagram.com/tariqelouzeh",
       linkedinUrl: "https://www.linkedin.com/in/tariqelouzeh/",
@@ -49,7 +57,7 @@ const TestimonialsSection = () => {
       comment:
         "Mahmut, hayallerinin peşinden azimle koşan, vizyoner ve çalışkan bir genç. Onu ofisimizde ağırlama fırsatı buldum ve o gün heyecanını, gözlerindeki ışığı yakından gördüm. Kısa zamanda kendisini web tasarım ve yazılım alanında geliştirmesi çok etkileyici.",
       project: "منصة تعليمية تفاعلية",
-      language: 'tr',
+      language: "tr",
       facebookUrl: "https://www.facebook.com",
       twitterUrl: "https://www.twitter.com",
       linkedinUrl: "https://www.linkedin.com/in/emine-%C3%B6zkan16/",
@@ -65,7 +73,7 @@ const TestimonialsSection = () => {
       comment:
         "Keep building, keep sharing - big things start exactly like this. Cheering you on all the way, Mahmoud. You can achieve anything you put your mind to! 🙌",
       project: " ",
-      language: 'en',
+      language: "en",
       facebookUrl: "https://www.facebook.com",
       twitterUrl: "https://x.com/jsmasterypro",
       linkedinUrl: "https://www.linkedin.com/company/javascriptmastery/",
@@ -96,16 +104,18 @@ const TestimonialsSection = () => {
         {/* العنوان */}
         <div className="text-center mb-20">
           <div className="inline-block px-4 py-2 bg-[#00FFA3]/10 border border-[#00FFA3]/30 rounded-full mb-6">
-            <span className="text-[#00FFA3] font-semibold text-sm">{t('testimonials.badge')}</span>
+            <span className="text-[#00FFA3] font-semibold text-sm">
+              {t("testimonials.badge")}
+            </span>
           </div>
           <h2 className="text-xl md:text-5xl font-black text-white mb-6 leading-tight">
-            {t('testimonials.title.part1')}{' '}
+            {t("testimonials.title.part1")}{" "}
             <span className="bg-gradient-to-r from-[#6C5CE7] via-[#00D9FF] to-[#00FFA3] bg-clip-text text-transparent">
-              {t('testimonials.title.highlight')}
+              {t("testimonials.title.highlight")}
             </span>
           </h2>
           <p className="text-[#A0AEC0] text-xs md:text-xl max-w-3xl mx-auto">
-            {t('testimonials.subtitle')}
+            {t("testimonials.subtitle")}
           </p>
         </div>
 
@@ -115,7 +125,7 @@ const TestimonialsSection = () => {
             {testimonials.map((testimonial, index) => {
               const isActive = index === activeIndex;
               const offset = index - activeIndex;
-              
+
               return (
                 <motion.div
                   key={testimonial.id}
@@ -134,7 +144,10 @@ const TestimonialsSection = () => {
                     ease: [0.4, 0, 0.2, 1],
                   }}
                 >
-                  <TestimonialCard testimonial={testimonial} isActive={isActive} />
+                  <TestimonialCard
+                    testimonial={testimonial}
+                    isActive={isActive}
+                  />
                 </motion.div>
               );
             })}
@@ -145,17 +158,14 @@ const TestimonialsSection = () => {
         <div className="relative md:hidden">
           {/* Container للبطاقات */}
           <div className="overflow-hidden">
-            <div 
+            <div
               className="flex transition-transform duration-500 ease-out"
               style={{
                 transform: `translateX(${activeIndex * 100}%)`,
               }}
             >
               {testimonials.map((testimonial) => (
-                <div
-                  key={testimonial.id}
-                  className="w-full flex-shrink-0 px-4"
-                >
+                <div key={testimonial.id} className="w-full flex-shrink-0 px-4">
                   <div className="bg-gradient-to-br from-[#1A1F3A]/95 to-[#0F1729]/95 backdrop-blur-xl border border-white/10 rounded-3xl p-6 shadow-2xl">
                     {/* معلومات الشخص - من اليسار لليمين */}
                     <div className="flex items-center gap-3 mb-6" dir="ltr">
@@ -178,42 +188,71 @@ const TestimonialsSection = () => {
                     </div>
 
                     {/* التعليق */}
-                    <p 
+                    <p
                       className={`text-[#A0AEC0] text-sm leading-relaxed mb-6 ${
-                        testimonial.language === 'ar' ? 'text-right' : 'text-left'
+                        testimonial.language === "ar"
+                          ? "text-right"
+                          : "text-left"
                       }`}
-                      dir={testimonial.language === 'ar' ? 'rtl' : 'ltr'}
+                      dir={testimonial.language === "ar" ? "rtl" : "ltr"}
                     >
                       {testimonial.comment}
                     </p>
 
                     {/* أيقونات التواصل */}
                     <div className="flex items-center justify-center gap-2 flex-wrap pt-4 border-t border-white/10">
-                      {testimonial.githubUrl && testimonial.githubUrl !== "#" && (
-                        <a href={testimonial.githubUrl} target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
-                          <Github className="w-4 h-4 text-white" />
-                        </a>
-                      )}
+                      {testimonial.githubUrl &&
+                        testimonial.githubUrl !== "#" && (
+                          <a
+                            href={testimonial.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center"
+                          >
+                            <Github className="w-4 h-4 text-white" />
+                          </a>
+                        )}
                       {testimonial.linkedinUrl && (
-                        <a href={testimonial.linkedinUrl} target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
+                        <a
+                          href={testimonial.linkedinUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center"
+                        >
                           <Linkedin className="w-4 h-4 text-white" />
                         </a>
                       )}
                       {testimonial.twitterUrl && (
-                        <a href={testimonial.twitterUrl} target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
+                        <a
+                          href={testimonial.twitterUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center"
+                        >
                           <Twitter className="w-4 h-4 text-white" />
                         </a>
                       )}
                       {testimonial.youtubeUrl && (
-                        <a href={testimonial.youtubeUrl} target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
+                        <a
+                          href={testimonial.youtubeUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center"
+                        >
                           <Youtube className="w-4 h-4 text-white" />
                         </a>
                       )}
-                      {testimonial.facebookUrl && testimonial.facebookUrl !== "#" && (
-                        <a href={testimonial.facebookUrl} target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
-                          <Facebook className="w-4 h-4 text-white" />
-                        </a>
-                      )}
+                      {testimonial.facebookUrl &&
+                        testimonial.facebookUrl !== "#" && (
+                          <a
+                            href={testimonial.facebookUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center"
+                          >
+                            <Facebook className="w-4 h-4 text-white" />
+                          </a>
+                        )}
                     </div>
                   </div>
                 </div>
@@ -249,8 +288,8 @@ const TestimonialsSection = () => {
               onClick={() => setActiveIndex(index)}
               className={`h-2 rounded-full transition-all duration-300 ${
                 index === activeIndex
-                  ? 'w-12 bg-gradient-to-r from-[#6C5CE7] to-[#00D9FF]'
-                  : 'w-2 bg-white/20 hover:bg-white/40'
+                  ? "w-12 bg-gradient-to-r from-[#6C5CE7] to-[#00D9FF]"
+                  : "w-2 bg-white/20 hover:bg-white/40"
               }`}
             />
           ))}
@@ -261,11 +300,12 @@ const TestimonialsSection = () => {
 };
 
 // مكون البطاقة المنفصل
-const TestimonialCard: React.FC<{ testimonial: Testimonial; isActive: boolean }> = ({ 
-  testimonial
-}) => {
-  const isRTL = testimonial.language === 'ar';
-  
+const TestimonialCard: React.FC<{
+  testimonial: Testimonial;
+  isActive: boolean;
+}> = ({ testimonial }) => {
+  const isRTL = testimonial.language === "ar";
+
   return (
     <div className="w-full md:w-[400px] bg-gradient-to-br from-[#1A1F3A]/95 to-[#0F1729]/95 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl hover:border-[#6C5CE7]/50 transition-all duration-300">
       {/* معلومات الشخص - في الأعلى من اليسار إلى اليمين */}
@@ -290,11 +330,11 @@ const TestimonialCard: React.FC<{ testimonial: Testimonial; isActive: boolean }>
 
       {/* التعليق */}
       <div className="mb-8">
-        <p 
+        <p
           className={`text-[#A0AEC0] text-base leading-relaxed min-h-[140px] ${
-            isRTL ? 'text-right' : 'text-left'
+            isRTL ? "text-right" : "text-left"
           }`}
-          dir={isRTL ? 'rtl' : 'ltr'}
+          dir={isRTL ? "rtl" : "ltr"}
         >
           {testimonial.comment}
         </p>

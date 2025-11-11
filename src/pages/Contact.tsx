@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Clock, Globe, Send } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { Mail, Phone, MapPin, Clock, Globe, Send } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const Contact = () => {
   const { t, i18n } = useTranslation();
-  const isRTL = i18n.dir() === 'rtl';
+  const isRTL = i18n.dir() === "rtl";
 
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -22,49 +22,51 @@ const Contact = () => {
     // Simulate form submission
     setTimeout(() => {
       setIsSubmitting(false);
-      setFormData({ name: '', email: '', subject: '', message: '' });
-      alert(t('contact.form.success'));
+      setFormData({ name: "", email: "", subject: "", message: "" });
+      alert(t("contact.form.success"));
     }, 2000);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
   const contactInfo = [
     {
       icon: Mail,
-      title: t('contact.info.email.title'),
-      info: t('contact.info.email.value'),
-      link: 'mailto:ahmeddalhalabi1@gmail.com'
+      title: t("contact.info.email.title"),
+      info: t("contact.info.email.value"),
+      link: "mailto:ahmeddalhalabi1@gmail.com",
     },
     {
       icon: Phone,
-      title: t('contact.info.phone.title'),
-      info: t('contact.info.phone.value'),
-      link: 'tel:+905313345111'
+      title: t("contact.info.phone.title"),
+      info: t("contact.info.phone.value"),
+      link: "tel:+905313345111",
     },
     {
       icon: MapPin,
-      title: t('contact.info.address.title'),
-      info: t('contact.info.address.value'),
-      link: 'https://maps.google.com'
+      title: t("contact.info.address.title"),
+      info: t("contact.info.address.value"),
+      link: "https://maps.google.com",
     },
     {
       icon: Clock,
-      title: t('contact.info.hours.title'),
-      info: t('contact.info.hours.value'),
-      link: null
+      title: t("contact.info.hours.title"),
+      info: t("contact.info.hours.value"),
+      link: null,
     },
     {
       icon: Globe,
-      title: t('contact.info.website.title'),
-      info: t('contact.info.website.value'),
-      link: 'https://www.websitemy.com'
-    }
+      title: t("contact.info.website.title"),
+      info: t("contact.info.website.value"),
+      link: "https://www.websitemy.com",
+    },
   ];
 
   return (
@@ -77,11 +79,19 @@ const Contact = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h1 className={`text-4xl md:text-5xl font-bold text-white mb-6 ${isRTL ? 'text-right' : 'text-left'}`}>
-            {t('contact.title')}
+          <h1
+            className={`text-4xl md:text-5xl font-bold text-white mb-6 ${
+              isRTL ? "text-right" : "text-left"
+            }`}
+          >
+            {t("contact.title")}
           </h1>
-          <p className={`text-xl text-gray-400 max-w-2xl mx-auto ${isRTL ? 'text-right' : 'text-left'}`}>
-            {t('contact.subtitle')}
+          <p
+            className={`text-xl text-gray-400 max-w-2xl mx-auto ${
+              isRTL ? "text-right" : "text-left"
+            }`}
+          >
+            {t("contact.subtitle")}
           </p>
         </motion.div>
 
@@ -93,15 +103,23 @@ const Contact = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <div className="bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl p-8 border border-gray-700">
-              <h2 className={`text-2xl font-bold text-white mb-6 ${isRTL ? 'text-right' : 'text-left'}`}>
-                {t('contact.form.title')}
+              <h2
+                className={`text-2xl font-bold text-white mb-6 ${
+                  isRTL ? "text-right" : "text-left"
+                }`}
+              >
+                {t("contact.form.title")}
               </h2>
-              
+
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className={`block text-sm font-medium text-gray-300 mb-2 ${isRTL ? 'text-right' : 'text-left'}`}>
-                      {t('contact.form.name')} {t('contact.form.required')}
+                    <label
+                      className={`block text-sm font-medium text-gray-300 mb-2 ${
+                        isRTL ? "text-right" : "text-left"
+                      }`}
+                    >
+                      {t("contact.form.name")} {t("contact.form.required")}
                     </label>
                     <input
                       type="text"
@@ -109,14 +127,20 @@ const Contact = () => {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className={`w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all text-white ${isRTL ? 'text-right' : 'text-left'}`}
-                      placeholder={t('contact.form.namePlaceholder')}
+                      className={`w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all text-white ${
+                        isRTL ? "text-right" : "text-left"
+                      }`}
+                      placeholder={t("contact.form.namePlaceholder")}
                     />
                   </div>
-                  
+
                   <div>
-                    <label className={`block text-sm font-medium text-gray-300 mb-2 ${isRTL ? 'text-right' : 'text-left'}`}>
-                      {t('contact.form.email')} {t('contact.form.required')}
+                    <label
+                      className={`block text-sm font-medium text-gray-300 mb-2 ${
+                        isRTL ? "text-right" : "text-left"
+                      }`}
+                    >
+                      {t("contact.form.email")} {t("contact.form.required")}
                     </label>
                     <input
                       type="email"
@@ -124,15 +148,21 @@ const Contact = () => {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className={`w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all text-white ${isRTL ? 'text-right' : 'text-left'}`}
-                      placeholder={t('contact.form.emailPlaceholder')}
+                      className={`w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all text-white ${
+                        isRTL ? "text-right" : "text-left"
+                      }`}
+                      placeholder={t("contact.form.emailPlaceholder")}
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className={`block text-sm font-medium text-gray-300 mb-2 ${isRTL ? 'text-right' : 'text-left'}`}>
-                    {t('contact.form.subject')} {t('contact.form.required')}
+                  <label
+                    className={`block text-sm font-medium text-gray-300 mb-2 ${
+                      isRTL ? "text-right" : "text-left"
+                    }`}
+                  >
+                    {t("contact.form.subject")} {t("contact.form.required")}
                   </label>
                   <input
                     type="text"
@@ -140,14 +170,20 @@ const Contact = () => {
                     value={formData.subject}
                     onChange={handleChange}
                     required
-                    className={`w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all text-white ${isRTL ? 'text-right' : 'text-left'}`}
-                    placeholder={t('contact.form.subjectPlaceholder')}
+                    className={`w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all text-white ${
+                      isRTL ? "text-right" : "text-left"
+                    }`}
+                    placeholder={t("contact.form.subjectPlaceholder")}
                   />
                 </div>
 
                 <div>
-                  <label className={`block text-sm font-medium text-gray-300 mb-2 ${isRTL ? 'text-right' : 'text-left'}`}>
-                    {t('contact.form.message')} {t('contact.form.required')}
+                  <label
+                    className={`block text-sm font-medium text-gray-300 mb-2 ${
+                      isRTL ? "text-right" : "text-left"
+                    }`}
+                  >
+                    {t("contact.form.message")} {t("contact.form.required")}
                   </label>
                   <textarea
                     name="message"
@@ -155,8 +191,10 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     rows={6}
-                    className={`w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all text-white resize-none ${isRTL ? 'text-right' : 'text-left'}`}
-                    placeholder={t('contact.form.messagePlaceholder')}
+                    className={`w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all text-white resize-none ${
+                      isRTL ? "text-right" : "text-left"
+                    }`}
+                    placeholder={t("contact.form.messagePlaceholder")}
                   />
                 </div>
 
@@ -165,17 +203,19 @@ const Contact = () => {
                   disabled={isSubmitting}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className={`w-full py-4 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-lg hover:from-cyan-600 hover:to-purple-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-medium text-lg flex items-center justify-center ${isRTL ? 'space-x-reverse' : ''} space-x-2`}
+                  className={`w-full py-4 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-lg hover:from-cyan-600 hover:to-purple-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-medium text-lg flex items-center justify-center ${
+                    isRTL ? "space-x-reverse" : ""
+                  } space-x-2`}
                 >
                   {isSubmitting ? (
                     <>
                       <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-                      <span>{t('contact.form.submitting')}</span>
+                      <span>{t("contact.form.submitting")}</span>
                     </>
                   ) : (
                     <>
                       <Send className="w-5 h-5" />
-                      <span>{t('contact.form.submit')}</span>
+                      <span>{t("contact.form.submit")}</span>
                     </>
                   )}
                 </motion.button>
@@ -191,10 +231,14 @@ const Contact = () => {
             className="space-y-6"
           >
             <div className="bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl p-8 border border-gray-700">
-              <h2 className={`text-2xl font-bold text-white mb-14 ${isRTL ? 'text-right' : 'text-left'}`}>
-                {t('contact.info.title')}
+              <h2
+                className={`text-2xl font-bold text-white mb-14 ${
+                  isRTL ? "text-right" : "text-left"
+                }`}
+              >
+                {t("contact.info.title")}
               </h2>
-              
+
               <div className="space-y-[50px]">
                 {contactInfo.map((item, index) => {
                   const Icon = item.icon;
@@ -204,13 +248,17 @@ const Contact = () => {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
-                      className={`flex items-start gap-4 group ${isRTL ? 'flex-row' : 'flex-row'}`}
+                      className={`flex items-start gap-4 group ${
+                        isRTL ? "flex-row" : "flex-row"
+                      }`}
                     >
                       <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
                         <Icon className="w-6 h-6 text-white" />
                       </div>
-                      <div className={isRTL ? 'text-right' : 'text-left'}>
-                        <h3 className="font-semibold text-white mb-1">{item.title}</h3>
+                      <div className={isRTL ? "text-right" : "text-left"}>
+                        <h3 className="font-semibold text-white mb-1">
+                          {item.title}
+                        </h3>
                         {item.link ? (
                           <a
                             href={item.link}
@@ -241,32 +289,32 @@ const Contact = () => {
         >
           <div className="bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl p-8 border border-gray-700">
             <h2 className="text-2xl font-bold text-white mb-6 text-center">
-              {t('contact.faq.title')}
+              {t("contact.faq.title")}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className={isRTL ? 'text-right' : 'text-left'}>
-                <h3 className="font-semibold text-white mb-2">{t('contact.faq.q1.question')}</h3>
-                <p className="text-gray-400">
-                  {t('contact.faq.q1.answer')}
-                </p>
+              <div className={isRTL ? "text-right" : "text-left"}>
+                <h3 className="font-semibold text-white mb-2">
+                  {t("contact.faq.q1.question")}
+                </h3>
+                <p className="text-gray-400">{t("contact.faq.q1.answer")}</p>
               </div>
-              <div className={isRTL ? 'text-right' : 'text-left'}>
-                <h3 className="font-semibold text-white mb-2">{t('contact.faq.q2.question')}</h3>
-                <p className="text-gray-400">
-                  {t('contact.faq.q2.answer')}
-                </p>
+              <div className={isRTL ? "text-right" : "text-left"}>
+                <h3 className="font-semibold text-white mb-2">
+                  {t("contact.faq.q2.question")}
+                </h3>
+                <p className="text-gray-400">{t("contact.faq.q2.answer")}</p>
               </div>
-              <div className={isRTL ? 'text-right' : 'text-left'}>
-                <h3 className="font-semibold text-white mb-2">{t('contact.faq.q3.question')}</h3>
-                <p className="text-gray-400">
-                  {t('contact.faq.q3.answer')}
-                </p>
+              <div className={isRTL ? "text-right" : "text-left"}>
+                <h3 className="font-semibold text-white mb-2">
+                  {t("contact.faq.q3.question")}
+                </h3>
+                <p className="text-gray-400">{t("contact.faq.q3.answer")}</p>
               </div>
-              <div className={isRTL ? 'text-right' : 'text-left'}>
-                <h3 className="font-semibold text-white mb-2">{t('contact.faq.q4.question')}</h3>
-                <p className="text-gray-400">
-                  {t('contact.faq.q4.answer')}
-                </p>
+              <div className={isRTL ? "text-right" : "text-left"}>
+                <h3 className="font-semibold text-white mb-2">
+                  {t("contact.faq.q4.question")}
+                </h3>
+                <p className="text-gray-400">{t("contact.faq.q4.answer")}</p>
               </div>
             </div>
           </div>
