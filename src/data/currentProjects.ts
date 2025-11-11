@@ -1,3 +1,5 @@
+import i18n from '../i18n';
+
 // Current Projects Data Types
 export type CurrentProject = {
   id: string;
@@ -21,76 +23,79 @@ export type CurrentProject = {
   }>;
 };
 
-// Current Projects Data
-export const currentProjectsData: CurrentProject[] = [
-  {
-    id: "arabia-swim",
-    shortTitle: "arabia-swim",
-    name: "أرابيا سويم للسباحة العلاجية",
-    status: "قيد التطوير",
-    progress: 93,
-    startDate: "01 يوليو 2025",
-    expectedDuration: "45 يوم",
-    tagline: "منصة علاجية متكاملة",
-    technologies: [
-      {
-        name: "TypeScript",
-        color: "from-gray-700 to-black",
-        icon: "⚛️",
-        border: "border-gray-600",
-      },
-      {
-        name: "React.js",
-        color: "from-blue-600/20 to-blue-800/20",
-        icon: "📘",
-        border: "border-blue-500/30",
-      },
-      {
-        name: "Tailwind CSS",
-        color: "from-cyan-500/20 to-cyan-700/20",
-        icon: "🎨",
-        border: "border-cyan-500/30",
-      },
-      {
-        name: "MongoDB",
-        color: "from-green-600/20 to-green-800/20",
-        icon: "🍃",
-        border: "border-green-500/30",
-      },
-    ],
-    features: [
-      {
-        title: "واجهة مستخدم حديثة",
-        desc: "هوية بصرية مع تجربة مستخدم رائعة",
-        icon: "🤖",
-      },
-      {
-        title: "بوابة الدفع الآمن",
-        desc: "تكامل مع بوابات دفع متعددة ومؤمنة",
-        icon: "💳",
-      },
-      {
-        title: "إدارة برامج علاجية",
-        desc: "محتوى طبي مخصص مع تحليلات تفصيلية",
-        icon: "🏊",
-      },
-      {
-        title: "مقالات مختصة",
-        desc: "محتوى طبي مخصص مع معلومات تفصيلية",
-        icon: "📚",
-      },
-    ],
-  },
-  {
-    id: "maqsaf-school",
-    shortTitle: "CompreVende",
-    name: "نربط بين مقدم الخدمة والعميل",
-    status: "قيد التطوير",
-    progress: 75,
-    startDate: "15 أغسطس 2025",
-    expectedDuration: "90 يوم",
-    tagline: "نربط بين مقدم الخدمة والعميل",
-    technologies: [
+// Function to get translated project data
+export const getCurrentProjectsData = (): CurrentProject[] => {
+  const t = i18n.t.bind(i18n);
+  
+  return [
+    {
+      id: "arabia-swim",
+      shortTitle: t('currentProjects.projects.arabiaSwim.shortTitle'),
+      name: t('currentProjects.projects.arabiaSwim.name'),
+      status: t('currentProjects.projects.arabiaSwim.status'),
+      progress: 93,
+      startDate: "01 يوليو 2025",
+      expectedDuration: "45 يوم",
+      tagline: t('currentProjects.projects.arabiaSwim.tagline'),
+      technologies: [
+        {
+          name: "TypeScript",
+          color: "from-gray-700 to-black",
+          icon: "⚛️",
+          border: "border-gray-600",
+        },
+        {
+          name: "React.js",
+          color: "from-blue-600/20 to-blue-800/20",
+          icon: "📘",
+          border: "border-blue-500/30",
+        },
+        {
+          name: "Tailwind CSS",
+          color: "from-cyan-500/20 to-cyan-700/20",
+          icon: "🎨",
+          border: "border-cyan-500/30",
+        },
+        {
+          name: "MongoDB",
+          color: "from-green-600/20 to-green-800/20",
+          icon: "🍃",
+          border: "border-green-500/30",
+        },
+      ],
+      features: [
+        {
+          title: t('currentProjects.projects.arabiaSwim.features.feature1.title'),
+          desc: t('currentProjects.projects.arabiaSwim.features.feature1.desc'),
+          icon: "🤖",
+        },
+        {
+          title: t('currentProjects.projects.arabiaSwim.features.feature2.title'),
+          desc: t('currentProjects.projects.arabiaSwim.features.feature2.desc'),
+          icon: "💳",
+        },
+        {
+          title: t('currentProjects.projects.arabiaSwim.features.feature3.title'),
+          desc: t('currentProjects.projects.arabiaSwim.features.feature3.desc'),
+          icon: "🏊",
+        },
+        {
+          title: t('currentProjects.projects.arabiaSwim.features.feature4.title'),
+          desc: t('currentProjects.projects.arabiaSwim.features.feature4.desc'),
+          icon: "📚",
+        },
+      ],
+    },
+    {
+      id: "maqsaf-school",
+      shortTitle: t('currentProjects.projects.compreVende.shortTitle'),
+      name: t('currentProjects.projects.compreVende.name'),
+      status: t('currentProjects.projects.compreVende.status'),
+      progress: 75,
+      startDate: "15 أغسطس 2025",
+      expectedDuration: "90 يوم",
+      tagline: t('currentProjects.projects.compreVende.tagline'),
+      technologies: [
       {
         name: "Next.js",
         color: "from-black to-gray-800",
@@ -118,36 +123,36 @@ export const currentProjectsData: CurrentProject[] = [
     ],
     features: [
       {
-        title: "ربط مقدمي الخدمات",
-        desc: "نربط بين مقدم الخدمة والعميل بسهولة وفعالية",
+        title: t('currentProjects.projects.compreVende.features.feature1.title'),
+        desc: t('currentProjects.projects.compreVende.features.feature1.desc'),
         icon: "🤝",
       },
       {
-        title: "نظام إشعارات ذكي",
-        desc: " تنبيهات فورية عبر البريد الإلكتروني والرسائل النصية",
+        title: t('currentProjects.projects.compreVende.features.feature2.title'),
+        desc: t('currentProjects.projects.compreVende.features.feature2.desc'),
         icon: "📈",
       },
       {
-        title: " طرق متعددة للربط",
-        desc: " خيارات متنوعة للاتصال بين الطرفين",
+        title: t('currentProjects.projects.compreVende.features.feature3.title'),
+        desc: t('currentProjects.projects.compreVende.features.feature3.desc'),
         icon: "📅",
       },
       {
-        title: "حلول متكاملة",
-        desc: "منصة شاملة تجمع كل احتياجاتك في مكان واحد",
+        title: t('currentProjects.projects.compreVende.features.feature4.title'),
+        desc: t('currentProjects.projects.compreVende.features.feature4.desc'),
         icon: "⚡",
       }
     ],
   },
   {
     id: "green-market",
-    shortTitle: "ALLEMNI",
-    name: " منصة تعليمية ذكية",
-    status: "قيد التطوير",
+    shortTitle: t('currentProjects.projects.allemni.shortTitle'),
+    name: t('currentProjects.projects.allemni.name'),
+    status: t('currentProjects.projects.allemni.status'),
     progress: 80,
     startDate: "20 نوفمبر 2025",
     expectedDuration: "90 يوم",
-    tagline: "منصة تعليمية اونلاين",
+    tagline: t('currentProjects.projects.allemni.tagline'),
     technologies: [
       {
         name: "react.js",
@@ -176,25 +181,29 @@ export const currentProjectsData: CurrentProject[] = [
     ],
     features: [
       {
-        title: "إنشاء دروس بالذكاء الاصطناعي",
-        desc: "قم بتحميل صورة ودع الذكاء الاصطناعي ينشئ الدرس تلقائياً",
+        title: t('currentProjects.projects.allemni.features.feature1.title'),
+        desc: t('currentProjects.projects.allemni.features.feature1.desc'),
         icon: "🤖",
       },
       {
-        title: "واجبات ذكية تلقائية",
-        desc: "إنشاء اختبارات خيارات متعددة من الصور بالذكاء الاصطناعي",
+        title: t('currentProjects.projects.allemni.features.feature2.title'),
+        desc: t('currentProjects.projects.allemni.features.feature2.desc'),
         icon: "📝",
       },
       {
-        title: "إدارة الملفات والمحتوى",
-        desc: "رفع وتنظيم الملفات والدروس بسهولة في مكان واحد",
+        title: t('currentProjects.projects.allemni.features.feature3.title'),
+        desc: t('currentProjects.projects.allemni.features.feature3.desc'),
         icon: "📁",
       },
       {
-        title: "دروس خصوصية مخصصة",
-        desc: "إنشاء ومشاركة دروس خاصة للطلاب المحددين",
+        title: t('currentProjects.projects.allemni.features.feature4.title'),
+        desc: t('currentProjects.projects.allemni.features.feature4.desc'),
         icon: "🎓",
       }
     ],
-  },
-];
+    }
+  ];
+};
+
+// Export currentProjectsData for backward compatibility
+export const currentProjectsData = getCurrentProjectsData();

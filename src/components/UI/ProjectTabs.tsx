@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { ArrowLeft, Sparkles, Zap, Target } from "lucide-react";
-import { serviceCategories } from "../../data/projects";
+import { getServiceCategories } from "../../data/projects";
 import ProjectCard from "./ProjectCard";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -11,6 +12,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const ProjectTabs = () => {
+  const { t, i18n } = useTranslation();
+  const isRTL = i18n.dir() === 'rtl';
+  const [serviceCategories, setServiceCategories] = useState(getServiceCategories());
   const [activeTab, setActiveTab] = useState(serviceCategories[0].id);
   const projectsRef = useRef<HTMLDivElement>(null);
   const tabsRef = useRef<HTMLDivElement>(null);
@@ -19,6 +23,11 @@ const ProjectTabs = () => {
 
   const activeCategory = serviceCategories.find((cat) => cat.id === activeTab);
   const featuredProjects = activeCategory?.projects.slice(0, 3) || []; // Changed from 2 to 3
+
+  // Update categories when language changes
+  useEffect(() => {
+    setServiceCategories(getServiceCategories());
+  }, [i18n.language]);
 
   // Check for reduced motion preference
   const prefersReducedMotion = window.matchMedia(
@@ -145,10 +154,10 @@ const ProjectTabs = () => {
           className="text-center md:mb-16 mb-8"
         >
           <h2 className="text-xl md:text-5xl font-bold text-white mb-6">
-            معرض إنجازاتنا التقنية
+            {t('projectTabs.title')}
           </h2>
           <p className="text-xs md:text-xl text-gray-400 max-w-2xl mx-auto">
-          مجموعة متنوعة من المشاريع التي طورناها  
+            {t('projectTabs.subtitle')}
           </p>
         </motion.div>
 
@@ -199,12 +208,12 @@ const ProjectTabs = () => {
               transition={{ duration: 0.2 }}
             >
               {/* Category Header with View More Button */}
-              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-12 gap-6 mx-auto max-w-[1288px]">
-                <div className="text-center lg:text-right flex-1">
-                  <h3 className="text-xl md:text-4xl font-bold text-white mb-4">
+              <div className={`flex flex-col lg:flex-row lg:items-center lg:justify-between mb-12 gap-6 mx-auto max-w-[1288px] ${isRTL ? 'lg:flex-row-reverse' : ''}`}>
+                <div className="flex-1">
+                  <h3 className={`text-xl md:text-4xl font-bold text-white mb-4 text-center ${isRTL ? 'lg:text-right' : 'lg:text-left'}`}>
                     {activeCategory.title}
                   </h3>
-                  <p className="text-gray-400 text-xs md:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                  <p className={`text-gray-400 text-xs md:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed text-center ${isRTL ? 'lg:text-right' : 'lg:text-left'}`}>
                     {activeCategory.description}
                   </p>
                 </div>
@@ -214,12 +223,12 @@ const ProjectTabs = () => {
                   <div className="flex-shrink-0 text-center lg:text-left">
                     <Link
                       to={`/projects?category=${activeCategory.id}`}
-                      className="inline-flex items-center justify-center gap-3 px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border-2 border-cyan-500/50 rounded-xl hover:from-cyan-500/20 hover:to-purple-500/20 hover:border-cyan-400 transition-all duration-300 text-cyan-300 hover:text-cyan-200 group transform hover:scale-105 shadow-lg hover:shadow-cyan-500/25"
+                      className={`inline-flex items-center justify-center gap-3 px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border-2 border-cyan-500/50 rounded-xl hover:from-cyan-500/20 hover:to-purple-500/20 hover:border-cyan-400 transition-all duration-300 text-cyan-300 hover:text-cyan-200 group transform hover:scale-105 shadow-lg hover:shadow-cyan-500/25 ${isRTL ? 'flex-row-reverse' : ''}`}
                     >
                       <span className="font-semibold text-base md:text-lg">
-                        عرض المزيد ({activeCategory.projects.length})
+                        {t('projectTabs.viewMore')} ({activeCategory.projects.length})
                       </span>
-                      <ArrowLeft className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
+                      <ArrowLeft className={`w-4 h-4 md:w-5 md:h-5 transition-transform ${isRTL ? 'rotate-180 group-hover:-translate-x-1' : 'group-hover:translate-x-1'}`} />
                     </Link>
                   </div>
                 )}

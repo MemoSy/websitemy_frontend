@@ -23,7 +23,7 @@ body {
   color: #ffffff;
   overflow-x: hidden;
   cursor: none; /* إخفاء المؤشر الافتراضي */
-  direction: rtl; /* اتجاه النص من اليمين لليسار */
+  /* direction will be set dynamically by i18n */
 }
 
 /* Custom scrollbar */
@@ -132,6 +132,21 @@ html {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
 }
 
 @keyframes float-element {

@@ -1,0 +1,498 @@
+{
+  "header": {
+    "nav": {
+      "home": "Home",
+      "projects": "Our Work",
+      "allProjects": "All Projects",
+      "about": "About Us",
+      "contact": "Contact Us",
+      "aiChat": "Ask Me"
+    }
+  },
+  "footer": {
+    "tagline": "We don't just build websites... we create timeless digital experiences",
+    "quickLinks": {
+      "title": "Quick Links",
+      "home": "Home",
+      "projects": "Projects",
+      "about": "About Us"
+    },
+    "contact": {
+      "title": "Contact Us",
+      "email": "info@websitemy.com",
+      "phone": "+905313345111",
+      "location": "Bursa \\ Turkey"
+    },
+    "copyright": "© 2025 All Rights Reserved"
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "We are a specialized web development company creating innovative digital solutions that help businesses and individuals achieve their technical goals. With over 3 years of market experience, we pride ourselves on delivering high-quality services that meet our diverse clients' needs.",
+    "mission": {
+      "title": "Our Mission",
+      "description": "We strive to transform ideas into exceptional digital reality through developing innovative technical solutions characterized by quality and high performance. We believe technology should serve humanity and contribute to improving daily life."
+    },
+    "values": {
+      "title": "Our Values",
+      "vision": {
+        "title": "Vision",
+        "description": "We believe every Syrian deserves a strong online presence. Our goal is to empower project and product owners to reach their customers anytime, anywhere, because success knows no boundaries or timing."
+      },
+      "innovation": {
+        "title": "Innovation",
+        "description": "We use the latest global technologies to deliver a website that outperforms your competitors. From responsive design to advanced security, every detail is carefully planned to ensure an exceptional experience that attracts customers and achieves sales."
+      },
+      "team": {
+        "title": "Team",
+        "description": "Our team consists of professional developers and designers who understand the Syrian market and know your needs. We're not just service providers, but partners in your success, standing with you every step until you achieve your goals."
+      },
+      "quality": {
+        "title": "Quality",
+        "description": "We commit to the highest global quality standards in every project. From loading speed to security and protection, from attractive design to ease of use, we guarantee a website that matches international sites at prices suitable for the local market."
+      }
+    },
+    "teamSection": {
+      "title": "Our Team",
+      "members": {
+        "member1": {
+          "name": "Ahmed Al-Mubayed",
+          "role": "Director",
+          "skills": ["General Manager"]
+        },
+        "member2": {
+          "name": "Mahmoud Al-Mubayed",
+          "role": "Full Stack Web Developer",
+          "skills": ["React", "Node.js", "MongoDB", "next.js"]
+        },
+        "member3": {
+          "name": "Asma Al-Juma",
+          "role": "UI/UX Designer",
+          "skills": ["Figma", "Adobe XD", "User Research"]
+        },
+        "member4": {
+          "name": "Sara Hallaq",
+          "role": "Frontend Developer",
+          "skills": ["React", "Javascript"]
+        }
+      }
+    },
+    "cta": {
+      "title": "Do You Have a Project?",
+      "description": "We're here to help transform your idea into an exceptional digital reality. Let's talk about your next project",
+      "button": "Contact Us Now"
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Do you have a new project or need technical consultation? We're here to help!",
+    "form": {
+      "title": "Send Us a Message",
+      "name": "Full Name",
+      "namePlaceholder": "Your full name",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",
+      "subject": "Subject",
+      "subjectPlaceholder": "Your message subject",
+      "message": "Message",
+      "messagePlaceholder": "Write your message here...",
+      "required": "*",
+      "submit": "Send Message",
+      "submitting": "Sending...",
+      "success": "Your message has been sent successfully! We'll contact you soon."
+    },
+    "info": {
+      "title": "Contact Information",
+      "email": {
+        "title": "Email",
+        "value": "ahmeddalhalabi1@gmail.com"
+      },
+      "phone": {
+        "title": "Phone",
+        "value": "+905313345111"
+      },
+      "address": {
+        "title": "Address",
+        "value": "Bursa \\ Turkey"
+      },
+      "hours": {
+        "title": "Working Hours",
+        "value": "Monday - Friday: 9:00 AM - 5:00 PM"
+      },
+      "website": {
+        "title": "Website",
+        "value": "www.websitemy.com"
+      }
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "q1": {
+        "question": "How long does project development take?",
+        "answer": "Development time varies based on project complexity, typically 2-8 weeks for small to medium projects."
+      },
+      "q2": {
+        "question": "Do you provide maintenance services?",
+        "answer": "Yes, we provide continuous maintenance and technical support to ensure your website performs optimally."
+      },
+      "q3": {
+        "question": "What is the project cost?",
+        "answer": "Cost is determined based on project requirements. We provide free quotes after discussing details."
+      },
+      "q4": {
+        "question": "Are websites mobile-friendly?",
+        "answer": "Absolutely! All our websites are designed to work perfectly on all devices and screens."
+      }
+    }
+  },
+  "aiChat": {
+    "title": "AI Assistant",
+    "subtitle": "Specialized in WebSiteMy Projects",
+    "description": "Ask about any project, technologies used, pricing, or any information you need",
+    "chatSaved": "Chat saved automatically",
+    "currentContext": "Current Context",
+    "contexts": {
+      "news": "News Websites",
+      "ecommerce": "E-commerce Stores",
+      "education": "Educational Platforms",
+      "personal": "Personal Websites",
+      "social": "Social Networks"
+    },
+    "welcomeMessage": "Hello! I'm your smart assistant specialized in WebSiteMy projects. I can answer any questions about our projects, pricing, technologies used, or any other information you need. How can I help you today?",
+    "typing": "Typing...",
+    "inputPlaceholder": "Type your question here...",
+    "quickQuestions": {
+      "title": "Frequently Asked Questions:",
+      "q1": "What are the project prices?",
+      "q2": "Technologies used"
+    },
+    "errorMessage": "Sorry, I couldn't get an accurate answer. Please try again."
+  },
+  "hero": {
+    "badge": "Most Trusted in Web Development",
+    "title": {
+      "part1": "We Transform Your Ideas into",
+      "highlight": "Websites",
+      "part2": "that Increase Your Profits by",
+      "percentage": "40%"
+    },
+    "subtitle": {
+      "main": "Your Trusted Tech Partner in Building Fast and Secure Web Solutions",
+      "services": "Development + Design + Hosting + Maintenance"
+    },
+    "features": {
+      "delivery": "On-Time Delivery or Money Back Guarantee",
+      "quality": "Quality Assurance",
+      "support": "24/7 Continuous Technical Support"
+    },
+    "cta": {
+      "consultation": "Get Free Consultation",
+      "calculator": "Calculate Your Project Cost"
+    },
+    "trust": {
+      "projects": "12+ Successful Projects",
+      "rating": "4.8/5 Client Rating",
+      "support": "Continuous Support"
+    }
+  },
+  "services": {
+    "badge": "Our Services",
+    "title": "Complete Web Solutions for Your Business Success",
+    "subtitle": "We provide comprehensive web development services tailored to achieve your business goals",
+    "cta": {
+      "quote": "Request a Quote",
+      "details": "Request Details",
+      "viewSample": "View Similar Work"
+    },
+    "pricing": {
+      "from": "Starting from",
+      "free": "Free"
+    },
+    "service1": {
+      "title": "Personal Website Development",
+      "description": "Fast and secure websites that reflect your professional identity and build client trust",
+      "feature1": "Professional design tailored to your brand",
+      "feature2": "Loading speed under 2 seconds",
+      "feature3": "SEO optimization"
+    },
+    "service2": {
+      "badge": "Most Popular",
+      "title": "E-Commerce Development",
+      "description": "Complete stores that increase your sales and make managing your products easy",
+      "feature1": "Advanced management system",
+      "feature2": "Secure multiple payment gateways",
+      "feature3": "Detailed reports and analytics"
+    },
+    "service3": {
+      "title": "Startup Applications",
+      "description": "We turn your idea into a professional app ready to launch in the market",
+      "feature1": "MVP development in 4-6 weeks",
+      "feature2": "Modern and attractive UX/UI design",
+      "feature3": "Scalable technical architecture"
+    },
+    "service4": {
+      "title": "Visual Identity Redesign",
+      "description": "We update your site with a modern professional design that reflects your brand evolution",
+      "feature1": "Specialized UI/UX team",
+      "feature2": "Comprehensive identity analysis",
+      "feature3": "Multiple revisions until complete satisfaction"
+    },
+    "service5": {
+      "title": "Community Giving Initiative",
+      "description": "We provide our services free for organizations and associations serving the community",
+      "feature1": "Free website development",
+      "feature2": "Technical support for 3 months",
+      "feature3": "Free hosting for the first year"
+    }
+  },
+  "stackCards": {
+    "badge": "Work Process",
+    "title": {
+      "part1": "How We Transform Your Company into a",
+      "highlight": "Successful Reality",
+      "part2": "?"
+    },
+    "subtitle": "A clear and organized process from start to finish with complete commitment to deadlines",
+    "cards": {
+      "card1": {
+        "title": "Free Consultation & Understanding Your Needs",
+        "description": "We listen to your goals and deeply analyze your project requirements to create a precise action plan that ensures your idea succeeds from day one"
+      },
+      "card2": {
+        "title": "Transparent & Detailed Quotation",
+        "description": "We provide you with a clear offer that includes all technical, timeline, and cost details without any hidden fees, with a guarantee to stick to the agreed budget"
+      },
+      "card3": {
+        "title": "Professional UI/UX Interface Design",
+        "description": "We design a smooth and attractive user experience that reflects your brand identity, focusing on ease of use and achieving the highest conversion rates"
+      },
+      "card4": {
+        "title": "Programming & Technical Development",
+        "description": "We build your site with the latest global technologies to ensure speed, security, and scalability, with clean and documented code that's easy to maintain in the future"
+      },
+      "card5": {
+        "title": "Testing & Continuous Development",
+        "description": "We test every part of the project with high precision to ensure it works efficiently on all devices and browsers, with continuous improvements based on your feedback"
+      },
+      "card6": {
+        "title": "Official Launch & Deployment",
+        "description": "We launch your site on fast and secure servers with full performance and security settings, ensuring it's ready to receive your visitors with the best possible experience"
+      },
+      "card7": {
+        "title": "Continuous Support & Maintenance",
+        "description": "We stay with you after launch to provide fast technical support, regular updates, and immediate solutions to any issues to ensure your site runs smoothly always"
+      }
+    }
+  },
+  "currentProjects": {
+    "title": "Projects in Progress",
+    "sections": {
+      "technologies": "Technologies Used",
+      "features": "Key Features",
+      "projectName": "Project Name",
+      "progress": "Progress Level",
+      "startDate": "Start Date",
+      "expectedDuration": "Expected Duration"
+    },
+    "cta": {
+      "title": "Interested in a Similar Project?",
+      "description": "Contact us to discuss your project and turn your idea into a digital reality",
+      "button": "Contact Us"
+    },
+    "projects": {
+      "arabiaSwim": {
+        "shortTitle": "arabia-swim",
+        "name": "Arabia Swim - Therapeutic Swimming",
+        "status": "In Development",
+        "tagline": "Integrated Therapeutic Platform",
+        "features": {
+          "feature1": {
+            "title": "Modern User Interface",
+            "desc": "Visual identity with an amazing user experience"
+          },
+          "feature2": {
+            "title": "Secure Payment Gateway",
+            "desc": "Integration with multiple secure payment gateways"
+          },
+          "feature3": {
+            "title": "Therapeutic Programs Management",
+            "desc": "Specialized medical content with detailed analytics"
+          },
+          "feature4": {
+            "title": "Specialized Articles",
+            "desc": "Dedicated medical content with detailed information"
+          }
+        }
+      },
+      "compreVende": {
+        "shortTitle": "CompreVende",
+        "name": "Connecting Service Providers & Clients",
+        "status": "In Development",
+        "tagline": "Connecting service providers with clients",
+        "features": {
+          "feature1": {
+            "title": "Service Provider Linking",
+            "desc": "Easily and effectively connect service providers with clients"
+          },
+          "feature2": {
+            "title": "Smart Notification System",
+            "desc": "Instant alerts via email and text messages"
+          },
+          "feature3": {
+            "title": "Multiple Connection Methods",
+            "desc": "Various options for communication between parties"
+          },
+          "feature4": {
+            "title": "Integrated Solutions",
+            "desc": "Comprehensive platform bringing all your needs in one place"
+          }
+        }
+      },
+      "allemni": {
+        "shortTitle": "ALLEMNI",
+        "name": "Smart Educational Platform",
+        "status": "In Development",
+        "tagline": "Online educational platform",
+        "features": {
+          "feature1": {
+            "title": "AI-Powered Lesson Creation",
+            "desc": "Upload an image and let AI create the lesson automatically"
+          },
+          "feature2": {
+            "title": "Automatic Smart Assignments",
+            "desc": "Create multiple-choice tests from images using AI"
+          },
+          "feature3": {
+            "title": "File & Content Management",
+            "desc": "Easily upload and organize files and lessons in one place"
+          },
+          "feature4": {
+            "title": "Customized Private Lessons",
+            "desc": "Create and share private lessons for specific students"
+          }
+        }
+      }
+    }
+  },
+  "projectTabs": {
+    "title": "Our Technical Achievements Gallery",
+    "subtitle": "A diverse collection of projects we've developed",
+    "viewMore": "View More",
+    "categories": {
+      "opensource": {
+        "title": "Open Source",
+        "description": "Open-source software projects contributing to the technical community development"
+      },
+      "ecommerce": {
+        "title": "E-Commerce",
+        "description": "Professional online stores with secure payment technologies and exceptional user experience"
+      },
+      "social": {
+        "title": "Social Networks",
+        "description": "Social communication platforms with advanced features and privacy protection"
+      },
+      "saas": {
+        "title": "Profitable Projects",
+        "description": "Software as a service with comprehensive management and professional control panel"
+      },
+      "news": {
+        "title": "News Platforms",
+        "description": "Software as a service with comprehensive management and professional control panel"
+      },
+      "service": {
+        "title": "Service Projects",
+        "description": "Software as a service with comprehensive management and professional control panel"
+      }
+    }
+  },
+  "testimonials": {
+    "badge": "Hall of Fame",
+    "title": {
+      "part1": "What",
+      "highlight": "Programming Experts Say"
+    },
+    "subtitle": "A dedicated space to showcase the opinions of elite programming professors and web developers"
+  },
+  "faq": {
+    "badge": "Frequently Asked Questions",
+    "title": {
+      "part1": "Everything You Need to",
+      "highlight": "Know"
+    },
+    "subtitle": "Clear answers to the most frequently asked questions",
+    "questions": {
+      "q1": {
+        "question": "How much does it cost to build a website?",
+        "intro": "The cost depends on the type of project and its requirements:",
+        "pricing": {
+          "simple": "Simple informational website (5-8 pages):",
+          "simplePrice": "Starting from $350",
+          "medium": "Medium company website (10-15 pages):",
+          "mediumPrice": "Starting from $500",
+          "smallStore": "Small online store (up to 100 products):",
+          "smallStorePrice": "Starting from $700",
+          "largeStore": "Large online store (more than 100 products):",
+          "largeStorePrice": "Starting from $1,500",
+          "webapp": "Custom web application:",
+          "webappPrice": "Starting from $1,200"
+        },
+        "conclusion": "We provide a detailed and free quote after accurately understanding your needs."
+      },
+      "q2": {
+        "question": "How long does it take to create a website?",
+        "intro": "The duration depends on the project's size and complexity:",
+        "timeline": {
+          "simple": "Simple informational website:",
+          "simpleTime": "2-3 weeks",
+          "medium": "Medium company website:",
+          "mediumTime": "3-4 weeks",
+          "store": "Online store:",
+          "storeTime": "4-6 weeks",
+          "webapp": "Custom web application:",
+          "webappTime": "6-10 weeks"
+        },
+        "conclusion": "We commit to the agreed timeline, and if we're late, we provide compensation."
+      },
+      "q4": {
+        "question": "Can I edit the website content myself?",
+        "intro": "Yes, absolutely!",
+        "introText": "We build your website with a very easy control panel:",
+        "features": {
+          "f1": "Easily edit texts and images",
+          "f2": "Add and delete pages",
+          "f3": "Manage products (for stores)",
+          "f4": "Update blog"
+        },
+        "trainingTitle": "We train you for free:",
+        "training": {
+          "t1": "Personal training session (two hours)",
+          "t2": "Video usage guide",
+          "t3": "Continuous technical support for any inquiries"
+        }
+      },
+      "q5": {
+        "question": "What does technical support include?",
+        "intro": "Technical support includes:",
+        "support": {
+          "s1Title": "One month of free support:",
+          "s1Text": "Immediate resolution of any technical issues",
+          "s2Title": "Performance monitoring:",
+          "s2Text": "We monitor your website's speed and performance",
+          "s3Title": "Quick response:",
+          "s3Text": "We respond as quickly as possible"
+        },
+        "channelsTitle": "Support channels:",
+        "channels": {
+          "c1": "WhatsApp (fastest)",
+          "c2": "Direct phone",
+          "c3": "Email"
+        }
+      }
+    },
+    "cta": {
+      "title": "Didn't find an answer to your question?",
+      "subtitle": "Contact us directly and we'll answer all your inquiries within minutes",
+      "whatsapp": "Contact via WhatsApp",
+      "call": "Call Us Now"
+    }
+  }
+}
+

@@ -1,3 +1,4 @@
+import i18n from '../i18n';
 import { Project, ServiceCategory } from "../types";
 
 export const projects: Project[] = [
@@ -659,6 +660,62 @@ export const projects: Project[] = [
     ],
   },
 ];
+
+// Function to get translated service categories
+export const getServiceCategories = (): ServiceCategory[] => {
+  const t = i18n.t.bind(i18n);
+  
+  return [
+    {
+      id: "opensource",
+      title: t('projectTabs.categories.opensource.title'),
+      subtitle: "كود يلهم العالم",
+      icon: "",
+      description: t('projectTabs.categories.opensource.description'),
+      projects: projects.filter((p) => p.category === "opensource"),
+    },
+    {
+      id: "ecommerce",
+      title: t('projectTabs.categories.ecommerce.title'),
+      subtitle: "منصات تجارية تحقق الأرباح",
+      icon: "🛒",
+      description: t('projectTabs.categories.ecommerce.description'),
+      projects: projects.filter((p) => p.category === "ecommerce"),
+    },
+    {
+      id: "social",
+      title: t('projectTabs.categories.social.title'),
+      subtitle: "ربط العالم بالابتكار",
+      icon: "🌐",
+      description: t('projectTabs.categories.social.description'),
+      projects: projects.filter((p) => p.category === "social"),
+    },
+    {
+      id: "saas",
+      title: t('projectTabs.categories.saas.title'),
+      subtitle: "حلول متقدمة",
+      icon: "💰",
+      description: t('projectTabs.categories.saas.description'),
+      projects: projects.filter((p) => p.category === "saas"),
+    },
+    {
+      id: "news",
+      title: t('projectTabs.categories.news.title'),
+      subtitle: "اخبار و مقالات ",
+      icon: "📰",
+      description: t('projectTabs.categories.news.description'),
+      projects: projects.filter((p) => p.category === "news"),
+    },
+    {
+      id: "service",
+      title: t('projectTabs.categories.service.title'),
+      subtitle: "خدمي",
+      icon: "💚",
+      description: t('projectTabs.categories.service.description'),
+      projects: projects.filter((p) => p.category === "service"),
+    },
+  ];
+};
 
 export const serviceCategories: ServiceCategory[] = [
   {

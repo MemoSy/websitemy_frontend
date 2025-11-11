@@ -1,0 +1,498 @@
+{
+  "header": {
+    "nav": {
+      "home": "Ana Sayfa",
+      "projects": "Çalışmalarımız",
+      "allProjects": "Tüm Projeler",
+      "about": "Hakkımızda",
+      "contact": "İletişim",
+      "aiChat": "Bana Sor"
+    }
+  },
+  "footer": {
+    "tagline": "Sadece web siteleri oluşturmuyoruz... zamansız dijital deneyimler yaratıyoruz",
+    "quickLinks": {
+      "title": "Hızlı Bağlantılar",
+      "home": "Ana Sayfa",
+      "projects": "Projeler",
+      "about": "Hakkımızda"
+    },
+    "contact": {
+      "title": "İletişim",
+      "email": "info@websitemy.com",
+      "phone": "+905313345111",
+      "location": "Bursa \\ Türkiye"
+    },
+    "copyright": "© 2025 Tüm Hakları Saklıdır"
+  },
+  "about": {
+    "title": "Hakkımızda",
+    "subtitle": "İşletmelerin ve bireylerin teknik hedeflerine ulaşmalarına yardımcı olan yenilikçi dijital çözümler oluşturmada uzmanlaşmış bir web geliştirme şirketiyiz. 3 yılı aşkın pazar deneyimimizle, çeşitli müşterilerimizin ihtiyaçlarını karşılayan yüksek kaliteli hizmetler sunmaktan gurur duyuyoruz.",
+    "mission": {
+      "title": "Misyonumuz",
+      "description": "Kalite ve yüksek performans ile karakterize edilen yenilikçi teknik çözümler geliştirerek fikirleri olağanüstü dijital gerçekliğe dönüştürmeye çalışıyoruz. Teknolojinin insanlığa hizmet etmesi ve günlük yaşamın iyileştirilmesine katkıda bulunması gerektiğine inanıyoruz."
+    },
+    "values": {
+      "title": "Değerlerimiz",
+      "vision": {
+        "title": "Vizyon",
+        "description": "Her Suriyelinin güçlü bir çevrimiçi varlığa sahip olduğuna inanıyoruz. Amacımız, proje ve ürün sahiplerinin müşterilerine her zaman, her yerden ulaşmalarını sağlamaktır, çünkü başarı sınır veya zamanlama tanımaz."
+      },
+      "innovation": {
+        "title": "İnovasyon",
+        "description": "Rakiplerinizi geride bırakan bir web sitesi sunmak için en son küresel teknolojileri kullanıyoruz. Duyarlı tasarımdan ileri güvenliğe kadar, her detay müşterileri çeken ve satış sağlayan olağanüstü bir deneyim sağlamak için dikkatle planlanmıştır."
+      },
+      "team": {
+        "title": "Ekip",
+        "description": "Ekibimiz Suriye pazarını anlayan ve ihtiyaçlarınızı bilen profesyonel geliştiriciler ve tasarımcılardan oluşur. Sadece hizmet sağlayıcılar değil, başarınızın ortaklarıyız ve hedeflerinize ulaşana kadar her adımda yanınızdayız."
+      },
+      "quality": {
+        "title": "Kalite",
+        "description": "Her projede en yüksek küresel kalite standartlarına bağlıyız. Yükleme hızından güvenlik ve korumaya, çekici tasarımdan kullanım kolaylığına kadar, yerel pazara uygun fiyatlarla uluslararası sitelere denk bir web sitesi garanti ediyoruz."
+      }
+    },
+    "teamSection": {
+      "title": "Ekibimiz",
+      "members": {
+        "member1": {
+          "name": "Ahmed Al-Mubayed",
+          "role": "Müdür",
+          "skills": ["Genel Müdür"]
+        },
+        "member2": {
+          "name": "Mahmoud Al-Mubayed",
+          "role": "Full Stack Web Geliştirici",
+          "skills": ["React", "Node.js", "MongoDB", "next.js"]
+        },
+        "member3": {
+          "name": "Asma Al-Juma",
+          "role": "UI/UX Tasarımcı",
+          "skills": ["Figma", "Adobe XD", "User Research"]
+        },
+        "member4": {
+          "name": "Sara Hallaq",
+          "role": "Frontend Geliştirici",
+          "skills": ["React", "Javascript"]
+        }
+      }
+    },
+    "cta": {
+      "title": "Bir Projeniz mi Var?",
+      "description": "Fikrinizi olağanüstü bir dijital gerçekliğe dönüştürmenize yardımcı olmak için buradayız. Bir sonraki projeniz hakkında konuşalım",
+      "button": "Şimdi İletişime Geçin"
+    }
+  },
+  "contact": {
+    "title": "İletişim",
+    "subtitle": "Yeni bir projeniz mi var veya teknik danışmanlığa mı ihtiyacınız var? Size yardımcı olmak için buradayız!",
+    "form": {
+      "title": "Bize Mesaj Gönderin",
+      "name": "Tam Ad",
+      "namePlaceholder": "Tam adınız",
+      "email": "E-posta",
+      "emailPlaceholder": "your@email.com",
+      "subject": "Konu",
+      "subjectPlaceholder": "Mesajınızın konusu",
+      "message": "Mesaj",
+      "messagePlaceholder": "Mesajınızı buraya yazın...",
+      "required": "*",
+      "submit": "Mesaj Gönder",
+      "submitting": "Gönderiliyor...",
+      "success": "Mesajınız başarıyla gönderildi! Yakında sizinle iletişime geçeceğiz."
+    },
+    "info": {
+      "title": "İletişim Bilgileri",
+      "email": {
+        "title": "E-posta",
+        "value": "ahmeddalhalabi1@gmail.com"
+      },
+      "phone": {
+        "title": "Telefon",
+        "value": "+905313345111"
+      },
+      "address": {
+        "title": "Adres",
+        "value": "Bursa \\ Türkiye"
+      },
+      "hours": {
+        "title": "Çalışma Saatleri",
+        "value": "Pazartesi - Cuma: 09:00 - 17:00"
+      },
+      "website": {
+        "title": "Web Sitesi",
+        "value": "www.websitemy.com"
+      }
+    },
+    "faq": {
+      "title": "Sıkça Sorulan Sorular",
+      "q1": {
+        "question": "Proje geliştirme ne kadar sürer?",
+        "answer": "Geliştirme süresi projenin karmaşıklığına göre değişir, küçük ve orta ölçekli projeler için genellikle 2-8 hafta."
+      },
+      "q2": {
+        "question": "Bakım hizmetleri sunuyor musunuz?",
+        "answer": "Evet, web sitenizin en iyi performansta çalışmasını sağlamak için sürekli bakım ve teknik destek sağlıyoruz."
+      },
+      "q3": {
+        "question": "Proje maliyeti nedir?",
+        "answer": "Maliyet, proje gereksinimlerine göre belirlenir. Detayları görüştükten sonra ücretsiz teklif sunuyoruz."
+      },
+      "q4": {
+        "question": "Web siteleri mobil uyumlu mu?",
+        "answer": "Kesinlikle! Tüm web sitelerimiz tüm cihazlarda ve ekranlarda mükemmel çalışacak şekilde tasarlanmıştır."
+      }
+    }
+  },
+  "aiChat": {
+    "title": "Yapay Zeka Asistanı",
+    "subtitle": "WebSiteMy Projelerinde Uzman",
+    "description": "Herhangi bir proje, kullanılan teknolojiler, fiyatlandırma veya ihtiyacınız olan bilgiler hakkında sorun",
+    "chatSaved": "Sohbet otomatik olarak kaydedildi",
+    "currentContext": "Mevcut Bağlam",
+    "contexts": {
+      "news": "Haber Siteleri",
+      "ecommerce": "E-ticaret Mağazaları",
+      "education": "Eğitim Platformları",
+      "personal": "Kişisel Web Siteleri",
+      "social": "Sosyal Ağlar"
+    },
+    "welcomeMessage": "Merhaba! WebSiteMy projelerinde uzmanlaşmış akıllı asistanınızım. Projelerimiz, fiyatlandırma, kullanılan teknolojiler veya ihtiyacınız olan diğer bilgiler hakkında sorularınızı yanıtlayabilirim. Bugün size nasıl yardımcı olabilirim?",
+    "typing": "Yazıyor...",
+    "inputPlaceholder": "Sorunuzu buraya yazın...",
+    "quickQuestions": {
+      "title": "Sık Sorulan Sorular:",
+      "q1": "Proje fiyatları nedir?",
+      "q2": "Kullanılan teknolojiler"
+    },
+    "errorMessage": "Üzgünüm, doğru bir cevap alamadım. Lütfen tekrar deneyin."
+  },
+  "hero": {
+    "badge": "Web Geliştirmede En Güvenilir",
+    "title": {
+      "part1": "Fikirlerinizi",
+      "highlight": "Web Sitelerine",
+      "part2": "Dönüştürüyoruz ve Karınızı",
+      "percentage": "40%"
+    },
+    "subtitle": {
+      "main": "Hızlı ve Güvenli Web Çözümleri Oluşturmada Güvenilir Teknoloji Ortağınız",
+      "services": "Geliştirme + Tasarım + Hosting + Bakım"
+    },
+    "features": {
+      "delivery": "Zamanında Teslimat veya Para İade Garantisi",
+      "quality": "Kalite Güvencesi",
+      "support": "7/24 Sürekli Teknik Destek"
+    },
+    "cta": {
+      "consultation": "Ücretsiz Danışmanlık Alın",
+      "calculator": "Proje Maliyetinizi Hesaplayın"
+    },
+    "trust": {
+      "projects": "12+ Başarılı Proje",
+      "rating": "4.8/5 Müşteri Değerlendirmesi",
+      "support": "Sürekli Destek"
+    }
+  },
+  "services": {
+    "badge": "Hizmetlerimiz",
+    "title": "İşinizin Başarısı için Eksiksiz Web Çözümleri",
+    "subtitle": "İş hedeflerinize ulaşmanız için özel olarak tasarlanmış kapsamlı web geliştirme hizmetleri sunuyoruz",
+    "cta": {
+      "quote": "Teklif İsteyin",
+      "details": "Detayları İsteyin",
+      "viewSample": "Benzer Çalışmaları Görün"
+    },
+    "pricing": {
+      "from": "Başlangıç fiyatı",
+      "free": "Ücretsiz"
+    },
+    "service1": {
+      "title": "Kişisel Web Sitesi Geliştirme",
+      "description": "Profesyonel kimliğinizi yansıtan ve müşteri güveni oluşturan hızlı ve güvenli web siteleri",
+      "feature1": "Markanıza özel profesyonel tasarım",
+      "feature2": "2 saniyenin altında yüklenme hızı",
+      "feature3": "SEO optimizasyonu"
+    },
+    "service2": {
+      "badge": "En Popüler",
+      "title": "E-Ticaret Geliştirme",
+      "description": "Satışlarınızı artıran ve ürün yönetiminizi kolaylaştıran eksiksiz mağazalar",
+      "feature1": "Gelişmiş yönetim sistemi",
+      "feature2": "Güvenli çoklu ödeme geçitleri",
+      "feature3": "Detaylı raporlar ve analizler"
+    },
+    "service3": {
+      "title": "Startup Uygulamaları",
+      "description": "Fikrinizi pazarda piyasaya sürmeye hazır profesyonel bir uygulamaya dönüştürüyoruz",
+      "feature1": "4-6 haftada MVP geliştirme",
+      "feature2": "Modern ve çekici UX/UI tasarım",
+      "feature3": "Ölçeklenebilir teknik mimari"
+    },
+    "service4": {
+      "title": "Görsel Kimlik Yenileme",
+      "description": "Sitenizi marka evrimi yansıtan modern profesyonel bir tasarımla güncelliyoruz",
+      "feature1": "Uzman UI/UX ekibi",
+      "feature2": "Kapsamlı kimlik analizi",
+      "feature3": "Tam memnuniyet için çoklu revizyonlar"
+    },
+    "service5": {
+      "title": "Toplumsal Katkı Girişimi",
+      "description": "Topluluğa hizmet eden kuruluşlar ve dernekler için ücretsiz hizmet sunuyoruz",
+      "feature1": "Ücretsiz web sitesi geliştirme",
+      "feature2": "3 ay teknik destek",
+      "feature3": "İlk yıl ücretsiz hosting"
+    }
+  },
+  "stackCards": {
+    "badge": "Çalışma Süreci",
+    "title": {
+      "part1": "Şirketinizi Nasıl",
+      "highlight": "Başarılı Bir Gerçeğe",
+      "part2": "Dönüştürüyoruz?"
+    },
+    "subtitle": "Baştan sona net ve düzenli bir süreç ile teslim tarihlerine tam bağlılık",
+    "cards": {
+      "card1": {
+        "title": "Ücretsiz Danışmanlık ve İhtiyaçlarınızı Anlama",
+        "description": "Hedeflerinizi dinliyor ve proje gereksinimlerinizi derinlemesine analiz ederek, fikrinizin ilk günden başarıya ulaşmasını sağlayan kesin bir eylem planı oluşturuyoruz"
+      },
+      "card2": {
+        "title": "Şeffaf ve Detaylı Fiyat Teklifi",
+        "description": "Gizli ücretler olmadan tüm teknik, zaman çizelgesi ve maliyet detaylarını içeren net bir teklif sunuyoruz, üzerinde anlaşılan bütçeye bağlı kalma garantisi ile"
+      },
+      "card3": {
+        "title": "Profesyonel UI/UX Arayüz Tasarımı",
+        "description": "Marka kimliğinizi yansıtan, kullanım kolaylığına odaklanan ve en yüksek dönüşüm oranlarını elde eden pürüzsüz ve çekici bir kullanıcı deneyimi tasarlıyoruz"
+      },
+      "card4": {
+        "title": "Programlama ve Teknik Geliştirme",
+        "description": "Hız, güvenlik ve ölçeklenebilirliği garanti etmek için en son küresel teknolojilerle sitenizi oluşturuyoruz, gelecekte bakımı kolay temiz ve belgelenmiş kod ile"
+      },
+      "card5": {
+        "title": "Test ve Sürekli Geliştirme",
+        "description": "Projenin her parçasını yüksek hassasiyetle test ediyoruz, tüm cihazlarda ve tarayıcılarda verimli çalışmasını sağlıyoruz, geri bildirimlerinize göre sürekli iyileştirmeler yapıyoruz"
+      },
+      "card6": {
+        "title": "Resmi Lansман ve Yayın",
+        "description": "Sitenizi hızlı ve güvenli sunucularda tam performans ve güvenlik ayarlarıyla yayınlıyoruz, ziyaretçilerinizi mümkün olan en iyi deneyimle karşılamaya hazır olduğundan emin oluyoruz"
+      },
+      "card7": {
+        "title": "Sürekli Destek ve Bakım",
+        "description": "Yayından sonra sizinle kalıyoruz, hızlı teknik destek, düzenli güncellemeler ve sitenizin her zaman sorunsuz çalışmasını sağlamak için ortaya çıkabilecek her soruna anında çözümler sunuyoruz"
+      }
+    }
+  },
+  "currentProjects": {
+    "title": "Devam Eden Projeler",
+    "sections": {
+      "technologies": "Kullanılan Teknolojiler",
+      "features": "Ana Özellikler",
+      "projectName": "Proje Adı",
+      "progress": "İlerleme Seviyesi",
+      "startDate": "Başlangıç Tarihi",
+      "expectedDuration": "Tahmini Süre"
+    },
+    "cta": {
+      "title": "Benzer Bir Projeyle İlgileniyor musunuz?",
+      "description": "Projenizi tartışmak ve fikrinizi dijital bir gerçeğe dönüştürmek için bizimle iletişime geçin",
+      "button": "Bizimle İletişime Geçin"
+    },
+    "projects": {
+      "arabiaSwim": {
+        "shortTitle": "arabia-swim",
+        "name": "Arabia Swim - Terapötik Yüzme",
+        "status": "Geliştirme Aşamasında",
+        "tagline": "Entegre Terapötik Platform",
+        "features": {
+          "feature1": {
+            "title": "Modern Kullanıcı Arayüzü",
+            "desc": "Harika kullanıcı deneyimi ile görsel kimlik"
+          },
+          "feature2": {
+            "title": "Güvenli Ödeme Geçidi",
+            "desc": "Çoklu güvenli ödeme geçitleri ile entegrasyon"
+          },
+          "feature3": {
+            "title": "Terapötik Program Yönetimi",
+            "desc": "Detaylı analizlerle özelleştirilmiş tıbbi içerik"
+          },
+          "feature4": {
+            "title": "Uzman Makaleler",
+            "desc": "Detaylı bilgilerle özel tıbbi içerik"
+          }
+        }
+      },
+      "compreVende": {
+        "shortTitle": "CompreVende",
+        "name": "Hizmet Sağlayıcıları ve Müşterileri Bağlama",
+        "status": "Geliştirme Aşamasında",
+        "tagline": "Hizmet sağlayıcıları ile müşterileri bağlama",
+        "features": {
+          "feature1": {
+            "title": "Hizmet Sağlayıcı Bağlantısı",
+            "desc": "Hizmet sağlayıcıları ile müşterileri kolayca ve etkili bir şekilde bağlayın"
+          },
+          "feature2": {
+            "title": "Akıllı Bildirim Sistemi",
+            "desc": "E-posta ve kısa mesajlar ile anında uyarılar"
+          },
+          "feature3": {
+            "title": "Çoklu Bağlantı Yöntemleri",
+            "desc": "Taraflar arası iletişim için çeşitli seçenekler"
+          },
+          "feature4": {
+            "title": "Entegre Çözümler",
+            "desc": "Tüm ihtiyaçlarınızı tek bir yerde toplayan kapsamlı platform"
+          }
+        }
+      },
+      "allemni": {
+        "shortTitle": "ALLEMNI",
+        "name": "Akıllı Eğitim Platformu",
+        "status": "Geliştirme Aşamasında",
+        "tagline": "Online eğitim platformu",
+        "features": {
+          "feature1": {
+            "title": "AI Destekli Ders Oluşturma",
+            "desc": "Bir resim yükleyin ve AI otomatik olarak dersi oluştursun"
+          },
+          "feature2": {
+            "title": "Otomatik Akıllı Ödevler",
+            "desc": "AI kullanarak resimlerden çoktan seçmeli testler oluşturun"
+          },
+          "feature3": {
+            "title": "Dosya ve İçerik Yönetimi",
+            "desc": "Dosyaları ve dersleri tek bir yerde kolayca yükleyin ve düzenleyin"
+          },
+          "feature4": {
+            "title": "Özelleştirilmiş Özel Dersler",
+            "desc": "Belirli öğrenciler için özel dersler oluşturun ve paylaşın"
+          }
+        }
+      }
+    }
+  },
+  "projectTabs": {
+    "title": "Teknik Başarılarımız Galerisi",
+    "subtitle": "Geliştirdiğimiz çeşitli projeler koleksiyonu",
+    "viewMore": "Daha Fazla Görüntüle",
+    "categories": {
+      "opensource": {
+        "title": "Açık Kaynak",
+        "description": "Teknik topluluğun gelişimine katkıda bulunan açık kaynaklı yazılım projeleri"
+      },
+      "ecommerce": {
+        "title": "E-Ticaret",
+        "description": "Güvenli ödeme teknolojileri ve olağanüstü kullanıcı deneyimi ile profesyonel çevrimiçi mağazalar"
+      },
+      "social": {
+        "title": "Sosyal Ağlar",
+        "description": "Gelişmiş özelliklere ve gizlilik korumasına sahip sosyal iletişim platformları"
+      },
+      "saas": {
+        "title": "Kârlı Projeler",
+        "description": "Kapsamlı yönetim ve profesyonel kontrol paneli ile hizmet olarak yazılım"
+      },
+      "news": {
+        "title": "Haber Platformları",
+        "description": "Kapsamlı yönetim ve profesyonel kontrol paneli ile hizmet olarak yazılım"
+      },
+      "service": {
+        "title": "Hizmet Projeleri",
+        "description": "Kapsamlı yönetim ve profesyonel kontrol paneli ile hizmet olarak yazılım"
+      }
+    }
+  },
+  "testimonials": {
+    "badge": "Onur Listesi",
+    "title": {
+      "part1": "Ne Diyor",
+      "highlight": "Programlama Uzmanları"
+    },
+    "subtitle": "Seçkin programlama profesörleri ve web geliştiricilerin görüşlerini sergilemek için özel bir alan"
+  },
+  "faq": {
+    "badge": "Sıkça Sorulan Sorular",
+    "title": {
+      "part1": "Bilmeniz Gereken",
+      "highlight": "Her Şey"
+    },
+    "subtitle": "En sık sorulan sorulara net cevaplar",
+    "questions": {
+      "q1": {
+        "question": "Bir web sitesi oluşturmanın maliyeti ne kadardır?",
+        "intro": "Maliyet, projenin türüne ve gereksinimlerine bağlıdır:",
+        "pricing": {
+          "simple": "Basit tanıtım web sitesi (5-8 sayfa):",
+          "simplePrice": "$350'den başlayan fiyatlarla",
+          "medium": "Orta ölçekli şirket web sitesi (10-15 sayfa):",
+          "mediumPrice": "$500'den başlayan fiyatlarla",
+          "smallStore": "Küçük çevrimiçi mağaza (100 ürüne kadar):",
+          "smallStorePrice": "$700'den başlayan fiyatlarla",
+          "largeStore": "Büyük çevrimiçi mağaza (100'den fazla ürün):",
+          "largeStorePrice": "$1,500'den başlayan fiyatlarla",
+          "webapp": "Özel web uygulaması:",
+          "webappPrice": "$1,200'den başlayan fiyatlarla"
+        },
+        "conclusion": "İhtiyaçlarınızı tam olarak anladıktan sonra detaylı ve ücretsiz bir teklif sunuyoruz."
+      },
+      "q2": {
+        "question": "Bir web sitesi oluşturmak ne kadar sürer?",
+        "intro": "Süre, projenin büyüklüğüne ve karmaşıklığına bağlıdır:",
+        "timeline": {
+          "simple": "Basit tanıtım web sitesi:",
+          "simpleTime": "2-3 hafta",
+          "medium": "Orta ölçekli şirket web sitesi:",
+          "mediumTime": "3-4 hafta",
+          "store": "Çevrimiçi mağaza:",
+          "storeTime": "4-6 hafta",
+          "webapp": "Özel web uygulaması:",
+          "webappTime": "6-10 hafta"
+        },
+        "conclusion": "Üzerinde anlaşılan zaman çizelgesine bağlı kalıyoruz ve geç kalırsak tazminat sunuyoruz."
+      },
+      "q4": {
+        "question": "Web sitesi içeriğini kendim düzenleyebilir miyim?",
+        "intro": "Evet, kesinlikle!",
+        "introText": "Web sitenizi çok kolay bir kontrol paneli ile oluşturuyoruz:",
+        "features": {
+          "f1": "Metinleri ve görselleri kolayca düzenleme",
+          "f2": "Sayfa ekleme ve silme",
+          "f3": "Ürün yönetimi (mağazalar için)",
+          "f4": "Blog güncelleme"
+        },
+        "trainingTitle": "Sizi ücretsiz eğitiyoruz:",
+        "training": {
+          "t1": "Kişisel eğitim oturumu (iki saat)",
+          "t2": "Video kullanım kılavuzu",
+          "t3": "Her türlü sorgu için sürekli teknik destek"
+        }
+      },
+      "q5": {
+        "question": "Teknik destek neleri içerir?",
+        "intro": "Teknik destek şunları içerir:",
+        "support": {
+          "s1Title": "Bir ay ücretsiz destek:",
+          "s1Text": "Herhangi bir teknik sorunu anında çözüme kavuşturma",
+          "s2Title": "Performans izleme:",
+          "s2Text": "Web sitenizin hızını ve performansını izliyoruz",
+          "s3Title": "Hızlı yanıt:",
+          "s3Text": "Mümkün olan en kısa sürede yanıt veriyoruz"
+        },
+        "channelsTitle": "Destek kanalları:",
+        "channels": {
+          "c1": "WhatsApp (en hızlı)",
+          "c2": "Doğrudan telefon",
+          "c3": "E-posta"
+        }
+      }
+    },
+    "cta": {
+      "title": "Sorunuzun cevabını bulamadınız mı?",
+      "subtitle": "Doğrudan bizimle iletişime geçin, tüm sorularınızı dakikalar içinde yanıtlayacağız",
+      "whatsapp": "WhatsApp ile İletişime Geçin",
+      "call": "Şimdi Bizi Arayın"
+    }
+  }
+}
+

@@ -1,5 +1,6 @@
-import React, { useLayoutEffect, useRef } from 'react';
-import gsap from 'gsap';
+import React, { useRef, useLayoutEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
   MessageSquare, 
@@ -23,6 +24,8 @@ interface Card {
 }
 
 const StackCards: React.FC = () => {
+  const { t, i18n } = useTranslation();
+  const isRTL = i18n.dir() === 'rtl';
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const triggersRef = useRef<ScrollTrigger[]>([]);
@@ -31,56 +34,56 @@ const StackCards: React.FC = () => {
     {
       id: 1,
       icon: <MessageSquare className="w-10 h-10" />,
-      title: 'استشارة مجانية وفهم احتياجاتك',
-      description: 'نبدأ بفهم رؤيتك واحتياجاتك الحقيقية من خلال استشارة مجانية شاملة',
+      title: t('stackCards.cards.card1.title'),
+      description: t('stackCards.cards.card1.description'),
       gradient: 'from-[#6C5CE7] to-[#00D9FF]',
       iconColor: '#6C5CE7'
     },
     {
       id: 2,
       icon: <Users className="w-10 h-10" />,
-      title: 'عرض سعر شفاف ومفصل',
-      description: 'نقدم عرض سعر واضح ومفصل بدون تكاليف خفية أو مفاجآت',
+      title: t('stackCards.cards.card2.title'),
+      description: t('stackCards.cards.card2.description'),
       gradient: 'from-[#00D9FF] to-[#00FFA3]',
       iconColor: '#00D9FF'
     },
     {
       id: 3,
       icon: <Palette className="w-10 h-10" />,
-      title: 'تصميم واجهات احترافية UI/UX',
-      description: 'تصميم واجهات عصرية تعكس هوية علامتك وتحسن تجربة عملائك',
+      title: t('stackCards.cards.card3.title'),
+      description: t('stackCards.cards.card3.description'),
       gradient: 'from-[#00FFA3] to-[#6C5CE7]',
       iconColor: '#00FFA3'
     },
     {
       id: 4,
       icon: <Code className="w-10 h-10" />,
-      title: 'البرمجة والتطوير التقني',
-      description: 'نقوم ببناء موقعك باستخدام أحدث التقنيات مع أعلى معايير الأمان والأداء',
+      title: t('stackCards.cards.card4.title'),
+      description: t('stackCards.cards.card4.description'),
       gradient: 'from-[#6C5CE7] to-[#00D9FF]',
       iconColor: '#6C5CE7'
     },
     {
       id: 5,
       icon: <Rocket className="w-10 h-10" />,
-      title: 'الاختبار والتطوير المستمر',
-      description: 'اختبار شامل لضمان عمل الموقع بشكل مثالي على جميع الأجهزة',
+      title: t('stackCards.cards.card5.title'),
+      description: t('stackCards.cards.card5.description'),
       gradient: 'from-[#00D9FF] to-[#00FFA3]',
       iconColor: '#00D9FF'
     },
     {
       id: 6,
       icon: <Award className="w-10 h-10" />,
-      title: 'الإطلاق والنشر الرسمي',
-      description: 'نطلق موقعك بشكل احترافي مع ضمان استقرار ونشره على منصات موثوقة',
+      title: t('stackCards.cards.card6.title'),
+      description: t('stackCards.cards.card6.description'),
       gradient: 'from-[#00FFA3] to-[#6C5CE7]',
       iconColor: '#00FFA3'
     },
     {
       id: 7,
       icon: <HeadphonesIcon className="w-10 h-10" />,
-      title: 'الدعم والصيانة المستمرة',
-      description: 'نقدم لك دعم فني مدى الحياة وتحديثات دورية مجانية لمدة ',
+      title: t('stackCards.cards.card7.title'),
+      description: t('stackCards.cards.card7.description'),
       gradient: 'from-[#6C5CE7] to-[#00D9FF]',
       iconColor: '#6C5CE7'
     }
@@ -96,7 +99,7 @@ const StackCards: React.FC = () => {
       const validCards = cardsRef.current.filter((card): card is HTMLDivElement => card !== null);
       
       validCards.forEach((card, index) => {
-        // الحصول على عنصر الرقم داخل البطاقة
+        // Get the number element inside the card
         const numberElement = card.querySelector('.card-number');
         
         if (index < validCards.length - 1) {
@@ -172,45 +175,45 @@ const StackCards: React.FC = () => {
     }, section);
 
     return () => {
-      // إيقاف جميع ScrollTriggers فوراً بترتيب عكسي
+      // Stop all ScrollTriggers immediately in reverse order
       [...triggersRef.current].reverse().forEach(trigger => {
         trigger.kill(true);
       });
       triggersRef.current = [];
       
-      // إعادة تعيين السياق
+      // Reset context
       ctx.revert();
     };
-  }, []);
+  }, [i18n.language]); // Re-run when language changes
 
   return (
     <div ref={sectionRef} className="relative bg-[#0F1729]">
-      {/* خلفية متحركة */}
+      {/* Animated background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 -left-32 w-96 h-96 bg-[#6C5CE7]/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-[#00FFA3]/10 rounded-full blur-3xl"></div>
       </div>
 
-      {/* العنوان */}
+      {/* Section Header */}
       <div className="container mx-auto px-4 sm:px-6 pt-20 md:pt-24 relative z-10">
-        <div className="text-center max-w-4xl mx-auto">
+        <div className={`text-center max-w-4xl mx-auto ${isRTL ? 'rtl' : 'ltr'}`}>
           <div className="inline-block px-4 py-2 bg-[#6C5CE7]/10 border border-[#6C5CE7]/30 rounded-full mb-4">
-            <span className="text-[#6C5CE7] font-semibold text-sm">خطوات العمل</span>
+            <span className="text-[#6C5CE7] font-semibold text-sm">{t('stackCards.badge')}</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-4 leading-tight px-4">
-            كيف نحول شركتك إلى{' '}
+          <h2 className={`text-3xl sm:text-4xl md:text-5xl font-black text-white mb-4 leading-tight px-4 ${isRTL ? 'text-right' : 'text-left'}`}>
+            {t('stackCards.title.part1')}{' '}
             <span className="bg-gradient-to-r from-[#6C5CE7] via-[#00D9FF] to-[#00FFA3] bg-clip-text text-transparent">
-              واقع ناجح
+              {t('stackCards.title.highlight')}
             </span>
-            ؟
+            {t('stackCards.title.part2')}
           </h2>
-          <p className="text-[#A0AEC0] text-base sm:text-lg md:text-xl leading-relaxed px-4">
-            عملية واضحة ومنظمة من البداية إلى النهاية مع التزام تام بالمواعيد
+          <p className={`text-[#A0AEC0] text-base sm:text-lg md:text-xl leading-relaxed px-4 ${isRTL ? 'text-right' : 'text-left'}`}>
+            {t('stackCards.subtitle')}
           </p>
         </div>
       </div>
 
-      {/* البطاقات المكدسة */}
+      {/* Stacked Cards */}
       <div className="relative pb-20 md:pb-24">
         {cards.map((card, index) => (
           <div
@@ -228,8 +231,8 @@ const StackCards: React.FC = () => {
                   transformOrigin: 'center top',
                 }}
               >
-                {/* رقم الخطوة */}
-                <div className="flex items-start justify-between mb-6 sm:mb-8">
+                {/* Step number */}
+                <div className={`flex items-start justify-between mb-6 sm:mb-8 ${isRTL ? 'flex-row' : 'flex-row-reverse'}`}>
                   <div 
                     className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg transition-all duration-300"
                     style={{
@@ -252,17 +255,17 @@ const StackCards: React.FC = () => {
                   </div>
                 </div>
 
-                {/* المحتوى */}
+                {/* Content */}
                 <div className="space-y-3 sm:space-y-4 md:space-y-6">
-                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight">
+                  <h3 className={`text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight ${isRTL ? 'text-right' : 'text-left'}`}>
                     {card.title}
                   </h3>
-                  <p className="text-[#A0AEC0] text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed">
+                  <p className={`text-[#A0AEC0] text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed ${isRTL ? 'text-right' : 'text-left'}`}>
                     {card.description}
                   </p>
                 </div>
 
-                {/* خط الفاصل */}
+                {/* Divider line */}
                 <div 
                   className={`h-1 w-full bg-gradient-to-r ${card.gradient} opacity-30 rounded-full mt-6 sm:mt-8 md:mt-10`}
                 ></div>

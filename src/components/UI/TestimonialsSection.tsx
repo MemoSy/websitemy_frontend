@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { Github, Linkedin, Twitter, Facebook, Youtube, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface Testimonial {
@@ -19,6 +20,9 @@ interface Testimonial {
 }
 
 const TestimonialsSection = () => {
+  const { t, i18n } = useTranslation();
+  const isRTL = i18n.dir() === 'rtl';
+  
   const testimonials: Testimonial[] = [
     {
       id: "1",
@@ -92,16 +96,16 @@ const TestimonialsSection = () => {
         {/* العنوان */}
         <div className="text-center mb-20">
           <div className="inline-block px-4 py-2 bg-[#00FFA3]/10 border border-[#00FFA3]/30 rounded-full mb-6">
-            <span className="text-[#00FFA3] font-semibold text-sm">قائمة الشرف</span>
+            <span className="text-[#00FFA3] font-semibold text-sm">{t('testimonials.badge')}</span>
           </div>
           <h2 className="text-xl md:text-5xl font-black text-white mb-6 leading-tight">
-            ما يقوله{' '}
+            {t('testimonials.title.part1')}{' '}
             <span className="bg-gradient-to-r from-[#6C5CE7] via-[#00D9FF] to-[#00FFA3] bg-clip-text text-transparent">
-              خبراء البرمجة
+              {t('testimonials.title.highlight')}
             </span>
           </h2>
           <p className="text-[#A0AEC0] text-xs md:text-xl max-w-3xl mx-auto">
-            مساحة مخصصة لعرض آراء نخبة من أساتذة البرمجة ومطوري الويب
+            {t('testimonials.subtitle')}
           </p>
         </div>
 

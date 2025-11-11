@@ -191,12 +191,46 @@ const analyzeContext = (conversationHistory: Array<{text: string, isUser: boolea
   return { currentTopic, lastMentionedProject };
 };
 
+// دالة لاكتشاف لغة النص
+const detectLanguage = (text: string): 'ar' | 'en' | 'tr' => {
+  // تنظيف النص من الأرقام والرموز
+  const cleanText = text.replace(/[0-9\s\.,!?@#$%^&*()_+\-=\[\]{};:'"\|,.<>\/?]/g, '');
+  
+  // الأحرف العربية
+  const arabicChars = (cleanText.match(/[\u0600-\u06FF]/g) || []).length;
+  
+  // الأحرف التركية المميزة
+  const turkishChars = (cleanText.match(/[çğıöşüÇĞİÖŞÜ]/gi) || []).length;
+  
+  // الأحرف اللاتينية
+  const latinChars = (cleanText.match(/[a-zA-Z]/g) || []).length;
+  
+  // تحديد اللغة بناءً على النسب
+  const totalChars = arabicChars + turkishChars + latinChars;
+  
+  if (totalChars === 0) return 'ar'; // افتراضي
+  
+  const arabicRatio = arabicChars / totalChars;
+  const turkishRatio = turkishChars / totalChars;
+  
+  if (arabicRatio > 0.3) return 'ar';
+  if (turkishRatio > 0.05 || turkishChars > 2) return 'tr'; // التركية لها أحرف مميزة
+  return 'en'; // افتراضي للإنجليزية
+};
+
 export const callChatGPT = async (
   currentMessage: string,
   context: AIKnowledgeBase,
   conversationHistory: Array<{text: string, isUser: boolean}> = []
 ) => {
   try {
+    // اكتشاف لغة السؤال
+    const detectedLanguage = detectLanguage(currentMessage);
+    const languageInstruction = 
+      detectedLanguage === 'ar' ? '⚠️ **هام جداً:** يجب أن يكون الرد بالكامل باللغة العربية فقط.' :
+      detectedLanguage === 'en' ? '⚠️ **CRITICAL:** Your response must be entirely in English only.' :
+      '⚠️ **ÇOK ÖNEMLİ:** Yanıtınız tamamen Türkçe olmalıdır.';
+    
     // تحليل السياق
     const contextAnalysis = analyzeContext(conversationHistory);
     
@@ -225,7 +259,9 @@ export const callChatGPT = async (
 
     // بناء تاريخ المحادثة
     const conversationContext = conversationHistory.length > 0 
-      ? `تاريخ المحادثة السابقة:
+      ? `${languageInstruction}
+
+تاريخ المحادثة السابقة:
 ${conversationHistory.slice(-6).map((msg, index) => 
   `${index + 1}. ${msg.isUser ? 'المستخدم' : 'المساعد'}: ${msg.text}`
 ).join('\n')}
@@ -236,7 +272,9 @@ ${conversationHistory.slice(-6).map((msg, index) =>
 ${faqContext}
 
 السؤال الحالي: ${currentMessage}`
-      : `السؤال: ${currentMessage}${faqContext}`;
+      : `${languageInstruction}
+
+السؤال: ${currentMessage}${faqContext}`;
 
     // استخدام System Prompt المتقدم
     const systemPrompt = generateAdvancedSystemPrompt(
