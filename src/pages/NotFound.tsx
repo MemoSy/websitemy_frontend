@@ -2,14 +2,18 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Home, Search, ArrowRight } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import SEO from '../components/SEO/SEO';
 
 const NotFound = () => {
+  const { t, i18n } = useTranslation();
+  const isRTL = i18n.dir() === 'rtl';
+  
   return (
     <div className="min-h-screen flex items-center justify-center">
       <SEO 
-        title="الصفحة غير موجودة - خطأ 404"
-        description="الصفحة التي تبحث عنها غير موجودة. تصفح مشاريعنا أو عد إلى الصفحة الرئيسية لاستكشاف خدمات WebSiteMy."
+        title={t('notFound.seo.title')}
+        description={t('notFound.seo.description')}
         noIndex={true}
         url="/404"
       />
@@ -39,30 +43,30 @@ const NotFound = () => {
           </motion.h1>
           
           {/* Message */}
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-            الصفحة غير موجودة
+          <h2 className={`text-2xl md:text-3xl font-bold text-white mb-4 ${isRTL ? 'text-right' : 'text-left'}`}>
+            {t('notFound.heading')}
           </h2>
-          <p className="text-gray-400 mb-8 max-w-md mx-auto">
-            عذراً، الصفحة التي تبحث عنها غير موجودة أو قد تم نقلها إلى موقع آخر.
+          <p className={`text-gray-400 mb-8 max-w-md mx-auto ${isRTL ? 'text-right' : 'text-left'}`}>
+            {t('notFound.message')}
           </p>
           
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link
               to="/"
-              className="group flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-xl hover:from-cyan-600 hover:to-purple-600 transition-all transform hover:scale-105"
+              className={`group flex items-center gap-2 ${isRTL ? 'flex-row-reverse' : ''} px-6 py-3 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-xl hover:from-cyan-600 hover:to-purple-600 transition-all transform hover:scale-105`}
             >
               <Home className="w-5 h-5" />
-              <span>العودة للرئيسية</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <span>{t('notFound.backToHome')}</span>
+              <ArrowRight className={`w-4 h-4 ${isRTL ? 'rotate-180 group-hover:-translate-x-1' : 'group-hover:translate-x-1'} transition-transform`} />
             </Link>
             
             <Link
               to="/projects"
-              className="group flex items-center gap-2 px-6 py-3 border-2 border-cyan-500 text-cyan-400 rounded-xl hover:bg-cyan-500 hover:text-white transition-all transform hover:scale-105"
+              className={`group flex items-center gap-2 ${isRTL ? 'flex-row-reverse' : ''} px-6 py-3 border-2 border-cyan-500 text-cyan-400 rounded-xl hover:bg-cyan-500 hover:text-white transition-all transform hover:scale-105`}
             >
               <Search className="w-5 h-5" />
-              <span>تصفح المشاريع</span>
+              <span>{t('notFound.browseProjects')}</span>
             </Link>
           </div>
           

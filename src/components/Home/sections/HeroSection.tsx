@@ -108,9 +108,7 @@ const HeroSection = () => {
 
             {/* CTA Buttons */}
             <div
-              className={`flex flex-col sm:flex-row gap-4 !mb-8 ${
-                isRTL ? "" : "sm:flex-row-reverse"
-              }`}
+              className={`flex flex-col sm:flex-row gap-4 !mb-8`}
             >
               <button
                 className={`flex items-center justify-center gap-2 bg-gradient-to-r from-[#00D9FF] to-[#6C5CE7] text-white px-8 py-4 rounded-xl text-sm md:text-base 2xl:text-lg font-semibold hover:shadow-[0_0_40px_rgba(0,217,255,0.8)] transition-all hover:-translate-y-1 ${

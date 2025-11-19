@@ -67,19 +67,30 @@ const Header = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.8 }}
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        isScrolled
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled
           ? "bg-black/80 backdrop-blur-xl border-b border-cyan-500/20"
           : "bg-transparent"
-      }`}
+        }`}
     >
       <div className="mx-auto w-full max-w-[1288px] px-4 py-4 sm:px-8">
-        <nav className="flex items-center justify-between">
+        <nav className={`flex items-center justify-between ${isRTL ? "flex-row-reverse" : "flex-row"}`}>
           {/* RTL: الرئيسية (يمين) | الشعار (يسار) */}
           {/* LTR: HOME (يسار) | الشعار (يمين) */}
 
           {isRTL ? (
             <>
+              {/* Logo + Language Switcher - Left Side (Arabic) */}
+              <div className="flex items-center gap-4">
+                <LanguageSwitcher />
+                <Link to="/" className="flex items-center group">
+                  <img
+                    src="/images/logo.png"
+                    alt="شعار موقع WebSiteMy لتطوير المواقع الإلكترونية"
+                    className="w-36"
+                  />
+                </Link>
+              </div>
+              
               {/* Desktop Navigation - Right Side (Arabic) */}
               <div className="hidden md:flex items-center gap-4">
                 {navItems.map((item) => {
@@ -95,19 +106,17 @@ const Header = () => {
                       >
                         <Link
                           to={item.path}
-                          className={`flex items-center flex-row-reverse gap-2 px-4 py-2 rounded-lg transition-all duration-300 group ${
-                            location.pathname === item.path ||
-                            location.pathname.startsWith("/project")
+                          className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 group ${location.pathname === item.path ||
+                              location.pathname.startsWith("/project")
                               ? "text-cyan-300 bg-cyan-500/10 border border-cyan-500/30"
                               : "text-gray-300 hover:text-cyan-300 hover:bg-cyan-500/5"
-                          }`}
+                            }`}
                         >
                           <Icon className="w-4 h-4" />
                           <span className="font-medium">{item.label}</span>
                           <ChevronDown
-                            className={`w-4 h-4 transition-transform ${
-                              isProjectsDropdownOpen ? "rotate-180" : ""
-                            }`}
+                            className={`w-4 h-4 transition-transform ${isProjectsDropdownOpen ? "rotate-180" : ""
+                              }`}
                           />
                         </Link>
 
@@ -156,11 +165,10 @@ const Header = () => {
                     <Link
                       key={item.path}
                       to={item.path}
-                      className={`flex items-center flex-row-reverse gap-2 px-4 py-2 rounded-lg transition-all duration-300 group ${
-                        location.pathname === item.path
+                      className={`flex items-center flex-row-reverse gap-2 px-4 py-2 rounded-lg transition-all duration-300 group ${location.pathname === item.path
                           ? "text-cyan-300 bg-cyan-500/10 border border-cyan-500/30"
                           : "text-gray-300 hover:text-cyan-300 hover:bg-cyan-500/5"
-                      }`}
+                        }`}
                     >
                       <Icon className="w-4 h-4" />
                       <span className="font-medium">{item.label}</span>
@@ -169,17 +177,7 @@ const Header = () => {
                 })}
               </div>
 
-              {/* Logo + Language Switcher - Left Side (Arabic) */}
-              <div className="flex items-center gap-4">
-                <LanguageSwitcher />
-                <Link to="/" className="flex items-center group">
-                  <img
-                    src="/images/logo.png"
-                    alt="شعار موقع WebSiteMy لتطوير المواقع الإلكترونية"
-                    className="w-36"
-                  />
-                </Link>
-              </div>
+
             </>
           ) : (
             <>
@@ -210,19 +208,17 @@ const Header = () => {
                       >
                         <Link
                           to={item.path}
-                          className={`flex items-center flex-row gap-2 px-4 py-2 rounded-lg transition-all duration-300 group ${
-                            location.pathname === item.path ||
-                            location.pathname.startsWith("/project")
+                          className={`flex items-center flex-row gap-2 px-4 py-2 rounded-lg transition-all duration-300 group ${location.pathname === item.path ||
+                              location.pathname.startsWith("/project")
                               ? "text-cyan-300 bg-cyan-500/10 border border-cyan-500/30"
                               : "text-gray-300 hover:text-cyan-300 hover:bg-cyan-500/5"
-                          }`}
+                            }`}
                         >
                           <Icon className="w-4 h-4" />
                           <span className="font-medium">{item.label}</span>
                           <ChevronDown
-                            className={`w-4 h-4 transition-transform ${
-                              isProjectsDropdownOpen ? "rotate-180" : ""
-                            }`}
+                            className={`w-4 h-4 transition-transform ${isProjectsDropdownOpen ? "rotate-180" : ""
+                              }`}
                           />
                         </Link>
 
@@ -271,11 +267,10 @@ const Header = () => {
                     <Link
                       key={item.path}
                       to={item.path}
-                      className={`flex items-center flex-row gap-2 px-4 py-2 rounded-lg transition-all duration-300 group ${
-                        location.pathname === item.path
+                      className={`flex items-center flex-row gap-2 px-4 py-2 rounded-lg transition-all duration-300 group ${location.pathname === item.path
                           ? "text-cyan-300 bg-cyan-500/10 border border-cyan-500/30"
                           : "text-gray-300 hover:text-cyan-300 hover:bg-cyan-500/5"
-                      }`}
+                        }`}
                     >
                       <Icon className="w-4 h-4" />
                       <span className="font-medium">{item.label}</span>
@@ -319,14 +314,12 @@ const Header = () => {
                         <Link
                           to={item.path}
                           onClick={() => setIsMenuOpen(false)}
-                          className={`flex items-center ${
-                            isRTL ? "flex-row-reverse" : "flex-row"
-                          } gap-3 px-4 py-3 rounded-lg transition-all duration-300 mb-2 ${
-                            location.pathname === item.path ||
-                            location.pathname.startsWith("/project")
+                          className={`flex items-center ${isRTL ? "flex-row-reverse" : "flex-row"
+                            } gap-3 px-4 py-3 rounded-lg transition-all duration-300 mb-2 ${location.pathname === item.path ||
+                              location.pathname.startsWith("/project")
                               ? "text-cyan-300 bg-cyan-500/10 border border-cyan-500/30"
                               : "text-gray-300 hover:text-cyan-300 hover:bg-cyan-500/5"
-                          }`}
+                            }`}
                         >
                           <Icon className="w-5 h-5" />
                           <span className="font-medium">{item.label}</span>
@@ -337,11 +330,9 @@ const Header = () => {
                               key={dropdownItem.path}
                               to={dropdownItem.path}
                               onClick={() => setIsMenuOpen(false)}
-                              className={`flex items-center ${
-                                isRTL ? "flex-row-reverse" : "flex-row"
-                              } gap-3 px-4 py-2 rounded-lg hover:bg-cyan-500/10 transition-all ${
-                                isRTL ? "text-right" : "text-left"
-                              } text-gray-400 hover:text-cyan-300 text-sm`}
+                              className={`flex items-center ${isRTL ? "flex-row-reverse" : "flex-row"
+                                } gap-3 px-4 py-2 rounded-lg hover:bg-cyan-500/10 transition-all ${isRTL ? "text-right" : "text-left"
+                                } text-gray-400 hover:text-cyan-300 text-sm`}
                             >
                               <span>{dropdownItem.icon}</span>
                               <span>{dropdownItem.label}</span>
@@ -357,13 +348,11 @@ const Header = () => {
                       key={item.path}
                       to={item.path}
                       onClick={() => setIsMenuOpen(false)}
-                      className={`flex items-center ${
-                        isRTL ? "flex-row-reverse" : "flex-row"
-                      } gap-3 px-4 py-3 rounded-lg transition-all duration-300 mb-2 last:mb-0 ${
-                        location.pathname === item.path
+                      className={`flex items-center ${isRTL ? "flex-row-reverse" : "flex-row"
+                        } gap-3 px-4 py-3 rounded-lg transition-all duration-300 mb-2 last:mb-0 ${location.pathname === item.path
                           ? "text-cyan-300 bg-cyan-500/10 border border-cyan-500/30"
                           : "text-gray-300 hover:text-cyan-300 hover:bg-cyan-500/5"
-                      }`}
+                        }`}
                     >
                       <Icon className="w-5 h-5" />
                       <span className="font-medium">{item.label}</span>

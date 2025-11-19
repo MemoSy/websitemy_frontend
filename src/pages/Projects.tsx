@@ -1,17 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Search, Filter, Grid, List } from 'lucide-react';
+import { Search, Grid, List } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { projects, serviceCategories } from '../data/projects';
+import { useTranslation } from 'react-i18next';
+import { projects, getServiceCategories } from '../data/projects';
 import ProjectCard from '../components/UI/ProjectCard';
 import SEO from '../components/SEO/SEO';
 
 const Projects = () => {
+  const { t, i18n } = useTranslation();
+  const isRTL = i18n.dir() === 'rtl';
+  
   const [searchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [filteredProjects, setFilteredProjects] = useState(projects);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [serviceCategories, setServiceCategories] = useState(getServiceCategories());
+
+  // تحديث التصنيفات عند تغيير اللغة
+  useEffect(() => {
+    setServiceCategories(getServiceCategories());
+  }, [i18n.language]);
 
   useEffect(() => {
     const category = searchParams.get('category');
@@ -47,9 +57,9 @@ const Projects = () => {
   return (
     <div className="min-h-screen py-20">
       <SEO 
-        title="مشاريعنا - أعمال WebSiteMy في تطوير المواقع"
-        description="استكشف مجموعة متنوعة من مشاريع التطوير التي نفذناها في WebSiteMy. من المواقع الشخصية إلى المتاجر الإلكترونية والتطبيقات المتقدمة باستخدام React و TypeScript."
-        keywords="مشاريع تطوير, أعمال سابقة, مواقع مطورة, تطبيقات ويب, معرض أعمال, portfolio"
+        title={t('projects.seo.title')}
+        description={t('projects.seo.description')}
+        keywords={t('projects.seo.keywords')}
         url="/projects"
       />
       <div className="container mx-auto px-4">
@@ -75,11 +85,11 @@ const Projects = () => {
             </div>
           ) : (
             <>
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                معرض المشاريع
+              <h1 className={`text-4xl md:text-5xl font-bold text-white mb-6 ${isRTL ? 'text-right' : 'text-left'}`}>
+                {t('projects.title')}
               </h1>
-              <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                اكتشف مجموعة متنوعة من المشاريع المبتكرة التي طورناها
+              <p className={`text-xl text-gray-400 max-w-2xl mx-auto ${isRTL ? 'text-right' : 'text-left'}`}>
+                {t('projects.subtitle')}
               </p>
             </>
           )}
@@ -101,13 +111,13 @@ const Projects = () => {
                   : 'text-gray-400 bg-gray-800/50 border border-gray-700 hover:text-cyan-300 hover:border-cyan-500/50'
               }`}
             >
-              جميع المشاريع
+              {t('projects.allProjects')}
             </button>
             {serviceCategories.map((category) => (
               <button
                 key={category.id}
                 onClick={() => setSelectedCategory(category.id)}
-                className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 flex items-center space-x-2 ${
+                className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 flex items-center ${isRTL ? 'space-x-reverse' : ''} space-x-2 ${
                   selectedCategory === category.id
                     ? 'text-white bg-gradient-to-r from-cyan-500 to-purple-500'
                     : 'text-gray-400 bg-gray-800/50 border border-gray-700 hover:text-cyan-300 hover:border-cyan-500/50'
@@ -130,18 +140,18 @@ const Projects = () => {
           <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">
             {/* Search */}
             <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+              <Search className={`absolute ${isRTL ? 'right-3' : 'left-3'} top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400`} />
               <input
                 type="text"
-                placeholder="البحث في المشاريع..."
+                placeholder={t('projects.searchPlaceholder')}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-gray-800 border border-gray-600 rounded-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all text-white"
+                className={`w-full ${isRTL ? 'pr-10 pl-4' : 'pl-10 pr-4'} py-3 bg-gray-800 border border-gray-600 rounded-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all text-white ${isRTL ? 'text-right' : 'text-left'}`}
               />
             </div>
 
             {/* View Mode Toggle */}
-            <div className="flex items-center space-x-4">
+            <div className={`flex items-center ${isRTL ? 'space-x-reverse' : ''} space-x-4`}>
               <div className="flex items-center bg-gray-800 rounded-lg p-1">
                 <button
                   onClick={() => setViewMode('grid')}
@@ -176,8 +186,8 @@ const Projects = () => {
         >
           {filteredProjects.length === 0 ? (
             <div className="text-center py-20">
-              <p className="text-xl text-gray-400">
-                لا توجد مشاريع تطابق البحث المطلوب
+              <p className={`text-xl text-gray-400 ${isRTL ? 'text-right' : 'text-left'}`}>
+                {t('projects.noResults')}
               </p>
             </div>
           ) : (
@@ -204,10 +214,10 @@ const Projects = () => {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="text-center mt-12"
         >
-          <p className="text-gray-400">
-            عرض {filteredProjects.length} من {projects.length} مشروع
+          <p className={`text-gray-400 ${isRTL ? 'text-right' : 'text-left'}`}>
+            {t('projects.showing')} {filteredProjects.length} {t('projects.of')} {projects.length} {t('projects.project')}
             {selectedCategory !== 'all' && selectedCategoryInfo && (
-              <span className="text-cyan-400"> في فئة {selectedCategoryInfo.title}</span>
+              <span className="text-cyan-400"> {t('projects.inCategory')} {selectedCategoryInfo.title}</span>
             )}
           </p>
         </motion.div>

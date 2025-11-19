@@ -9,9 +9,35 @@ const AdminPage = () => {
 
   useEffect(() => {
     const checkAuth = async () => {
-      if (isAdminLoggedIn()) {
+      const hasToken = isAdminLoggedIn();
+      console.log('🔍 Checking auth... Has token:', hasToken);
+      
+      if (hasToken) {
+        // If we have a token, assume authenticated until proven otherwise
+        // This prevents logout on refresh when network is slow
+        setIsAuthenticated(true);
+        
         const isValid = await verifyAdminToken();
-        setIsAuthenticated(isValid);
+        console.log('✅ Token valid:', isValid);
+        
+        // Only logout if explicitly invalid (401 response)
+        if (!isValid) {
+          // Check if token still exists (verifyAdminToken might have been a network error)
+          const stillHasToken = isAdminLoggedIn();
+          if (stillHasToken) {
+            console.log('⚠️ Verification failed but token exists - keeping user logged in');
+            // Keep authenticated, let AdminDashboard handle any errors
+            setIsAuthenticated(true);
+          } else {
+            console.log('🗑️ No token - logging out');
+            setIsAuthenticated(false);
+            localStorage.removeItem('adminToken');
+            sessionStorage.removeItem('adminToken');
+          }
+        }
+      } else {
+        console.log('❌ No token found');
+        setIsAuthenticated(false);
       }
       setIsLoading(false);
     };

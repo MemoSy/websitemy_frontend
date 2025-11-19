@@ -52,9 +52,7 @@ const CurrentProjectsSection = () => {
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">
           <h2
-            className={`text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent ${
-              isRTL ? "text-right" : "text-left"
-            }`}
+            className={`text-3xl sm:text-4xl md:text-5xl py-2 font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent text-center`}
           >
             {t("currentProjects.title")}
           </h2>

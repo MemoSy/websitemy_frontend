@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ExternalLink, Star } from 'lucide-react';
+import { ExternalLink, Eye } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Project } from '../../types';
 import LazyImage from './LazyImage';
 import MicroInteractions from './MicroInteractions';
@@ -13,88 +14,95 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
+  const { t, i18n } = useTranslation();
+  const isRTL = i18n.dir() === 'rtl';
+  
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
       viewport={{ once: true }}
-      className="group relative w-full bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-700 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/20"
+      className="group relative w-full bg-gradient-to-br from-gray-900/95 to-gray-800/95 backdrop-blur-sm rounded-3xl overflow-hidden border border-gray-700/50 hover:border-cyan-500/60 transition-all duration-500 hover:shadow-2xl hover:shadow-cyan-500/30"
     >
       {/* Enhanced Glow Effect */}
-      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-purple-500/0 to-cyan-500/0 opacity-0 group-hover:opacity-20 transition-opacity duration-700"></div>
       
-      {/* Image Container */}
-      <div className="relative overflow-hidden">
+      {/* Image Container - 70% of card */}
+      <div className="relative overflow-hidden h-64 md:h-80">
         <LazyImage
-          src={optimizeImage(project.image, 800, 400)}
+          src={optimizeImage(project.image, 800, 600)}
           alt={project.title}
-          className="w-full h-48 transform group-hover:scale-110 transition-transform duration-700 ease-out"
+          className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+        
+        {/* Dark Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
 
-        {/* Rating Badge */}
-        <div className="absolute top-4 right-4 flex items-center space-x-1 space-x-reverse bg-black/50 backdrop-blur-sm px-3 py-1 rounded-full border border-gray-600">
-          <Star className="w-4 h-4 text-yellow-400 fill-current" />
-          <span className="text-sm font-semibold text-white">{project.rating}</span>
-        </div>
-
-        {/* Technology Badge */}
-        <div className="absolute top-4 left-4 bg-gradient-to-r from-cyan-500/90 to-purple-500/90 backdrop-blur-sm px-3 py-1 rounded-full">
-          <span className="text-xs font-medium text-white">{project.technologies[0]}</span>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="p-6">
-        <div className="flex items-start justify-between mb-3">
-          <MicroInteractions type="text">
-            <h3 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors duration-300">
-              {project.title}
-            </h3>
-          </MicroInteractions>
-        </div>
-
-        <p className="text-gray-400 mb-4 line-clamp-2 leading-relaxed">
-          {project.description}
-        </p>
-
-        {/* Technologies */}
-        <div className="flex flex-wrap gap-2 mb-4">
-          {project.technologies.slice(0, 3).map((tech) => (
-            <MicroInteractions key={tech} type="button" intensity="subtle">
-              <span className="px-3 py-1 bg-gray-800/70 border border-gray-600 rounded-full text-xs text-gray-300 hover:border-cyan-500/50 hover:text-cyan-300 transition-all duration-300">
-                {tech}
-              </span>
-            </MicroInteractions>
+        {/* Technologies - Show on Hover at Bottom Left */}
+        <div className={`absolute bottom-4 ${isRTL ? 'right-4' : 'left-4'} flex flex-wrap gap-2 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0 max-w-[80%]`}>
+          {project.technologies.slice(0, 4).map((tech) => (
+            <span
+              key={tech}
+              className="px-2.5 py-1 bg-black/70 backdrop-blur-md border border-cyan-500/40 rounded-lg text-xs text-cyan-300 font-medium"
+            >
+              {tech}
+            </span>
           ))}
-          {project.technologies.length > 3 && (
-            <span className="px-3 py-1 bg-gray-800/70 border border-gray-600 rounded-full text-xs text-gray-300">
-              +{project.technologies.length - 3}
+          {project.technologies.length > 4 && (
+            <span className="px-2.5 py-1 bg-black/70 backdrop-blur-md border border-cyan-500/40 rounded-lg text-xs text-cyan-300 font-medium">
+              +{project.technologies.length - 4}
             </span>
           )}
         </div>
+      </div>
 
-        {/* Duration and View Button */}
-        <div className="flex items-center justify-between">
-          <span className="text-sm text-gray-500 font-medium">
-            مدة التنفيذ: {project.duration}
-          </span>
+      {/* Content - 30% of card */}
+      <div className="p-5 md:p-6 space-y-4">
+        {/* Title */}
+        <MicroInteractions type="text">
+          <h3 className={`text-xl md:text-2xl font-bold text-white group-hover:text-cyan-300 transition-colors duration-300 line-clamp-1 ${isRTL ? 'text-right' : 'text-left'}`}>
+            {project.title}
+          </h3>
+        </MicroInteractions>
+
+        {/* Description - 2 lines max */}
+        <p className={`text-gray-400 text-sm md:text-base line-clamp-2 leading-relaxed ${isRTL ? 'text-right' : 'text-left'}`}>
+          {project.description}
+        </p>
+
+        {/* Action Buttons */}
+        <div className={`flex items-center gap-3 pt-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
+          {/* Live Preview Button */}
+          {project.liveUrl && (
+            <MicroInteractions type="button" intensity="medium">
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`flex-1 inline-flex items-center justify-center gap-2 ${isRTL ? 'flex-row-reverse' : ''} px-4 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-xl hover:from-cyan-600 hover:to-blue-700 transition-all transform hover:scale-105 text-sm font-semibold shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50`}
+              >
+                <Eye className="w-4 h-4" />
+                <span>{isRTL ? 'معاينة مباشرة' : 'Live Preview'}</span>
+              </a>
+            </MicroInteractions>
+          )}
+          
+          {/* View Details Button */}
           <MicroInteractions type="button" intensity="medium">
             <Link
               to={`/project/${project.id}`}
-              data-cursor-text="عرض التفاصيل"
-              className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-lg hover:from-cyan-600 hover:to-purple-600 transition-all transform hover:scale-105 text-sm font-medium group/btn"
+              className={`flex-1 inline-flex items-center justify-center gap-2 ${isRTL ? 'flex-row-reverse' : ''} px-4 py-2.5 bg-gray-800/80 border border-gray-600 text-gray-300 rounded-xl hover:bg-gray-700 hover:border-cyan-500/50 hover:text-cyan-300 transition-all transform hover:scale-105 text-sm font-semibold`}
             >
-              <span>عرض التفاصيل</span>
-              <ExternalLink className="w-3 h-3 mr-2 group-hover/btn:translate-x-1 transition-transform" />
+              <ExternalLink className="w-4 h-4" />
+              <span>{t('projects.card.viewDetails')}</span>
             </Link>
           </MicroInteractions>
         </div>
-
-        {/* Hover Effect Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 to-purple-500/0 group-hover:from-cyan-500/5 group-hover:to-purple-500/5 transition-all duration-500 pointer-events-none"></div>
       </div>
+
+      {/* Hover Effect Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 to-purple-500/0 group-hover:from-cyan-500/5 group-hover:to-purple-500/5 transition-all duration-700 pointer-events-none rounded-3xl"></div>
     </motion.div>
   );
 };

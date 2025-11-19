@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ArrowLeft, Sparkles, Zap, Target } from "lucide-react";
@@ -14,27 +14,22 @@ gsap.registerPlugin(ScrollTrigger);
 const ProjectTabs = () => {
   const { t, i18n } = useTranslation();
   const isRTL = i18n.dir() === "rtl";
+  const prefersReducedMotion = useReducedMotion();
   const [serviceCategories, setServiceCategories] = useState(
     getServiceCategories()
   );
   const [activeTab, setActiveTab] = useState(serviceCategories[0].id);
   const projectsRef = useRef<HTMLDivElement>(null);
-  const tabsRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const backgroundRef = useRef<HTMLDivElement>(null);
 
   const activeCategory = serviceCategories.find((cat) => cat.id === activeTab);
-  const featuredProjects = activeCategory?.projects.slice(0, 3) || []; // Changed from 2 to 3
+  const featuredProjects = activeCategory?.projects.slice(0, 3) || [];
 
   // Update categories when language changes
   useEffect(() => {
     setServiceCategories(getServiceCategories());
   }, [i18n.language]);
-
-  // Check for reduced motion preference
-  const prefersReducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches;
 
   useEffect(() => {
     // Skip animations if user prefers reduced motion
@@ -136,15 +131,15 @@ const ProjectTabs = () => {
         </div>
 
         {/* Floating Icons */}
-        <div className="floating-element absolute top-32 right-20 w-8 h-8 md:w-16 md:h-16 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 rounded-2xl flex items-center justify-center backdrop-blur-sm border border-cyan-500/30">
+        <div className="floating-element absolute top-32 right-20 w-8 h-8 md:w-16 md:h-16 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 rounded-2xl hidden md:flex items-center justify-center backdrop-blur-sm border border-cyan-500/30">
           <Sparkles className="md:w-8 md:h-8 w-4 h-4 text-cyan-400" />
         </div>
 
-        <div className="floating-element absolute top-20 left-20 md:top-48 md:left-32 w-10 h-10 md:w-20 md:h-20 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 rounded-2xl flex items-center justify-center backdrop-blur-sm border border-purple-500/30">
+        <div className="floating-element absolute top-20 left-20 md:top-48 md:left-32 w-10 h-10 md:w-20 md:h-20 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 rounded-2xl hidden md:flex items-center justify-center backdrop-blur-sm border border-purple-500/30">
           <Zap className="w-5 h-5 md:w-10 md:h-10 text-purple-400" />
         </div>
 
-        <div className="floating-element absolute bottom-40 right-40 w-14 h-14 bg-gradient-to-r from-green-500/20 to-cyan-500/20 rounded-2xl flex items-center justify-center backdrop-blur-sm border border-green-500/30">
+        <div className="floating-element absolute bottom-40 right-40 w-14 h-14 bg-gradient-to-r from-green-500/20 to-cyan-500/20 rounded-2xl hidden md:flex items-center justify-center backdrop-blur-sm border border-green-500/30">
           <Target className="w-7 h-7 text-green-400" />
         </div>
       </div>
@@ -166,41 +161,59 @@ const ProjectTabs = () => {
           </p>
         </motion.div>
 
-        {/* Tabs Navigation */}
-        <motion.div
-          ref={tabsRef}
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          viewport={{ once: true }}
-          className="mb-12"
-        >
-          <div className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-            {serviceCategories.map((category) => (
+        {/* Tabs Navigation - Infinite Marquee */}
+        <div className="mb-12 relative w-full overflow-hidden group">
+          {/* Gradient Edges for smooth fade */}
+          <div className={`absolute ${isRTL ? 'right-0' : 'left-0'} top-0 bottom-0 w-12 md:w-24 z-10 bg-gradient-to-${isRTL ? 'l' : 'r'} from-black via-black/90 to-transparent pointer-events-none`}></div>
+          <div className={`absolute ${isRTL ? 'left-0' : 'right-0'} top-0 bottom-0 w-12 md:w-24 z-10 bg-gradient-to-${isRTL ? 'r' : 'l'} from-black via-black/90 to-transparent pointer-events-none`}></div>
+
+          <motion.div
+            className="flex gap-3 md:gap-4"
+            style={{
+              willChange: 'transform',
+            }}
+            animate={{
+              x: isRTL ? ['0%', '50%'] : ['-50%', '0%'],
+            }}
+            transition={{
+              duration: 35,
+              ease: "linear",
+              repeat: Infinity,
+              repeatType: 'loop',
+            }}
+          >
+            {[
+              ...serviceCategories,
+              ...serviceCategories,
+            ].map((category, index) => (
               <button
-                key={category.id}
+                key={`${category.id}-${index}`}
                 onClick={() => handleTabChange(category.id)}
-                className={`relative w-full px-3 py-2 md:px-4 md:py-3 rounded-xl font-medium transition-all duration-300 transform hover:scale-[1.02] ${
+                className={`relative px-6 py-3 md:px-8 md:py-4 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 whitespace-nowrap flex-shrink-0 ${
                   activeTab === category.id
-                    ? "text-white bg-gradient-to-r from-cyan-500 to-purple-500 shadow-lg shadow-cyan-500/25"
+                    ? "text-white bg-gradient-to-r from-cyan-500 to-purple-500 shadow-lg shadow-cyan-500/25 scale-105"
                     : "text-gray-400 bg-gray-800/50 border border-gray-700 hover:text-cyan-300 hover:border-cyan-500/50"
                 }`}
               >
-                <span className="text-[14px] md:text-[16px]">
+                <span className="text-sm md:text-base lg:text-lg">
                   {category.title}
                 </span>
 
                 {activeTab === category.id && (
                   <motion.div
-                    layoutId="activeTab"
+                    layoutId="activeTabMarquee"
                     className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-xl -z-10"
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    transition={{
+                      type: "spring",
+                      bounce: 0.2,
+                      duration: 0.6,
+                    }}
                   />
                 )}
               </button>
             ))}
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
 
         {/* Active Category Content */}
         <AnimatePresence mode="wait">
@@ -214,9 +227,7 @@ const ProjectTabs = () => {
             >
               {/* Category Header with View More Button */}
               <div
-                className={`flex flex-col lg:flex-row lg:items-center lg:justify-between mb-12 gap-6 mx-auto max-w-[1288px] ${
-                  isRTL ? "lg:flex-row-reverse" : ""
-                }`}
+                className={`flex flex-col lg:flex-row lg:items-center lg:justify-between mb-12 gap-6 mx-auto max-w-[1288px]`}
               >
                 <div className="flex-1">
                   <h3

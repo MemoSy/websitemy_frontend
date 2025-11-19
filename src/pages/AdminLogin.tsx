@@ -30,6 +30,8 @@ const AdminLogin = ({ onLoginSuccess }: AdminLoginProps) => {
       const result = await adminLogin(credentials);
       
       if (result.success) {
+        // Small delay to ensure token is saved
+        await new Promise(resolve => setTimeout(resolve, 100));
         onLoginSuccess();
       } else {
         setError(result.message || 'فشل في تسجيل الدخول');

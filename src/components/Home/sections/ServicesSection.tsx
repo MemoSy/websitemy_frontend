@@ -133,6 +133,10 @@ const ServicesSection = () => {
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-4 leading-tight">
             {t("services.title")}
+            <span className="bg-gradient-to-r from-[#00D9FF] to-[#6C5CE7] bg-clip-text text-transparent">
+              {" "}
+              {t("services.highlight")}
+            </span>
           </h2>
           <p className="text-[#A0AEC0] text-base sm:text-lg leading-relaxed">
             {t("services.subtitle")}

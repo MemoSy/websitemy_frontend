@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   LogOut, 
@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import { 
   getAllChats, 
-  adminLogout, 
+  adminLogout,
   ChatData 
 } from "../utils/adminService";
 
@@ -23,18 +23,55 @@ const AdminDashboard = ({ onLogout }: AdminDashboardProps) => {
   const [selectedChat, setSelectedChat] = useState<ChatData | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterBy, setFilterBy] = useState<'all' | 'today' | 'week'>('all');
+  const [error, setError] = useState<string | null>(null);
+  const retryCountRef = useRef(0);
 
   useEffect(() => {
+    // Fetch data on mount
     fetchData();
   }, []);
 
   const fetchData = async () => {
     setLoading(true);
+    setError(null);
+    
+    console.log('🔍 Fetching data... Retry count:', retryCountRef.current);
+    
     try {
       const chatsData = await getAllChats();
       setChats(chatsData);
-    } catch (error) {
-      console.error('Error fetching data:', error);
+      retryCountRef.current = 0; // Reset retry count on success
+      console.log('✅ Data fetched successfully:', chatsData.length, 'chats');
+    } catch (error: any) {
+      console.error('❌ Error fetching data:', error);
+      
+      // Handle authentication errors
+      if (error.message === 'UNAUTHORIZED' || error.message === 'NO_TOKEN') {
+        retryCountRef.current += 1;
+        console.log('🔑 Auth error. Retry count:', retryCountRef.current);
+        
+        // Don't logout - this might be a backend issue or different token requirements
+        // Just show error and let user manually logout or retry
+        if (retryCountRef.current >= 2) {
+          console.log('⚠️ Multiple auth failures - showing error');
+          setError('فشل تحميل البيانات بسبب مشكلة في الصلاحيات. جرب تسجيل الخروج والدخول مرة أخرى.');
+          return;
+        }
+        
+        // Give it a moment and retry automatically once
+        if (retryCountRef.current === 1) {
+          console.log('🔄 Retrying in 1000ms...');
+          setError('جاري إعادة المحاولة...');
+          setTimeout(() => fetchData(), 1000);
+          return;
+        }
+        
+        setError('فشل في تحميل البيانات. حاول مرة أخرى.');
+      } else if (error.message === 'REQUEST_TIMEOUT') {
+        setError('انتهت مهلة الطلب. يرجى التحقق من اتصالك بالإنترنت.');
+      } else {
+        setError('فشل في تحميل البيانات. حاول مرة أخرى.');
+      }
     } finally {
       setLoading(false);
     }
@@ -71,7 +108,10 @@ const AdminDashboard = ({ onLogout }: AdminDashboardProps) => {
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 flex items-center justify-center">
-        <div className="text-white text-xl">جاري التحميل...</div>
+        <div className="flex flex-col items-center space-y-4">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-500"></div>
+          <div className="text-white text-xl">جاري التحميل...</div>
+        </div>
       </div>
     );
   }
@@ -144,11 +184,32 @@ const AdminDashboard = ({ onLogout }: AdminDashboardProps) => {
                 <div className="text-xs text-gray-400">رسائل</div>
               </div>
             </div>
+
+            {/* Error Message */}
+            {error && (
+              <div className="mt-4 bg-red-900/50 border border-red-500 rounded-lg p-3 text-red-300 text-sm">
+                <p className="text-center mb-2">{error}</p>
+                <button
+                  onClick={fetchData}
+                  className="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg transition-colors"
+                >
+                  إعادة المحاولة
+                </button>
+              </div>
+            )}
           </div>
 
           {/* Chat List */}
           <div className="flex-1 overflow-y-auto">
-            {filteredChats.map((chat) => (
+            {filteredChats.length === 0 ? (
+              <div className="flex items-center justify-center h-full p-8">
+                <div className="text-center text-gray-400">
+                  <MessageSquare className="w-12 h-12 mx-auto mb-3 opacity-50" />
+                  <p className="text-sm">لا توجد محادثات</p>
+                </div>
+              </div>
+            ) : (
+              filteredChats.map((chat) => (
               <div
                 key={chat._id}
                 onClick={() => setSelectedChat(chat)}
@@ -184,7 +245,8 @@ const AdminDashboard = ({ onLogout }: AdminDashboardProps) => {
                   </div>
                 </div>
               </div>
-            ))}
+            ))
+            )}
           </div>
         </div>
 

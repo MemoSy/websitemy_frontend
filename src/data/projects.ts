@@ -1,7 +1,77 @@
 import i18n from "../i18n";
 import { Project, ServiceCategory } from "../types";
 
-export const projects: Project[] = [
+// Function to get translated projects
+export const getProjects = (): Project[] => {
+  const t = i18n.t.bind(i18n);
+
+  return [
+  {
+    id: "arabia-swim",
+    title: t("arabiaSwim.title"),
+    description: t("arabiaSwim.description"),
+    fullDescription: t("arabiaSwim.fullDescription"),
+    image: "/images/projects/arabia-swim/hero-main.webp",
+    youtubeVideo: "https://www.youtube.com/watch?v=IuEP6DBxzUU",
+    category: "news",
+    technologies: ["React", "TypeScript", "Tailwind CSS", "GSAP", "i18next"],
+    duration: t("arabiaSwim.duration"),
+    rating: 4.9,
+    aiData: {
+      price: "400$",
+      clientType: t("arabiaSwim.clientType"),
+      complexity: t("arabiaSwim.complexity"),
+      teamSize: t("arabiaSwim.teamSize"),
+      keyFeatures: [
+        t("arabiaSwim.keyFeatures.feature1"),
+        t("arabiaSwim.keyFeatures.feature2"),
+        t("arabiaSwim.keyFeatures.feature3"),
+        t("arabiaSwim.keyFeatures.feature4"),
+        t("arabiaSwim.keyFeatures.feature5"),
+        t("arabiaSwim.keyFeatures.feature6"),
+        t("arabiaSwim.keyFeatures.feature7"),
+        t("arabiaSwim.keyFeatures.feature8"),
+        t("arabiaSwim.keyFeatures.feature9"),
+      ],
+      clientFeedback: t("arabiaSwim.clientFeedback"),
+    },
+    reviews: [],
+    liveUrl: "https://arabiaswim.com/",
+    githubUrl: "#",
+    objectives: [
+      t("arabiaSwim.objectives.objective1"),
+      t("arabiaSwim.objectives.objective2"),
+      t("arabiaSwim.objectives.objective3"),
+      t("arabiaSwim.objectives.objective4"),
+      t("arabiaSwim.objectives.objective5"),
+    ],
+    challenges: [
+      t("arabiaSwim.challenges.challenge1"),
+      t("arabiaSwim.challenges.challenge2"),
+      t("arabiaSwim.challenges.challenge3"),
+      t("arabiaSwim.challenges.challenge4"),
+      t("arabiaSwim.challenges.challenge5"),
+    ],
+    features: [
+      t("arabiaSwim.features.feature1"),
+      t("arabiaSwim.features.feature2"),
+      t("arabiaSwim.features.feature3"),
+      t("arabiaSwim.features.feature4"),
+      t("arabiaSwim.features.feature5"),
+      t("arabiaSwim.features.feature6"),
+      t("arabiaSwim.features.feature7"),
+      t("arabiaSwim.features.feature8"),
+      t("arabiaSwim.features.feature9"),
+      t("arabiaSwim.features.feature10"),
+      t("arabiaSwim.features.feature11"),
+      t("arabiaSwim.features.feature12"),
+      t("arabiaSwim.features.feature13"),
+      t("arabiaSwim.features.feature14"),
+      t("arabiaSwim.features.feature15"),
+      t("arabiaSwim.features.feature16"),
+      t("arabiaSwim.features.feature17"),
+    ],
+  },
   {
     id: "ecommerce-luxury",
     title: "المتجر الذكي  ",
@@ -497,7 +567,7 @@ export const projects: Project[] = [
       "منصة إعلامية متطورة تهدف لدعم التحول الرقمي في سوريا. تتميز بتصميم استثنائي وواجهة متجاوبة مع جميع أحجام الشاشات، وتقدم محتوى إعلامي هادف عبر مقالات وصور وفيديوهات وبودكاست.",
     image: "/images/projects/local/project-sara.webp",
     youtubeVideo: "https://www.youtube.com/embed/Hlw4cJAAqGk",
-    category: "news",
+    category: "service",
     technologies: ["nextjs", "TypeScript", "Tailwind CSS", "mongodb"],
     duration: "شهرين",
     rating: 4.9,
@@ -644,59 +714,64 @@ export const projects: Project[] = [
     ],
   },
 ];
+};
+
+// Legacy export for backward compatibility
+export const projects: Project[] = getProjects();
 
 // Function to get translated service categories
 export const getServiceCategories = (): ServiceCategory[] => {
   const t = i18n.t.bind(i18n);
+  const translatedProjects = getProjects();
 
   return [
     {
       id: "opensource",
-      title: t("projectTabs.categories.opensource.title"),
-      subtitle: "كود يلهم العالم",
+      title: t("projects.categories.opensource.title"),
+      subtitle: t("projects.categories.opensource.subtitle"),
       icon: "",
-      description: t("projectTabs.categories.opensource.description"),
-      projects: projects.filter((p) => p.category === "opensource"),
+      description: t("projects.categories.opensource.description"),
+      projects: translatedProjects.filter((p) => p.category === "opensource"),
     },
     {
       id: "ecommerce",
-      title: t("projectTabs.categories.ecommerce.title"),
-      subtitle: "منصات تجارية تحقق الأرباح",
+      title: t("projects.categories.ecommerce.title"),
+      subtitle: t("projects.categories.ecommerce.subtitle"),
       icon: "🛒",
-      description: t("projectTabs.categories.ecommerce.description"),
-      projects: projects.filter((p) => p.category === "ecommerce"),
+      description: t("projects.categories.ecommerce.description"),
+      projects: translatedProjects.filter((p) => p.category === "ecommerce"),
     },
     {
       id: "social",
-      title: t("projectTabs.categories.social.title"),
-      subtitle: "ربط العالم بالابتكار",
+      title: t("projects.categories.social.title"),
+      subtitle: t("projects.categories.social.subtitle"),
       icon: "🌐",
-      description: t("projectTabs.categories.social.description"),
-      projects: projects.filter((p) => p.category === "social"),
+      description: t("projects.categories.social.description"),
+      projects: translatedProjects.filter((p) => p.category === "social"),
     },
     {
       id: "saas",
-      title: t("projectTabs.categories.saas.title"),
-      subtitle: "حلول متقدمة",
+      title: t("projects.categories.saas.title"),
+      subtitle: t("projects.categories.saas.subtitle"),
       icon: "💰",
-      description: t("projectTabs.categories.saas.description"),
-      projects: projects.filter((p) => p.category === "saas"),
+      description: t("projects.categories.saas.description"),
+      projects: translatedProjects.filter((p) => p.category === "saas"),
     },
     {
       id: "news",
-      title: t("projectTabs.categories.news.title"),
-      subtitle: "اخبار و مقالات ",
+      title: t("projects.categories.news.title"),
+      subtitle: t("projects.categories.news.subtitle"),
       icon: "📰",
-      description: t("projectTabs.categories.news.description"),
-      projects: projects.filter((p) => p.category === "news"),
+      description: t("projects.categories.news.description"),
+      projects: translatedProjects.filter((p) => p.category === "news"),
     },
     {
       id: "service",
-      title: t("projectTabs.categories.service.title"),
-      subtitle: "خدمي",
+      title: t("projects.categories.service.title"),
+      subtitle: t("projects.categories.service.subtitle"),
       icon: "💚",
-      description: t("projectTabs.categories.service.description"),
-      projects: projects.filter((p) => p.category === "service"),
+      description: t("projects.categories.service.description"),
+      projects: translatedProjects.filter((p) => p.category === "service"),
     },
   ];
 };

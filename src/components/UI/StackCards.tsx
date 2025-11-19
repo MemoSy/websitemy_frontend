@@ -4,12 +4,9 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   MessageSquare,
-  Users,
   Palette,
   Code,
   Rocket,
-  Award,
-  HeadphonesIcon,
 } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -41,7 +38,7 @@ const StackCards: React.FC = () => {
     },
     {
       id: 2,
-      icon: <Users className="w-10 h-10" />,
+      icon: <Palette className="w-10 h-10" />,
       title: t("stackCards.cards.card2.title"),
       description: t("stackCards.cards.card2.description"),
       gradient: "from-[#00D9FF] to-[#00FFA3]",
@@ -49,7 +46,7 @@ const StackCards: React.FC = () => {
     },
     {
       id: 3,
-      icon: <Palette className="w-10 h-10" />,
+      icon: <Code className="w-10 h-10" />,
       title: t("stackCards.cards.card3.title"),
       description: t("stackCards.cards.card3.description"),
       gradient: "from-[#00FFA3] to-[#6C5CE7]",
@@ -57,33 +54,9 @@ const StackCards: React.FC = () => {
     },
     {
       id: 4,
-      icon: <Code className="w-10 h-10" />,
+      icon: <Rocket className="w-10 h-10" />,
       title: t("stackCards.cards.card4.title"),
       description: t("stackCards.cards.card4.description"),
-      gradient: "from-[#6C5CE7] to-[#00D9FF]",
-      iconColor: "#6C5CE7",
-    },
-    {
-      id: 5,
-      icon: <Rocket className="w-10 h-10" />,
-      title: t("stackCards.cards.card5.title"),
-      description: t("stackCards.cards.card5.description"),
-      gradient: "from-[#00D9FF] to-[#00FFA3]",
-      iconColor: "#00D9FF",
-    },
-    {
-      id: 6,
-      icon: <Award className="w-10 h-10" />,
-      title: t("stackCards.cards.card6.title"),
-      description: t("stackCards.cards.card6.description"),
-      gradient: "from-[#00FFA3] to-[#6C5CE7]",
-      iconColor: "#00FFA3",
-    },
-    {
-      id: 7,
-      icon: <HeadphonesIcon className="w-10 h-10" />,
-      title: t("stackCards.cards.card7.title"),
-      description: t("stackCards.cards.card7.description"),
       gradient: "from-[#6C5CE7] to-[#00D9FF]",
       iconColor: "#6C5CE7",
     },
@@ -104,76 +77,49 @@ const StackCards: React.FC = () => {
         // Get the number element inside the card
         const numberElement = card.querySelector(".card-number");
 
-        if (index < validCards.length - 1) {
-          // تثبيت البطاقة مع pin
-          const pinTrigger = ScrollTrigger.create({
-            trigger: card,
-            start: "top 100px",
-            end: "bottom 0px",
-            pin: true,
-            pinSpacing: false,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-            onUpdate: (self) => {
-              if (numberElement) {
-                const progress = self.progress;
+        // تثبيت البطاقة مع pin
+        const pinTrigger = ScrollTrigger.create({
+          trigger: card,
+          start: `top ${100 + index * 10}px`,
+          endTrigger: sectionRef.current,
+          end: "bottom bottom",
+          pin: true,
+          pinSpacing: false,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            if (numberElement) {
+              const progress = self.progress;
 
-                let glowIntensity = 0;
-                let numberOpacity = 0;
+              let glowIntensity = 0;
+              let numberOpacity = 0;
 
-                if (progress < 0.2) {
-                  const fadeInProgress = progress / 0.2;
-                  glowIntensity = fadeInProgress * 40;
-                  numberOpacity = fadeInProgress;
-                } else if (progress < 0.8) {
-                  glowIntensity = 20;
-                  numberOpacity = 0.5;
-                } else {
-                  const fadeOutProgress = (progress - 0.8) / 0.2;
-                  glowIntensity = 20 * (1 - fadeOutProgress);
-                  numberOpacity = 0.5 * (1 - fadeOutProgress);
-                }
-
-                gsap.to(numberElement, {
-                  opacity: numberOpacity,
-                  textShadow: `0 0 ${glowIntensity}px currentColor, 0 0 ${
-                    glowIntensity * 1.5
-                  }px currentColor, 0 0 ${glowIntensity * 2}px currentColor`,
-                  duration: 0.1,
-                  ease: "none",
-                });
+              if (progress < 0.2) {
+                const fadeInProgress = progress / 0.2;
+                glowIntensity = fadeInProgress * 40;
+                numberOpacity = fadeInProgress;
+              } else if (progress < 0.8) {
+                glowIntensity = 20;
+                numberOpacity = 0.5;
+              } else {
+                const fadeOutProgress = (progress - 0.8) / 0.2;
+                glowIntensity = 20 * (1 - fadeOutProgress);
+                numberOpacity = 0.5 * (1 - fadeOutProgress);
               }
-            },
-          });
 
-          triggers.push(pinTrigger);
+              gsap.to(numberElement, {
+                opacity: numberOpacity,
+                textShadow: `0 0 ${glowIntensity}px currentColor, 0 0 ${
+                  glowIntensity * 1.5
+                }px currentColor, 0 0 ${glowIntensity * 2}px currentColor`,
+                duration: 0.1,
+                ease: "none",
+              });
+            }
+          },
+        });
 
-          // تأثير التلاشي (fade out) عندما تصعد البطاقة للأعلى
-          const fadeAnimation = gsap.to(card, {
-            opacity: 0,
-            scale: 0.9,
-            scrollTrigger: {
-              trigger: card,
-              start: "top 100px",
-              end: "bottom 100px",
-              scrub: 1,
-              invalidateOnRefresh: true,
-            },
-          });
-
-          if (fadeAnimation.scrollTrigger) {
-            triggers.push(fadeAnimation.scrollTrigger);
-          }
-        } else {
-          // البطاقة الأخيرة: إضاءة كاملة دائمًا
-          if (numberElement) {
-            gsap.set(numberElement, {
-              opacity: 1,
-              textShadow:
-                "0 0 40px currentColor, 0 0 60px currentColor, 0 0 80px currentColor",
-            });
-          }
-        }
+        triggers.push(pinTrigger);
       });
 
       triggersRef.current = triggers;
@@ -221,9 +167,7 @@ const StackCards: React.FC = () => {
             {t("stackCards.title.part2")}
           </h2>
           <p
-            className={`text-[#A0AEC0] text-base sm:text-lg md:text-xl leading-relaxed px-4 ${
-              isRTL ? "text-right" : "text-left"
-            }`}
+            className={`text-[#A0AEC0] text-base sm:text-lg leading-relaxed`}
           >
             {t("stackCards.subtitle")}
           </p>
@@ -244,7 +188,9 @@ const StackCards: React.FC = () => {
               <div
                 className="bg-gradient-to-br from-[#1A1F3A]/95 to-[#0F1729]/95 backdrop-blur-xl border border-white/10 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 lg:p-12 shadow-2xl"
                 style={{
-                  transform: `scale(${1 - index * 0.05})`,
+                  transform: isRTL
+                    ? `translateX(-${index * 10}px)`
+                    : `translateX(${index * 10}px)`,
                   transformOrigin: "center top",
                 }}
               >

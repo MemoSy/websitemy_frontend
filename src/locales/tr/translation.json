@@ -60,7 +60,7 @@
           "skills": ["Genel Müdür"]
         },
         "member2": {
-          "name": "Mahmoud Al-Mubayed",
+          "name": "Mahmut Elmabit",
           "role": "Full Stack Web Geliştirici",
           "skills": ["React", "Node.js", "MongoDB", "next.js"]
         },
@@ -150,7 +150,7 @@
     "chatSaved": "Sohbet otomatik olarak kaydedildi",
     "currentContext": "Mevcut Bağlam",
     "contexts": {
-      "news": "Haber Siteleri",
+      "news": "Kişisel Web Siteleri",
       "ecommerce": "E-ticaret Mağazaları",
       "education": "Eğitim Platformları",
       "personal": "Kişisel Web Siteleri",
@@ -165,6 +165,91 @@
       "q2": "Kullanılan teknolojiler"
     },
     "errorMessage": "Üzgünüm, doğru bir cevap alamadım. Lütfen tekrar deneyin."
+  },
+  "projects": {
+    "title": "Proje Galerisi",
+    "subtitle": "Geliştirdiğimiz yenilikçi projelerin çeşitli koleksiyonunu keşfedin",
+    "allProjects": "Tüm Projeler",
+    "searchPlaceholder": "Projelerde ara...",
+    "noResults": "Arama kriterlerine uygun proje bulunamadı",
+    "showing": "Gösteriliyor",
+    "of": "/",
+    "project": "proje",
+    "inCategory": "kategorisinde",
+    "seo": {
+      "title": "Projelerimiz - WebSiteMy Web Sitesi Geliştirme Çalışmaları",
+      "description": "WebSiteMy'de gerçekleştirdiğimiz çeşitli geliştirme projelerini keşfedin. Kişisel web sitelerinden e-ticaret mağazalarına ve React ve TypeScript kullanarak gelişmiş uygulamalara kadar.",
+      "keywords": "geliştirme projeleri, önceki çalışmalar, geliştirilmiş web siteleri, web uygulamaları, portföy, çalışma vitrini"
+    },
+    "categories": {
+      "opensource": {
+        "title": "Açık Kaynak",
+        "subtitle": "Dünyaya ilham veren kod",
+        "description": "Teknik topluluk gelişimine katkıda bulunan açık kaynak yazılım projeleri"
+      },
+      "ecommerce": {
+        "title": "E-Ticaret",
+        "subtitle": "Kar sağlayan ticari platformlar",
+        "description": "Güvenli ödeme teknolojileri ve olağanüstü kullanıcı deneyimi ile profesyonel çevrimiçi mağazalar"
+      },
+      "social": {
+        "title": "Sosyal Ağlar",
+        "subtitle": "İnovasyon yoluyla dünyayı birleştirmek",
+        "description": "Gelişmiş özellikler ve gizlilik koruması ile sosyal iletişim platformları"
+      },
+      "saas": {
+        "title": "Karlı Projeler",
+        "subtitle": "Gelişmiş çözümler",
+        "description": "Kapsamlı yönetim ve profesyonel kontrol paneli ile Hizmet Olarak Yazılım"
+      },
+      "news": {
+        "title": "Haber Platformları",
+        "subtitle": "Haberler ve makaleler",
+        "description": "Kapsamlı yönetim ve profesyonel kontrol paneli ile Hizmet Olarak Yazılım"
+      },
+      "service": {
+        "title": "Hizmet Projeleri",
+        "subtitle": "Hizmet odaklı",
+        "description": "Kapsamlı yönetim ve profesyonel kontrol paneli ile Hizmet Olarak Yazılım"
+      }
+    },
+    "card": {
+      "duration": "Süre:",
+      "viewDetails": "Detayları Görüntüle"
+    }
+  },
+  "projectDetail": {
+    "notFound": "Proje bulunamadı",
+    "backToHome": "Ana Sayfaya Dön",
+    "livePreview": "Canlı Önizleme",
+    "sourceCode": "Kaynak Kodu",
+    "meta": {
+      "duration": "Süre",
+      "rating": "Değerlendirme",
+      "technologies": "Teknolojiler",
+      "reviews": "İncelemeler"
+    },
+    "sections": {
+      "technologiesUsed": "Kullanılan Teknolojiler",
+      "video": "Video",
+      "overview": "Genel Bakış",
+      "features": "Ana Özellikler",
+      "objectives": "Hedefler",
+      "challenges": "Zorluklar",
+      "stats": "Proje İstatistikleri"
+    },
+    "stats": {
+      "successRate": "Başarı Oranı",
+      "clientSatisfaction": "Müşteri Memnuniyeti",
+      "support": "Teknik Destek",
+      "overallRating": "Genel Değerlendirme"
+    },
+    "seo": {
+      "titleSuffix": "- Profesyonel Web Geliştirme Projesi | WebSiteMy",
+      "descriptionPrefix": "Kullanılarak geliştirilen proje",
+      "descriptionDuration": "süre içinde",
+      "descriptionRating": "Müşteri değerlendirmesi:"
+    }
   },
   "hero": {
     "badge": "Web Geliştirmede En Güvenilir",
@@ -195,7 +280,8 @@
   },
   "services": {
     "badge": "Hizmetlerimiz",
-    "title": "İşinizin Başarısı için Eksiksiz Web Çözümleri",
+    "title": "İşinizin Başarısı için Eksiksiz",
+    "highlight": "Web Çözümleri",
     "subtitle": "İş hedeflerinize ulaşmanız için özel olarak tasarlanmış kapsamlı web geliştirme hizmetleri sunuyoruz",
     "cta": {
       "quote": "Teklif İsteyin",
@@ -253,32 +339,20 @@
     "subtitle": "Baştan sona net ve düzenli bir süreç ile teslim tarihlerine tam bağlılık",
     "cards": {
       "card1": {
-        "title": "Ücretsiz Danışmanlık ve İhtiyaçlarınızı Anlama",
-        "description": "Hedeflerinizi dinliyor ve proje gereksinimlerinizi derinlemesine analiz ederek, fikrinizin ilk günden başarıya ulaşmasını sağlayan kesin bir eylem planı oluşturuyoruz"
+        "title": "Proje Analizi ve Planlama",
+        "description": "İş gereksinimlerinizi ve hedef pazarınızı derinlemesine inceleyerek, hedeflerinize ulaşmanızı ve rakiplerinizin önüne geçmenizi sağlayacak hassas bir dijital strateji geliştiriyoruz."
       },
       "card2": {
-        "title": "Şeffaf ve Detaylı Fiyat Teklifi",
-        "description": "Gizli ücretler olmadan tüm teknik, zaman çizelgesi ve maliyet detaylarını içeren net bir teklif sunuyoruz, üzerinde anlaşılan bütçeye bağlı kalma garantisi ile"
+        "title": "Modern Arayüz Tasarımı",
+        "description": "Müşteri deneyimine (UI/UX) odaklanan, marka kimliğinizi güçlendiren ve dönüşüm oranlarını artıran çekici ve kullanıcı dostu tasarımlar oluşturuyoruz."
       },
       "card3": {
-        "title": "Profesyonel UI/UX Arayüz Tasarımı",
-        "description": "Marka kimliğinizi yansıtan, kullanım kolaylığına odaklanan ve en yüksek dönüşüm oranlarını elde eden pürüzsüz ve çekici bir kullanıcı deneyimi tasarlıyoruz"
+        "title": "İleri Web Geliştirme",
+        "description": "Tüm cihazlarla uyumlu, hızlı ve güvenli web siteleri oluşturmak için en son programlama teknolojilerini kullanıyor, arama sonuçlarında üst sıralarda yer almanızı sağlamak için SEO standartlarına uyuyoruz."
       },
       "card4": {
-        "title": "Programlama ve Teknik Geliştirme",
-        "description": "Hız, güvenlik ve ölçeklenebilirliği garanti etmek için en son küresel teknolojilerle sitenizi oluşturuyoruz, gelecekte bakımı kolay temiz ve belgelenmiş kod ile"
-      },
-      "card5": {
-        "title": "Test ve Sürekli Geliştirme",
-        "description": "Projenin her parçasını yüksek hassasiyetle test ediyoruz, tüm cihazlarda ve tarayıcılarda verimli çalışmasını sağlıyoruz, geri bildirimlerinize göre sürekli iyileştirmeler yapıyoruz"
-      },
-      "card6": {
-        "title": "Resmi Lansман ve Yayın",
-        "description": "Sitenizi hızlı ve güvenli sunucularda tam performans ve güvenlik ayarlarıyla yayınlıyoruz, ziyaretçilerinizi mümkün olan en iyi deneyimle karşılamaya hazır olduğundan emin oluyoruz"
-      },
-      "card7": {
-        "title": "Sürekli Destek ve Bakım",
-        "description": "Yayından sonra sizinle kalıyoruz, hızlı teknik destek, düzenli güncellemeler ve sitenizin her zaman sorunsuz çalışmasını sağlamak için ortaya çıkabilecek her soruna anında çözümler sunuyoruz"
+        "title": "Yayınlama ve Sürekli Destek",
+        "description": "Rolümüz yayınlama ile bitmiyor; sitenizin istikrarını sağlamak için bakım ve teknik destek sunuyor, işinizin büyümesine ve pazar değişikliklerine ayak uyduran sürekli iyileştirmeler sağlıyoruz."
       }
     }
   },
@@ -492,6 +566,92 @@
       "subtitle": "Doğrudan bizimle iletişime geçin, tüm sorularınızı dakikalar içinde yanıtlayacağız",
       "whatsapp": "WhatsApp ile İletişime Geçin",
       "call": "Şimdi Bizi Arayın"
+    }
+  },
+  "notFound": {
+    "title": "Sayfa Bulunamadı",
+    "heading": "Sayfa Bulunamadı",
+    "message": "Üzgünüz, aradığınız sayfa mevcut değil veya başka bir konuma taşınmış.",
+    "backToHome": "Ana Sayfaya Dön",
+    "browseProjects": "Projelere Göz At",
+    "seo": {
+      "title": "Sayfa Bulunamadı - 404 Hatası",
+      "description": "Aradığınız sayfa mevcut değil. Projelerimize göz atın veya WebSiteMy hizmetlerini keşfetmek için ana sayfaya dönün."
+    }
+  },
+  "reviewSystem": {
+    "title": "Değerlendirmeler",
+    "reviewsCount": "değerlendirme",
+    "addReviewTitle": "Değerlendirmenizi Ekleyin",
+    "form": {
+      "name": "İsim",
+      "namePlaceholder": "Tam adınız",
+      "email": "E-posta",
+      "emailPlaceholder": "your@email.com",
+      "rating": "Değerlendirme",
+      "comment": "Yorum",
+      "commentPlaceholder": "Bu projeyle ilgili deneyiminizi paylaşın...",
+      "submitButton": "Değerlendirmeyi Gönder",
+      "submitting": "Gönderiliyor...",
+      "required": "*"
+    },
+    "comments": {
+      "title": "Yorumlar",
+      "noReviews": "Henüz değerlendirme yok. Bu projeyi ilk değerlendiren siz olun!"
+    }
+  },
+  "arabiaSwim": {
+    "title": "Arabia Yüzme Akademisi",
+    "description": "Rezervasyon sistemi ve kapsamlı eğitim programları ile profesyonel yüzme akademisi web sitesi",
+    "fullDescription": "Arabia Yüzme Akademisi için en son teknolojiler kullanılarak profesyonel bir web sitesi geliştirildi. Site, dinamik tasarım ve GSAP efektleri ile olağanüstü bir kullanıcı deneyimi sunuyor, çok katmanlı fiyatlandırma sistemine sahip 9 kapsamlı eğitim programı, profesyonel fotoğraf ve video galerisi, hikayesi ve başarılarıyla özel antrenör bölümü, zengin eğitim makaleleri kütüphanesi ve doğrudan WhatsApp rezervasyon sistemi içeriyor. Web sitesi, tüm cihazlarda duyarlı tasarımla Arapça ve İngilizce dillerini tam olarak destekliyor.",
+    "duration": "Bir ay",
+    "clientType": "Spor Akademisi - Yüzme Eğitimi",
+    "complexity": "İleri",
+    "teamSize": "3 geliştirici",
+    "clientFeedback": "İnanılmaz yükleme hızı ve benzersiz kullanıcı deneyimi ile canlı bir web sitesi",
+    "keyFeatures": {
+      "feature1": "Sinematik GSAP efektleri ile dinamik Hero Section",
+      "feature2": "Çok seviyeli Pricing Tiers sistemi ile 9 eğitim programı",
+      "feature3": "Kapsamlı detay sayfaları: müfredat, program, ekipman",
+      "feature4": "Profesyonel animasyonlu Slider galerisi",
+      "feature5": "İlham verici hikaye ve referanslarla antrenör bölümü",
+      "feature6": "Eğitim video kütüphanesi",
+      "feature7": "Dahili arama motoru ile profesyonel makaleler",
+      "feature8": "Doğrudan WhatsApp rezervasyon sistemi",
+      "feature9": "Arapça/İngilizce diller için tam destek"
+    },
+    "objectives": {
+      "objective1": "Akademinin kimliğini yansıtan profesyonel bir web sitesi geliştirmek",
+      "objective2": "Programlara göz atma ve rezervasyonda müşteri deneyimini iyileştirmek",
+      "objective3": "Eğitim programlarını çekici ve düzenli bir şekilde görüntülemek",
+      "objective4": "WhatsApp üzerinden iletişim ve rezervasyonu kolaylaştırmak",
+      "objective5": "Kursiyerler için değerli eğitim içeriği sağlamak"
+    },
+    "challenges": {
+      "challenge1": "Program başına iki fiyat planını destekleyen karmaşık Pricing Tiers sistemi tasarlamak",
+      "challenge2": "Performansı etkilemeden profesyonel GSAP efektleri oluşturmak",
+      "challenge3": "Akıllı arama filtreleri ile 9 eğitim programını organize etmek",
+      "challenge4": "Doğrudan rezervasyon için WhatsApp API'yi entegre etmek",
+      "challenge5": "Zengin görüntü ve video içeriği ile hızlı yükleme için performansı optimize etmek"
+    },
+    "features": {
+      "feature1": "GSAP efektleri ve animasyonlu Counter ile Hero Section",
+      "feature2": "Eksiksiz detaylarla 9 Program Kartı",
+      "feature3": "Pricing Tiers sistemi: program başına iki fiyat planı",
+      "feature4": "Doğrudan WhatsApp iletişim butonları",
+      "feature5": "Hover efektleri ile yüksek kaliteli görüntü galerisi",
+      "feature6": "Kategori ve seviyeye göre akıllı arama filtreleri",
+      "feature7": "Kapsamlı program detay sayfaları",
+      "feature8": "Profesyonel görüntü Slider",
+      "feature9": "Kursiyerlerden Gerçek Referanslar",
+      "feature10": "SSS bölümü",
+      "feature11": "Image Carousel ile antrenör bölümü",
+      "feature12": "Eğitim video kütüphanesi",
+      "feature13": "Kategoriler ve arama motoru ile makaleler",
+      "feature14": "İstatistiklerle eksiksiz Hakkımızda sayfası",
+      "feature15": "3 numara ve interaktif harita ile İletişim sayfası",
+      "feature16": "Tüm cihazlarda Responsive Design",
+      "feature17": "Arapça/İngilizce için i18next desteği"
     }
   }
 }

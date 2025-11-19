@@ -150,7 +150,7 @@
     "chatSaved": "Chat saved automatically",
     "currentContext": "Current Context",
     "contexts": {
-      "news": "News Websites",
+      "news": "Personal Websites",
       "ecommerce": "E-commerce Stores",
       "education": "Educational Platforms",
       "personal": "Personal Websites",
@@ -165,6 +165,91 @@
       "q2": "Technologies used"
     },
     "errorMessage": "Sorry, I couldn't get an accurate answer. Please try again."
+  },
+  "projects": {
+    "title": "Projects Gallery",
+    "subtitle": "Discover a diverse collection of innovative projects we've developed",
+    "allProjects": "All Projects",
+    "searchPlaceholder": "Search in projects...",
+    "noResults": "No projects match the search criteria",
+    "showing": "Showing",
+    "of": "of",
+    "project": "project",
+    "inCategory": "in category",
+    "seo": {
+      "title": "Our Projects - WebSiteMy Website Development Work",
+      "description": "Explore a diverse range of development projects we've executed at WebSiteMy. From personal websites to e-commerce stores and advanced applications using React and TypeScript.",
+      "keywords": "development projects, previous work, developed websites, web applications, portfolio, work showcase"
+    },
+    "categories": {
+      "opensource": {
+        "title": "Open Source",
+        "subtitle": "Code that inspires the world",
+        "description": "Open source software projects contributing to technical community development"
+      },
+      "ecommerce": {
+        "title": "E-Commerce",
+        "subtitle": "Commercial platforms generating profits",
+        "description": "Professional online stores with secure payment technologies and exceptional user experience"
+      },
+      "social": {
+        "title": "Social Networks",
+        "subtitle": "Connecting the world through innovation",
+        "description": "Social communication platforms with advanced features and privacy protection"
+      },
+      "saas": {
+        "title": "Profitable Projects",
+        "subtitle": "Advanced solutions",
+        "description": "Software as a Service with comprehensive management and professional dashboard"
+      },
+      "news": {
+        "title": "News Platforms",
+        "subtitle": "News and articles",
+        "description": "Software as a Service with comprehensive management and professional dashboard"
+      },
+      "service": {
+        "title": "Service Projects",
+        "subtitle": "Service-oriented",
+        "description": "Software as a Service with comprehensive management and professional dashboard"
+      }
+    },
+    "card": {
+      "duration": "Duration:",
+      "viewDetails": "View Details"
+    }
+  },
+  "projectDetail": {
+    "notFound": "Project not found",
+    "backToHome": "Back to Home",
+    "livePreview": "Live Preview",
+    "sourceCode": "Source Code",
+    "meta": {
+      "duration": "Duration",
+      "rating": "Rating",
+      "technologies": "Technologies",
+      "reviews": "Reviews"
+    },
+    "sections": {
+      "technologiesUsed": "Technologies Used",
+      "video": "Video",
+      "overview": "Overview",
+      "features": "Key Features",
+      "objectives": "Objectives",
+      "challenges": "Challenges",
+      "stats": "Project Statistics"
+    },
+    "stats": {
+      "successRate": "Success Rate",
+      "clientSatisfaction": "Client Satisfaction",
+      "support": "Technical Support",
+      "overallRating": "Overall Rating"
+    },
+    "seo": {
+      "titleSuffix": "- Professional Web Development Project | WebSiteMy",
+      "descriptionPrefix": "Project developed using",
+      "descriptionDuration": "in duration",
+      "descriptionRating": "Client rating:"
+    }
   },
   "hero": {
     "badge": "Most Trusted in Web Development",
@@ -195,7 +280,8 @@
   },
   "services": {
     "badge": "Our Services",
-    "title": "Complete Web Solutions for Your Business Success",
+    "title": "Complete Web Solutions for Your",
+    "highlight": "Business Success",
     "subtitle": "We provide comprehensive web development services tailored to achieve your business goals",
     "cta": {
       "quote": "Request a Quote",
@@ -253,32 +339,20 @@
     "subtitle": "A clear and organized process from start to finish with complete commitment to deadlines",
     "cards": {
       "card1": {
-        "title": "Free Consultation & Understanding Your Needs",
-        "description": "We listen to your goals and deeply analyze your project requirements to create a precise action plan that ensures your idea succeeds from day one"
+        "title": "Project Analysis & Planning",
+        "description": "We start with an in-depth study of your business requirements and target market to develop a precise digital strategy that ensures achieving your goals and outperforming competitors."
       },
       "card2": {
-        "title": "Transparent & Detailed Quotation",
-        "description": "We provide you with a clear offer that includes all technical, timeline, and cost details without any hidden fees, with a guarantee to stick to the agreed budget"
+        "title": "Modern UI/UX Design",
+        "description": "We create attractive, user-friendly designs focused on customer experience (UI/UX), enhancing your brand identity and increasing conversion rates."
       },
       "card3": {
-        "title": "Professional UI/UX Interface Design",
-        "description": "We design a smooth and attractive user experience that reflects your brand identity, focusing on ease of use and achieving the highest conversion rates"
+        "title": "Advanced Web Development",
+        "description": "We use the latest programming technologies to build fast, secure, and responsive websites for all devices, adhering to SEO standards to ensure top search results."
       },
       "card4": {
-        "title": "Programming & Technical Development",
-        "description": "We build your site with the latest global technologies to ensure speed, security, and scalability, with clean and documented code that's easy to maintain in the future"
-      },
-      "card5": {
-        "title": "Testing & Continuous Development",
-        "description": "We test every part of the project with high precision to ensure it works efficiently on all devices and browsers, with continuous improvements based on your feedback"
-      },
-      "card6": {
-        "title": "Official Launch & Deployment",
-        "description": "We launch your site on fast and secure servers with full performance and security settings, ensuring it's ready to receive your visitors with the best possible experience"
-      },
-      "card7": {
-        "title": "Continuous Support & Maintenance",
-        "description": "We stay with you after launch to provide fast technical support, regular updates, and immediate solutions to any issues to ensure your site runs smoothly always"
+        "title": "Launch & Continuous Support",
+        "description": "Our role doesn't end at launch; we provide maintenance and technical support to ensure your site's stability, with continuous improvements to keep up with your business growth and market changes."
       }
     }
   },
@@ -492,6 +566,92 @@
       "subtitle": "Contact us directly and we'll answer all your inquiries within minutes",
       "whatsapp": "Contact via WhatsApp",
       "call": "Call Us Now"
+    }
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "heading": "Page Not Found",
+    "message": "Sorry, the page you are looking for does not exist or has been moved to another location.",
+    "backToHome": "Back to Home",
+    "browseProjects": "Browse Projects",
+    "seo": {
+      "title": "Page Not Found - 404 Error",
+      "description": "The page you are looking for does not exist. Browse our projects or return to the home page to explore WebSiteMy services."
+    }
+  },
+  "reviewSystem": {
+    "title": "Reviews",
+    "reviewsCount": "review",
+    "addReviewTitle": "Add Your Review",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Your full name",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",
+      "rating": "Rating",
+      "comment": "Comment",
+      "commentPlaceholder": "Share your experience with this project...",
+      "submitButton": "Submit Review",
+      "submitting": "Submitting...",
+      "required": "*"
+    },
+    "comments": {
+      "title": "Comments",
+      "noReviews": "No reviews yet. Be the first to review this project!"
+    }
+  },
+  "arabiaSwim": {
+    "title": "Arabia Swimming Academy",
+    "description": "Professional swimming academy website with booking system and comprehensive training programs",
+    "fullDescription": "A professional website was developed for Arabia Swimming Academy using the latest technologies. The site delivers an exceptional user experience with dynamic design and GSAP effects, featuring 9 comprehensive training programs with multi-tier pricing system, professional photo and video gallery, dedicated coach section with story and achievements, rich educational articles library, and direct WhatsApp booking system. The website fully supports Arabic and English languages with responsive design across all devices.",
+    "duration": "One month",
+    "clientType": "Sports Academy - Swimming Training",
+    "complexity": "Advanced",
+    "teamSize": "3 developers",
+    "clientFeedback": "A vibrant website with incredible loading speed and unparalleled user experience",
+    "keyFeatures": {
+      "feature1": "Dynamic Hero Section with cinematic GSAP effects",
+      "feature2": "9 training programs with multi-level Pricing Tiers system",
+      "feature3": "Comprehensive detail pages: curriculum, schedule, equipment",
+      "feature4": "Professional animated image Slider gallery",
+      "feature5": "Coach section with inspiring story and testimonials",
+      "feature6": "Educational video library",
+      "feature7": "Professional articles with internal search engine",
+      "feature8": "Direct WhatsApp booking system",
+      "feature9": "Full support for Arabic/English languages"
+    },
+    "objectives": {
+      "objective1": "Develop a professional website reflecting the academy's identity",
+      "objective2": "Improve customer experience in browsing programs and booking",
+      "objective3": "Display training programs in an attractive and organized manner",
+      "objective4": "Facilitate communication and booking via WhatsApp",
+      "objective5": "Provide valuable educational content for trainees"
+    },
+    "challenges": {
+      "challenge1": "Design complex Pricing Tiers system supporting two price plans per program",
+      "challenge2": "Create professional GSAP effects without affecting performance",
+      "challenge3": "Organize 9 training programs with smart search filters",
+      "challenge4": "Integrate WhatsApp API for direct booking",
+      "challenge5": "Optimize performance for fast loading with rich image and video content"
+    },
+    "features": {
+      "feature1": "Hero Section with GSAP effects and animated Counter",
+      "feature2": "9 Program Cards with complete details",
+      "feature3": "Pricing Tiers system: two price plans per program",
+      "feature4": "Direct WhatsApp contact buttons",
+      "feature5": "High-quality image gallery with hover effects",
+      "feature6": "Smart search filters by category and level",
+      "feature7": "Comprehensive program detail pages",
+      "feature8": "Professional image Slider",
+      "feature9": "Real Testimonials from trainees",
+      "feature10": "FAQ section",
+      "feature11": "Coach section with Image Carousel",
+      "feature12": "Educational video library",
+      "feature13": "Articles with categories and search engine",
+      "feature14": "Complete About page with statistics",
+      "feature15": "Contact page with 3 numbers and interactive map",
+      "feature16": "Responsive Design on all devices",
+      "feature17": "i18next support for Arabic/English"
     }
   }
 }
