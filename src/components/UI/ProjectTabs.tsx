@@ -18,7 +18,7 @@ const ProjectTabs = () => {
   const [serviceCategories, setServiceCategories] = useState(
     getServiceCategories()
   );
-  const [activeTab, setActiveTab] = useState(serviceCategories[0].id);
+  const [activeTab, setActiveTab] = useState("news");
   const projectsRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const backgroundRef = useRef<HTMLDivElement>(null);
@@ -153,10 +153,10 @@ const ProjectTabs = () => {
           viewport={{ once: true }}
           className="text-center md:mb-16 mb-8"
         >
-          <h2 className="text-xl md:text-5xl font-bold text-white mb-6">
+          <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-6">
             {t("projectTabs.title")}
           </h2>
-          <p className="text-xs md:text-xl text-gray-400 max-w-2xl mx-auto">
+          <p className="text-sm md:text-xl text-gray-400 max-w-2xl mx-auto">
             {t("projectTabs.subtitle")}
           </p>
         </motion.div>
@@ -176,7 +176,7 @@ const ProjectTabs = () => {
               x: isRTL ? ['0%', '50%'] : ['-50%', '0%'],
             }}
             transition={{
-              duration: 35,
+              duration: 17.5,
               ease: "linear",
               repeat: Infinity,
               repeatType: 'loop',

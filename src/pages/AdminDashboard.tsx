@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   LogOut, 
@@ -24,7 +24,6 @@ const AdminDashboard = ({ onLogout }: AdminDashboardProps) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterBy, setFilterBy] = useState<'all' | 'today' | 'week'>('all');
   const [error, setError] = useState<string | null>(null);
-  const retryCountRef = useRef(0);
 
   useEffect(() => {
     // Fetch data on mount
@@ -35,51 +34,42 @@ const AdminDashboard = ({ onLogout }: AdminDashboardProps) => {
     setLoading(true);
     setError(null);
     
-    console.log('🔍 Fetching data... Retry count:', retryCountRef.current);
+    console.log('🔍 Fetching data...');
     
     try {
       const chatsData = await getAllChats();
       setChats(chatsData);
-      retryCountRef.current = 0; // Reset retry count on success
       console.log('✅ Data fetched successfully:', chatsData.length, 'chats');
     } catch (error: any) {
       console.error('❌ Error fetching data:', error);
-      
-      // Handle authentication errors
-      if (error.message === 'UNAUTHORIZED' || error.message === 'NO_TOKEN') {
-        retryCountRef.current += 1;
-        console.log('🔑 Auth error. Retry count:', retryCountRef.current);
-        
-        // Don't logout - this might be a backend issue or different token requirements
-        // Just show error and let user manually logout or retry
-        if (retryCountRef.current >= 2) {
-          console.log('⚠️ Multiple auth failures - showing error');
-          setError('فشل تحميل البيانات بسبب مشكلة في الصلاحيات. جرب تسجيل الخروج والدخول مرة أخرى.');
-          return;
-        }
-        
-        // Give it a moment and retry automatically once
-        if (retryCountRef.current === 1) {
-          console.log('🔄 Retrying in 1000ms...');
-          setError('جاري إعادة المحاولة...');
-          setTimeout(() => fetchData(), 1000);
-          return;
-        }
-        
-        setError('فشل في تحميل البيانات. حاول مرة أخرى.');
-      } else if (error.message === 'REQUEST_TIMEOUT') {
-        setError('انتهت مهلة الطلب. يرجى التحقق من اتصالك بالإنترنت.');
-      } else {
-        setError('فشل في تحميل البيانات. حاول مرة أخرى.');
-      }
+      setError('فشل في تحميل البيانات. تأكد من اتصالك بالإنترنت وحاول مرة أخرى.');
     } finally {
       setLoading(false);
     }
   };
 
   const handleLogout = async () => {
-    await adminLogout();
-    onLogout();
+    console.log('🚪 Logout button clicked');
+    try {
+      const result = await adminLogout();
+      console.log('🔓 Logout result:', result);
+      
+      // Clear all admin-related data
+      localStorage.removeItem('adminToken');
+      sessionStorage.removeItem('adminToken');
+      
+      // Call parent logout handler
+      onLogout();
+      
+      console.log('✅ Logout completed');
+    } catch (error) {
+      console.error('❌ Logout error:', error);
+      
+      // Force logout even if there's an error
+      localStorage.removeItem('adminToken');
+      sessionStorage.removeItem('adminToken');
+      onLogout();
+    }
   };
 
   const filteredChats = chats.filter(chat => {
@@ -119,7 +109,7 @@ const AdminDashboard = ({ onLogout }: AdminDashboardProps) => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900">
       {/* Header */}
-      <div className="bg-gray-900/50 backdrop-blur-sm border-b border-gray-700 px-6 py-4">
+      <div className="px-6 py-4 z-[999] relative">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold text-white">لوحة التحكم الإدارية</h1>
           <div className="flex items-center space-x-4 space-x-reverse">
@@ -130,8 +120,11 @@ const AdminDashboard = ({ onLogout }: AdminDashboardProps) => {
               <RefreshCw className="w-5 h-5" />
             </button>
             <button
-              onClick={handleLogout}
-              className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors flex items-center space-x-2 space-x-reverse"
+              onClick={() => {
+                console.log('🔴 LOGOUT BUTTON CLICKED!!!');
+                handleLogout();
+              }}
+              className="bg-red-600 z-auto hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors flex items-center space-x-2 space-x-reverse"
             >
               <LogOut className="w-4 h-4" />
               <span>تسجيل الخروج</span>

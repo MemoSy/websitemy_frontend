@@ -203,7 +203,7 @@
         "description": "Kapsamlı yönetim ve profesyonel kontrol paneli ile Hizmet Olarak Yazılım"
       },
       "news": {
-        "title": "Haber Platformları",
+        "title": "Kişisel Web Siteleri",
         "subtitle": "Haberler ve makaleler",
         "description": "Kapsamlı yönetim ve profesyonel kontrol paneli ile Hizmet Olarak Yazılım"
       },
@@ -468,7 +468,7 @@
         "description": "Kapsamlı yönetim ve profesyonel kontrol paneli ile hizmet olarak yazılım"
       },
       "news": {
-        "title": "Haber Platformları",
+        "title": "Kişisel Web Siteleri",
         "description": "Kapsamlı yönetim ve profesyonel kontrol paneli ile hizmet olarak yazılım"
       },
       "service": {
@@ -602,7 +602,7 @@
   },
   "arabiaSwim": {
     "title": "Arabia Yüzme Akademisi",
-    "description": "Rezervasyon sistemi ve kapsamlı eğitim programları ile profesyonel yüzme akademisi web sitesi",
+    "description": "WhatsApp üzerinden doğrudan rezervasyon, profesyonel fotoğraf ve video galerileri ve etkileyici GSAP animasyonlu dinamik tasarıma sahip 9 kapsamlı eğitim programı içeren profesyonel yüzme akademisi web sitesi",
     "fullDescription": "Arabia Yüzme Akademisi için en son teknolojiler kullanılarak profesyonel bir web sitesi geliştirildi. Site, dinamik tasarım ve GSAP efektleri ile olağanüstü bir kullanıcı deneyimi sunuyor, çok katmanlı fiyatlandırma sistemine sahip 9 kapsamlı eğitim programı, profesyonel fotoğraf ve video galerisi, hikayesi ve başarılarıyla özel antrenör bölümü, zengin eğitim makaleleri kütüphanesi ve doğrudan WhatsApp rezervasyon sistemi içeriyor. Web sitesi, tüm cihazlarda duyarlı tasarımla Arapça ve İngilizce dillerini tam olarak destekliyor.",
     "duration": "Bir ay",
     "clientType": "Spor Akademisi - Yüzme Eğitimi",

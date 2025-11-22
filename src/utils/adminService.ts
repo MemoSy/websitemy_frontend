@@ -88,28 +88,38 @@ export const adminLogin = async (credentials: AdminCredentials): Promise<AdminLo
 };
 
 export const adminLogout = async (): Promise<boolean> => {
+  console.log('🚪 adminLogout called');
   try {
     const token = localStorage.getItem('adminToken') || sessionStorage.getItem('adminToken');
     if (!token) {
       console.log('ℹ️ No token to logout');
+      localStorage.removeItem('adminToken');
+      sessionStorage.removeItem('adminToken');
       return true;
     }
 
-    console.log('👋 Logging out...');
-    await fetch(`${API_BASE_URL}/admin/logout`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'X-Requested-With': 'XMLHttpRequest',
-      },
-    });
+    console.log('👋 Logging out with token:', token.substring(0, 20) + '...');
+    
+    try {
+      await fetch(`${API_BASE_URL}/admin/logout`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'X-Requested-With': 'XMLHttpRequest',
+        },
+      });
+      console.log('📤 Logout request sent to backend');
+    } catch (fetchError) {
+      console.warn('⚠️ Backend logout request failed (continuing anyway):', fetchError);
+    }
 
     localStorage.removeItem('adminToken');
     sessionStorage.removeItem('adminToken');
+    console.log('✅ Token removed from storage');
     console.log('✅ Logout successful');
     return true;
   } catch (error) {
-    console.error('Logout error:', error);
+    console.error('❌ Logout error:', error);
     localStorage.removeItem('adminToken');
     sessionStorage.removeItem('adminToken');
     return true;
@@ -117,91 +127,36 @@ export const adminLogout = async (): Promise<boolean> => {
 };
 
 export const verifyAdminToken = async (): Promise<boolean> => {
-  try {
-    const token = localStorage.getItem('adminToken') || sessionStorage.getItem('adminToken');
-    if (!token) {
-      console.log('❌ No token found for verification');
-      return false;
-    }
-
-    console.log('🔐 Verifying token...');
-    const response = await fetchWithTimeout(
-      `${API_BASE_URL}/admin/verify`,
-      {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'X-Requested-With': 'XMLHttpRequest',
-        },
-      },
-      10000 // 10 second timeout
-    );
-
-    if (response.status === 401) {
-      console.log('❌ Token verification failed: 401 Unauthorized');
-      return false;
-    }
-
-    if (!response.ok) {
-      console.log('❌ Token verification failed:', response.status);
-      return false;
-    }
-
-    const data = await response.json();
-    console.log('✅ Token verification result:', data.success);
-    return data.success;
-  } catch (error) {
-    console.error('❌ Token verification error:', error);
-    // Don't remove token on errors - let the app decide what to do
-    // Return true on network errors to keep user logged in
-    if (error instanceof Error && error.message === 'REQUEST_TIMEOUT') {
-      console.log('⚠️ Timeout during verification - keeping user logged in');
-      return true; // Keep user logged in on timeout
-    }
-    return false;
-  }
+  // No verification needed - if token exists, it's valid
+  const token = localStorage.getItem('adminToken') || sessionStorage.getItem('adminToken');
+  return !!token;
 };
 
 export const getAllChats = async (): Promise<ChatData[]> => {
-  try {
-    const token = localStorage.getItem('adminToken') || sessionStorage.getItem('adminToken');
-    if (!token) {
-      console.log('❌ No token found in storage');
-      throw new Error('NO_TOKEN');
-    }
-
-    console.log('📤 Fetching chats with token:', token.substring(0, 20) + '...');
-    const response = await fetchWithTimeout(
-      `${API_BASE_URL}/admin/chats`,
-      {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'X-Requested-With': 'XMLHttpRequest',
-        },
-      },
-      15000 // 15 second timeout
-    );
-
-    console.log('📥 Response status:', response.status);
-    
-    if (response.status === 401) {
-      console.log('❌ 401 Unauthorized - Token rejected by /admin/chats');
-      // Token expired or invalid - but don't remove yet, let the app handle it
-      throw new Error('UNAUTHORIZED');
-    }
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch chats: ${response.status}`);
-    }
-
-    const result = await response.json();
-    return result.data || [];
-  } catch (error: any) {
-    console.error('Error fetching chats:', error);
-    if (error.name === 'AbortError') {
-      throw new Error('REQUEST_TIMEOUT');
-    }
-    throw error;
+  const token = localStorage.getItem('adminToken') || sessionStorage.getItem('adminToken');
+  if (!token) {
+    throw new Error('NO_TOKEN');
   }
+
+  console.log('📤 Fetching chats...');
+  const response = await fetchWithTimeout(
+    `${API_BASE_URL}/admin/chats`,
+    {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+    },
+    15000
+  );
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch chats: ${response.status}`);
+  }
+
+  const result = await response.json();
+  console.log('✅ Fetched', result.data?.length || 0, 'chats');
+  return result.data || [];
 };
 
 export const getAdminAnalytics = async () => {

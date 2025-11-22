@@ -27,14 +27,14 @@ const HomeNew = () => {
       {/* Services Section - قسم الخدمات */}
       <ServicesSection />
 
+      {/* Portfolio - معرض الأعمال */}
+      <ProjectTabs />
+
       {/* How We Work - Stack Cards Effect */}
       <StackCards />
 
       {/* Current Projects Section - المشاريع الحالية */}
       <CurrentProjectsSection />
-
-      {/* Portfolio - معرض الأعمال */}
-      <ProjectTabs />
 
       {/* Testimonials - آراء العملاء */}
       <TestimonialsSection />

@@ -203,7 +203,7 @@
         "description": "Software as a Service with comprehensive management and professional dashboard"
       },
       "news": {
-        "title": "News Platforms",
+        "title": "Personal Websites",
         "subtitle": "News and articles",
         "description": "Software as a Service with comprehensive management and professional dashboard"
       },
@@ -468,7 +468,7 @@
         "description": "Software as a service with comprehensive management and professional control panel"
       },
       "news": {
-        "title": "News Platforms",
+        "title": "Personal Websites",
         "description": "Software as a service with comprehensive management and professional control panel"
       },
       "service": {
@@ -602,7 +602,7 @@
   },
   "arabiaSwim": {
     "title": "Arabia Swimming Academy",
-    "description": "Professional swimming academy website with booking system and comprehensive training programs",
+    "description": "Professional swimming academy website featuring 9 comprehensive training programs with direct WhatsApp booking, professional photo and video galleries, and dynamic design with stunning GSAP animations",
     "fullDescription": "A professional website was developed for Arabia Swimming Academy using the latest technologies. The site delivers an exceptional user experience with dynamic design and GSAP effects, featuring 9 comprehensive training programs with multi-tier pricing system, professional photo and video gallery, dedicated coach section with story and achievements, rich educational articles library, and direct WhatsApp booking system. The website fully supports Arabic and English languages with responsive design across all devices.",
     "duration": "One month",
     "clientType": "Sports Academy - Swimming Training",

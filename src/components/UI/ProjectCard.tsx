@@ -66,8 +66,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
           </h3>
         </MicroInteractions>
 
-        {/* Description - 2 lines max */}
-        <p className={`text-gray-400 text-sm md:text-base line-clamp-2 leading-relaxed ${isRTL ? 'text-right' : 'text-left'}`}>
+        {/* Description - 3 lines max */}
+        <p className={`text-gray-400 text-sm md:text-base line-clamp-3 leading-relaxed ${isRTL ? 'text-right' : 'text-left'}`}>
           {project.description}
         </p>
 

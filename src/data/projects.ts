@@ -12,7 +12,7 @@ export const getProjects = (): Project[] => {
     description: t("arabiaSwim.description"),
     fullDescription: t("arabiaSwim.fullDescription"),
     image: "/images/projects/arabia-swim/hero-main.webp",
-    youtubeVideo: "https://www.youtube.com/watch?v=IuEP6DBxzUU",
+    youtubeVideo: "https://www.youtube.com/embed/IuEP6DBxzUU",
     category: "news",
     technologies: ["React", "TypeScript", "Tailwind CSS", "GSAP", "i18next"],
     duration: t("arabiaSwim.duration"),
@@ -76,7 +76,7 @@ export const getProjects = (): Project[] => {
     id: "ecommerce-luxury",
     title: "المتجر الذكي  ",
     description:
-      "منصة تجارة إلكترونية متطورة بتصميم حديث وتجربة مستخدم استثنائية",
+      "منصة تجارة إلكترونية متكاملة تضم لوحة تحكم متقدمة جداً، نظام تبديل استايلات ديناميكي، نظام تقييم وتعليقات بدون تسجيل، وإضافة منتجات بأسعار مخفضة مع تحليلات مبيعات شاملة",
     fullDescription:
       "تم تطوير هذا المتجر الإلكتروني باستخدام أحدث التقنيات لضمان تجربة تسوق سلسة ومرضية. يتضمن نظام إدارة محتوى قوي، نظام ذكي، وتحليلات مبيعات متقدمة. المشروع يهدف إلى توفير منصة شاملة للتجارة الإلكترونية مع واجهة مستخدم حديثة وسهلة الاستخدام، بالإضافة إلى نظام إدارة متقدم للمنتجات والطلبات.",
     image: "/images/projects/local/project-artwin-main.webp",
@@ -140,7 +140,7 @@ export const getProjects = (): Project[] => {
     id: "artwin-mobile",
     title: "artwin mobile ",
     description:
-      "Modern tasarıma ve olağanüstü kullanıcı deneyimine sahip, gelişmiş .",
+      "Akıllı kontrol sistemi, Türkçe/İngilizce çok dilli destek, gelişmiş istatistik yönetim paneli, her ekran boyutuna duyarlı tasarım ve 3D interaktif ürün kataloğu ile modern e-ticaret platformu",
     fullDescription:
       "Bu çevrimiçi mağaza, sorunsuz ve tatmin edici bir alışveriş deneyimi sağlamak için en son teknolojiler kullanılarak geliştirildi. Sağlam bir içerik yönetim sistemi, akıllı bir sistem ve gelişmiş satış analitiği içerir. Proje, modern ve kullanımı kolay bir kullanıcı arayüzüne sahip kapsamlı bir e-ticaret platformu ve gelişmiş bir ürün ve sipariş yönetim sistemi sağlamayı amaçlamaktadır.",
     image: "/images/projects/local/project-artwin-screenshot.webp",
@@ -213,7 +213,7 @@ export const getProjects = (): Project[] => {
     id: "websitemy-portfolio",
     title: "موقع WebSiteMy الرسمي",
     description:
-      "موقع شركة تطوير المواقع الإلكترونية - معرض إنجازات تقنية احترافي",
+      "موقع شركة احترافي يضم مساعد ذكي متطور بالذكاء الاصطناعي، معرض تفاعلي للمشاريع مع نظام تقييمات، لوحة تحكم متقدمة، تحسين SEO متقدم، ونظام إدارة محتوى مرن قابل للتوسع",
     fullDescription:
       "تم تطوير الموقع الرسمي لشركة WebSiteMy باستخدام أحدث التقنيات لعرض خدمات الشركة ومشاريعها بطريقة احترافية. يتضمن الموقع مساعد ذكي متطور، معرض تفاعلي للمشاريع، ونظام إدارة محتوى متقدم. المشروع يهدف إلى توفير تجربة مستخدم استثنائية مع واجهة حديثة وسهلة الاستخدام، بالإضافة إلى تحسين محركات البحث للوصول لأكبر عدد من العملاء المحتملين.",
     image: "https://www.websitemy.com/images/logo.png",
@@ -265,7 +265,7 @@ export const getProjects = (): Project[] => {
   {
     id: "pro-camz",
     title: "Pro Camz ",
-    description: "متجر الكتروني متكامل لبيع الكميرات و مستلزماتها متعدد اللغات",
+    description: "متجر إلكتروني متخصص في الكاميرات ومستلزماتها مع كتالوج منتجات احترافي، نظام طلبات ذكي، دعم متعدد اللغات، معرض صور عالي الجودة، وتصميم متجاوب مع جميع الأجهزة",
     fullDescription:
       "تم تطوير هذا المتجر الإلكتروني باستخدام أحدث التقنيات لضمان تجربة تسوق سلسة ومرضية. يتضمن نظام إدارة محتوى قوي، نظام ذكي، وتحليلات مبيعات متقدمة. المشروع يهدف إلى توفير منصة شاملة للتجارة الإلكترونية مع واجهة مستخدم حديثة وسهلة الاستخدام، بالإضافة إلى نظام إدارة متقدم للمنتجات والطلبات.",
     image: "/images/projects/local/project-1.webp",
@@ -329,7 +329,7 @@ export const getProjects = (): Project[] => {
   {
     id: "sharekna",
     title: "منصة شاركنا الاجتماعية ",
-    description: "منصة تواصل اجتماعي ذكية وآمنة",
+    description: "منصة تواصل اجتماعي مبتكرة بدون تنمر أو لايكات، تركز على الأفكار فقط، مع تلخيص ذكي فوري للمنشورات بالذكاء الاصطناعي، والتعليقات المفيدة تتصدر تلقائياً لتجربة تواصل أعمق وأسرع",
     fullDescription:
       "منصة اجتماعية مبتكرة تتيح للمستخدمين التعبير بحرية في بيئة خالية من التنمر والتقييمات السطحية. تعتمد على نظام ذكي يبرز التعليقات المفيدة ويقدم تلخيصات فورية للمحتوى، مما يوفر تجربة تواصل أكثر عمقًا وسرعة.",
     image:
@@ -381,7 +381,7 @@ export const getProjects = (): Project[] => {
   {
     id: "business",
     title: "ذاكرة الشهداء",
-    description: "ذاكرة الشهداء - مشروع من القلب إلى القلب",
+    description: "منصة مخصصة لحفظ ذكريات الشهداء الأبطال مع نظام إضافة معلومات شامل (صور، قصص)، بحث متقدم، باركود فريد لكل شهيد، نظام موافقة، وتعليقات محمية بالذكاء الاصطناعي",
     fullDescription:
       "موقع ويب مخصص لحفظ ذكريات وقصص شهدائنا الأبطال، حيث يمكن لأي شخص مشاركة قصة شهيد عزيز عليه والاحتفاظ بذكراه للأبد.",
     image: "/images/projects/local/project-youtube.webp",
@@ -444,7 +444,7 @@ export const getProjects = (): Project[] => {
   {
     id: "social-network",
     title: "منصة  codelam",
-    description: "منصة تواصل اجتماعي مع ميزات متقدمة وحماية للخصوصية",
+    description: "شبكة اجتماعية مبتكرة تركز على الخصوصية والأمان مع تواصل مشفر من الطرف للطرف، مشاركة ذكية للمحتوى، أدوات بناء مجتمعات آمنة، ونظام حماية متقدم للبيانات الشخصية",
     fullDescription:
       "شبكة اجتماعية مبتكرة تركز على الخصوصية والأمان. تتضمن ميزات التواصل المشفر، المشاركة الذكية، وأدوات بناء المجتمعات. المنصة تهدف إلى توفير بيئة آمنة ومحفزة للتواصل الاجتماعي مع احترام خصوصية المستخدمين وحماية بياناتهم.",
     image:
@@ -506,7 +506,7 @@ export const getProjects = (): Project[] => {
     id: "aleppo-complaints",
     title: "شكاوي حلب ",
     description:
-      "منصة لتقديم الشكاوى وتحسين التواصل بين المواطنين والجهات المعنية",
+      "منصة صوت حلب لتحسين التواصل بين المواطنين والبلدية مع نظام تقديم شكاوى تفاعلي، تتبع حالة الشكوى فورياً، لوحة تحكم للجهات المعنية، إشعارات فورية، وتصنيف ذكي حسب النوع والمنطقة",
     fullDescription:
       'منصة "صوت حلب" تهدف إلى تحسين التواصل بين المواطنين والجهات المعنية، ومعالجة القضايا الخدمية بكفاءة وسرعة. تم تنفيذ المشروع في مدة قياسية بلغت أربعة أيام كمرحلة أولى، ويشمل خيارات مبتكرة لتقديم الشكاوى وإضافات فريدة لتحسين تجربة المستخدم',
     image: "/images/projects/local/project-ww.webp",
@@ -562,7 +562,7 @@ export const getProjects = (): Project[] => {
   {
     id: "national-network-media",
     title: "الشبكة الوطنية للإعلام",
-    description: "منصة إعلامية اخبارية",
+    description: "منصة إعلامية سورية متطورة تدعم التحول الرقمي مع نظام إدارة محتوى متقدم، دعم مرئيات شامل (مقالات، صور، فيديو، بودكاست)، نظام تعليقات، مشاركة اجتماعية، وتحسين SEO احترافي",
     fullDescription:
       "منصة إعلامية متطورة تهدف لدعم التحول الرقمي في سوريا. تتميز بتصميم استثنائي وواجهة متجاوبة مع جميع أحجام الشاشات، وتقدم محتوى إعلامي هادف عبر مقالات وصور وفيديوهات وبودكاست.",
     image: "/images/projects/local/project-sara.webp",
@@ -615,7 +615,7 @@ export const getProjects = (): Project[] => {
   {
     id: "national-network-media-opensource",
     title: "الشبكة الوطنية للإعلام",
-    description: "منصة إعلامية اخبارية ",
+    description: "منصة إعلامية مفتوحة المصدر مع تصميم استثنائي متجاوب، نظام إدارة محتوى متقدم، دعم كامل للمرئيات والبودكاست، لوحة تحكم سهلة، ونظام تعليقات بدون تسجيل مع مشاركة اجتماعية",
     fullDescription:
       "منصة إعلامية متطورة تهدف لدعم التحول الرقمي في سوريا. تتميز بتصميم استثنائي وواجهة متجاوبة مع جميع أحجام الشاشات، وتقدم محتوى إعلامي هادف عبر مقالات وصور وفيديوهات وبودكاست.",
     image: "/images/projects/local/project-sara-2.webp",
@@ -667,7 +667,7 @@ export const getProjects = (): Project[] => {
     id: "saas-platform",
     title: "مرافقي للذكي",
     description:
-      "تطبيق الرعاية الصحية الذكية - معلومات مفصلة عن الأدوية + دقة في البحث",
+      "رفيقك الصحي الشخصي الذكي مع معلومات دقيقة عن الأدوية وتفاعلاتها، طبيب افتراضي يحلل تاريخك الصحي، تذكيرات ذكية بالجرعات، متابعة العادات الصحية، ودعم نفسي بلغة واضحة ومباشرة",
     fullDescription:
       "مرافقي الذكي ليس مجرد تطبيق عادي ... رفيقك الصحي الشخصي الذي يرافقك في رحلتك نحو حياة أكثر صحة وسعادة 💖",
     image:
