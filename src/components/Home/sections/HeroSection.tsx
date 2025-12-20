@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Gift,
   Calculator,
@@ -8,10 +9,29 @@ import {
   Shield,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import CostCalculatorModal from "../../CostCalculatorModal";
+import { soundEffects } from "../../../utils/soundEffects";
 
 const HeroSection = () => {
   const { t, i18n } = useTranslation();
   const isRTL = i18n.dir() === "rtl";
+  const [isCalculatorOpen, setIsCalculatorOpen] = useState(false);
+
+  // فتح واتساب للاستشارة المجانية
+  const openWhatsAppConsultation = () => {
+    soundEffects.playSend(); // صوت إرسال
+    const message = isRTL
+      ? "مرحباً، أريد الحصول على استشارة مجانية حول مشروعي 🚀"
+      : "Hello, I would like to get a free consultation about my project 🚀";
+    const encodedMessage = encodeURIComponent(message);
+    window.open(`https://wa.me/905313345111?text=${encodedMessage}`, "_blank");
+  };
+
+  // فتح حاسبة التكلفة مع صوت
+  const openCalculator = () => {
+    soundEffects.playPop(); // صوت فتح
+    setIsCalculatorOpen(true);
+  };
 
   return (
     <section
@@ -111,6 +131,7 @@ const HeroSection = () => {
               className={`flex flex-col sm:flex-row gap-4 !mb-8`}
             >
               <button
+                onClick={openWhatsAppConsultation}
                 className={`flex items-center justify-center gap-2 bg-gradient-to-r from-[#00D9FF] to-[#6C5CE7] text-white px-8 py-4 rounded-xl text-sm md:text-base 2xl:text-lg font-semibold hover:shadow-[0_0_40px_rgba(0,217,255,0.8)] transition-all hover:-translate-y-1 ${
                   isRTL ? "flex-row" : "flex-row-reverse"
                 }`}
@@ -119,6 +140,7 @@ const HeroSection = () => {
                 <span>{t("hero.cta.consultation")}</span>
               </button>
               <button
+                onClick={openCalculator}
                 className={`flex items-center justify-center gap-2 bg-transparent border-2 border-[#00D9FF] text-[#00D9FF] px-8 py-4 rounded-xl text-sm md:text-base 2xl:text-lg font-semibold hover:bg-[#00D9FF]/10 transition-all hover:-translate-y-1 ${
                   isRTL ? "flex-row" : "flex-row-reverse"
                 }`}
@@ -226,6 +248,12 @@ const HeroSection = () => {
           <span className="w-0.5 h-3 bg-[#00D9FF] opacity-30"></span>
         </div>
       </div>
+
+      {/* Cost Calculator Modal */}
+      <CostCalculatorModal
+        isOpen={isCalculatorOpen}
+        onClose={() => setIsCalculatorOpen(false)}
+      />
     </section>
   );
 };

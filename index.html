@@ -7,16 +7,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#00d4ff" />
     <meta name="msvalidate.01" content="5B8B74BB3ED119CA47C4A5AE662A0883" />
-    <!-- Preconnect to external domains -->
+    
+    <!-- Preconnect to external domains (once only) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Preload Arabic Font for faster rendering -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;500;600;700;800&display=swap" as="style" />
     
     <!-- Preload critical resources -->
     <link rel="preload" href="/images/hero-poster.jpg" as="image" type="image/jpeg" />
     
-    <!-- Font optimization with font-display swap -->
+    <!-- Font loading - optimized single load -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    
+    <!-- Critical CSS - Above the fold -->
     <style>
-      /* Critical CSS - Above the fold */
       * {
         margin: 0;
         padding: 0;
@@ -24,8 +30,8 @@
       }
       
       body {
-        font-family: system-ui, -apple-system, sans-serif;
-        background: #000;
+        font-family: 'Noto Kufi Arabic', system-ui, -apple-system, sans-serif;
+        background: #0a0a0a;
         color: #fff;
         overflow-x: hidden;
       }
@@ -45,62 +51,158 @@
       }
     </style>
     
-    <!-- Google Search Console Verification - ضع كودك هنا -->
+    <!-- Google Search Console Verification -->
     <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE_HERE" />
-    <title>websitemy ➡ لتطوير الويب</title>
-    <meta
-      name="description"
-      content="شركة تطوير ويب متخصصة في إنشاء مواقع إلكترونية وتطبيقات ويب متقدمة. نحول أفكارك إلى واقع رقمي بأحدث التقنيات."
-    />
     
-    <!-- SEO Meta Tags -->
-    <meta name="keywords" content="تطوير مواقع, تطبيقات ويب, برمجة, تصميم مواقع, تطوير واجهات, React, TypeScript, NestJS, WebSiteMy" />
+    <!-- Primary Meta Tags -->
+    <title>WebSiteMy | تصميم مواقع احترافية وتطوير متاجر إلكترونية - خصم 40%</title>
+    <meta name="description" content="شركة WebSiteMy لتصميم وتطوير المواقع الإلكترونية والمتاجر الرقمية. نقدم حلول ويب متكاملة: تصميم احترافي، برمجة متقدمة، استضافة آمنة، دعم فني 24/7. احصل على خصم 40% الآن!" />
+    <meta name="keywords" content="تصميم مواقع, تطوير مواقع, متجر إلكتروني, برمجة مواقع, تصميم متاجر, شركة تصميم مواقع, أفضل شركة تطوير ويب, تصميم مواقع احترافية, تطوير تطبيقات ويب, WebSiteMy" />
     <meta name="author" content="WebSiteMy" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="language" content="Arabic" />
-    <meta name="revisit-after" content="7 days" />
+    <meta name="revisit-after" content="3 days" />
+    <meta name="rating" content="general" />
+    
+    <!-- Multilingual Support - hreflang -->
+    <link rel="alternate" hreflang="ar" href="https://www.websitemy.com/" />
+    <link rel="alternate" hreflang="en" href="https://www.websitemy.com/?lang=en" />
+    <link rel="alternate" hreflang="tr" href="https://www.websitemy.com/?lang=tr" />
+    <link rel="alternate" hreflang="x-default" href="https://www.websitemy.com/" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.websitemy.com/" />
-    <meta property="og:title" content="websitemy ➡ لتطوير الويب" />
-    <meta property="og:description" content="شركة تطوير ويب متخصصة في إنشاء مواقع إلكترونية وتطبيقات ويب متقدمة. نحول أفكارك إلى واقع رقمي بأحدث التقنيات." />
+    <meta property="og:title" content="WebSiteMy | تصميم مواقع احترافية وتطوير متاجر إلكترونية" />
+    <meta property="og:description" content="شركة WebSiteMy لتصميم وتطوير المواقع الإلكترونية. تصميم احترافي، برمجة متقدمة، استضافة آمنة. احصل على خصم 40% الآن!" />
     <meta property="og:image" content="https://www.websitemy.com/logo1.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ar_SA" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:site_name" content="WebSiteMy" />
     
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://www.websitemy.com/" />
-    <meta property="twitter:title" content="websitemy ➡ لتطوير الويب" />
-    <meta property="twitter:description" content="شركة تطوير ويب متخصصة في إنشاء مواقع إلكترونية وتطبيقات ويب متقدمة. نحول أفكارك إلى واقع رقمي بأحدث التقنيات." />
-    <meta property="twitter:image" content="https://www.websitemy.com/logo1.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://www.websitemy.com/" />
+    <meta name="twitter:title" content="WebSiteMy | تصميم مواقع احترافية وتطوير متاجر إلكترونية" />
+    <meta name="twitter:description" content="شركة WebSiteMy لتصميم وتطوير المواقع الإلكترونية. تصميم احترافي، برمجة متقدمة. احصل على خصم 40%!" />
+    <meta name="twitter:image" content="https://www.websitemy.com/logo1.png" />
+    <meta name="twitter:site" content="@websitemy" />
+    <meta name="twitter:creator" content="@websitemy" />
     
     <!-- Canonical URL -->
     <link rel="canonical" href="https://www.websitemy.com/" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@100..900&display=swap"
-      rel="stylesheet"
-    />
 
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-QJHWNDNKEV"
-    ></script>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QJHWNDNKEV"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
+      function gtag() { dataLayer.push(arguments); }
       gtag("js", new Date());
-
       gtag("config", "G-QJHWNDNKEV");
+    </script>
+    
+    <!-- Structured Data - Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "WebSiteMy",
+      "alternateName": "ويب سايت ماي",
+      "url": "https://www.websitemy.com",
+      "logo": "https://www.websitemy.com/logo1.png",
+      "description": "شركة متخصصة في تصميم وتطوير المواقع الإلكترونية والمتاجر الرقمية",
+      "foundingDate": "2020",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+905313345111",
+        "contactType": "customer service",
+        "availableLanguage": ["Arabic", "English", "Turkish"]
+      },
+      "sameAs": [
+        "https://github.com/MemoSy",
+        "https://www.linkedin.com/in/mahmudalmubayed/",
+        "https://x.com/Memosy2009",
+        "https://www.facebook.com/websitemyy"
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "12",
+        "bestRating": "5"
+      }
+    }
+    </script>
+    
+    <!-- Structured Data - WebSite with Search -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "WebSiteMy",
+      "url": "https://www.websitemy.com",
+      "description": "شركة تصميم وتطوير مواقع إلكترونية احترافية",
+      "inLanguage": ["ar", "en", "tr"],
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.websitemy.com/projects?search={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    
+    <!-- Structured Data - Services -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "خدماتنا",
+      "description": "الخدمات التي تقدمها شركة WebSiteMy",
+      "numberOfItems": 5,
+      "itemListElement": [
+        {
+          "@type": "Service",
+          "position": 1,
+          "name": "تطوير المواقع الشخصية",
+          "description": "مواقع سريعة وآمنة تعكس هويتك المهنية",
+          "provider": {"@type": "Organization", "name": "WebSiteMy"},
+          "offers": {"@type": "Offer", "price": "300", "priceCurrency": "USD"}
+        },
+        {
+          "@type": "Service",
+          "position": 2,
+          "name": "بناء المتاجر الإلكترونية",
+          "description": "متاجر متكاملة تزيد مبيعاتك",
+          "provider": {"@type": "Organization", "name": "WebSiteMy"},
+          "offers": {"@type": "Offer", "price": "500", "priceCurrency": "USD"}
+        },
+        {
+          "@type": "Service",
+          "position": 3,
+          "name": "تطبيقات Startup",
+          "description": "نحول فكرتك إلى تطبيق احترافي",
+          "provider": {"@type": "Organization", "name": "WebSiteMy"},
+          "offers": {"@type": "Offer", "price": "1000", "priceCurrency": "USD"}
+        },
+        {
+          "@type": "Service",
+          "position": 4,
+          "name": "تجديد الهوية البصرية",
+          "description": "تصميم عصري يعكس تطور علامتك التجارية",
+          "provider": {"@type": "Organization", "name": "WebSiteMy"},
+          "offers": {"@type": "Offer", "price": "250", "priceCurrency": "USD"}
+        },
+        {
+          "@type": "Service",
+          "position": 5,
+          "name": "مبادرة العطاء المجتمعي",
+          "description": "خدمات مجانية للمؤسسات الخيرية",
+          "provider": {"@type": "Organization", "name": "WebSiteMy"},
+          "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+        }
+      ]
+    }
     </script>
   </head>
   <body>

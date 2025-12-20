@@ -19,8 +19,6 @@ const AdminPage = lazy(() => import('./pages/AdminPage'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 // Lazy load heavy UI components after initial render
-const AnimatedBackground = lazy(() => import('./components/UI/AnimatedBackground'));
-const ParticleBackground = lazy(() => import('./components/UI/ParticleBackground'));
 const CustomCursor = lazy(() => import('./components/UI/CustomCursor'));
 const PerformanceMonitor = lazy(() => import('./components/UI/PerformanceMonitor'));
 const AIAssistantButton = lazy(() => import('./components/UI/AIAssistantButton'));

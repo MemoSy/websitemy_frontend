@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect } from "react";
+import React, { useRef, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -18,6 +18,7 @@ interface Card {
   description: string;
   gradient: string;
   iconColor: string;
+  bgGradient: string; // خلفية القسم المتدرجة
 }
 
 const StackCards: React.FC = () => {
@@ -26,6 +27,9 @@ const StackCards: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const triggersRef = useRef<ScrollTrigger[]>([]);
+  const bgRef = useRef<HTMLDivElement>(null);
+  const [activeCard, setActiveCard] = useState(0);
+  const [isInView, setIsInView] = useState(false); // للتحكم في ظهور شريط التقدم
 
   const cards: Card[] = [
     {
@@ -35,6 +39,7 @@ const StackCards: React.FC = () => {
       description: t("stackCards.cards.card1.description"),
       gradient: "from-[#6C5CE7] to-[#00D9FF]",
       iconColor: "#6C5CE7",
+      bgGradient: "radial-gradient(ellipse at 30% 20%, rgba(108, 92, 231, 0.15) 0%, transparent 50%), radial-gradient(ellipse at 70% 80%, rgba(0, 217, 255, 0.1) 0%, transparent 50%)",
     },
     {
       id: 2,
@@ -43,6 +48,7 @@ const StackCards: React.FC = () => {
       description: t("stackCards.cards.card2.description"),
       gradient: "from-[#00D9FF] to-[#00FFA3]",
       iconColor: "#00D9FF",
+      bgGradient: "radial-gradient(ellipse at 70% 30%, rgba(0, 217, 255, 0.15) 0%, transparent 50%), radial-gradient(ellipse at 30% 70%, rgba(0, 255, 163, 0.1) 0%, transparent 50%)",
     },
     {
       id: 3,
@@ -51,6 +57,7 @@ const StackCards: React.FC = () => {
       description: t("stackCards.cards.card3.description"),
       gradient: "from-[#00FFA3] to-[#6C5CE7]",
       iconColor: "#00FFA3",
+      bgGradient: "radial-gradient(ellipse at 40% 40%, rgba(0, 255, 163, 0.15) 0%, transparent 50%), radial-gradient(ellipse at 60% 60%, rgba(108, 92, 231, 0.1) 0%, transparent 50%)",
     },
     {
       id: 4,
@@ -59,6 +66,7 @@ const StackCards: React.FC = () => {
       description: t("stackCards.cards.card4.description"),
       gradient: "from-[#6C5CE7] to-[#00D9FF]",
       iconColor: "#6C5CE7",
+      bgGradient: "radial-gradient(ellipse at 50% 30%, rgba(108, 92, 231, 0.2) 0%, transparent 40%), radial-gradient(ellipse at 50% 70%, rgba(0, 217, 255, 0.15) 0%, transparent 40%), radial-gradient(ellipse at 30% 50%, rgba(0, 255, 163, 0.1) 0%, transparent 50%)",
     },
   ];
 
@@ -69,6 +77,18 @@ const StackCards: React.FC = () => {
     const triggers: ScrollTrigger[] = [];
 
     const ctx = gsap.context(() => {
+      // ScrollTrigger للقسم بالكامل - للتحكم في ظهور شريط التقدم
+      const sectionTrigger = ScrollTrigger.create({
+        trigger: section,
+        start: "top 80%",
+        end: "bottom 20%",
+        onEnter: () => setIsInView(true),
+        onLeave: () => setIsInView(false),
+        onEnterBack: () => setIsInView(true),
+        onLeaveBack: () => setIsInView(false),
+      });
+      triggers.push(sectionTrigger);
+
       const validCards = cardsRef.current.filter(
         (card): card is HTMLDivElement => card !== null
       );
@@ -88,9 +108,23 @@ const StackCards: React.FC = () => {
           anticipatePin: 1,
           invalidateOnRefresh: true,
           onUpdate: (self) => {
-            if (numberElement) {
-              const progress = self.progress;
+            const progress = self.progress;
+            
+            // تحديث البطاقة النشطة للخلفية المتدرجة
+            if (progress > 0.1 && progress < 0.9) {
+              setActiveCard(index);
+            }
+            
+            // تحديث الخلفية المتدرجة
+            if (bgRef.current) {
+              gsap.to(bgRef.current, {
+                background: cards[index].bgGradient,
+                duration: 0.5,
+                ease: "power2.out",
+              });
+            }
 
+            if (numberElement) {
               let glowIntensity = 0;
               let numberOpacity = 0;
 
@@ -139,10 +173,60 @@ const StackCards: React.FC = () => {
 
   return (
     <div ref={sectionRef} className="relative bg-[#0F1729]">
-      {/* Animated background */}
+      {/* Dynamic Gradient Background */}
+      <div 
+        ref={bgRef}
+        className="absolute inset-0 transition-all duration-700 ease-out pointer-events-none"
+        style={{ background: cards[0].bgGradient }}
+      />
+      
+      {/* Animated background blobs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 -left-32 w-96 h-96 bg-[#6C5CE7]/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-[#00FFA3]/10 rounded-full blur-3xl"></div>
+      </div>
+
+      {/* Vertical Progress Indicator - يظهر فقط عندما يكون القسم مرئياً */}
+      <div 
+        className={`fixed top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col items-center gap-2 transition-all duration-500 ${
+          isRTL ? 'right-8' : 'left-8'
+        } ${isInView ? 'opacity-100 translate-x-0' : `opacity-0 ${isRTL ? 'translate-x-8' : '-translate-x-8'}`}`}
+      >
+        {/* Progress Line Background */}
+        <div className="relative h-48 w-1 bg-white/10 rounded-full overflow-hidden">
+          {/* Active Progress */}
+          <div 
+            className="absolute top-0 left-0 w-full bg-gradient-to-b from-[#6C5CE7] via-[#00D9FF] to-[#00FFA3] rounded-full transition-all duration-500 ease-out"
+            style={{ height: `${((activeCard + 1) / cards.length) * 100}%` }}
+          />
+        </div>
+        
+        {/* Step Dots */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 h-48 flex flex-col justify-between py-0">
+          {cards.map((card, index) => (
+            <div 
+              key={card.id}
+              className={`w-3 h-3 rounded-full border-2 transition-all duration-300 ${
+                index <= activeCard 
+                  ? 'border-transparent scale-125' 
+                  : 'border-white/30 bg-transparent'
+              }`}
+              style={{
+                backgroundColor: index <= activeCard ? card.iconColor : 'transparent',
+                boxShadow: index === activeCard ? `0 0 15px ${card.iconColor}, 0 0 30px ${card.iconColor}50` : 'none'
+              }}
+            />
+          ))}
+        </div>
+        
+        {/* Current Step Number */}
+        <div 
+          className="mt-4 text-2xl font-bold transition-all duration-300"
+          style={{ color: cards[activeCard]?.iconColor || '#6C5CE7' }}
+        >
+          {String(activeCard + 1).padStart(2, '0')}
+          <span className="text-white/30 text-sm">/{String(cards.length).padStart(2, '0')}</span>
+        </div>
       </div>
 
       {/* Section Header */}

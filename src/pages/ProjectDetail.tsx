@@ -6,7 +6,6 @@ import {
   Github,
   Clock,
   Star,
-  Calendar,
   Code,
   Target,
   Zap,
@@ -19,7 +18,6 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { getProjects } from "../data/projects";
 import { Review } from "../types";
-import ImageGallery from "../components/UI/ImageGallery";
 import ReviewSystem from "../components/UI/ReviewSystem";
 import SEO from "../components/SEO/SEO";
 import ProjectStructuredData from "../components/SEO/ProjectStructuredData";

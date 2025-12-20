@@ -36,7 +36,7 @@ const AdminLogin = ({ onLoginSuccess }: AdminLoginProps) => {
       } else {
         setError(result.message || 'فشل في تسجيل الدخول');
       }
-    } catch (error) {
+    } catch {
       setError('حدث خطأ في الاتصال');
     } finally {
       setIsLoading(false);

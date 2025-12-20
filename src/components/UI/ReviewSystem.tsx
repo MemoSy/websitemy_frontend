@@ -7,12 +7,10 @@ import StarRating from "./StarRating";
 import axios from "axios";
 
 interface ReviewSystemProps {
-  onAddReview: (review: Omit<Review, "id" | "date">) => void;
   projectId: string;
 }
 
 const ReviewSystem: React.FC<ReviewSystemProps> = ({
-  onAddReview,
   projectId,
 }) => {
   const { t, i18n } = useTranslation();

@@ -4,14 +4,12 @@ interface TypewriterTextProps {
   texts: string[];
   speed?: number;
   delay?: number;
-  className?: string;
 }
 
 const TypewriterText: React.FC<TypewriterTextProps> = ({
   texts,
   speed = 100,
   delay = 2000,
-  className = ''
 }) => {
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [currentText, setCurrentText] = useState('');

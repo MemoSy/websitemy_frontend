@@ -28,8 +28,7 @@ interface Testimonial {
 }
 
 const TestimonialsSection = () => {
-  const { t, i18n } = useTranslation();
-  const isRTL = i18n.dir() === "rtl";
+  const { t } = useTranslation();
 
   const testimonials: Testimonial[] = [
     {
