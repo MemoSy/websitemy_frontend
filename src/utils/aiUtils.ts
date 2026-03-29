@@ -152,7 +152,7 @@ export const generateKnowledgeBase = (): AIKnowledgeBase => {
 
 // دالة لتحليل السياق واستخراج المعلومات المهمة
 const analyzeContext = (
-  conversationHistory: Array<{ text: string; isUser: boolean }>
+  conversationHistory: Array<{ text: string; isUser: boolean }>,
 ) => {
   let currentTopic = "";
   let lastMentionedProject = "";
@@ -214,7 +214,7 @@ const detectLanguage = (text: string): "ar" | "en" | "tr" => {
   // تنظيف النص من الأرقام والرموز
   const cleanText = text.replace(
     /[0-9\s\.,!?@#$%^&*()_+\-=\[\]{};:'"\|,.<>\/?]/g,
-    ""
+    "",
   );
 
   // الأحرف العربية
@@ -242,7 +242,7 @@ const detectLanguage = (text: string): "ar" | "en" | "tr" => {
 export const callChatGPT = async (
   currentMessage: string,
   context: AIKnowledgeBase,
-  conversationHistory: Array<{ text: string; isUser: boolean }> = []
+  conversationHistory: Array<{ text: string; isUser: boolean }> = [],
 ) => {
   try {
     // اكتشاف لغة السؤال
@@ -251,8 +251,8 @@ export const callChatGPT = async (
       detectedLanguage === "ar"
         ? "⚠️ **هام جداً:** يجب أن يكون الرد بالكامل باللغة العربية فقط."
         : detectedLanguage === "en"
-        ? "⚠️ **CRITICAL:** Your response must be entirely in English only."
-        : "⚠️ **ÇOK ÖNEMLİ:** Yanıtınız tamamen Türkçe olmalıdır.";
+          ? "⚠️ **CRITICAL:** Your response must be entirely in English only."
+          : "⚠️ **ÇOK ÖNEMLİ:** Yanıtınız tamamen Türkçe olmalıdır.";
 
     // تحليل السياق
     const contextAnalysis = analyzeContext(conversationHistory);
@@ -291,7 +291,7 @@ ${conversationHistory
   .slice(-6)
   .map(
     (msg, index) =>
-      `${index + 1}. ${msg.isUser ? "المستخدم" : "المساعد"}: ${msg.text}`
+      `${index + 1}. ${msg.isUser ? "المستخدم" : "المساعد"}: ${msg.text}`,
   )
   .join("\n")}
 
@@ -309,7 +309,7 @@ ${faqContext}
     const systemPrompt = generateAdvancedSystemPrompt(
       context.companyInfo,
       context.projects.slice(0, 10),
-      faqData.slice(0, 10)
+      faqData.slice(0, 10),
     );
 
     // بناء الرسالة الكاملة
@@ -345,13 +345,13 @@ ${conversationContext}`;
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
-      
+
       if (response.status === 401) {
         return "عذراً، مفتاح API غير صحيح. يرجى التحقق من صحة المفتاح.";
       } else if (response.status === 429) {
         return "⚠️ **عذراً، الخدمة غير متوفرة مؤقتاً**\n\nتم تجاوز حد الاستخدام المسموح.\n\n📞 **للحصول على إجابات فورية:**\n- اتصل بنا: **+905313345111** (واتساب)\n- البريد: info@websitemy.com\n\n💡 سنكون سعداء بالإجابة على جميع أسئلتك!";
       }
-      
+
       console.error("z.ai API Error:", errorData);
       return `عذراً، حدث خطأ في الاتصال. يرجى المحاولة مرة أخرى.\n\n📱 للدعم الفوري: +905313345111`;
     }
@@ -391,9 +391,15 @@ ${conversationContext}`;
 
     if (error?.message?.includes("API key")) {
       return "عذراً، مفتاح API غير صحيح. يرجى التحقق من صحة المفتاح.";
-    } else if (error?.message?.includes("quota") || error?.message?.includes("limit")) {
+    } else if (
+      error?.message?.includes("quota") ||
+      error?.message?.includes("limit")
+    ) {
       return "⚠️ **عذراً، الخدمة غير متوفرة مؤقتاً**\n\nتم تجاوز حد الاستخدام المسموح.\n\n📞 **للحصول على إجابات فورية:**\n- اتصل بنا: **+905313345111** (واتساب)\n- البريد: info@websitemy.com\n\n💡 سنكون سعداء بالإجابة على جميع أسئلتك!";
-    } else if (error?.message?.includes("blocked") || error?.message?.includes("safety")) {
+    } else if (
+      error?.message?.includes("blocked") ||
+      error?.message?.includes("safety")
+    ) {
       return "عذراً، لا أستطيع الإجابة على هذا السؤال. هل يمكنك إعادة صياغته بطريقة أخرى؟\n\n📱 للمساعدة المباشرة: +905313345111";
     } else if (error?.message) {
       console.error("Detailed error:", error.message);
