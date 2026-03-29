@@ -15,7 +15,6 @@
     "optimize-all": "npm run compress-video && npm run optimize-images"
   },
   "dependencies": {
-    "@google/generative-ai": "^0.24.1",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.10.0",
     "framer-motion": "^12.23.0",

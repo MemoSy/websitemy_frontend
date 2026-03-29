@@ -150,11 +150,11 @@
     "chatSaved": "Sohbet otomatik olarak kaydedildi",
     "currentContext": "Mevcut Bağlam",
     "contexts": {
-      "news": "Kişisel Web Siteleri",
-      "ecommerce": "E-ticaret Mağazaları",
+      "news": "Portföy Web Sitesi",
+      "ecommerce": "Çevrimiçi Mağazalar",
       "education": "Eğitim Platformları",
       "personal": "Kişisel Web Siteleri",
-      "social": "Sosyal Ağlar"
+      "social": "Sosyal Platformlar"
     },
     "welcomeMessage": "Merhaba! WebSiteMy projelerinde uzmanlaşmış akıllı asistanınızım. Projelerimiz, fiyatlandırma, kullanılan teknolojiler veya ihtiyacınız olan diğer bilgiler hakkında sorularınızı yanıtlayabilirim. Bugün size nasıl yardımcı olabilirim?",
     "typing": "Yazıyor...",
@@ -188,34 +188,34 @@
         "description": "Teknik topluluk gelişimine katkıda bulunan açık kaynak yazılım projeleri"
       },
       "ecommerce": {
-        "title": "E-Ticaret",
+        "title": "Çevrimiçi Mağazalar",
         "subtitle": "Kar sağlayan ticari platformlar",
         "description": "Güvenli ödeme teknolojileri ve olağanüstü kullanıcı deneyimi ile profesyonel çevrimiçi mağazalar"
       },
       "social": {
-        "title": "Sosyal Ağlar",
+        "title": "Sosyal Platformlar",
         "subtitle": "İnovasyon yoluyla dünyayı birleştirmek",
         "description": "Gelişmiş özellikler ve gizlilik koruması ile sosyal iletişim platformları"
       },
       "saas": {
-        "title": "Karlı Projeler",
+        "title": "Startup Uygulamaları",
         "subtitle": "Gelişmiş çözümler",
         "description": "Kapsamlı yönetim ve profesyonel kontrol paneli ile Hizmet Olarak Yazılım"
       },
       "news": {
-        "title": "Kişisel Web Siteleri",
-        "subtitle": "Haberler ve makaleler",
+        "title": "Portföy Web Sitesi",
+        "subtitle": "Çeşitli portföy web siteleri",
         "description": "Kapsamlı yönetim ve profesyonel kontrol paneli ile Hizmet Olarak Yazılım"
       },
       "service": {
-        "title": "Hizmet Projeleri",
+        "title": "Hizmet Web Siteleri",
         "subtitle": "Hizmet odaklı",
         "description": "Kapsamlı yönetim ve profesyonel kontrol paneli ile Hizmet Olarak Yazılım"
       }
     },
     "card": {
       "duration": "Süre:",
-      "viewDetails": "Detayları Görüntüle"
+      "viewDetails": "Detaylar"
     }
   },
   "projectDetail": {
@@ -420,27 +420,52 @@
           }
         }
       },
-      "allemni": {
-        "shortTitle": "ALLEMNI",
-        "name": "Akıllı Eğitim Platformu",
+      "linkedinCoach": {
+        "shortTitle": "LinkedIn Pro",
+        "name": "LinkedIn Koç Profesyonel Web Sitesi",
         "status": "Geliştirme Aşamasında",
-        "tagline": "Online eğitim platformu",
+        "expectedDuration": "3-4 hafta",
+        "tagline": "Yol haritası ve etkileşimli ipuçları içeren bir LinkedIn koçü için profesyonel kişisel web sitesi",
         "features": {
           "feature1": {
-            "title": "AI Destekli Ders Oluşturma",
-            "desc": "Bir resim yükleyin ve AI otomatik olarak dersi oluştursun"
+            "title": "Profesyonel Kişisel Sayfa",
+            "desc": "Koçün kimliğini ve deneyimini çekici biçimde yansıtan profesyonel tasarım"
           },
           "feature2": {
-            "title": "Otomatik Akıllı Ödevler",
-            "desc": "AI kullanarak resimlerden çoktan seçmeli testler oluşturun"
+            "title": "LinkedIn Yol Haritası",
+            "desc": "Güçlü ve profesyonel bir LinkedIn profili oluşturmak için adım adım rehber"
           },
           "feature3": {
-            "title": "Dosya ve İçerik Yönetimi",
-            "desc": "Dosyaları ve dersleri tek bir yerde kolayca yükleyin ve düzenleyin"
+            "title": "Müşteri Yorumları ve Referanslar",
+            "desc": "Eğitim oturumlarından faydalanan müşterilerden gerçek referanslar"
           },
           "feature4": {
-            "title": "Özelleştirilmiş Özel Dersler",
-            "desc": "Belirli öğrenciler için özel dersler oluşturun ve paylaşın"
+            "title": "Videolar ve LinkedIn İpuçları",
+            "desc": "LinkedIn varlığınızı güçlendirmek için etkileşimli eğitim içeriği"
+          }
+        }
+      },
+      "mobilyaShowroom": {
+        "shortTitle": "Mobilya Showroom",
+        "name": "Mobilya ve Dekorasyon Showroom",
+        "status": "Geliştirme Aşamasında",
+        "tagline": "İç ve dış mekan tasarım işlerini ve dekorasyonları gösteren bir web sitesi",
+        "features": {
+          "feature1": {
+            "title": "Malzemeleri ve Stilleri Bağlayın",
+            "desc": "Malzemeleri, stilleri ve tasarım desenlerini kolayca birbirine bağlama yeteneği"
+          },
+          "feature2": {
+            "title": "Eski ve Yeni Ekran",
+            "desc": "Eski ve yeni tasarımları akıllı kategorileştirme ile göstermek için özel bölümler"
+          },
+          "feature3": {
+            "title": "Makaleler ve İçerik",
+            "desc": "Modern dekorasyon ve mobilya hakkında makaleler ve ipuçları için kapsamlı bölüm"
+          },
+          "feature4": {
+            "title": "Harika Görsel Efektler",
+            "desc": "Mobilya ve mobilyaların ileri görsel efektlerle profesyonel sunumu"
           }
         }
       }
@@ -456,23 +481,23 @@
         "description": "Teknik topluluğun gelişimine katkıda bulunan açık kaynaklı yazılım projeleri"
       },
       "ecommerce": {
-        "title": "E-Ticaret",
+        "title": "Çevrimiçi Mağazalar",
         "description": "Güvenli ödeme teknolojileri ve olağanüstü kullanıcı deneyimi ile profesyonel çevrimiçi mağazalar"
       },
       "social": {
-        "title": "Sosyal Ağlar",
+        "title": "Sosyal Platformlar",
         "description": "Gelişmiş özelliklere ve gizlilik korumasına sahip sosyal iletişim platformları"
       },
       "saas": {
-        "title": "Kârlı Projeler",
+        "title": "Startup Uygulamaları",
         "description": "Kapsamlı yönetim ve profesyonel kontrol paneli ile hizmet olarak yazılım"
       },
       "news": {
-        "title": "Kişisel Web Siteleri",
+        "title": "Portföy Web Siteleri",
         "description": "Kapsamlı yönetim ve profesyonel kontrol paneli ile hizmet olarak yazılım"
       },
       "service": {
-        "title": "Hizmet Projeleri",
+        "title": "Hizmet Web Siteleri",
         "description": "Kapsamlı yönetim ve profesyonel kontrol paneli ile hizmet olarak yazılım"
       }
     }
@@ -652,6 +677,514 @@
       "feature15": "3 numara ve interaktif harita ile İletişim sayfası",
       "feature16": "Tüm cihazlarda Responsive Design",
       "feature17": "Arapça/İngilizce için i18next desteği"
+    }
+  },
+  "websitemyPortfolio": {
+    "title": "WebSiteMy Resmi Web Sitesi",
+    "description": "Gelişmiş yapay zeka asistanı, derecelendirme sistemi ile interaktif proje galerisi, gelişmiş kontrol paneli, gelişmiş SEO optimizasyonu ve esnek ölçeklenebilir içerik yönetim sistemi içeren profesyonel şirket web sitesi",
+    "fullDescription": "WebSiteMy'nin resmi web sitesi, şirketin hizmetlerini ve projelerini profesyonel bir şekilde sergilemek için en son teknolojiler kullanılarak geliştirildi. Web sitesi gelişmiş yapay zeka asistanı, interaktif proje galerisi ve gelişmiş içerik yönetim sistemi içerir. Proje, modern ve kullanıcı dostu bir arayüz ile olağanüstü bir kullanıcı deneyimi sağlamayı, ayrıca en fazla potansiyel müşteriye ulaşmak için arama motoru optimizasyonunu amaçlıyor.",
+    "duration": "İki ay",
+    "clientType": "Web sitesi geliştirme şirketi web sitesi",
+    "complexity": "Orta",
+    "teamSize": "2 geliştirici",
+    "clientFeedback": "Müşteri erişiminde %85 iyileşme ve siparişlerde %60 artış",
+    "keyFeatures": {
+      "feature1": "Yapay zeka teknolojisi ile gelişmiş yapay zeka asistanı",
+      "feature2": "Projeleri ve başarıları sergilemek için interaktif galeri",
+      "feature3": "Gelişmiş içerik yönetim sistemi ve kontrol paneli",
+      "feature4": "Tüm ekran boyutları için duyarlı tasarım",
+      "feature5": "Gelişmiş arama motoru optimizasyonu (SEO)",
+      "feature6": "Müşteri derecelendirmeleri ve yorum sistemi"
+    },
+    "objectives": {
+      "objective1": "Şirketin teknik kimliğini yansıtan profesyonel bir web sitesi geliştirmek",
+      "objective2": "Projeleri ve hizmetleri interaktif ve çekici bir şekilde sergilemek",
+      "objective3": "Müşteri deneyimini iyileştirmek için akıllı bir asistan uygulamak",
+      "objective4": "Arama motorlarındaki erişimi ve görünürlüğü iyileştirmek"
+    },
+    "challenges": {
+      "challenge1": "Bağlamı anlayıp doğru cevaplar veren akıllı bir asistan geliştirmek",
+      "challenge2": "Şirket kimliğini yansıtan profesyonel bir kullanıcı arayüzü tasarlamak",
+      "challenge3": "Esnek ve ölçeklenebilir bir içerik yönetim sistemi uygulamak",
+      "challenge4": "Yüksek performans ve hızlı yükleme sağlamak"
+    },
+    "features": {
+      "feature1": "Yapay zeka teknolojisi ile gelişmiş yapay zeka asistanı",
+      "feature2": "Projeleri ve başarıları sergilemek için interaktif galeri",
+      "feature3": "Gelişmiş içerik yönetim sistemi ve kontrol paneli",
+      "feature4": "Tüm ekran boyutları için duyarlı tasarım",
+      "feature5": "Gelişmiş arama motoru optimizasyonu (SEO)",
+      "feature6": "Müşteri derecelendirmeleri ve yorum sistemi"
+    }
+  },
+  "ecommerceLuxury": {
+    "title": "Akıllı Mağaza",
+    "description": "Gelişmiş kontrol paneli, dinamik stil değiştirme sistemi, kayıt olmadan derecelendirme ve yorum sistemi, indirimli fiyatlarla ürün ekleme ve kapsamlı satış analitiği içeren entegre e-ticaret platformu",
+    "fullDescription": "Bu e-ticaret mağazası, sorunsuz ve tatmin edici bir alışveriş deneyimi sağlamak için en son teknolojiler kullanılarak geliştirildi. Sağlam bir içerik yönetim sistemi, akıllı bir sistem ve gelişmiş satış analitiği içerir. Proje, modern ve kullanımı kolay bir kullanıcı arayüzüne sahip kapsamlı bir e-ticaret platformu ve gelişmiş bir ürün ve sipariş yönetim sistemi sağlamayı amaçlamaktadır.",
+    "duration": "2 ay",
+    "clientType": "Akıllı Online Mağaza",
+    "complexity": "Gelişmiş",
+    "teamSize": "3 geliştirici",
+    "clientFeedback": "Mükemmel deneyim ve satışlarda %40 artış",
+    "keyFeatures": {
+      "feature1": "Profesyonel kullanıcı arayüzü",
+      "feature2": "İndirimli fiyata ürün ekleme",
+      "feature3": "Çok gelişmiş kontrol paneli",
+      "feature4": "Stil değiştirme sistemi",
+      "feature5": "Ürün derecelendirme sistemi",
+      "feature6": "Kayıt olmadan yorum sistemi"
+    },
+    "objectives": {
+      "objective1": "Modern ve kullanıcı dostu bir arayüz geliştirmek",
+      "objective2": "Kullanıcı deneyimini iyileştirmek ve dönüşüm oranlarını artırmak",
+      "objective3": "Yüksek performans ve hızlı yanıt sağlamak",
+      "objective4": "Güvenlik ve korunma en iyi uygulamalarını uygulamak"
+    },
+    "challenges": {
+      "challenge1": "Büyük miktarda veriyi işlemek için uygulama performansını iyileştirmek",
+      "challenge2": "Tüm tarayıcılar ve cihazlarla uyumluluk sağlamak",
+      "challenge3": "Kullanıcı verilerini korumak için gelişmiş bir güvenlik sistemi uygulamak",
+      "challenge4": "Ölçeklenebilir bir API geliştirmek"
+    },
+    "features": {
+      "feature1": "Profesyonel kullanıcı arayüzü",
+      "feature2": "İndirimli fiyata ürün ekleme",
+      "feature3": "Çok gelişmiş kontrol paneli",
+      "feature4": "Stil değiştirme sistemi",
+      "feature5": "Ürün derecelendirme sistemi",
+      "feature6": "Kayıt olmadan yorum sistemi"
+    }
+  },
+  "sharekna": {
+    "title": "Sharekna Sosyal Platformu",
+    "description": "Zorbalık veya beğeniler olmadan yenilikçi bir sosyal iletişim platformu, sadece fikirleri odaklayan, yapay zeka destekli anlık gönderi özetleri ile ve yararlı yorumlar otomatik olarak üst sıralara çıkar, daha derin ve hızlı bir iletişim deneyimi için",
+    "fullDescription": "Kullanıcıların zorbalık ve yüzeysel değerlendirmelerden özgür bir ortamda özgürce ifade etmelerine olanak tanıyan yenilikçi bir sosyal platform. Yararlı yorumları öne çıkaran ve içerik için anlık özetler sağlayan akıllı bir sisteme dayanır, daha derin ve hızlı bir iletişim deneyimi sağlar.",
+    "duration": "25 gün",
+    "clientType": "Akıllı ve Güvenli Sosyal İletişim Platformu",
+    "complexity": "Orta",
+    "teamSize": "1 geliştirici",
+    "clientFeedback": "Operasyonel verimlilik iyileştirildi",
+    "keyFeatures": {
+      "feature1": "Zorbalıksız sosyal platform",
+      "feature2": "Beğeni veya beğenmeme yok, sadece fikir odaklanma",
+      "feature3": "Herkes için tam ifade özgürlüğü",
+      "feature4": "Yararlı yorumlar otomatik olarak üst sıralara çıkar",
+      "feature5": "Gönderi ve yorumların anlık akıllı özeti"
+    },
+    "objectives": {
+      "objective1": "Modern ve kullanıcı dostu bir arayüz geliştirmek",
+      "objective2": "Kullanıcı deneyimini iyileştirmek ve dönüşüm oranlarını artırmak",
+      "objective3": "Yüksek performans ve hızlı yanıt sağlamak",
+      "objective4": "Güvenlik ve korunma en iyi uygulamalarını uygulamak"
+    },
+    "challenges": {
+      "challenge1": "Büyük miktarda veriyi işlemek için uygulama performansını iyileştirmek",
+      "challenge2": "Tüm tarayıcılar ve cihazlarla uyumluluk sağlamak",
+      "challenge3": "Kullanıcı verilerini korumak için gelişmiş bir güvenlik sistemi uygulamak",
+      "challenge4": "Ölçeklenebilir bir API geliştirmek"
+    },
+    "features": {
+      "feature1": "Zorbalıksız sosyal platform",
+      "feature2": "Beğeni veya beğenmeme yok, sadece fikir odaklanma",
+      "feature3": "Herkes için tam ifade özgürlüğü",
+      "feature4": "Yararlı yorumlar otomatik olarak üst sıralara çıkar",
+      "feature5": "Gönderi ve yorumların anlık akıllı özeti"
+    }
+  },
+  "business": {
+    "title": "Şehitler Anısı",
+    "description": "Kahraman şehitlerin anılarını korumaya adanmış platform, kapsamlı bilgi ekleme sistemi (fotoğraflar, hikayeler), gelişmiş arama, her şehit için benzersiz barkod, onay sistemi ve yapay zeka korumalı yorumlar ile",
+    "fullDescription": "Kahraman şehitlerimizin anılarını ve hikayelerini korumaya adanmış bir web sitesi, burada herkes sevdiği bir şehidin hikayesini paylaşabilir ve anısını sonsuza kadar koruyabilir.",
+    "duration": "3 hafta",
+    "clientType": "Hayır kurumu",
+    "complexity": "Orta",
+    "teamSize": "2 geliştirici",
+    "clientFeedback": "Uluslararası taleplerde %60 artış ve operasyonel verimlilik iyileştirildi",
+    "keyFeatures": {
+      "feature1": "Şehit bilgilerini ekleme (isim, tarih, yer, fotoğraflar, hikaye)",
+      "feature2": "Saygılı içeriği sağlamak için onay sistemi",
+      "feature3": "İsim, tarih veya şehre göre şehitlerde gelişmiş arama",
+      "feature4": "Kolay paylaşım için her şehit için benzersiz barkod",
+      "feature5": "Yapay zeka korumalı yorum sistemi",
+      "feature6": "Anıları ve takdiri paylaşma imkanı"
+    },
+    "objectives": {
+      "objective1": "Modern ve kullanıcı dostu bir arayüz geliştirmek",
+      "objective2": "Kullanıcı deneyimini iyileştirmek ve dönüşüm oranlarını artırmak",
+      "objective3": "Yüksek performans ve hızlı yanıt sağlamak",
+      "objective4": "Güvenlik ve korunma en iyi uygulamalarını uygulamak"
+    },
+    "challenges": {
+      "challenge1": "Büyük miktarda veriyi işlemek için uygulama performansını iyileştirmek",
+      "challenge2": "Tüm tarayıcılar ve cihazlarla uyumluluk sağlamak",
+      "challenge3": "Kullanıcı verilerini korumak için gelişmiş bir güvenlik sistemi uygulamak",
+      "challenge4": "Ölçeklenebilir bir API geliştirmek"
+    },
+    "features": {
+      "feature1": "Şehit bilgilerini ekleme (isim, tarih, yer, fotoğraflar, hikaye)",
+      "feature2": "Saygılı içeriği sağlamak için onay sistemi",
+      "feature3": "İsim, tarih veya şehre göre şehitlerde gelişmiş arama",
+      "feature4": "Kolay paylaşım için her şehit için benzersiz barkod",
+      "feature5": "Yapay zeka korumalı yorum sistemi",
+      "feature6": "Anıları ve takdiri paylaşma imkanı"
+    }
+  },
+  "socialNetwork": {
+    "title": "Codelam Platformu",
+    "description": "Gizlilik ve güvenliğe odaklanan yenilikçi sosyal ağ, uçtan uca şifreli iletişim, akıllı içerik paylaşımı, güvenli topluluklar oluşturma araçları ve gelişmiş kişisel veri koruma sistemi ile",
+    "fullDescription": "Gizlilik ve güvenliğe odaklanan yenilikçi sosyal ağ. Şifreli iletişim özellikleri, akıllı paylaşım ve topluluk oluşturma araçlarını içerir. Platform, kullanıcı gizliliğine saygı göstererek ve verilerini koruyarak sosyal etkileşim için güvenli ve motive edici bir ortam sağlamayı amaçlamaktadır.",
+    "duration": "",
+    "clientType": "Sosyal platform",
+    "complexity": "Gelişmiş",
+    "teamSize": "2 geliştirici",
+    "clientFeedback": "Uluslararası taleplerde %60 artış ve operasyonel verimlilik iyileştirildi",
+    "keyFeatures": {
+      "feature1": "Gerçek zamanlı makaleler, gönderiler ve haberler için akıllı beslemeli etkileşimli ana sayfa",
+      "feature2": "Toplulukla kodlama sorunlarını değişmek ve çözmek için programlama projeleri sayfası",
+      "feature3": "Çok dilli, renk sistemi, derecelendirme sistemi",
+      "feature4": "Puanları harika şeyler için değişmek üzere mağaza sayfası (yapım aşamasında)",
+      "feature5": "Puanlarınızı, sıralamanızı, bağlantılarınızı, arkadaşlarınızı ve tüm etkinliğinizi tek yerde görüntülemek için profil sayfası"
+    },
+    "objectives": {
+      "objective1": "Modern ve kullanıcı dostu bir arayüz geliştirmek",
+      "objective2": "Kullanıcı deneyimini iyileştirmek ve dönüşüm oranlarını artırmak",
+      "objective3": "Yüksek performans ve hızlı yanıt sağlamak",
+      "objective4": "Güvenlik ve korunma en iyi uygulamalarını uygulamak"
+    },
+    "challenges": {
+      "challenge1": "Büyük miktarda veriyi işlemek için uygulama performansını iyileştirmek",
+      "challenge2": "Tüm tarayıcılar ve cihazlarla uyumluluk sağlamak",
+      "challenge3": "Kullanıcı verilerini korumak için gelişmiş bir güvenlik sistemi uygulamak",
+      "challenge4": "Ölçeklenebilir bir API geliştirmek"
+    },
+    "features": {
+      "feature1": "Gerçek zamanlı makaleler, gönderiler ve haberler için akıllı beslemeli etkileşimli ana sayfa",
+      "feature2": "Toplulukla kodlama sorunlarını değişmek ve çözmek için programlama projeleri sayfası",
+      "feature3": "Çok dilli, renk sistemi, derecelendirme sistemi",
+      "feature4": "Puanları harika şeyler için değişmek üzere mağaza sayfası (yapım aşamasında)",
+      "feature5": "Puanlarınızı, sıralamanızı, bağlantılarınızı, arkadaşlarınızı ve tüm etkinliğinizi tek yerde görüntülemek için profil sayfası"
+    }
+  },
+  "aleppoComplaints": {
+    "title": "Halep Şikayetleri",
+    "description": "Vatandaşlar ve belediye arasındaki iletişimi iyileştirmek için Halep Sesi platformu, etkileşimli şikayet gönderme sistemi, anlık şikayet durumu takibi, ilgili taraflar için kontrol paneli, anlık bildirimler ve türe ve bölgeye göre akıllı sınıflandırma ile",
+    "fullDescription": "Halep Sesi platformu, vatandaşlar ve ilgili taraflar arasındaki iletişimi iyileştirmeyi ve hizmet sorunlarını verimli ve hızlı bir şekilde ele almayı amaçlamaktadır. Proje, ilk aşama olarak dört günde rekor sürede gerçekleştirildi ve şikayet gönderme için yenilikçi seçenekler ve kullanıcı deneyimini iyileştirmek için benzersiz eklemeler içerir",
+    "duration": "20 gün",
+    "clientType": "Halep Şehir Konseyi ve Vatandaşlar",
+    "complexity": "Orta",
+    "teamSize": "2 geliştirici",
+    "clientFeedback": "Vatandaşlar ve belediye arasındaki iletişimde belirgin iyileşme ve şikayet işleme verimliliğinde artış",
+    "keyFeatures": {
+      "feature1": "Etkileşimli şikayet gönderme sistemi",
+      "feature2": "Gerçek zamanlı şikayet durumu takibi",
+      "feature3": "İlgili taraflar için kontrol paneli",
+      "feature4": "Anlık bildirimler",
+      "feature5": "Şikayetlerin türe ve bölgeye göre akıllı sınıflandırması"
+    },
+    "objectives": {
+      "objective1": "Modern ve kullanıcı dostu bir arayüz geliştirmek",
+      "objective2": "Kullanıcı deneyimini iyileştirmek ve dönüşüm oranlarını artırmak",
+      "objective3": "Yüksek performans ve hızlı yanıt sağlamak",
+      "objective4": "Güvenlik ve korunma en iyi uygulamalarını uygulamak"
+    },
+    "challenges": {
+      "challenge1": "Büyük miktarda veriyi işlemek için uygulama performansını iyileştirmek",
+      "challenge2": "Tüm tarayıcılar ve cihazlarla uyumluluk sağlamak",
+      "challenge3": "Kullanıcı verilerini korumak için gelişmiş bir güvenlik sistemi uygulamak",
+      "challenge4": "Ölçeklenebilir bir API geliştirmek"
+    },
+    "features": {
+      "feature1": "Etkileşimli şikayet gönderme sistemi",
+      "feature2": "Gerçek zamanlı şikayet durumu takibi",
+      "feature3": "İlgili taraflar için kontrol paneli",
+      "feature4": "Anlık bildirimler",
+      "feature5": "Şikayetlerin türe ve bölgeye göre akıllı sınıflandırması"
+    }
+  },
+  "saasPlatform": {
+    "title": "Morafiqi Akıllı",
+    "description": "İlaçlar ve etkileşimleri hakkında doğru bilgilerle akıllı kişisel sağlık arkadaşınız, tıbbi geçmişinizi analiz eden sanal doktor, akıllı doz hatırlatıcıları, sağlıklı alışkanlık takibi ve net ve doğrudan dilde psikolojik destek",
+    "fullDescription": "Morafiqi Akıllı sıradan bir uygulama değil... daha sağlıklı ve mutlu bir yaşam yolculuğunuzda size eşlik eden kişisel sağlık arkadaşınız 💖",
+    "duration": "2 ay",
+    "clientType": "Akıllı Sağlık Bakım Platformu",
+    "complexity": "Orta",
+    "teamSize": "3 geliştirici",
+    "clientFeedback": "Uluslararası taleplerde %60 artış ve operasyonel verimlilik iyileştirildi",
+    "keyFeatures": {
+      "feature1": "Bilgi doğruluğu + insan dokunuşu: güvenilir bilgiler, ilaç etkileşimleri ve psikolojik destek hepsi bir arada.",
+      "feature2": "Sanal doktor 'sizi tanıyan': tıbbi geçmişinizin doğru analizi için size kişiselleştirilmiş tavsiyeler sunmak.",
+      "feature3": "Hiçbir şeyi unutma: ilaç hatırlatıcıları, doz takibi ve alışkanlıklarınızı ilham verici istatistiklere dönüştürme.",
+      "feature4": "Dilin... basitçe: karmaşık tıbbi terimlerin zorluklarını anlıyoruz ve size net ve doğrudan bir dille konuşuyoruz."
+    },
+    "objectives": {
+      "objective1": "Modern ve kullanıcı dostu bir arayüz geliştirmek",
+      "objective2": "Kullanıcı deneyimini iyileştirmek ve dönüşüm oranlarını artırmak",
+      "objective3": "Yüksek performans ve hızlı yanıt sağlamak",
+      "objective4": "Güvenlik ve korunma en iyi uygulamalarını uygulamak"
+    },
+    "challenges": {
+      "challenge1": "Büyük miktarda veriyi işlemek için uygulama performansını iyileştirmek",
+      "challenge2": "Tüm tarayıcılar ve cihazlarla uyumluluk sağlamak",
+      "challenge3": "Kullanıcı verilerini korumak için gelişmiş bir güvenlik sistemi uygulamak",
+      "challenge4": "Ölçeklenebilir bir API geliştirmek"
+    },
+    "features": {
+      "feature1": "Bilgi doğruluğu + insan dokunuşu: güvenilir bilgiler, ilaç etkileşimleri ve psikolojik destek.",
+      "feature2": "Sanal doktor 'sizi tanıyan': tıbbi geçmişinizin doğru analizi için size kişiselleştirilmiş tavsiyeler sunmak.",
+      "feature3": "Hiçbir şeyi unutma: ilaç hatırlatıcıları, doz takibi ve alışkanlıklarınızı ilham verici istatistiklere dönüştürme.",
+      "feature4": "Dilin... basitçe: karmaşık tıbbi terimlerin zorluklarını anlıyoruz ve size net ve doğrudan bir dille konuşuyoruz."
+    }
+  },
+  "nationalNetworkMedia": {
+    "title": "Ulusal Medya Ağı",
+    "description": "Olağanüstü duyarlı tasarım, gelişmiş içerik yönetim sistemi, görseller ve podcast'ler için tam destek, kolay kontrol paneli ve kayıt olmadan yorum sistemi ile açık kaynaklı medya platformu ve sosyal paylaşım",
+    "fullDescription": "Suriye'de dijital dönüşümü desteklemeyi amaçlayan gelişmiş bir medya platformu. Olağanüstü tasarım ve tüm ekran boyutlarına duyarlı bir arayüz ile karakterizedir ve makaleler, resimler, videolar ve podcast'ler aracılığıyla amaçlı medya içeriği sağlar.",
+    "duration": "2 ay",
+    "clientType": "Suriye Haber Platformu",
+    "complexity": "Gelişmiş",
+    "teamSize": "3 geliştirici",
+    "clientFeedback": "Uluslararası taleplerde %60 artış ve operasyonel verimlilik iyileştirildi",
+    "keyFeatures": {
+      "feature1": "Gelişmiş içerik yönetim sistemi",
+      "feature2": "Entegre görsel desteği",
+      "feature3": "Kolay kontrol paneli",
+      "feature4": "Giriş yapmadan yorum sistemi",
+      "feature5": "Makaleleri sosyal medya platformlarında paylaşma",
+      "feature6": "Arama motoru optimizasyonu (SEO)"
+    },
+    "objectives": {
+      "objective1": "Modern ve kullanıcı dostu bir arayüz geliştirmek",
+      "objective2": "Kullanıcı deneyimini iyileştirmek ve dönüşüm oranlarını artırmak",
+      "objective3": "Yüksek performans ve hızlı yanıt sağlamak",
+      "objective4": "Güvenlik ve korunma en iyi uygulamalarını uygulamak"
+    },
+    "challenges": {
+      "challenge1": "Büyük miktarda veriyi işlemek için uygulama performansını iyileştirmek",
+      "challenge2": "Tüm tarayıcılar ve cihazlarla uyumluluk sağlamak",
+      "challenge3": "Kullanıcı verilerini korumak için gelişmiş bir güvenlik sistemi uygulamak",
+      "challenge4": "Ölçeklenebilir bir API geliştirmek"
+    },
+    "features": {
+      "feature1": "Gelişmiş içerik yönetim sistemi",
+      "feature2": "Entegre görsel desteği",
+      "feature3": "Kolay kontrol paneli",
+      "feature4": "Giriş yapmadan yorum sistemi",
+      "feature5": "Makaleleri sosyal medya platformlarında paylaşma",
+      "feature6": "Arama motoru optimizasyonu (SEO)"
+    }
+  },
+  "syria2030": {
+    "title": "Suriye 2030",
+    "description": "Suriyelilerin ülkelerinin geleceğine dair vizyonlarını çok seviyeli etkileşimli bir harita aracılığıyla paylaşmalarını sağlayan etkileşimli bir platform.",
+    "fullDescription": "Suriyelilerin (içeride ve dışarıda) ülkelerinin geleceğine dair vizyonlarını çok seviyeli etkileşimli bir harita aracılığıyla paylaşmalarını sağlayan etkileşimli bir platform oluşturmak. Ana hedef, yaklaşık coğrafi doğruluk ve mobil öncelikli tasarım odaklı olarak mümkün olduğunca fazla vizyon toplamak. Platform 8 ana kategori destekliyor (Eğitim, Sağlık, Altyapı, Konut, Ekonomi, Kültür, Spor ve Toplum) ve anlık güncellemeler, anonim paylaşım ve hükümet duyuruları gibi özellikleri içeriyor.",
+    "duration": "75 gün",
+    "clientType": "Hizmet Platformu",
+    "complexity": "Gelişmiş",
+    "teamSize": "1 geliştirici",
+    "clientFeedback": "Suriye'nin geleceği için ortak bir vizyon oluşturmaya katkıda bulunan yenilikçi bir platform",
+    "keyFeatures": {
+      "feature1": "Coğrafi vizyonları görüntülemek için Leaflet kullanarak etkileşimli harita",
+      "feature2": "Zaman tabanlı vizyon sistemi (uzatma olasılığı ile bir süre sonra vizyonlar kaybolur)",
+      "feature3": "Vizyonlar için 8 ana kategori (Eğitim, Sağlık vb.)",
+      "feature4": "Socket.io kullanarak anlık yorum ve etkileşim sistemi",
+      "feature5": "Anonim paylaşım ve coğrafi konum belirleme",
+      "feature6": "Resim yükleme ile yönetici paneli",
+      "feature7": "Yetkililer için rozetlerle hükümet duyuruları sistemi",
+      "feature8": "Glassmorphism efektleri ile mobil öncelikli duyarlı tasarım"
+    },
+    "objectives": {
+      "objective1": "Suriye'nin geleceği hakkında mümkün olduğunca fazla vizyon toplamak",
+      "objective2": "Vatandaşların ortak bir vizyon oluşturmaya katılmasını sağlamak",
+      "objective3": "Gizlilik seçeneği ile görüşleri ifade etmek için güvenli bir platform sağlamak",
+      "objective4": "Etkileşimli bir harita aracılığıyla içeride ve dışarıda Suriyelileri bağlamak",
+      "objective5": "Hükümet kurumlarının halkla iletişim kurmasını desteklemek"
+    },
+    "challenges": {
+      "challenge1": "Performansı korurken doğru coğrafi etkileşimli harita geliştirmek",
+      "challenge2": "Büyük içerik ve anlık etkileşimleri yönetmek",
+      "challenge3": "Anonim gönderilerde güvenlik ve gizliliği sağlamak",
+      "challenge4": "Zaman tabanlı sistem ve hükümet duyuruları gibi gelişmiş özellikleri entegre etmek",
+      "challenge5": "Büyük verilerle mobil için performansı optimize etmek"
+    },
+    "features": {
+      "feature1": "Etkileşimli harita",
+      "feature2": "JWT ve orijinal şehir belirleme ile kayıt ve kimlik doğrulama sistemi",
+      "feature3": "Yorum ve oylama yetenekleri ile vizyon oluşturma ve paylaşma",
+      "feature4": "Vizyonlar için zaman tabanlı sistem (24 saat sonra kaybolur, uzatma mümkün)",
+      "feature5": "Resim yükleme ve istatistiklerle yönetici paneli",
+      "feature6": "Yetkililer için rozetlerle hükümet duyuruları sistemi",
+      "feature7": "Tarihsel gelişimi keşfetmek için zaman filtresi",
+      "feature8": "Performans optimizasyonu için alanlar için akıllı yükleme (Viewport Loading)",
+      "feature9": "İçerik oluşturma yardımı için Google AI entegrasyonu",
+      "feature10": "Anlık bildirim ve güncellemeler sistemi",
+      "feature11": "Yerler ve gönderimler için resim yükleme yeteneği"
+    }
+  },
+  "alimniPlatform": {
+    "title": "Alimni - Kapsamlı E-Öğrenme Platformu",
+    "description": "Arapça ve İngilizceyi ve Türkçe destekleyen, öğretmenleri, öğrencileri ve yönetimi tek bir dijital ortamda bir araya getiren entegre bir eğitim platformu. Ders planlaması, ödevler, raporlar ve puan ile başarılarla ödül sistemi içerir.",
+    "fullDescription": "Alimni, kapsamlı bir öğrenim yönetim sistemi sunan çok kiracılı (multi-tenant) bir SaaS eğitim platformudur. Öğretmenler gerçek zamanlı olarak dersler ve ödevler oluşturabilir, öğrenci ilerlemesini takip edebilir. Öğrenciler ise puan, başarılar ve dijital kütüphaneye sahip kişiselleştirilmiş bir panoya erişir. Platform çevrimdışı çalışmayı (PWA Offline), otomatik not verme ve performans analizi için YZ entegrasyonunu ve tam Arapça (RTL) ile İngilizce desteğini destekler.",
+    "duration": "6+ ay",
+    "clientType": "Eğitim platformu - özel okullar ve öğrenme merkezleri",
+    "complexity": "İleri Seviye",
+    "teamSize": "1 geliştirici (Full-Stack)",
+    "clientFeedback": "Platform, okulumuzun yönetim şeklini tamamen dönüştürdü — manuel öğrenci takibinden, tek dokunuşta raporlar ve analizler sağlayan kapsamlı bir panoya geçtik.",
+    "keyFeatures": {
+      "feature1": "Birden fazla rol destekleyen çok kiracılı sistem",
+      "feature2": "Ders programı ve devam yönetimi",
+      "feature3": "YZ destekli otomatik not verme ile ödev sistemi",
+      "feature4": "Eğitim materyalleri için dijital kütüphane (video, PDF)",
+      "feature5": "Oyunlaştırma sistemi: puanlar + başarılar + seviyeler",
+      "feature6": "Gelişmiş analitik ve raporlar (Excel/PDF)",
+      "feature7": "Anlık bildirimler (Web Push + Socket.io)",
+      "feature8": "Çevrimdışı destek ile PWA (IndexedDB)",
+      "feature9": "Google OAuth + çift JWT kimlik doğrulama",
+      "feature10": "Tam iki dilli destek Arapça/İngilizce (RTL/LTR)"
+    },
+    "objectives": {
+      "objective1": "Tek sistemden birden fazla okulu destekleyen entegre bir SaaS eğitim platformu oluşturmak",
+      "objective2": "Tam RTL desteğiyle özgün bir Arapça kullanıcı deneyimi sağlamak",
+      "objective3": "Bilinçli eğitim kararları için gerçek veri analizi araçları sunmak",
+      "objective4": "Performans ve çevrimdışı çalışmayı sağlamak için PWA standartlarını uygulamak",
+      "objective5": "Öğrenme yolculuğuna YZ entegre etmek (not verme, analiz, içerik üretimi)"
+    },
+    "challenges": {
+      "challenge1": "Çok kiracılı mimari: performansı etkilemeden her okulun verilerini güvenli şekilde izole etmek",
+      "challenge2": "Dinamik RTL/LTR: grafikler ve formlar dahil tüm bileşenlerde yön değiştirmeyi desteklemek",
+      "challenge3": "Çevrimdışı ile Gerçek Zamanlı: Socket.io verilerini yerel IndexedDB ile senkronize etmek",
+      "challenge4": "Karmaşık izin sistemi: 4 rolü (Admin, Director, Teacher, Student) ayrıntılı erişim kurallarıyla yönetmek",
+      "challenge5": "PDF/Excel raporları: sunucuda Puppeteer ve ExcelJS kullanarak karmaşık dinamik raporlar oluşturmak"
+    },
+    "features": {
+      "feature1": "Kayıt ve giriş (Email/Password + Google OAuth)",
+      "feature2": "Süper Yönetici paneli",
+      "feature3": "Okul Müdürü paneli",
+      "feature4": "Canlı istatistikli Öğretmen paneli",
+      "feature5": "Puan ve başarılı Öğrenci paneli",
+      "feature6": "Ders oturumu oluşturma ve yönetimi",
+      "feature7": "Haftalık ve aylık ders takvimi",
+      "feature8": "Dosya yükleme ve akıllı not verme ile ödev oluşturma",
+      "feature9": "Ödev teslim takibi ve notlandırma",
+      "feature10": "Motivasyonel ticker ile başarı sistemi",
+      "feature11": "Eğitim kaynakları kütüphanesi (video, PDF, görseller)",
+      "feature12": "Dahili bildirimler + mobil için Web Push",
+      "feature13": "Öğretmen/öğrenci davet sistemi",
+      "feature14": "PDF ve Excel formatında öğrenci raporları",
+      "feature15": "Gelişmiş performans ve devam analitikleri",
+      "feature16": "Profil resmi yükleme (Cloudinary)",
+      "feature17": "Çevrimdışı izleme için video indirme (PWA)",
+      "feature18": "Anında geçişle tam Arapça/İngilizce desteği",
+      "feature19": "Mobil ve tablet için %100 duyarlı arayüz",
+      "feature20": "Gerçek zamanlı mesajlaşma (Mesajlaşma / Sohbet)"
+    }
+  },
+  "goldCup": {
+    "title": "Altın Fincan - Meşrubat Markası",
+    "description": "Türk ve Arap meşrubat endüstrisi için profesyonel e-ticaret platformu, gelişmiş ürün yönetimi, envanter sistemi ve müşteri bağlantı yönetimi ile",
+    "fullDescription": "Altın Fincan, Türkiye ve Arap ülkelerinde meşrubat satışını yapan başarılı bir marka için geliştirilmiş profesyonel e-ticaret platformudur. Platform, ürün kataloğu yönetimi, envanter takibi, müşteri yönetimi, satış analitiği ve entegre sipariş sistemi ile tam kapsamlı bir çözüm sunmaktadır. Platform Türkçe, Arapça ve İngilizce dillerini desteklemekte, mobil-friendly tasarıma ve hızlı yükleme performansına sahiptir.",
+    "duration": "6 hafta",
+    "clientType": "Meşrubat Mağazası - E-Ticaret",
+    "complexity": "Orta",
+    "teamSize": "2 geliştirici",
+    "clientFeedback": "Müşteri memnuniyeti %95 ve sipariş oranında %125 artış",
+    "keyFeatures": {
+      "feature1": "Ürün kategorileri ve alt kategoriler ile gelişmiş ürün yönetimi",
+      "feature2": "Gerçek zamanlı envanter takibi sistemi",
+      "feature3": "Perakende ve toptan fiyatlandırma seçenekleri",
+      "feature4": "Müşteri yönetimi ve sipariş geçmişi",
+      "feature5": "Güvenli çoklu ödeme geçitleri (Kredi kartı, havale, kapıda ödeme)",
+      "feature6": "Kargo entegrasyonu ve otomatik takibi",
+      "feature7": "Canlı satış analitiği ve raporlar",
+      "feature8": "Kupon ve promosyon sistemi",
+      "feature9": "Müşteri yorumları ve derecelendirmeler"
+    },
+    "objectives": {
+      "objective1": "Altın Fincan markasının çevrimiçi satış varlığını güçlendirmek",
+      "objective2": "Müşteri deneyimini iyileştirerek sipariş sayısını artırmak",
+      "objective3": "Verimli ürün ve sipariş yönetimi sağlamak",
+      "objective4": "Türk ve Arap pazarlarına etkin erişim sağlamak",
+      "objective5": "Marka bilinirliğini artırmak ve müşteri sadakatini güçlendirmek"
+    },
+    "challenges": {
+      "challenge1": "Türkçe, Arapça ve İngilizce desteğinde dil seçimini düzgün yönetmek",
+      "challenge2": "Ürün görselleri ve video içeriği için performansı optimize etmek",
+      "challenge3": "Çoklu para birimleri (TL, Ş.P., USD) ile fiyat güncellemelerini senkronize etmek",
+      "challenge4": "Türk ve Arap bölgelerinden farklı kargo hizmetleri ile entegrasyonu sağlamak",
+      "challenge5": "Yüksek hacimli sipariş dönemlerinde sistem stabilitesini korumak"
+    },
+    "features": {
+      "feature1": "Ürün kategorileri ve alt kategoriler ile gelişmiş ürün yönetimi",
+      "feature2": "Gerçek zamanlı envanter ve stok takibi",
+      "feature3": "Perakende ve toptan fiyatlandırma seçenekleri",
+      "feature4": "Müşteri hesapları ve sipariş geçmişi",
+      "feature5": "Kredi kartı, banka havalesi ve kapıda ödeme seçenekleri",
+      "feature6": "Kargo hizmetleri ile otomatik takip sistemi",
+      "feature7": "Satış, gelir ve müşteri analitiği paneli",
+      "feature8": "Belirli zamanlara ve ürünlere kupon kodları",
+      "feature9": "Müşteri yorumları ve 5 yıldızlı derecelendirme sistemi",
+      "feature10": "Müşteri hizmetleri için WebSocket tabanlı canlı destek",
+      "feature11": "E-mail ve SMS bildirimleri sipariş durumu için",
+      "feature12": "Mobil uygulama API uyumluluğu",
+      "feature13": "Ürün görselleri için CDN entegrasyonu",
+      "feature14": "İleri arama ve filtreleme sistemi",
+      "feature15": "Sosyal medya entegrasyonu ve paylaşım seçenekleri",
+      "feature16": "Flash haddi ve haftalık özellikleri",
+      "feature17": "Yönetici paneli ile tam kontrol",
+      "feature18": "Türkçe, Arapça, İngilizce tam destek (RTL/LTR)",
+      "feature19": "Mobil ve tablet cihazlar için tam duyarlı tasarım",
+      "feature20": "Google Analytics ve SEO optimizasyonu"
+    }
+  },
+  "compreVende": {
+    "title": "Comprevende - Yerel Hizmetler Platformu",
+    "description": "Brezilya'da yerel hizmet sağlayıcılarını müşterilerle bağlayan elektronik bir platform",
+    "fullDescription": "Brezilya'da yerel hizmetlerin kapsamlı bir platformu, Fiverr veya Thumbtack'e benzer şekilde, müşterilerin elektrikçi, tesisatçı ve temizlikçi gibi hizmet sağlayıcılarını arayabildiği. Hizmet sağlayıcılar profil oluşturabilir, istekleri alabilir ve anında mesajlaşma sistemi, derecelendirme sistemi ve ödül puanları sistemi aracılığıyla rezervasyonları yönetebilir.",
+    "duration": "5 ay",
+    "clientType": "Brezilya Şirketi",
+    "complexity": "İleri Seviye",
+    "teamSize": "3 geliştirici",
+    "clientFeedback": "Binlerce hizmet sağlayıcı ve müşteriyi kolaylıkla bağlayan profesyonel ve güvenilir bir platform",
+    "keyFeatures": {
+      "feature1": "Çok rolü kayıt ve giriş sistemi (müşteri, hizmet sağlayıcı, kuruluş)",
+      "feature2": "Gelişmiş arama ve filtreler ile etkileşimli ana sayfa",
+      "feature3": "Resimler ve derecelendirmelerle kapsamlı hizmet sağlayıcı profilleri",
+      "feature4": "Hizmet talep sistemi",
+      "feature5": "Müşteriler ve hizmet sağlayıcıları arasında anında mesajlaşma",
+      "feature6": "Talepler ve mesajlar için bildirim sistemi",
+      "feature7": "Derecelendirmeler ve yorumlar sistemi",
+      "feature8": "Rezervasyon ve talep yönetimi",
+      "feature9": "Kullanılabilir ödül puanları sistemi",
+      "feature10": "Ücretli abonelik paketleri",
+      "feature11": "PWA mobil uygulaması",
+      "feature12": "Schema Markup ile kapsamlı SEO optimizasyonu"
+    },
+    "objectives": {
+      "objective1": "Yerel hizmet sağlayıcılarını müşterilerle güvenli ve kolay bir şekilde bağlamak",
+      "objective2": "Yerel hizmetleri verimli bir şekilde aramak için güvenilir bir platform sağlamak",
+      "objective3": "Kullanıcı dostu ve güvenli bir arayüz aracılığıyla kullanıcı deneyimini iyileştirmek",
+      "objective4": "En iyi hizmet sağlayıcılarını seçmeye yardımcı olan güçlü bir derecelendirme sistemi oluşturmak"
+    },
+    "challenges": {
+      "challenge1": "Farklı veri türleri nedeniyle alt dizin eşleştirme sorunları (ObjectId ile string)",
+      "challenge2": "Socket.io kullanarak hizmet sağlayıcıları arasında anında mesajlaşma sistemi düzeltildi",
+      "challenge3": "Tabletler ve akıllı cihazlarda bildirim sorunları",
+      "challenge4": "Hostinger ile e-posta yapılandırması ve spam sınıflandırmasından kaçınma",
+      "challenge5": "Hizmet sağlayıcıları için çift rolleri destekleme (müşteri olarak da çalış)"
+    },
+    "features": {
+      "feature1": "E-posta doğrulaması ile güvenli kayıt ve giriş",
+      "feature2": "Müşteriler, hizmet sağlayıcıları ve kuruluşlar için ayrı kontrol paneli",
+      "feature3": "Kategoriler, şehirler ve mahalleler tarafından gelişmiş arama",
+      "feature4": "Kapsamlı adım adım ayrıntılarla hizmet talep sistemi",
+      "feature5": "Socket.io desteği ve gerçek zamanlı uyarılarla anında mesajlaşma",
+      "feature6": "Kapsamlı derecelendirmeler ve yorumlar sistemi",
+      "feature7": "Kolay rezervasyon ve talep yönetimi",
+      "feature8": "İtfa seçenekleri ile akıllı ödül puanları sistemi",
+      "feature9": "Esnek ücretli abonelik paketleri",
+      "feature10": "İleri PWA mobil uygulaması",
+      "feature11": "Schema Markup ile kapsamlı SEO optimizasyonu",
+      "feature12": "Gerçek zamanlı bildirim sistemi",
+      "feature13": "Portekizce ve İngilizce dil desteği"
     }
   }
 }

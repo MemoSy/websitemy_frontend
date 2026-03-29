@@ -29,14 +29,14 @@ export const getCurrentProjectsData = (): CurrentProject[] => {
 
   return [
     {
-      id: "maqsaf-school",
-      shortTitle: t("currentProjects.projects.compreVende.shortTitle"),
-      name: t("currentProjects.projects.compreVende.name"),
-      status: t("currentProjects.projects.compreVende.status"),
+      id: "mobilya-showroom",
+      shortTitle: t("currentProjects.projects.mobilyaShowroom.shortTitle"),
+      name: t("currentProjects.projects.mobilyaShowroom.name"),
+      status: t("currentProjects.projects.mobilyaShowroom.status"),
       progress: 75,
-      startDate: "15 أغسطس 2025",
-      expectedDuration: "90 يوم",
-      tagline: t("currentProjects.projects.compreVende.tagline"),
+      startDate: "10 يناير 2026",
+      expectedDuration: "٤٥ يومًا",
+      tagline: t("currentProjects.projects.mobilyaShowroom.tagline"),
       technologies: [
         {
           name: "Next.js",
@@ -45,118 +45,102 @@ export const getCurrentProjectsData = (): CurrentProject[] => {
           border: "border-gray-700",
         },
         {
-          name: "mongoDB",
-          color: "from-blue-500/20 to-blue-700/20",
-          icon: "🐘",
+          name: "React",
+          color: "from-blue-400/20 to-blue-600/20",
+          icon: "⚛️",
           border: "border-blue-400/30",
         },
         {
-          name: "nest.js",
-          color: "from-indigo-500/20 to-purple-700/20",
-          icon: "🔷",
-          border: "border-indigo-400/30",
+          name: "Tailwind CSS",
+          color: "from-cyan-400/20 to-cyan-600/20",
+          icon: "🎨",
+          border: "border-cyan-400/30",
         },
         {
-          name: "Stripe",
-          color: "from-purple-500/20 to-pink-600/20",
-          icon: "💰",
-          border: "border-purple-400/30",
-        },
-      ],
-      features: [
-        {
-          title: t(
-            "currentProjects.projects.compreVende.features.feature1.title"
-          ),
-          desc: t(
-            "currentProjects.projects.compreVende.features.feature1.desc"
-          ),
-          icon: "🤝",
-        },
-        {
-          title: t(
-            "currentProjects.projects.compreVende.features.feature2.title"
-          ),
-          desc: t(
-            "currentProjects.projects.compreVende.features.feature2.desc"
-          ),
-          icon: "📈",
-        },
-        {
-          title: t(
-            "currentProjects.projects.compreVende.features.feature3.title"
-          ),
-          desc: t(
-            "currentProjects.projects.compreVende.features.feature3.desc"
-          ),
-          icon: "📅",
-        },
-        {
-          title: t(
-            "currentProjects.projects.compreVende.features.feature4.title"
-          ),
-          desc: t(
-            "currentProjects.projects.compreVende.features.feature4.desc"
-          ),
-          icon: "⚡",
-        },
-      ],
-    },
-    {
-      id: "green-market",
-      shortTitle: t("currentProjects.projects.allemni.shortTitle"),
-      name: t("currentProjects.projects.allemni.name"),
-      status: t("currentProjects.projects.allemni.status"),
-      progress: 80,
-      startDate: "20 نوفمبر 2025",
-      expectedDuration: "90 يوم",
-      tagline: t("currentProjects.projects.allemni.tagline"),
-      technologies: [
-        {
-          name: "react.js",
+          name: "MongoDB",
           color: "from-green-500/20 to-emerald-700/20",
           icon: "💚",
           border: "border-green-400/30",
         },
+      ],
+      features: [
         {
-          name: "nest.js",
+          title: t("currentProjects.projects.mobilyaShowroom.features.feature1.title"),
+          desc: t("currentProjects.projects.mobilyaShowroom.features.feature1.desc"),
+          icon: "🔗",
+        },
+        {
+          title: t("currentProjects.projects.mobilyaShowroom.features.feature2.title"),
+          desc: t("currentProjects.projects.mobilyaShowroom.features.feature2.desc"),
+          icon: "📂",
+        },
+        {
+          title: t("currentProjects.projects.mobilyaShowroom.features.feature3.title"),
+          desc: t("currentProjects.projects.mobilyaShowroom.features.feature3.desc"),
+          icon: "📰",
+        },
+        {
+          title: t("currentProjects.projects.mobilyaShowroom.features.feature4.title"),
+          desc: t("currentProjects.projects.mobilyaShowroom.features.feature4.desc"),
+          icon: "✨",
+        },
+      ],
+    },
+    {
+      id: "linkedin-coach",
+      shortTitle: t("currentProjects.projects.linkedinCoach.shortTitle"),
+      name: t("currentProjects.projects.linkedinCoach.name"),
+      status: t("currentProjects.projects.linkedinCoach.status"),
+      progress: 10,
+      startDate: "22 فبراير 2026",
+      expectedDuration: t("currentProjects.projects.linkedinCoach.expectedDuration"),
+      tagline: t("currentProjects.projects.linkedinCoach.tagline"),
+      technologies: [
+        {
+          name: "Next.js",
+          color: "from-black to-gray-800",
+          icon: "▲",
+          border: "border-gray-700",
+        },
+        {
+          name: "NestJS",
           color: "from-red-500/20 to-orange-600/20",
           icon: "🔴",
           border: "border-red-400/30",
         },
         {
-          name: "mongoDB",
-          color: "from-indigo-500/20 to-purple-700/20",
-          icon: "🔷",
-          border: "border-indigo-400/30",
+          name: "MongoDB",
+          color: "from-green-500/20 to-emerald-700/20",
+          icon: "💚",
+          border: "border-green-400/30",
         },
         {
-          name: "tailwind CSS",
-          color: "from-purple-500/20 to-pink-600/20",
+          name: "Tailwind CSS",
+          color: "from-cyan-400/20 to-cyan-600/20",
           icon: "🎨",
-          border: "border-purple-400/30",
+          border: "border-cyan-400/30",
         },
       ],
       features: [
         {
-          title: t("currentProjects.projects.allemni.features.feature1.title"),
-          desc: t("currentProjects.projects.allemni.features.feature1.desc"),
-          icon: "🤖",
+          title: t("currentProjects.projects.linkedinCoach.features.feature1.title"),
+          desc: t("currentProjects.projects.linkedinCoach.features.feature1.desc"),
+          icon: "💼",
         },
         {
-          title: t("currentProjects.projects.allemni.features.feature2.title"),
-          desc: t("currentProjects.projects.allemni.features.feature2.desc"),
-          icon: "📝",
+          title: t("currentProjects.projects.linkedinCoach.features.feature2.title"),
+          desc: t("currentProjects.projects.linkedinCoach.features.feature2.desc"),
+          icon: "🖥️",
         },
         {
-          title: t("currentProjects.projects.allemni.features.feature3.title"),
-          desc: t("currentProjects.projects.allemni.features.feature3.desc"),
-          icon: "📁",
+          title: t("currentProjects.projects.linkedinCoach.features.feature3.title"),
+          desc: t("currentProjects.projects.linkedinCoach.features.feature3.desc"),
+          icon: "⭐",
         },
         {
-          title: t("currentProjects.projects.allemni.features.feature4.title"),
-          desc: t("currentProjects.projects.allemni.features.feature4.desc"),
-          icon: "🎓",
+          title: t("currentProjects.projects.linkedinCoach.features.feature4.title"),
+          desc: t("currentProjects.projects.linkedinCoach.features.feature4.desc"),
+          icon: "🎥",
         },
       ],
     },

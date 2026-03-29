@@ -6,11 +6,10 @@ import {
   trackOffTopicAttempts,
 } from "./aiSystemPrompt";
 import { searchFAQ } from "../data/faqData";
-import { GoogleGenerativeAI } from "@google/generative-ai";
 
-// Initialize Google Gemini AI
-const genAI = new GoogleGenerativeAI("AIzaSyCjvHw9OEVKSnOeu1andptpv4AU7eMpJok");
-const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+// Initialize z.ai API
+const Z_AI_API_KEY = "71471ff4015f40b88792e9c9a6bb93d5.gN2fyCSexhxZDuOm";
+const Z_AI_API_URL = "https://api.z.ai/v1/chat/completions";
 
 export interface CompanyInfo {
   name: string;
@@ -51,11 +50,11 @@ export const companyInfo: CompanyInfo = {
   ],
   specialties: [
     "المواقع التعريفية الشخصية والاحترافية",
-    "المتاجر الإلكترونية",
+    "متاجر الكترونية",
     "المنصات التعليمية والأكاديميات",
-    "الشبكات الاجتماعية",
-    "المنصات الإخبارية",
-    "المدونات الشخصية والمحافظ",
+    "منصات اجتماعية",
+    "موقع أعمالي",
+    "مواقع خدمية",
   ],
 };
 
@@ -309,25 +308,69 @@ ${faqContext}
     // استخدام System Prompt المتقدم
     const systemPrompt = generateAdvancedSystemPrompt(
       context.companyInfo,
-      context.projects.slice(0, 10), // أول 10 مشاريع لتقليل الحجم
-      faqData.slice(0, 10) // أول 10 أسئلة شائعة
+      context.projects.slice(0, 10),
+      faqData.slice(0, 10)
     );
 
-    // استخدام Google Gemini بدلاً من OpenAI
+    // بناء الرسالة الكاملة
     const fullPrompt = `${systemPrompt}
 
 ---
 
 ${conversationContext}`;
 
-    const result = await model.generateContent(fullPrompt);
-    const geminiResponse = result.response;
-    const response =
-      geminiResponse.text() ||
-      "آسف، لم أتمكن من الحصول على إجابة دقيقة. يرجى المحاولة مرة أخرى.";
+    // استخدام z.ai API
+    const response = await fetch(Z_AI_API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${Z_AI_API_KEY}`,
+      },
+      body: JSON.stringify({
+        model: "default", // أو أي model يفضلها z.ai
+        messages: [
+          {
+            role: "system",
+            content: systemPrompt,
+          },
+          {
+            role: "user",
+            content: conversationContext,
+          },
+        ],
+        temperature: 0.7,
+        max_tokens: 1000,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      
+      if (response.status === 401) {
+        return "عذراً، مفتاح API غير صحيح. يرجى التحقق من صحة المفتاح.";
+      } else if (response.status === 429) {
+        return "⚠️ **عذراً، الخدمة غير متوفرة مؤقتاً**\n\nتم تجاوز حد الاستخدام المسموح.\n\n📞 **للحصول على إجابات فورية:**\n- اتصل بنا: **+905313345111** (واتساب)\n- البريد: info@websitemy.com\n\n💡 سنكون سعداء بالإجابة على جميع أسئلتك!";
+      }
+      
+      console.error("z.ai API Error:", errorData);
+      return `عذراً، حدث خطأ في الاتصال. يرجى المحاولة مرة أخرى.\n\n📱 للدعم الفوري: +905313345111`;
+    }
+
+    const data = await response.json();
+    let aiResponse = "";
+
+    // معالجة الرد من z.ai
+    if (data.choices && data.choices[0] && data.choices[0].message) {
+      aiResponse = data.choices[0].message.content;
+    } else if (data.result) {
+      aiResponse = data.result;
+    } else {
+      console.error("Unexpected z.ai response format:", data);
+      return "آسف، لم أتمكن من الحصول على إجابة دقيقة. يرجى المحاولة مرة أخرى.";
+    }
 
     // التحقق من صحة الرد
-    const validation = validateAIResponse(response);
+    const validation = validateAIResponse(aiResponse);
     if (!validation.isValid) {
       console.error("AI Response Validation Failed:", validation.errors);
       return `عذراً، هناك مشكلة في تكوين الرد. دعني أوصلك بالفريق للمساعدة:
@@ -342,22 +385,15 @@ ${conversationContext}`;
       console.warn("AI Response Warnings:", validation.warnings);
     }
 
-    return response;
+    return aiResponse;
   } catch (error: any) {
-    console.error("Google Gemini API Error:", error);
+    console.error("z.ai API Error:", error);
 
-    // معالجة أخطاء Gemini
     if (error?.message?.includes("API key")) {
       return "عذراً، مفتاح API غير صحيح. يرجى التحقق من صحة المفتاح.";
-    } else if (
-      error?.message?.includes("quota") ||
-      error?.message?.includes("limit")
-    ) {
+    } else if (error?.message?.includes("quota") || error?.message?.includes("limit")) {
       return "⚠️ **عذراً، الخدمة غير متوفرة مؤقتاً**\n\nتم تجاوز حد الاستخدام المسموح.\n\n📞 **للحصول على إجابات فورية:**\n- اتصل بنا: **+905313345111** (واتساب)\n- البريد: info@websitemy.com\n\n💡 سنكون سعداء بالإجابة على جميع أسئلتك!";
-    } else if (
-      error?.message?.includes("blocked") ||
-      error?.message?.includes("safety")
-    ) {
+    } else if (error?.message?.includes("blocked") || error?.message?.includes("safety")) {
       return "عذراً، لا أستطيع الإجابة على هذا السؤال. هل يمكنك إعادة صياغته بطريقة أخرى؟\n\n📱 للمساعدة المباشرة: +905313345111";
     } else if (error?.message) {
       console.error("Detailed error:", error.message);

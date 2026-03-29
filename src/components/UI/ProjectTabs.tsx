@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ArrowLeft, Sparkles, Zap, Target } from "lucide-react";
+import { ArrowLeft, ArrowRight, Sparkles, Zap, Target } from "lucide-react";
 import { getServiceCategories } from "../../data/projects";
 import ProjectCard from "./ProjectCard";
 import { gsap } from "gsap";
@@ -18,10 +18,12 @@ const ProjectTabs = () => {
   const [serviceCategories, setServiceCategories] = useState(
     getServiceCategories()
   );
-  const [activeTab, setActiveTab] = useState("news");
+  const [activeTab, setActiveTab] = useState("saas");
+  const [tabScrollPosition, setTabScrollPosition] = useState(0);
   const projectsRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const backgroundRef = useRef<HTMLDivElement>(null);
+  const tabsContainerRef = useRef<HTMLDivElement>(null);
 
   const activeCategory = serviceCategories.find((cat) => cat.id === activeTab);
   const featuredProjects = activeCategory?.projects.slice(0, 3) || [];
@@ -31,32 +33,45 @@ const ProjectTabs = () => {
     setServiceCategories(getServiceCategories());
   }, [i18n.language]);
 
-  useEffect(() => {
-    // Skip animations if user prefers reduced motion
-    if (prefersReducedMotion) return;
+  // Handle tab navigation with arrow keys
+  const scrollTabs = (direction: "next" | "prev") => {
+    if (!tabsContainerRef.current) return;
 
-    // Only animate floating elements, not the section entrance
-    const floatingElements =
-      backgroundRef.current?.querySelectorAll(".floating-element");
-    if (floatingElements && floatingElements.length > 0) {
-      gsap.to(floatingElements, {
-        y: -15,
-        rotation: 3,
-        duration: 4,
-        repeat: -1,
-        yoyo: true,
-        ease: "power1.inOut",
-        stagger: 0.8,
-        force3D: true,
-        transformOrigin: "center center",
-      });
-    }
+    const container = tabsContainerRef.current;
+    const scrollAmount = 300; // pixels to scroll per click
+    const isScrolling = isRTL ? direction === "prev" : direction === "next";
+    const newPosition = isScrolling
+      ? tabScrollPosition + scrollAmount
+      : tabScrollPosition - scrollAmount;
 
-    return () => {
-      // Clean up all ScrollTrigger instances
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, [prefersReducedMotion]);
+    // Ensure we don't scroll beyond bounds
+    const maxScroll =
+      container.scrollWidth - container.clientWidth;
+    const finalPosition = Math.max(0, Math.min(newPosition, maxScroll));
+
+    setTabScrollPosition(finalPosition);
+
+    // Smooth scroll without animation library
+    container.scrollTo({
+      left: isRTL ? -finalPosition : finalPosition,
+      behavior: "smooth",
+    });
+  };
+
+  // Check if we can scroll in each direction
+  const canScrollNext = (() => {
+    if (!tabsContainerRef.current) return false;
+    const container = tabsContainerRef.current;
+    const maxScroll = container.scrollWidth - container.clientWidth;
+    return isRTL
+      ? tabScrollPosition > 0
+      : tabScrollPosition < maxScroll;
+  })();
+
+  const canScrollPrev = (() => {
+    if (!tabsContainerRef.current) return false;
+    return isRTL ? tabScrollPosition < (tabsContainerRef.current.scrollWidth - tabsContainerRef.current.clientWidth) : tabScrollPosition > 0;
+  })();
 
   useEffect(() => {
     if (projectsRef.current) {
@@ -80,9 +95,6 @@ const ProjectTabs = () => {
           force3D: true,
         }
       );
-
-      // Interest card animation
-      // Removed interest card animation since we no longer use it
     }
   }, [activeTab]);
 
@@ -144,7 +156,7 @@ const ProjectTabs = () => {
         </div>
       </div>
 
-      <div className="mx-auto w-full max-w-[1288px] px-4 relative z-10 sm:px-8">
+      <div className="mx-auto w-full max-w-[1288px] px-4 relative z-10 lg:px-8">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -161,47 +173,25 @@ const ProjectTabs = () => {
           </p>
         </motion.div>
 
-        {/* Tabs Navigation - Infinite Marquee */}
-        <div className="mb-12 relative w-full overflow-hidden group">
-          {/* Gradient Edges for smooth fade */}
-          <div className={`absolute ${isRTL ? 'right-0' : 'left-0'} top-0 bottom-0 w-12 md:w-24 z-10 bg-gradient-to-${isRTL ? 'l' : 'r'} from-black via-black/90 to-transparent pointer-events-none`}></div>
-          <div className={`absolute ${isRTL ? 'left-0' : 'right-0'} top-0 bottom-0 w-12 md:w-24 z-10 bg-gradient-to-${isRTL ? 'r' : 'l'} from-black via-black/90 to-transparent pointer-events-none`}></div>
-
-          <motion.div
-            className="flex gap-3 md:gap-4"
-            style={{
-              willChange: 'transform',
-            }}
-            animate={{
-              x: isRTL ? ['0%', '50%'] : ['-50%', '0%'],
-            }}
-            transition={{
-              duration: 17.5,
-              ease: "linear",
-              repeat: Infinity,
-              repeatType: 'loop',
-            }}
-          >
-            {[
-              ...serviceCategories,
-              ...serviceCategories,
-            ].map((category, index) => (
+        {/* Tabs Navigation - Fixed with Arrow Controls (Mobile Only) */}
+        <div className="mb-12 relative w-full">
+          <div className="hidden md:flex flex-nowrap justify-center gap-3 mb-12 overflow-x-auto scrollbar-hide pb-1">
+            {/* Desktop View - Show all tabs without arrows */}
+            {serviceCategories.map((category) => (
               <button
-                key={`${category.id}-${index}`}
+                key={category.id}
                 onClick={() => handleTabChange(category.id)}
-                className={`relative px-6 py-3 md:px-8 md:py-4 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 whitespace-nowrap flex-shrink-0 ${
+                className={`relative px-3 py-2 md:px-4 md:py-2.5 rounded-xl font-medium transition-all duration-300 whitespace-nowrap flex-shrink-0 text-sm ${
                   activeTab === category.id
-                    ? "text-white bg-gradient-to-r from-cyan-500 to-purple-500 shadow-lg shadow-cyan-500/25 scale-105"
-                    : "text-gray-400 bg-gray-800/50 border border-gray-700 hover:text-cyan-300 hover:border-cyan-500/50"
+                    ? "text-white bg-gradient-to-r from-cyan-500 to-purple-500 shadow-lg shadow-cyan-500/25 scale-100"
+                    : "text-gray-400 bg-gray-800/50 border border-gray-700 hover:text-cyan-300 hover:border-cyan-500/50 hover:scale-105"
                 }`}
               >
-                <span className="text-sm md:text-base lg:text-lg">
-                  {category.title}
-                </span>
+                {category.title}
 
                 {activeTab === category.id && (
                   <motion.div
-                    layoutId="activeTabMarquee"
+                    layoutId="activeTab"
                     className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-xl -z-10"
                     transition={{
                       type: "spring",
@@ -212,7 +202,76 @@ const ProjectTabs = () => {
                 )}
               </button>
             ))}
-          </motion.div>
+          </div>
+
+          {/* Mobile View - Show tabs with arrows */}
+          <div className="md:hidden flex items-center gap-3">
+            {/* Previous Arrow Button */}
+            <button
+              onClick={() => scrollTabs("prev")}
+              disabled={!canScrollPrev}
+              className={`flex-shrink-0 p-2 md:p-3 rounded-lg transition-all duration-200 ${
+                canScrollPrev
+                  ? "bg-cyan-500/20 border border-cyan-500/50 text-cyan-400 hover:bg-cyan-500/30 hover:border-cyan-400 cursor-pointer hover:scale-105"
+                  : "bg-gray-800/30 border border-gray-700/50 text-gray-600 cursor-not-allowed opacity-50"
+              }`}
+              aria-label={isRTL ? "Next category" : "Previous category"}
+            >
+              <ArrowLeft className="w-5 h-5 md:w-6 md:h-6" />
+            </button>
+
+            {/* Tabs Container - Fixed, No Auto-Scroll */}
+            <div
+              ref={tabsContainerRef}
+              className="flex-1 overflow-x-auto scrollbar-hide"
+              style={{
+                scrollBehavior: "smooth",
+                WebkitOverflowScrolling: "touch",
+              }}
+            >
+              <div className="flex gap-3 md:gap-4 px-2 py-1 min-w-min">
+                {serviceCategories.map((category) => (
+                  <button
+                    key={category.id}
+                    onClick={() => handleTabChange(category.id)}
+                    className={`relative px-4 py-2 md:px-6 md:py-3 rounded-xl font-medium transition-all duration-300 whitespace-nowrap flex-shrink-0 text-sm md:text-base lg:text-lg ${
+                      activeTab === category.id
+                        ? "text-white bg-gradient-to-r from-cyan-500 to-purple-500 shadow-lg shadow-cyan-500/25 scale-100"
+                        : "text-gray-400 bg-gray-800/50 border border-gray-700 hover:text-cyan-300 hover:border-cyan-500/50 hover:scale-105"
+                    }`}
+                  >
+                    {category.title}
+
+                    {activeTab === category.id && (
+                      <motion.div
+                        layoutId="activeTab"
+                        className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-xl -z-10"
+                        transition={{
+                          type: "spring",
+                          bounce: 0.2,
+                          duration: 0.6,
+                        }}
+                      />
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Next Arrow Button */}
+            <button
+              onClick={() => scrollTabs("next")}
+              disabled={!canScrollNext}
+              className={`flex-shrink-0 p-2 md:p-3 rounded-lg transition-all duration-200 ${
+                canScrollNext
+                  ? "bg-cyan-500/20 border border-cyan-500/50 text-cyan-400 hover:bg-cyan-500/30 hover:border-cyan-400 cursor-pointer hover:scale-105"
+                  : "bg-gray-800/30 border border-gray-700/50 text-gray-600 cursor-not-allowed opacity-50"
+              }`}
+              aria-label={isRTL ? "Previous category" : "Next category"}
+            >
+              <ArrowRight className="w-5 h-5 md:w-6 md:h-6" />
+            </button>
+          </div>
         </div>
 
         {/* Active Category Content */}

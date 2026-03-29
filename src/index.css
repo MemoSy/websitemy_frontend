@@ -48,6 +48,16 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Hide scrollbar for specific elements while keeping scrolling functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* Custom Animations for HomeNew */
 @keyframes float {
   0%,

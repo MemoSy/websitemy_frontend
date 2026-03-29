@@ -221,6 +221,7 @@ const ProjectDetail = () => {
         </motion.div>
 
         {/* Project Images */}
+        {project.youtubeVideo && (
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -243,6 +244,7 @@ const ProjectDetail = () => {
                   web-share"
           ></iframe>
         </motion.div>
+        )}
 
         {/* Project Overview */}
         <motion.div
@@ -253,8 +255,8 @@ const ProjectDetail = () => {
         >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Project Description */}
-            <div className="bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl p-8 border border-gray-700">
-              <h2 className={`text-2xl font-bold text-white mb-6 flex items-center ${isRTL ? 'flex-row-reverse' : ''}`}>
+            <div className="bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl p-8 border border-gray-700" dir={isRTL ? 'rtl' : 'ltr'}>
+              <h2 className={`text-2xl font-bold text-white mb-6 flex items-center ${isRTL ? 'text-right' : ''}`}>
                 <Target className={`w-6 h-6 text-cyan-400 ${isRTL ? 'ml-3' : 'mr-3'}`} />
                 {t('projectDetail.sections.overview')}
               </h2>
@@ -262,13 +264,13 @@ const ProjectDetail = () => {
                 {project.fullDescription}
               </p>
 
-              <h3 className={`text-xl font-semibold text-white mb-4 flex items-center ${isRTL ? 'flex-row-reverse' : ''}`}>
+              <h3 className={`text-xl font-semibold text-white mb-4 flex items-center ${isRTL ? 'text-right' : ''}`}>
                 <CheckCircle className={`w-5 h-5 text-green-400 ${isRTL ? 'ml-2' : 'mr-2'}`} />
                 {t('projectDetail.sections.features')}
               </h3>
-              <ul className="space-y-3">
+              <ul className="space-y-3" dir={isRTL ? 'rtl' : 'ltr'}>
                 {project.features.map((feature, index) => (
-                  <li key={index} className={`flex items-start ${isRTL ? 'flex-row-reverse space-x-reverse' : ''} space-x-3`}>
+                  <li key={index} className={`flex items-start ${isRTL ? 'text-right space-x-reverse' : ''} space-x-3`}>
                     <div className="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0"></div>
                     <span className={`text-gray-300 ${isRTL ? 'text-right' : 'text-left'}`}>{feature}</span>
                   </li>
@@ -279,14 +281,14 @@ const ProjectDetail = () => {
             {/* Objectives and Challenges */}
             <div className="space-y-8">
               {/* Objectives */}
-              <div className="bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl p-8 border border-gray-700">
-                <h3 className={`text-xl font-bold text-white mb-6 flex items-center ${isRTL ? 'flex-row-reverse' : ''}`}>
+              <div className="bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl p-8 border border-gray-700" dir={isRTL ? 'rtl' : 'ltr'}>
+                <h3 className={`text-xl font-bold text-white mb-6 flex items-center ${isRTL ? 'text-right' : ''}`}>
                   <Award className={`w-6 h-6 text-yellow-400 ${isRTL ? 'ml-3' : 'mr-3'}`} />
                   {t('projectDetail.sections.objectives')}
                 </h3>
-                <ul className="space-y-3">
+                <ul className="space-y-3" dir={isRTL ? 'rtl' : 'ltr'}>
                   {project.objectives.map((objective, index) => (
-                    <li key={index} className={`flex items-start ${isRTL ? 'flex-row-reverse space-x-reverse' : ''} space-x-3`}>
+                    <li key={index} className={`flex items-start ${isRTL ? 'text-right space-x-reverse' : ''} space-x-3`}>
                       <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
                       <span className={`text-gray-300 ${isRTL ? 'text-right' : 'text-left'}`}>{objective}</span>
                     </li>
@@ -295,14 +297,14 @@ const ProjectDetail = () => {
               </div>
 
               {/* Challenges */}
-              <div className="bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl p-8 border border-gray-700">
-                <h3 className={`text-xl font-bold text-white mb-6 flex items-center ${isRTL ? 'flex-row-reverse' : ''}`}>
+              <div className="bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl p-8 border border-gray-700" dir={isRTL ? 'rtl' : 'ltr'}>
+                <h3 className={`text-xl font-bold text-white mb-6 flex items-center ${isRTL ? 'text-right' : ''}`}>
                   <Zap className={`w-6 h-6 text-purple-400 ${isRTL ? 'ml-3' : 'mr-3'}`} />
                   {t('projectDetail.sections.challenges')}
                 </h3>
-                <ul className="space-y-3">
+                <ul className="space-y-3" dir={isRTL ? 'rtl' : 'ltr'}>
                   {project.challenges.map((challenge, index) => (
-                    <li key={index} className={`flex items-start ${isRTL ? 'flex-row-reverse space-x-reverse' : ''} space-x-3`}>
+                    <li key={index} className={`flex items-start ${isRTL ? 'text-right space-x-reverse' : ''} space-x-3`}>
                       <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></div>
                       <span className={`text-gray-300 ${isRTL ? 'text-right' : 'text-left'}`}>{challenge}</span>
                     </li>

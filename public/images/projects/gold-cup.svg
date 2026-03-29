@@ -1,0 +1,59 @@
+<svg width="800" height="500" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad-goldcup" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d97706" />
+      <stop offset="50%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#fbbf24" />
+    </linearGradient>
+    <linearGradient id="panel-goldcup" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1c1208" stop-opacity="0.97" />
+      <stop offset="100%" stop-color="#0a0803" stop-opacity="0.99" />
+    </linearGradient>
+    <linearGradient id="cup-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="800" height="500" fill="#0a0803" />
+  <rect x="36" y="36" width="728" height="428" rx="40" fill="url(#panel-goldcup)" stroke="rgba(245,158,11,0.35)" stroke-width="2" />
+
+  <!-- Decorative circles -->
+  <circle cx="680" cy="80" r="120" fill="#d97706" opacity="0.06" />
+  <circle cx="120" cy="420" r="90" fill="#f59e0b" opacity="0.05" />
+
+  <!-- Cup shape (stylized) -->
+  <path d="M 130 150 L 155 330 Q 160 350 180 350 L 260 350 Q 280 350 285 330 L 310 150 Z" fill="url(#cup-gradient)" opacity="0.85" />
+  <rect x="170" y="350" width="100" height="18" rx="9" fill="#fbbf24" opacity="0.9" />
+  <rect x="185" y="368" width="70" height="12" rx="6" fill="#d97706" opacity="0.8" />
+  <!-- Steam lines -->
+  <path d="M 185 140 Q 195 120 185 100 Q 175 80 185 60" stroke="#fbbf24" stroke-width="3" fill="none" opacity="0.5" stroke-linecap="round" />
+  <path d="M 215 140 Q 225 115 215 95 Q 205 75 215 55" stroke="#f59e0b" stroke-width="3" fill="none" opacity="0.4" stroke-linecap="round" />
+  <path d="M 250 140 Q 260 120 250 100 Q 240 80 250 60" stroke="#fbbf24" stroke-width="3" fill="none" opacity="0.45" stroke-linecap="round" />
+
+  <!-- Title bar -->
+  <rect x="358" y="120" width="370" height="70" rx="22" fill="url(#grad-goldcup)" opacity="0.75" />
+  <text x="543" y="163" fill="#fff" font-size="28" font-family="Tahoma, Verdana, sans-serif" font-weight="bold" text-anchor="middle">Gold Cup ☕</text>
+
+  <!-- Info cards -->
+  <rect x="358" y="210" width="170" height="85" rx="16" fill="#1e1208" opacity="0.95" stroke="rgba(245,158,11,0.3)" stroke-width="1" />
+  <text x="443" y="248" fill="#fbbf24" font-size="14" font-family="Tahoma, Verdana, sans-serif" text-anchor="middle">16 نكهة متنوعة</text>
+  <text x="443" y="272" fill="#d97706" font-size="12" font-family="Tahoma, Verdana, sans-serif" text-anchor="middle">مشروبات تركية فاخرة</text>
+
+  <rect x="548" y="210" width="180" height="85" rx="16" fill="#1e1208" opacity="0.95" stroke="rgba(245,158,11,0.3)" stroke-width="1" />
+  <text x="638" y="248" fill="#fbbf24" font-size="14" font-family="Tahoma, Verdana, sans-serif" text-anchor="middle">ذكاء اصطناعي</text>
+  <text x="638" y="272" fill="#d97706" font-size="12" font-family="Tahoma, Verdana, sans-serif" text-anchor="middle">كشف الباركود الذكي</text>
+
+  <!-- Tech tags -->
+  <rect x="358" y="318" width="90" height="28" rx="10" fill="rgba(245,158,11,0.15)" stroke="rgba(245,158,11,0.4)" stroke-width="1" />
+  <text x="403" y="336" fill="#fbbf24" font-size="12" font-family="Tahoma, Verdana, sans-serif" text-anchor="middle">Next.js</text>
+
+  <rect x="460" y="318" width="90" height="28" rx="10" fill="rgba(245,158,11,0.15)" stroke="rgba(245,158,11,0.4)" stroke-width="1" />
+  <text x="505" y="336" fill="#fbbf24" font-size="12" font-family="Tahoma, Verdana, sans-serif" text-anchor="middle">MongoDB</text>
+
+  <rect x="562" y="318" width="110" height="28" rx="10" fill="rgba(245,158,11,0.15)" stroke="rgba(245,158,11,0.4)" stroke-width="1" />
+  <text x="617" y="336" fill="#fbbf24" font-size="12" font-family="Tahoma, Verdana, sans-serif" text-anchor="middle">Gemini AI</text>
+
+  <!-- Bottom subtitle -->
+  <text x="543" y="395" fill="#92400e" font-size="16" font-family="Tahoma, Verdana, sans-serif" text-anchor="middle">منصة مشروبات تركية فاخرة | 3 لغات</text>
+</svg>

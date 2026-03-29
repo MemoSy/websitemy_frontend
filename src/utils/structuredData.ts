@@ -53,7 +53,7 @@ export const getOrganizationSchema = () => ({
     },
     {
       "@type": "Service",
-      "name": "التجارة الإلكترونية",
+      "name": "متاجر الكترونية",
       "description": "تطوير متاجر إلكترونية متكاملة",
       "provider": {
         "@type": "Organization",

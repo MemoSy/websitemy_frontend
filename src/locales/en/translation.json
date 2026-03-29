@@ -150,11 +150,11 @@
     "chatSaved": "Chat saved automatically",
     "currentContext": "Current Context",
     "contexts": {
-      "news": "Personal Websites",
-      "ecommerce": "E-commerce Stores",
+      "news": "Portfolio Website",
+      "ecommerce": "Online Stores",
       "education": "Educational Platforms",
       "personal": "Personal Websites",
-      "social": "Social Networks"
+      "social": "Social Platforms"
     },
     "welcomeMessage": "Hello! I'm your smart assistant specialized in WebSiteMy projects. I can answer any questions about our projects, pricing, technologies used, or any other information you need. How can I help you today?",
     "typing": "Typing...",
@@ -188,27 +188,27 @@
         "description": "Open source software projects contributing to technical community development"
       },
       "ecommerce": {
-        "title": "E-Commerce",
+        "title": "Online Stores",
         "subtitle": "Commercial platforms generating profits",
         "description": "Professional online stores with secure payment technologies and exceptional user experience"
       },
       "social": {
-        "title": "Social Networks",
+        "title": "Social Platforms",
         "subtitle": "Connecting the world through innovation",
         "description": "Social communication platforms with advanced features and privacy protection"
       },
       "saas": {
-        "title": "Profitable Projects",
+        "title": "Startup Applications",
         "subtitle": "Advanced solutions",
         "description": "Software as a Service with comprehensive management and professional dashboard"
       },
       "news": {
-        "title": "Personal Websites",
-        "subtitle": "News and articles",
+        "title": "Portfolio Website",
+        "subtitle": "Diverse portfolio websites",
         "description": "Software as a Service with comprehensive management and professional dashboard"
       },
       "service": {
-        "title": "Service Projects",
+        "title": "Service Websites",
         "subtitle": "Service-oriented",
         "description": "Software as a Service with comprehensive management and professional dashboard"
       }
@@ -420,27 +420,52 @@
           }
         }
       },
-      "allemni": {
-        "shortTitle": "ALLEMNI",
-        "name": "Smart Educational Platform",
+      "linkedinCoach": {
+        "shortTitle": "LinkedIn Pro",
+        "name": "LinkedIn Coach Professional Website",
         "status": "In Development",
-        "tagline": "Online educational platform",
+        "expectedDuration": "3-4 weeks",
+        "tagline": "Professional personal website for a LinkedIn coach with roadmap and interactive tips",
         "features": {
           "feature1": {
-            "title": "AI-Powered Lesson Creation",
-            "desc": "Upload an image and let AI create the lesson automatically"
+            "title": "Professional Personal Page",
+            "desc": "Professional design reflecting the coach's identity and expertise attractively"
           },
           "feature2": {
-            "title": "Automatic Smart Assignments",
-            "desc": "Create multiple-choice tests from images using AI"
+            "title": "LinkedIn Roadmap",
+            "desc": "Step-by-step guide to building a strong and professional LinkedIn profile"
           },
           "feature3": {
-            "title": "File & Content Management",
-            "desc": "Easily upload and organize files and lessons in one place"
+            "title": "Client Reviews & Testimonials",
+            "desc": "Real testimonials from clients who benefited from training sessions"
           },
           "feature4": {
-            "title": "Customized Private Lessons",
-            "desc": "Create and share private lessons for specific students"
+            "title": "Videos & LinkedIn Tips",
+            "desc": "Interactive educational content to boost your LinkedIn presence"
+          }
+        }
+      },
+      "mobilyaShowroom": {
+        "shortTitle": "Mobilya Showroom",
+        "name": "Furniture & Decoration Showroom",
+        "status": "In Development",
+        "tagline": "A website showcasing interior and exterior design works and decorations",
+        "features": {
+          "feature1": {
+            "title": "Link Materials & Styles",
+            "desc": "Ability to link materials, styles and design patterns together with ease"
+          },
+          "feature2": {
+            "title": "Old & New Display",
+            "desc": "Specialized sections to showcase old and new designs with smart categorization"
+          },
+          "feature3": {
+            "title": "Articles & Content",
+            "desc": "Comprehensive section for articles and tips about modern decoration and furniture"
+          },
+          "feature4": {
+            "title": "Amazing Visual Effects",
+            "desc": "Professional presentation of furniture and furnishings with advanced visual effects"
           }
         }
       }
@@ -456,23 +481,23 @@
         "description": "Open-source software projects contributing to the technical community development"
       },
       "ecommerce": {
-        "title": "E-Commerce",
+        "title": "Online Stores",
         "description": "Professional online stores with secure payment technologies and exceptional user experience"
       },
       "social": {
-        "title": "Social Networks",
+        "title": "Social Platforms",
         "description": "Social communication platforms with advanced features and privacy protection"
       },
       "saas": {
-        "title": "Profitable Projects",
+        "title": "Startup Applications",
         "description": "Software as a service with comprehensive management and professional control panel"
       },
       "news": {
-        "title": "Personal Websites",
+        "title": "Portfolio Website",
         "description": "Software as a service with comprehensive management and professional control panel"
       },
       "service": {
-        "title": "Service Projects",
+        "title": "Service Websites",
         "description": "Software as a service with comprehensive management and professional control panel"
       }
     }
@@ -652,6 +677,514 @@
       "feature15": "Contact page with 3 numbers and interactive map",
       "feature16": "Responsive Design on all devices",
       "feature17": "i18next support for Arabic/English"
+    }
+  },
+  "websitemyPortfolio": {
+    "title": "WebSiteMy Official Website",
+    "description": "A professional company website featuring an advanced AI assistant, interactive project gallery with rating system, advanced control panel, advanced SEO optimization, and flexible scalable content management system",
+    "fullDescription": "The official WebSiteMy website was developed using the latest technologies to professionally display the company's services and projects. The website includes an advanced AI assistant, interactive project gallery, and advanced content management system. The project aims to provide an exceptional user experience with a modern and user-friendly interface, in addition to search engine optimization to reach the largest number of potential customers.",
+    "duration": "Two months",
+    "clientType": "Website development company website",
+    "complexity": "Medium",
+    "teamSize": "2 developers",
+    "clientFeedback": "85% improvement in customer reach and 60% increase in orders",
+    "keyFeatures": {
+      "feature1": "Advanced AI assistant with artificial intelligence technology",
+      "feature2": "Interactive gallery to display projects and achievements",
+      "feature3": "Advanced content management system and control panel",
+      "feature4": "Responsive design for all screen sizes",
+      "feature5": "Advanced search engine optimization (SEO)",
+      "feature6": "Customer ratings and reviews system"
+    },
+    "objectives": {
+      "objective1": "Develop a professional website that reflects the company's technical identity",
+      "objective2": "Display projects and services in an interactive and attractive way",
+      "objective3": "Implement an intelligent assistant to improve customer experience",
+      "objective4": "Improve access and visibility in search engines"
+    },
+    "challenges": {
+      "challenge1": "Develop an intelligent assistant that understands context and provides accurate answers",
+      "challenge2": "Design a professional user interface that reflects the company's identity",
+      "challenge3": "Implement a flexible and scalable content management system",
+      "challenge4": "Ensure high performance and fast loading"
+    },
+    "features": {
+      "feature1": "Advanced AI assistant with artificial intelligence technology",
+      "feature2": "Interactive gallery to display projects and achievements",
+      "feature3": "Advanced content management system and control panel",
+      "feature4": "Responsive design for all screen sizes",
+      "feature5": "Advanced search engine optimization (SEO)",
+      "feature6": "Customer ratings and reviews system"
+    }
+  },
+  "ecommerceLuxury": {
+    "title": "Smart Store",
+    "description": "A comprehensive e-commerce platform featuring an advanced control panel, dynamic style switching system, rating and commenting system without registration, and adding products at discounted prices with comprehensive sales analytics",
+    "fullDescription": "This e-commerce store was developed using the latest technologies to ensure a smooth and satisfying shopping experience. It includes a robust content management system, intelligent system, and advanced sales analytics. The project aims to provide a comprehensive e-commerce platform with a modern and user-friendly interface, in addition to an advanced product and order management system.",
+    "duration": "2 months",
+    "clientType": "Smart Online Store",
+    "complexity": "Advanced",
+    "teamSize": "3 developers",
+    "clientFeedback": "Excellent experience and 40% increase in sales",
+    "keyFeatures": {
+      "feature1": "Professional user interface",
+      "feature2": "Add product at discounted price",
+      "feature3": "Highly advanced control panel",
+      "feature4": "Style switching system",
+      "feature5": "Product rating system",
+      "feature6": "Comments system without registration"
+    },
+    "objectives": {
+      "objective1": "Develop a modern and user-friendly user interface",
+      "objective2": "Improve user experience and increase conversion rates",
+      "objective3": "Ensure high performance and rapid response",
+      "objective4": "Implement security and protection best practices"
+    },
+    "challenges": {
+      "challenge1": "Improve application performance to handle large amounts of data",
+      "challenge2": "Ensure compatibility with all browsers and devices",
+      "challenge3": "Implement an advanced security system to protect user data",
+      "challenge4": "Develop a scalable API"
+    },
+    "features": {
+      "feature1": "Professional user interface",
+      "feature2": "Add product at discounted price",
+      "feature3": "Highly advanced control panel",
+      "feature4": "Style switching system",
+      "feature5": "Product rating system",
+      "feature6": "Comments system without registration"
+    }
+  },
+  "sharekna": {
+    "title": "Sharekna Social Platform",
+    "description": "An innovative social communication platform without bullying or likes, focusing only on ideas, with instant AI-powered summaries of posts, and useful comments automatically rise to the top for a deeper and faster communication experience",
+    "fullDescription": "An innovative social platform that allows users to express themselves freely in an environment free from bullying and superficial evaluations. It relies on an intelligent system that highlights useful comments and provides instant content summaries, providing a deeper and faster communication experience.",
+    "duration": "25 days",
+    "clientType": "Smart and Safe Social Communication Platform",
+    "complexity": "Medium",
+    "teamSize": "1 developer",
+    "clientFeedback": "Improved operational efficiency",
+    "keyFeatures": {
+      "feature1": "Social platform without bullying",
+      "feature2": "No likes or dislikes, focus only on the idea",
+      "feature3": "Complete freedom of expression for everyone",
+      "feature4": "Useful comments automatically rise to the top",
+      "feature5": "Instant smart summary of posts and comments"
+    },
+    "objectives": {
+      "objective1": "Develop a modern and user-friendly user interface",
+      "objective2": "Improve user experience and increase conversion rates",
+      "objective3": "Ensure high performance and rapid response",
+      "objective4": "Implement security and protection best practices"
+    },
+    "challenges": {
+      "challenge1": "Improve application performance to handle large amounts of data",
+      "challenge2": "Ensure compatibility with all browsers and devices",
+      "challenge3": "Implement an advanced security system to protect user data",
+      "challenge4": "Develop a scalable API"
+    },
+    "features": {
+      "feature1": "Social platform without bullying",
+      "feature2": "No likes or dislikes, focus only on the idea",
+      "feature3": "Complete freedom of expression for everyone",
+      "feature4": "Useful comments automatically rise to the top",
+      "feature5": "Instant smart summary of posts and comments"
+    }
+  },
+  "business": {
+    "title": "Martyrs Memorial",
+    "description": "A dedicated platform for preserving the memories of heroic martyrs with a comprehensive information addition system (photos, stories), advanced search, unique barcode for each martyr, approval system, and AI-protected comments",
+    "fullDescription": "A website dedicated to preserving the memories and stories of our heroic martyrs, where anyone can share the story of a beloved martyr and keep their memory forever.",
+    "duration": "3 weeks",
+    "clientType": "Charitable organization",
+    "complexity": "Medium",
+    "teamSize": "2 developers",
+    "clientFeedback": "60% increase in international requests and improved operational efficiency",
+    "keyFeatures": {
+      "feature1": "Add martyr information (name, date, location, photos, story)",
+      "feature2": "Approval system to ensure respectful content",
+      "feature3": "Advanced search for martyrs by name, date, or city",
+      "feature4": "Unique barcode for each martyr for easy sharing",
+      "feature5": "AI-protected comment system",
+      "feature6": "Ability to share memories and appreciation"
+    },
+    "objectives": {
+      "objective1": "Develop a modern and user-friendly user interface",
+      "objective2": "Improve user experience and increase conversion rates",
+      "objective3": "Ensure high performance and rapid response",
+      "objective4": "Implement security and protection best practices"
+    },
+    "challenges": {
+      "challenge1": "Improve application performance to handle large amounts of data",
+      "challenge2": "Ensure compatibility with all browsers and devices",
+      "challenge3": "Implement an advanced security system to protect user data",
+      "challenge4": "Develop a scalable API"
+    },
+    "features": {
+      "feature1": "Add martyr information (name, date, location, photos, story)",
+      "feature2": "Approval system to ensure respectful content",
+      "feature3": "Advanced search for martyrs by name, date, or city",
+      "feature4": "Unique barcode for each martyr for easy sharing",
+      "feature5": "AI-protected comment system",
+      "feature6": "Ability to share memories and appreciation"
+    }
+  },
+  "socialNetwork": {
+    "title": "Codelam Platform",
+    "description": "An innovative social network focusing on privacy and security with end-to-end encrypted communication, smart content sharing, tools for building safe communities, and advanced personal data protection system",
+    "fullDescription": "An innovative social network focusing on privacy and security. It includes encrypted communication features, smart sharing, and community building tools. The platform aims to provide a safe and motivating environment for social interaction while respecting user privacy and protecting their data.",
+    "duration": "",
+    "clientType": "Social platform",
+    "complexity": "Advanced",
+    "teamSize": "2 developers",
+    "clientFeedback": "60% increase in international requests and improved operational efficiency",
+    "keyFeatures": {
+      "feature1": "Interactive homepage with smart feed for articles, posts, and news in real-time",
+      "feature2": "Programming projects page for exchanging and solving coding problems with the community",
+      "feature3": "Multi-language, color system, rating system",
+      "feature4": "Store page for exchanging points for great things (under construction)",
+      "feature5": "Profile page to display your scores, rankings, connections, friends, and all your activity in one place"
+    },
+    "objectives": {
+      "objective1": "Develop a modern and user-friendly user interface",
+      "objective2": "Improve user experience and increase conversion rates",
+      "objective3": "Ensure high performance and rapid response",
+      "objective4": "Implement security and protection best practices"
+    },
+    "challenges": {
+      "challenge1": "Improve application performance to handle large amounts of data",
+      "challenge2": "Ensure compatibility with all browsers and devices",
+      "challenge3": "Implement an advanced security system to protect user data",
+      "challenge4": "Develop a scalable API"
+    },
+    "features": {
+      "feature1": "Interactive homepage with smart feed for articles, posts, and news in real-time",
+      "feature2": "Programming projects page for exchanging and solving coding problems with the community",
+      "feature3": "Multi-language, color system, rating system",
+      "feature4": "Store page for exchanging points for great things (under construction)",
+      "feature5": "Profile page to display your scores, rankings, connections, friends, and all your activity in one place"
+    }
+  },
+  "aleppoComplaints": {
+    "title": "Aleppo Complaints",
+    "description": "Aleppo Voice platform to improve communication between citizens and the municipality with an interactive complaint submission system, real-time complaint status tracking, control panel for concerned parties, instant notifications, and smart classification by type and region",
+    "fullDescription": "The 'Voice of Aleppo' platform aims to improve communication between citizens and concerned parties, and handle service issues efficiently and quickly. The project was implemented in a record time of four days as a first phase, and includes innovative options for submitting complaints and unique additions to improve user experience",
+    "duration": "20 days",
+    "clientType": "Aleppo City Council and Citizens",
+    "complexity": "Medium",
+    "teamSize": "2 developers",
+    "clientFeedback": "Noticeable improvement in communication between citizens and the municipality, and increased efficiency in complaint handling",
+    "keyFeatures": {
+      "feature1": "Interactive complaint submission system",
+      "feature2": "Real-time complaint status tracking",
+      "feature3": "Control panel for concerned parties",
+      "feature4": "Instant notifications",
+      "feature5": "Smart classification of complaints by type and region"
+    },
+    "objectives": {
+      "objective1": "Develop a modern and user-friendly user interface",
+      "objective2": "Improve user experience and increase conversion rates",
+      "objective3": "Ensure high performance and rapid response",
+      "objective4": "Implement security and protection best practices"
+    },
+    "challenges": {
+      "challenge1": "Improve application performance to handle large amounts of data",
+      "challenge2": "Ensure compatibility with all browsers and devices",
+      "challenge3": "Implement an advanced security system to protect user data",
+      "challenge4": "Develop a scalable API"
+    },
+    "features": {
+      "feature1": "Interactive complaint submission system",
+      "feature2": "Real-time complaint status tracking",
+      "feature3": "Control panel for concerned parties",
+      "feature4": "Instant notifications",
+      "feature5": "Smart classification of complaints by type and region"
+    }
+  },
+  "saasPlatform": {
+    "title": "Morafiqi Smart",
+    "description": "Your smart personal health companion with accurate information about medications and their interactions, a virtual doctor that analyzes your medical history, smart dose reminders, healthy habit tracking, and psychological support in clear and direct language",
+    "fullDescription": "Morafiqi Smart is not just an ordinary app... your personal health companion that accompanies you on your journey towards a healthier and happier life 💖",
+    "duration": "2 months",
+    "clientType": "Smart Healthcare Platform",
+    "complexity": "Medium",
+    "teamSize": "3 developers",
+    "clientFeedback": "60% increase in international requests and improved operational efficiency",
+    "keyFeatures": {
+      "feature1": "Accuracy in information + human touch: reliable information, drug interactions, and psychological support all in one place.",
+      "feature2": "Virtual doctor 'who knows you': accurate analysis of your medical history to provide personalized advice for you.",
+      "feature3": "Don't forget anything: medication reminders, dose tracking, and turning your habits into inspiring statistics.",
+      "feature4": "Your language... simply: we understand the challenges of complex medical terms and speak to you in clear and direct language."
+    },
+    "objectives": {
+      "objective1": "Develop a modern and user-friendly user interface",
+      "objective2": "Improve user experience and increase conversion rates",
+      "objective3": "Ensure high performance and rapid response",
+      "objective4": "Implement security and protection best practices"
+    },
+    "challenges": {
+      "challenge1": "Improve application performance to handle large amounts of data",
+      "challenge2": "Ensure compatibility with all browsers and devices",
+      "challenge3": "Implement an advanced security system to protect user data",
+      "challenge4": "Develop a scalable API"
+    },
+    "features": {
+      "feature1": "Accuracy in information + human touch: reliable information, drug interactions, and psychological support.",
+      "feature2": "Virtual doctor 'who knows you': accurate analysis of your medical history to provide personalized advice for you.",
+      "feature3": "Don't forget anything: medication reminders, dose tracking, and turning your habits into inspiring statistics.",
+      "feature4": "Your language... simply: we understand the challenges of complex medical terms and speak to you in clear and direct language."
+    }
+  },
+  "nationalNetworkMedia": {
+    "title": "National Network for Media",
+    "description": "Open source media platform with exceptional responsive design, advanced content management system, full support for visuals and podcasts, easy control panel, and comment system without registration with social sharing",
+    "fullDescription": "An advanced media platform aimed at supporting digital transformation in Syria. It features exceptional design and an interface responsive to all screen sizes, and provides purposeful media content through articles, images, videos, and podcasts.",
+    "duration": "2 months",
+    "clientType": "Syrian News Platform",
+    "complexity": "Advanced",
+    "teamSize": "3 developers",
+    "clientFeedback": "60% increase in international requests and improved operational efficiency",
+    "keyFeatures": {
+      "feature1": "Advanced content management system",
+      "feature2": "Integrated visual support",
+      "feature3": "Easy control panel",
+      "feature4": "Comments system without login",
+      "feature5": "Sharing articles on social media platforms",
+      "feature6": "Search engine optimization (SEO)"
+    },
+    "objectives": {
+      "objective1": "Develop a modern and user-friendly user interface",
+      "objective2": "Improve user experience and increase conversion rates",
+      "objective3": "Ensure high performance and rapid response",
+      "objective4": "Implement security and protection best practices"
+    },
+    "challenges": {
+      "challenge1": "Improve application performance to handle large amounts of data",
+      "challenge2": "Ensure compatibility with all browsers and devices",
+      "challenge3": "Implement an advanced security system to protect user data",
+      "challenge4": "Develop a scalable API"
+    },
+    "features": {
+      "feature1": "Advanced content management system",
+      "feature2": "Integrated visual support",
+      "feature3": "Easy control panel",
+      "feature4": "Comments system without login",
+      "feature5": "Sharing articles on social media platforms",
+      "feature6": "Search engine optimization (SEO)"
+    }
+  },
+  "syria2030": {
+    "title": "Syria 2030",
+    "description": "An interactive platform that allows Syrians to share their visions for their country's future through a multi-level interactive map.",
+    "fullDescription": "Building an interactive platform that allows Syrians (inside and outside) to share their visions for their country's future through a multi-level interactive map. The main goal is to collect as many visions as possible, with a focus on approximate geographical accuracy and mobile-first design. The platform supports 8 main categories (Education, Health, Infrastructure, Housing, Economy, Culture, Sports, and Community) and includes features like real-time updates, anonymous sharing, and government announcements.",
+    "duration": "75 days",
+    "clientType": "Service Platform",
+    "complexity": "Advanced",
+    "teamSize": "1 developer",
+    "clientFeedback": "An innovative platform that contributes to building a shared vision for Syria's future",
+    "keyFeatures": {
+      "feature1": "Interactive map using Leaflet to display geographical visions",
+      "feature2": "Time-based vision system (visions disappear after a period with extension possibility)",
+      "feature3": "8 main categories for visions (Education, Health, etc.)",
+      "feature4": "Real-time comments and interaction system using Socket.io",
+      "feature5": "Anonymous sharing and geographical location identification",
+      "feature6": "Admin panel with image upload",
+      "feature7": "Government announcements system with badges for officials",
+      "feature8": "Mobile-first responsive design with Glassmorphism effects"
+    },
+    "objectives": {
+      "objective1": "Collect as many visions as possible about Syria's future",
+      "objective2": "Enable citizens to participate in building a shared vision",
+      "objective3": "Provide a safe platform for expressing opinions with privacy option",
+      "objective4": "Connect Syrians inside and outside through an interactive map",
+      "objective5": "Support government entities in communicating with the people"
+    },
+    "challenges": {
+      "challenge1": "Developing an accurate geographical interactive map while maintaining performance",
+      "challenge2": "Managing large content and real-time interactions",
+      "challenge3": "Ensuring security and privacy in anonymous submissions",
+      "challenge4": "Integrating advanced features like time-based system and government announcements",
+      "challenge5": "Optimizing performance for mobile with large data"
+    },
+    "features": {
+      "feature1": "Interactive map",
+      "feature2": "Registration and authentication system with JWT and original city identification",
+      "feature3": "Creating and sharing visions with commenting and voting capabilities",
+      "feature4": "Time-based system for visions (disappear after 24 hours with possible extension)",
+      "feature5": "Admin panel with image upload and statistics",
+      "feature6": "Government announcements system with badges for officials",
+      "feature7": "Time filter for exploring historical development",
+      "feature8": "Smart loading for areas (Viewport Loading) for performance optimization",
+      "feature9": "Integration with Google AI for content creation assistance",
+      "feature10": "Real-time notifications and updates system",
+      "feature11": "Image upload capability for places and submissions"
+    }
+  },
+  "alimniPlatform": {
+    "title": "Alimni - Comprehensive E-Learning Platform",
+    "description": "An integrated educational platform supporting Arabic and English and Turkey, connecting teachers, students, and administration in one digital environment. Includes class scheduling, assignments, reports, and a gamification system with points and achievements.",
+    "fullDescription": "Alimni is a multi-tenant SaaS educational platform offering a comprehensive learning management system. Teachers can create classes, assignments, and track student progress in real time, while students access a personalized dashboard with points, achievements, and a digital library. The platform supports offline operation (PWA Offline), AI integration for auto-grading and performance analysis, with full Arabic (RTL) and English support.",
+    "duration": "6+ months",
+    "clientType": "Educational platform - private schools and learning centers",
+    "complexity": "Advanced",
+    "teamSize": "1 developer (Full-Stack)",
+    "clientFeedback": "The platform completely transformed the way we manage our school — from manual student tracking to a comprehensive dashboard providing reports and analytics with a single touch.",
+    "keyFeatures": {
+      "feature1": "Multi-tenant system supporting multiple schools with multiple roles",
+      "feature2": "Class schedules and attendance management",
+      "feature3": "Assignment system with AI-powered auto-grading",
+      "feature4": "Digital library for educational materials (video, PDF)",
+      "feature5": "Gamification system: points + achievements + levels",
+      "feature6": "Advanced analytics and reports (Excel/PDF)",
+      "feature7": "Instant notifications (Web Push + Socket.io Real-time)",
+      "feature8": "PWA support with offline capabilities (IndexedDB)",
+      "feature9": "Google OAuth + dual JWT authentication",
+      "feature10": "Full bilingual support Arabic/English (RTL/LTR)"
+    },
+    "objectives": {
+      "objective1": "Build an integrated SaaS educational platform supporting multiple schools from a single system",
+      "objective2": "Achieve an authentic Arabic user experience with full RTL support",
+      "objective3": "Provide real data analysis tools for informed educational decisions",
+      "objective4": "Implement PWA standards to ensure performance and offline operation",
+      "objective5": "Integrate AI into the learning journey (grading, analysis, content generation)"
+    },
+    "challenges": {
+      "challenge1": "Multi-tenant architecture: securely isolating each school's data without impacting performance",
+      "challenge2": "Dynamic RTL/LTR: supporting direction switching across all components including charts and forms",
+      "challenge3": "Real-time with Offline: syncing Socket.io data with local IndexedDB database",
+      "challenge4": "Complex permissions system: managing 4 roles (Admin, Director, Teacher, Student) with granular access rules",
+      "challenge5": "PDF/Excel reports: generating complex dynamic reports using Puppeteer and ExcelJS on the server"
+    },
+    "features": {
+      "feature1": "Sign up and login (Email/Password + Google OAuth)",
+      "feature2": "Super Admin dashboard",
+      "feature3": "School Director dashboard",
+      "feature4": "Teacher dashboard with live statistics",
+      "feature5": "Student dashboard with points and achievements",
+      "feature6": "Class sessions creation and management",
+      "feature7": "Weekly and monthly class schedule calendar",
+      "feature8": "Assignment creation with file upload and smart grading",
+      "feature9": "Assignment submission tracking and grading",
+      "feature10": "Achievements system with motivational ticker",
+      "feature11": "Educational resource library (video, PDF, images)",
+      "feature12": "Internal notifications + Web Push for mobile",
+      "feature13": "Teacher/student invitation system",
+      "feature14": "Student reports in PDF and Excel format",
+      "feature15": "Advanced performance and attendance analytics",
+      "feature16": "Profile image upload (Cloudinary)",
+      "feature17": "Video download for offline viewing (PWA)",
+      "feature18": "Full Arabic/English support with instant switching",
+      "feature19": "100% responsive interface for mobile and tablet",
+      "feature20": "Real-time messaging (Messaging / Chat)"
+    }
+  },
+  "goldCup": {
+    "title": "Gold Cup - Golden Beverage",
+    "description": "A luxury Turkish beverage platform offering 16 unique flavors. An advanced web application combining multi-language support, intelligent campaign systems, and AI-powered barcode detection.",
+    "fullDescription": "Gold Cup is a modern web platform dedicated to marketing and selling premium Turkish beverages with 16 diverse flavors. It supports Arabic, Turkish, and English languages with intelligent campaign systems featuring advanced barcode detection. It includes smart reward systems, geographical distribution maps, and modern user interface with interactive 3D effects. Designed to serve individuals and organizations with three defined packages: for students, for corporations, and for luxury gifts.",
+    "duration": "One month",
+    "clientType": "Commercial Company",
+    "complexity": "Medium",
+    "teamSize": "2 developers",
+    "clientFeedback": "An exceptional project combining quality and innovation with a premium user experience",
+    "keyFeatures": {
+      "feature1": "16 diverse flavors with interactive 3D effects",
+      "feature2": "Smart barcode detection from images with high accuracy",
+      "feature3": "Multi-language support (Arabic, Turkish, English) with full localization",
+      "feature4": "Campaign and contest system with attractive rewards",
+      "feature5": "AI-generated image detection",
+      "feature6": "High-performance interactive photo gallery",
+      "feature7": "Geographical distribution map with location identification",
+      "feature8": "Three-tier package system (for students, corporations, luxury gifts)",
+      "feature9": "Comprehensive administrative control panel with advanced analytics"
+    },
+    "objectives": {
+      "objective1": "Develop a digital marketing platform for premium Turkish beverages",
+      "objective2": "Support multiple languages with complete cultural localization",
+      "objective3": "Implement intelligent campaign systems with attractive rewards",
+      "objective4": "Use artificial intelligence for barcode and fake image detection",
+      "objective5": "Provide a premium and seamless user experience across all devices"
+    },
+    "challenges": {
+      "challenge1": "Barcode detection from multi-angle and lighting conditions",
+      "challenge2": "Multi-language support while maintaining compatibility",
+      "challenge3": "Efficient processing of large images",
+      "challenge4": "Accurate AI-generated image detection",
+      "challenge5": "Building a secure reward system with tracking capability"
+    },
+    "features": {
+      "feature1": "Modern homepage with dynamic product display",
+      "feature2": "Flavor display with interactive 3D effects and smooth transitions",
+      "feature3": "Dynamic carousel for product group showcase",
+      "feature4": "Three-tier package system with comprehensive details",
+      "feature5": "Interactive photo gallery with advanced hover effects",
+      "feature6": "Geographical distribution map with smart search",
+      "feature7": "Image upload form with smart verification",
+      "feature8": "Available rewards and prizes display",
+      "feature9": "News and updates section",
+      "feature10": "Advanced search and filtering system",
+      "feature11": "Administrative control panel with real-time statistics",
+      "feature12": "Campaign and promotion management",
+      "feature13": "Direct WhatsApp integration",
+      "feature14": "Smooth scrolling and seamless transitions",
+      "feature15": "Interactive preparation steps with detail",
+      "feature16": "Animated image slides with visual effects",
+      "feature17": "Social media sharing links",
+      "feature18": "Complete Arabic/Turkish/English support",
+      "feature19": "100% responsive design for all devices",
+      "feature20": "Real-time notification system"
+    }
+  },
+  "compreVende": {
+    "title": "Comprevende - Local Services Platform",
+    "description": "An electronic platform connecting local service providers with customers in Brazil",
+    "fullDescription": "A comprehensive local services platform in Brazil, similar to Fiverr or Thumbtack, where customers can search for service providers such as electricians, plumbers, and cleaners. Service providers can create profiles, receive requests, and manage bookings through an instant messaging system, a ratings system, and a rewards point system.",
+    "duration": "5 months",
+    "clientType": "Brazilian Company",
+    "complexity": "Advanced",
+    "teamSize": "3 developers",
+    "clientFeedback": "A professional and reliable platform that connects thousands of service providers and customers with ease",
+    "keyFeatures": {
+      "feature1": "Multi-role registration and login system (customer, service provider, organization)",
+      "feature2": "Interactive homepage with advanced search and filters",
+      "feature3": "Comprehensive service provider profiles with images and ratings",
+      "feature4": "Service request system",
+      "feature5": "Instant messaging between customers and service providers",
+      "feature6": "Notification system for requests and messages",
+      "feature7": "Ratings and reviews system",
+      "feature8": "Booking and request management",
+      "feature9": "Redeemable reward points system",
+      "feature10": "Paid subscription packages",
+      "feature11": "PWA mobile application",
+      "feature12": "Comprehensive SEO optimization with Schema Markup"
+    },
+    "objectives": {
+      "objective1": "Connect local service providers with customers safely and easily",
+      "objective2": "Provide a reliable platform for searching local services efficiently",
+      "objective3": "Improve user experience through a user-friendly and secure interface",
+      "objective4": "Build a strong rating system to help select the best service providers"
+    },
+    "challenges": {
+      "challenge1": "Subdirectory matching issues due to different data types (ObjectId vs string)",
+      "challenge2": "Fixed instant messaging system between service providers using Socket.io",
+      "challenge3": "Notification issues on tablets and smart devices",
+      "challenge4": "Email configuration with Hostinger and avoiding spam classification",
+      "challenge5": "Support for dual roles for service providers who also work as customers"
+    },
+    "features": {
+      "feature1": "Secure registration and login with email verification",
+      "feature2": "Separate control panel for customers, service providers, and organizations",
+      "feature3": "Advanced search by categories, cities, and neighborhoods",
+      "feature4": "Service request system with comprehensive step-by-step details",
+      "feature5": "Instant messaging with Socket.io support and real-time alerts",
+      "feature6": "Comprehensive ratings and reviews system",
+      "feature7": "Easy booking and request management",
+      "feature8": "Smart reward points system with redemption options",
+      "feature9": "Flexible paid subscription packages",
+      "feature10": "Advanced PWA mobile application",
+      "feature11": "Comprehensive SEO optimization with Schema Markup",
+      "feature12": "Real-time notification system",
+      "feature13": "Support for Portuguese and English languages"
     }
   }
 }

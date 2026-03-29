@@ -80,10 +80,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`flex-1 inline-flex items-center justify-center gap-2 ${isRTL ? 'flex-row-reverse' : ''} px-4 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-xl hover:from-cyan-600 hover:to-blue-700 transition-all transform hover:scale-105 text-sm font-semibold shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50`}
+                className={`flex-1 inline-flex items-center justify-center gap-2 ${isRTL ? 'flex-row-reverse' : ''} px-3 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-xl hover:from-cyan-600 hover:to-blue-700 transition-all transform hover:scale-105 text-sm font-semibold shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50`}
               >
-                <Eye className="w-4 h-4" />
-                <span>{isRTL ? 'معاينة مباشرة' : 'Live Preview'}</span>
+                <Eye className="w-4 h-4 flex-shrink-0" />
+                <span className="whitespace-nowrap">{isRTL ? 'معاينة مباشرة' : 'Live Preview'}</span>
               </a>
             </MicroInteractions>
           )}
@@ -92,10 +92,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
           <MicroInteractions type="button" intensity="medium">
             <Link
               to={`/project/${project.id}`}
-              className={`flex-1 inline-flex items-center justify-center gap-2 ${isRTL ? 'flex-row-reverse' : ''} px-4 py-2.5 bg-gray-800/80 border border-gray-600 text-gray-300 rounded-xl hover:bg-gray-700 hover:border-cyan-500/50 hover:text-cyan-300 transition-all transform hover:scale-105 text-sm font-semibold`}
+              className={`flex-1 inline-flex items-center justify-center gap-2 ${isRTL ? 'flex-row-reverse' : ''} px-3 py-2.5 bg-gray-800/80 border border-gray-600 text-gray-300 rounded-xl hover:bg-gray-700 hover:border-cyan-500/50 hover:text-cyan-300 transition-all transform hover:scale-105 text-sm font-semibold`}
             >
-              <ExternalLink className="w-4 h-4" />
-              <span>{t('projects.card.viewDetails')}</span>
+              <ExternalLink className="w-4 h-4 flex-shrink-0" />
+              <span className="whitespace-nowrap">{t('projects.card.viewDetails')}</span>
             </Link>
           </MicroInteractions>
         </div>

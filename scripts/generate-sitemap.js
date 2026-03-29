@@ -4,6 +4,9 @@ import path from 'path';
 
 // مؤقتاً سنقوم بإنشاء البيانات يدوياً
 const projects = [
+  { id: 'websitemy-portfolio' },
+  { id: 'alimni-platform' },
+  { id: 'comprevende' },
   { id: 'ecommerce-luxury' },
   { id: 'artwin-mobile' },
   { id: 'pro-camz' },
@@ -12,7 +15,8 @@ const projects = [
   { id: 'social-network' },
   { id: 'aleppo-complaints' },
   { id: 'national-network-media' },
-  { id: 'saas-platform' }
+  { id: 'saas-platform' },
+  { id: 'syria-2030' }
 ];
 
 const serviceCategories = [

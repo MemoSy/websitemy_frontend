@@ -55,14 +55,14 @@ const Projects = () => {
   const selectedCategoryInfo = serviceCategories.find(cat => cat.id === selectedCategory);
 
   return (
-    <div className="min-h-screen py-20">
+    <div className="min-h-screen pt-28 md:pt-32 pb-20">
       <SEO 
         title={t('projects.seo.title')}
         description={t('projects.seo.description')}
         keywords={t('projects.seo.keywords')}
         url="/projects"
       />
-      <div className="container mx-auto px-4">
+      <div className="mx-auto w-full max-w-[1288px] px-4 sm:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -72,9 +72,7 @@ const Projects = () => {
         >
           {selectedCategory !== 'all' && selectedCategoryInfo ? (
             <div className="mb-8">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-2xl mb-6">
-                <span className="text-2xl">{selectedCategoryInfo.icon}</span>
-              </div>
+ 
               <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
                 {selectedCategoryInfo.title}
               </h1>
@@ -85,10 +83,10 @@ const Projects = () => {
             </div>
           ) : (
             <>
-              <h1 className={`text-4xl md:text-5xl font-bold text-white mb-6 ${isRTL ? 'text-right' : 'text-left'}`}>
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 text-center">
                 {t('projects.title')}
               </h1>
-              <p className={`text-xl text-gray-400 max-w-2xl mx-auto ${isRTL ? 'text-right' : 'text-left'}`}>
+              <p className="text-xl text-gray-400 max-w-2xl mx-auto text-center">
                 {t('projects.subtitle')}
               </p>
             </>
@@ -186,7 +184,7 @@ const Projects = () => {
         >
           {filteredProjects.length === 0 ? (
             <div className="text-center py-20">
-              <p className={`text-xl text-gray-400 ${isRTL ? 'text-right' : 'text-left'}`}>
+              <p className="text-xl text-gray-400 text-center">
                 {t('projects.noResults')}
               </p>
             </div>
@@ -214,7 +212,7 @@ const Projects = () => {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="text-center mt-12"
         >
-          <p className={`text-gray-400 ${isRTL ? 'text-right' : 'text-left'}`}>
+          <p className="text-gray-400 text-center">
             {t('projects.showing')} {filteredProjects.length} {t('projects.of')} {projects.length} {t('projects.project')}
             {selectedCategory !== 'all' && selectedCategoryInfo && (
               <span className="text-cyan-400"> {t('projects.inCategory')} {selectedCategoryInfo.title}</span>
