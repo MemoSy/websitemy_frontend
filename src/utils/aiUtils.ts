@@ -7,9 +7,10 @@ import {
 } from "./aiSystemPrompt";
 import { searchFAQ } from "../data/faqData";
 
-// Initialize z.ai API
-const Z_AI_API_KEY = "71471ff4015f40b88792e9c9a6bb93d5.gN2fyCSexhxZDuOm";
-const Z_AI_API_URL = "https://api.z.ai/v1/chat/completions";
+// Backend AI proxy URL (avoids CORS from browser direct calls)
+const AI_PROXY_URL = import.meta.env.VITE_BACKEND_URL
+  ? `${import.meta.env.VITE_BACKEND_URL}/chat/ai-proxy`
+  : "https://websitemy-backend.vercel.app/chat/ai-proxy";
 
 export interface CompanyInfo {
   name: string;
@@ -312,34 +313,15 @@ ${faqContext}
       faqData.slice(0, 10),
     );
 
-    // بناء الرسالة الكاملة
-    const fullPrompt = `${systemPrompt}
-
----
-
-${conversationContext}`;
-
-    // استخدام z.ai API
-    const response = await fetch(Z_AI_API_URL, {
+    // استخدام z.ai API عبر البروكسي في الباك اند
+    const response = await fetch(AI_PROXY_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${Z_AI_API_KEY}`,
       },
       body: JSON.stringify({
-        model: "default", // أو أي model يفضلها z.ai
-        messages: [
-          {
-            role: "system",
-            content: systemPrompt,
-          },
-          {
-            role: "user",
-            content: conversationContext,
-          },
-        ],
-        temperature: 0.7,
-        max_tokens: 1000,
+        systemPrompt,
+        userMessage: conversationContext,
       }),
     });
 
@@ -352,22 +334,12 @@ ${conversationContext}`;
         return "⚠️ **عذراً، الخدمة غير متوفرة مؤقتاً**\n\nتم تجاوز حد الاستخدام المسموح.\n\n📞 **للحصول على إجابات فورية:**\n- اتصل بنا: **+905313345111** (واتساب)\n- البريد: info@websitemy.com\n\n💡 سنكون سعداء بالإجابة على جميع أسئلتك!";
       }
 
-      console.error("z.ai API Error:", errorData);
+      console.error("AI Proxy Error:", errorData);
       return `عذراً، حدث خطأ في الاتصال. يرجى المحاولة مرة أخرى.\n\n📱 للدعم الفوري: +905313345111`;
     }
 
     const data = await response.json();
-    let aiResponse = "";
-
-    // معالجة الرد من z.ai
-    if (data.choices && data.choices[0] && data.choices[0].message) {
-      aiResponse = data.choices[0].message.content;
-    } else if (data.result) {
-      aiResponse = data.result;
-    } else {
-      console.error("Unexpected z.ai response format:", data);
-      return "آسف، لم أتمكن من الحصول على إجابة دقيقة. يرجى المحاولة مرة أخرى.";
-    }
+    let aiResponse = data?.content ?? "";
 
     // التحقق من صحة الرد
     const validation = validateAIResponse(aiResponse);
