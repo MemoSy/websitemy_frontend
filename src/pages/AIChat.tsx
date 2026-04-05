@@ -1,14 +1,17 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, Bot, User, Loader2, Brain } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { useTranslation } from "react-i18next";
-import { callChatGPT, generateKnowledgeBase } from "../utils/aiUtils";
+import { callAI } from "../utils/aiUtils";
 import {
-  generateSessionId,
+  getOrCreateSession,
+  addMessage,
+  type ChatSession,
+} from "../utils/sessionManager";
+import {
   saveChatSession,
   updateChatSession,
-  ChatMessage,
 } from "../utils/chatService";
 import { getCachedUserLocation, LocationData } from "../utils/locationService";
 
@@ -23,21 +26,38 @@ const AIChat = () => {
   const { t, i18n } = useTranslation();
   const isRTL = i18n.dir() === "rtl";
 
-  const [sessionId] = useState<string>(() => generateSessionId());
+  // جلسة المستخدم — مبنية على بصمة الجهاز، مستمرة عبر الزيارات
+  const [session, setSession] = useState<ChatSession>(() => getOrCreateSession());
   const [userLocation, setUserLocation] = useState<LocationData | null>(null);
-  const [currentContext, setCurrentContext] = useState<string>(""); // لحفظ السياق الحالي
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: "1",
-      text: t("aiChat.welcomeMessage"),
-      isUser: false,
-      timestamp: new Date(),
-    },
-  ]);
-  const [inputText, setInputText] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const [isChatSaved, setIsChatSaved] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // تحويل تاريخ الجلسة المحفوظ إلى رسائل للعرض
+  const storedMessages: Message[] = session.messages.map((m) => ({
+    id: String(m.timestamp),
+    text: m.content,
+    isUser: m.role === "user",
+    timestamp: new Date(m.timestamp),
+  }));
+
+  // الرسالة الترحيبية تظهر فقط إذا لم تكن هناك محادثة سابقة
+  const welcomeMsg: Message = {
+    id: "welcome",
+    text: t("aiChat.welcomeMessage"),
+    isUser: false,
+    timestamp: new Date(),
+  };
+
+  const displayMessages: Message[] =
+    storedMessages.length > 0 ? storedMessages : [welcomeMsg];
+
+  const [inputText, setInputText] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  // تحديث التمرير عند وصول رسائل جديدة
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [displayMessages.length, isLoading]);
 
   // Get user location on component mount
   useEffect(() => {
@@ -47,127 +67,65 @@ const AIChat = () => {
         setUserLocation(location);
       } catch (error) {
         console.error("Error getting user location:", error);
-        // Set default location if geolocation fails
         setUserLocation({ country: "Unknown", city: "Unknown" });
       }
     };
-
     getLocation();
   }, []);
 
-  // دالة لتحديث السياق الحالي بناءً على آخر رسائل المستخدم
-  const updateCurrentContext = (userMessage: string) => {
-    const message = userMessage.toLowerCase();
-    let newContext = currentContext;
-
-    if (
-      message.includes("أخبار") ||
-      message.includes("إعلام") ||
-      message.includes("صحافة")
-    ) {
-      newContext = "news";
-    } else if (
-      message.includes("متجر") ||
-      message.includes("تجارة") ||
-      message.includes("متجر إلكتروني")
-    ) {
-      newContext = "ecommerce";
-    } else if (
-      message.includes("تعليم") ||
-      message.includes("منصة تعليمية") ||
-      message.includes("دورات")
-    ) {
-      newContext = "education";
-    } else if (
-      message.includes("شخصي") ||
-      message.includes("بروفايل") ||
-      message.includes("سيرة ذاتية")
-    ) {
-      newContext = "personal";
-    } else if (
-      message.includes("اجتماعي") ||
-      message.includes("شبكة اجتماعية")
-    ) {
-      newContext = "social";
-    }
-
-    if (newContext !== currentContext) {
-      setCurrentContext(newContext);
-    }
-
-    return newContext;
-  };
-
-  // Save chat to database when messages change (but not on first load)
+  // حفظ المحادثة في قاعدة البيانات للتحليلات (analytics فقط)
   useEffect(() => {
     const saveChat = async () => {
-      if (messages.length > 1 && userLocation) {
-        // Only save if there are more than just the initial message and location is available
+      if (session.messages.length > 0 && userLocation) {
         if (!isChatSaved) {
-          // First time saving this chat session
           await saveChatSession({
-            sessionId,
-            messages: messages as ChatMessage[],
+            sessionId: session.sessionId,
+            messages: session.messages.map((m) => ({
+              id: String(m.timestamp),
+              text: m.content,
+              isUser: m.role === "user",
+              timestamp: new Date(m.timestamp),
+            })),
             country: userLocation.country,
             city: userLocation.city,
           });
           setIsChatSaved(true);
         } else {
-          // Update existing chat session
-          await updateChatSession(sessionId, messages as ChatMessage[]);
+          await updateChatSession(
+            session.sessionId,
+            session.messages.map((m) => ({
+              id: String(m.timestamp),
+              text: m.content,
+              isUser: m.role === "user",
+              timestamp: new Date(m.timestamp),
+            })),
+          );
         }
       }
     };
-
     saveChat();
-  }, [messages, sessionId, isChatSaved, userLocation]);
+  }, [session.messages.length, session.sessionId, isChatSaved, userLocation]);
 
-  const handleSendMessage = async () => {
+  const handleSendMessage = useCallback(async () => {
     if (!inputText.trim() || isLoading) return;
 
-    // تحديث السياق الحالي بناءً على رسالة المستخدم
-    updateCurrentContext(inputText);
-
-    const userMessage: Message = {
-      id: Date.now().toString(),
-      text: inputText,
-      isUser: true,
-      timestamp: new Date(),
-    };
-
-    setMessages((prev) => [...prev, userMessage]);
+    const userText = inputText.trim();
     setInputText("");
     setIsLoading(true);
 
-    // تحضير تاريخ المحادثة للذكاء الاصطناعي (نستثني الرسالة الترحيبية الأولى)
-    const conversationHistory = messages
-      .slice(1) // نتجاهل الرسالة الترحيبية الأولى
-      .map((msg) => ({
-        text: msg.text,
-        isUser: msg.isUser,
-      }));
+    // 1. حفظ رسالة المستخدم في الجلسة فوراً (للعرض + localStorage)
+    const sessionWithUser = addMessage(session, "user", userText);
+    setSession(sessionWithUser);
 
-    // إضافة الرسالة الحالية للتاريخ
-    conversationHistory.push({
-      text: inputText,
-      isUser: true,
-    });
+    // 2. استدعاء الذكاء الاصطناعي — يقرأ التاريخ الكامل + وثيقة المعرفة
+    const aiText = await callAI(sessionWithUser.messages.slice(0, -1), userText);
 
-    const aiResponseText = await callChatGPT(
-      inputText,
-      generateKnowledgeBase(),
-      conversationHistory
-    );
-    const aiResponse: Message = {
-      id: (Date.now() + 1).toString(),
-      text: aiResponseText || t("aiChat.errorMessage"),
-      isUser: false,
-      timestamp: new Date(),
-    };
+    // 3. حفظ رد الذكاء الاصطناعي في الجلسة
+    const sessionWithAI = addMessage(sessionWithUser, "assistant", aiText || t("aiChat.errorMessage"));
+    setSession(sessionWithAI);
 
-    setMessages((prev) => [...prev, aiResponse]);
     setIsLoading(false);
-  };
+  }, [inputText, isLoading, session, t]);
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -230,12 +188,6 @@ const AIChat = () => {
               💾 {t("aiChat.chatSaved")}
             </p>
           )}
-          {currentContext && (
-            <p className="text-blue-400 text-xs mt-1 opacity-75">
-              🧠 {t("aiChat.currentContext")}:{" "}
-              {t(`aiChat.contexts.${currentContext}`, currentContext)}
-            </p>
-          )}
         </motion.div>
 
         {/* Chat Container - ملء الشاشة على الموبايل */}
@@ -248,7 +200,7 @@ const AIChat = () => {
           {/* Messages */}
           <div className="flex-1 w-full overflow-y-auto p-4 sm:p-6 space-y-4 sm:space-y-4">
             <AnimatePresence>
-              {messages.map((message) => (
+              {displayMessages.map((message) => (
                 <motion.div
                   key={message.id}
                   initial={{ opacity: 0, y: 20 }}
