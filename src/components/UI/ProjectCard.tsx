@@ -29,7 +29,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
       <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-purple-500/0 to-cyan-500/0 opacity-0 group-hover:opacity-20 transition-opacity duration-700"></div>
       
       {/* Image Container - 70% of card */}
-      <div className="relative overflow-hidden h-64 md:h-80">
+      <div className="relative overflow-hidden h-72 md:h-[22rem]">
         <LazyImage
           src={optimizeImage(project.image, 800, 600)}
           alt={project.title}
@@ -58,7 +58,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
       </div>
 
       {/* Content - 30% of card */}
-      <div className="p-5 md:p-6 space-y-4">
+      <div className="p-6 md:p-7 space-y-4">
         {/* Title */}
         <MicroInteractions type="text">
           <h3 className={`text-xl md:text-2xl font-bold text-white group-hover:text-cyan-300 transition-colors duration-300 line-clamp-1 ${isRTL ? 'text-right' : 'text-left'}`}>
@@ -67,12 +67,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
         </MicroInteractions>
 
         {/* Description - 3 lines max */}
-        <p className={`text-gray-400 text-sm md:text-base line-clamp-3 leading-relaxed ${isRTL ? 'text-right' : 'text-left'}`}>
+        <p className={`text-gray-400 text-sm md:text-base line-clamp-4 leading-relaxed ${isRTL ? 'text-right' : 'text-left'}`}>
           {project.description}
         </p>
 
         {/* Action Buttons */}
-        <div className={`flex items-center gap-3 pt-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
+        <div className="flex items-center gap-4 pt-3">
           {/* Live Preview Button */}
           {project.liveUrl && (
             <MicroInteractions type="button" intensity="medium">
@@ -80,7 +80,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`flex-1 inline-flex items-center justify-center gap-2 ${isRTL ? 'flex-row-reverse' : ''} px-3 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-xl hover:from-cyan-600 hover:to-blue-700 transition-all transform hover:scale-105 text-sm font-semibold shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50`}
+                className={`flex-1 inline-flex items-center justify-center gap-2 ${isRTL ? 'order-2 flex-row-reverse' : 'order-1'} px-3 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-xl hover:from-cyan-600 hover:to-blue-700 transition-all transform hover:scale-105 text-sm font-semibold shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50`}
               >
                 <Eye className="w-4 h-4 flex-shrink-0" />
                 <span className="whitespace-nowrap">{isRTL ? 'معاينة مباشرة' : 'Live Preview'}</span>
@@ -92,10 +92,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
           <MicroInteractions type="button" intensity="medium">
             <Link
               to={`/project/${project.id}`}
-              className={`flex-1 inline-flex items-center justify-center gap-2 ${isRTL ? 'flex-row-reverse' : ''} px-3 py-2.5 bg-gray-800/80 border border-gray-600 text-gray-300 rounded-xl hover:bg-gray-700 hover:border-cyan-500/50 hover:text-cyan-300 transition-all transform hover:scale-105 text-sm font-semibold`}
+              dir={isRTL ? 'rtl' : 'ltr'}
+              className={`flex-1 inline-flex items-center gap-2 ${isRTL ? 'order-1 justify-start text-right pr-4' : 'order-2 justify-center'} px-3 py-2.5 bg-gray-800/80 border border-gray-600 text-gray-300 rounded-xl hover:bg-gray-700 hover:border-cyan-500/50 hover:text-cyan-300 transition-all transform hover:scale-105 text-sm font-semibold`}
             >
-              <ExternalLink className="w-4 h-4 flex-shrink-0" />
               <span className="whitespace-nowrap">{t('projects.card.viewDetails')}</span>
+              <ExternalLink className="w-4 h-4 flex-shrink-0" />
             </Link>
           </MicroInteractions>
         </div>

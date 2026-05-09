@@ -99,7 +99,7 @@ const ProjectDetail = () => {
       />
       
       <div className="min-h-screen py-20">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 xl:px-0">
         {/* Back Button */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}

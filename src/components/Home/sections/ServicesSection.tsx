@@ -216,7 +216,7 @@ const ServicesSection = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+      <div className="container mx-auto px-4 xl:px-0 relative z-10">
         {/* Section Header */}
         <div
           className={`text-center mb-12 md:mb-16 max-w-3xl mx-auto ${

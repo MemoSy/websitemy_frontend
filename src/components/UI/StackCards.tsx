@@ -230,7 +230,7 @@ const StackCards: React.FC = () => {
       </div>
 
       {/* Section Header */}
-      <div className="container mx-auto px-4 sm:px-6 pt-20 md:pt-24 relative z-10">
+      <div className="container mx-auto px-4 xl:px-0 pt-20 md:pt-24 relative z-10">
         <div
           className={`text-center max-w-4xl mx-auto ${isRTL ? "rtl" : "ltr"}`}
         >

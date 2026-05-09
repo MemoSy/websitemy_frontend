@@ -215,7 +215,7 @@
     },
     "card": {
       "duration": "Süre:",
-      "viewDetails": "Detaylar"
+      "viewDetails": "Detayları Görüntüle"
     }
   },
   "projectDetail": {
@@ -425,11 +425,11 @@
         "name": "LinkedIn Koç Profesyonel Web Sitesi",
         "status": "Geliştirme Aşamasında",
         "expectedDuration": "3-4 hafta",
-        "tagline": "Yol haritası ve etkileşimli ipuçları içeren bir LinkedIn koçü için profesyonel kişisel web sitesi",
+        "tagline": "Yol haritası ve etkileşimli ipuçları içeren bir LinkedIn koçu için profesyonel kişisel web sitesi",
         "features": {
           "feature1": {
             "title": "Profesyonel Kişisel Sayfa",
-            "desc": "Koçün kimliğini ve deneyimini çekici biçimde yansıtan profesyonel tasarım"
+            "desc": "Koçun kimliğini ve deneyimini çekici biçimde yansıtan profesyonel tasarım"
           },
           "feature2": {
             "title": "LinkedIn Yol Haritası",
@@ -445,27 +445,27 @@
           }
         }
       },
-      "mobilyaShowroom": {
-        "shortTitle": "Mobilya Showroom",
-        "name": "Mobilya ve Dekorasyon Showroom",
+      "economicsLessons": {
+        "shortTitle": "İktisat Dersleri Platformu",
+        "name": "Entegre İktisat Dersleri Platformu",
         "status": "Geliştirme Aşamasında",
-        "tagline": "İç ve dış mekan tasarım işlerini ve dekorasyonları gösteren bir web sitesi",
+        "tagline": "Abonelik sistemi ve kapsamlı akademik ilerleme takibi ile iktisat dersleri için gelişmiş eğitim platformu",
         "features": {
           "feature1": {
-            "title": "Malzemeleri ve Stilleri Bağlayın",
-            "desc": "Malzemeleri, stilleri ve tasarım desenlerini kolayca birbirine bağlama yeteneği"
+            "title": "Öne Çıkan Ana Sayfa",
+            "desc": "Öğrenciler için harika bir gezinme deneyimi sağlayan çekici kullanıcı arayüzü"
           },
           "feature2": {
-            "title": "Eski ve Yeni Ekran",
-            "desc": "Eski ve yeni tasarımları akıllı kategorileştirme ile göstermek için özel bölümler"
+            "title": "Abonelik Tabanlı İçerik",
+            "desc": "Pakete göre dersler için erişim sağlayan abonelik sistemi"
           },
           "feature3": {
-            "title": "Makaleler ve İçerik",
-            "desc": "Modern dekorasyon ve mobilya hakkında makaleler ve ipuçları için kapsamlı bölüm"
+            "title": "Akademik İlerleme Takibi",
+            "desc": "Akademik seviyeyi anlamak ve takip etmek için entegre yol haritası"
           },
           "feature4": {
-            "title": "Harika Görsel Efektler",
-            "desc": "Mobilya ve mobilyaların ileri görsel efektlerle profesyonel sunumu"
+            "title": "Video ve Görsel İçerik",
+            "desc": "Videolar ve görsel açıklamaları yayınlamak için özel bölümler"
           }
         }
       }
@@ -1022,7 +1022,7 @@
   },
   "alimniPlatform": {
     "title": "Alimni - Kapsamlı E-Öğrenme Platformu",
-    "description": "Arapça ve İngilizceyi ve Türkçe destekleyen, öğretmenleri, öğrencileri ve yönetimi tek bir dijital ortamda bir araya getiren entegre bir eğitim platformu. Ders planlaması, ödevler, raporlar ve puan ile başarılarla ödül sistemi içerir.",
+    "description": "Arapça ve İngilizceyi destekleyen, öğretmenleri, öğrencileri ve yönetimi tek bir dijital ortamda bir araya getiren entegre bir eğitim platformu. Ders planlaması, ödevler, raporlar ve puan ile başarılarla ödül sistemi içerir.",
     "fullDescription": "Alimni, kapsamlı bir öğrenim yönetim sistemi sunan çok kiracılı (multi-tenant) bir SaaS eğitim platformudur. Öğretmenler gerçek zamanlı olarak dersler ve ödevler oluşturabilir, öğrenci ilerlemesini takip edebilir. Öğrenciler ise puan, başarılar ve dijital kütüphaneye sahip kişiselleştirilmiş bir panoya erişir. Platform çevrimdışı çalışmayı (PWA Offline), otomatik not verme ve performans analizi için YZ entegrasyonunu ve tam Arapça (RTL) ile İngilizce desteğini destekler.",
     "duration": "6+ ay",
     "clientType": "Eğitim platformu - özel okullar ve öğrenme merkezleri",
@@ -1076,115 +1076,6 @@
       "feature18": "Anında geçişle tam Arapça/İngilizce desteği",
       "feature19": "Mobil ve tablet için %100 duyarlı arayüz",
       "feature20": "Gerçek zamanlı mesajlaşma (Mesajlaşma / Sohbet)"
-    }
-  },
-  "goldCup": {
-    "title": "Altın Fincan - Meşrubat Markası",
-    "description": "Türk ve Arap meşrubat endüstrisi için profesyonel e-ticaret platformu, gelişmiş ürün yönetimi, envanter sistemi ve müşteri bağlantı yönetimi ile",
-    "fullDescription": "Altın Fincan, Türkiye ve Arap ülkelerinde meşrubat satışını yapan başarılı bir marka için geliştirilmiş profesyonel e-ticaret platformudur. Platform, ürün kataloğu yönetimi, envanter takibi, müşteri yönetimi, satış analitiği ve entegre sipariş sistemi ile tam kapsamlı bir çözüm sunmaktadır. Platform Türkçe, Arapça ve İngilizce dillerini desteklemekte, mobil-friendly tasarıma ve hızlı yükleme performansına sahiptir.",
-    "duration": "6 hafta",
-    "clientType": "Meşrubat Mağazası - E-Ticaret",
-    "complexity": "Orta",
-    "teamSize": "2 geliştirici",
-    "clientFeedback": "Müşteri memnuniyeti %95 ve sipariş oranında %125 artış",
-    "keyFeatures": {
-      "feature1": "Ürün kategorileri ve alt kategoriler ile gelişmiş ürün yönetimi",
-      "feature2": "Gerçek zamanlı envanter takibi sistemi",
-      "feature3": "Perakende ve toptan fiyatlandırma seçenekleri",
-      "feature4": "Müşteri yönetimi ve sipariş geçmişi",
-      "feature5": "Güvenli çoklu ödeme geçitleri (Kredi kartı, havale, kapıda ödeme)",
-      "feature6": "Kargo entegrasyonu ve otomatik takibi",
-      "feature7": "Canlı satış analitiği ve raporlar",
-      "feature8": "Kupon ve promosyon sistemi",
-      "feature9": "Müşteri yorumları ve derecelendirmeler"
-    },
-    "objectives": {
-      "objective1": "Altın Fincan markasının çevrimiçi satış varlığını güçlendirmek",
-      "objective2": "Müşteri deneyimini iyileştirerek sipariş sayısını artırmak",
-      "objective3": "Verimli ürün ve sipariş yönetimi sağlamak",
-      "objective4": "Türk ve Arap pazarlarına etkin erişim sağlamak",
-      "objective5": "Marka bilinirliğini artırmak ve müşteri sadakatini güçlendirmek"
-    },
-    "challenges": {
-      "challenge1": "Türkçe, Arapça ve İngilizce desteğinde dil seçimini düzgün yönetmek",
-      "challenge2": "Ürün görselleri ve video içeriği için performansı optimize etmek",
-      "challenge3": "Çoklu para birimleri (TL, Ş.P., USD) ile fiyat güncellemelerini senkronize etmek",
-      "challenge4": "Türk ve Arap bölgelerinden farklı kargo hizmetleri ile entegrasyonu sağlamak",
-      "challenge5": "Yüksek hacimli sipariş dönemlerinde sistem stabilitesini korumak"
-    },
-    "features": {
-      "feature1": "Ürün kategorileri ve alt kategoriler ile gelişmiş ürün yönetimi",
-      "feature2": "Gerçek zamanlı envanter ve stok takibi",
-      "feature3": "Perakende ve toptan fiyatlandırma seçenekleri",
-      "feature4": "Müşteri hesapları ve sipariş geçmişi",
-      "feature5": "Kredi kartı, banka havalesi ve kapıda ödeme seçenekleri",
-      "feature6": "Kargo hizmetleri ile otomatik takip sistemi",
-      "feature7": "Satış, gelir ve müşteri analitiği paneli",
-      "feature8": "Belirli zamanlara ve ürünlere kupon kodları",
-      "feature9": "Müşteri yorumları ve 5 yıldızlı derecelendirme sistemi",
-      "feature10": "Müşteri hizmetleri için WebSocket tabanlı canlı destek",
-      "feature11": "E-mail ve SMS bildirimleri sipariş durumu için",
-      "feature12": "Mobil uygulama API uyumluluğu",
-      "feature13": "Ürün görselleri için CDN entegrasyonu",
-      "feature14": "İleri arama ve filtreleme sistemi",
-      "feature15": "Sosyal medya entegrasyonu ve paylaşım seçenekleri",
-      "feature16": "Flash haddi ve haftalık özellikleri",
-      "feature17": "Yönetici paneli ile tam kontrol",
-      "feature18": "Türkçe, Arapça, İngilizce tam destek (RTL/LTR)",
-      "feature19": "Mobil ve tablet cihazlar için tam duyarlı tasarım",
-      "feature20": "Google Analytics ve SEO optimizasyonu"
-    }
-  },
-  "compreVende": {
-    "title": "Comprevende - Yerel Hizmetler Platformu",
-    "description": "Brezilya'da yerel hizmet sağlayıcılarını müşterilerle bağlayan elektronik bir platform",
-    "fullDescription": "Brezilya'da yerel hizmetlerin kapsamlı bir platformu, Fiverr veya Thumbtack'e benzer şekilde, müşterilerin elektrikçi, tesisatçı ve temizlikçi gibi hizmet sağlayıcılarını arayabildiği. Hizmet sağlayıcılar profil oluşturabilir, istekleri alabilir ve anında mesajlaşma sistemi, derecelendirme sistemi ve ödül puanları sistemi aracılığıyla rezervasyonları yönetebilir.",
-    "duration": "5 ay",
-    "clientType": "Brezilya Şirketi",
-    "complexity": "İleri Seviye",
-    "teamSize": "3 geliştirici",
-    "clientFeedback": "Binlerce hizmet sağlayıcı ve müşteriyi kolaylıkla bağlayan profesyonel ve güvenilir bir platform",
-    "keyFeatures": {
-      "feature1": "Çok rolü kayıt ve giriş sistemi (müşteri, hizmet sağlayıcı, kuruluş)",
-      "feature2": "Gelişmiş arama ve filtreler ile etkileşimli ana sayfa",
-      "feature3": "Resimler ve derecelendirmelerle kapsamlı hizmet sağlayıcı profilleri",
-      "feature4": "Hizmet talep sistemi",
-      "feature5": "Müşteriler ve hizmet sağlayıcıları arasında anında mesajlaşma",
-      "feature6": "Talepler ve mesajlar için bildirim sistemi",
-      "feature7": "Derecelendirmeler ve yorumlar sistemi",
-      "feature8": "Rezervasyon ve talep yönetimi",
-      "feature9": "Kullanılabilir ödül puanları sistemi",
-      "feature10": "Ücretli abonelik paketleri",
-      "feature11": "PWA mobil uygulaması",
-      "feature12": "Schema Markup ile kapsamlı SEO optimizasyonu"
-    },
-    "objectives": {
-      "objective1": "Yerel hizmet sağlayıcılarını müşterilerle güvenli ve kolay bir şekilde bağlamak",
-      "objective2": "Yerel hizmetleri verimli bir şekilde aramak için güvenilir bir platform sağlamak",
-      "objective3": "Kullanıcı dostu ve güvenli bir arayüz aracılığıyla kullanıcı deneyimini iyileştirmek",
-      "objective4": "En iyi hizmet sağlayıcılarını seçmeye yardımcı olan güçlü bir derecelendirme sistemi oluşturmak"
-    },
-    "challenges": {
-      "challenge1": "Farklı veri türleri nedeniyle alt dizin eşleştirme sorunları (ObjectId ile string)",
-      "challenge2": "Socket.io kullanarak hizmet sağlayıcıları arasında anında mesajlaşma sistemi düzeltildi",
-      "challenge3": "Tabletler ve akıllı cihazlarda bildirim sorunları",
-      "challenge4": "Hostinger ile e-posta yapılandırması ve spam sınıflandırmasından kaçınma",
-      "challenge5": "Hizmet sağlayıcıları için çift rolleri destekleme (müşteri olarak da çalış)"
-    },
-    "features": {
-      "feature1": "E-posta doğrulaması ile güvenli kayıt ve giriş",
-      "feature2": "Müşteriler, hizmet sağlayıcıları ve kuruluşlar için ayrı kontrol paneli",
-      "feature3": "Kategoriler, şehirler ve mahalleler tarafından gelişmiş arama",
-      "feature4": "Kapsamlı adım adım ayrıntılarla hizmet talep sistemi",
-      "feature5": "Socket.io desteği ve gerçek zamanlı uyarılarla anında mesajlaşma",
-      "feature6": "Kapsamlı derecelendirmeler ve yorumlar sistemi",
-      "feature7": "Kolay rezervasyon ve talep yönetimi",
-      "feature8": "İtfa seçenekleri ile akıllı ödül puanları sistemi",
-      "feature9": "Esnek ücretli abonelik paketleri",
-      "feature10": "İleri PWA mobil uygulaması",
-      "feature11": "Schema Markup ile kapsamlı SEO optimizasyonu",
-      "feature12": "Gerçek zamanlı bildirim sistemi",
-      "feature13": "Portekizce ve İngilizce dil desteği"
     }
   }
 }

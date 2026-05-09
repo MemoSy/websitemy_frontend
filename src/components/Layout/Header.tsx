@@ -72,7 +72,7 @@ const Header = () => {
           : "bg-transparent"
         }`}
     >
-      <div className="mx-auto w-full max-w-[1288px] px-4 py-4 sm:px-8">
+      <div className="mx-auto w-full max-w-[1400px] px-4 py-4 xl:px-0">
         <nav className={`flex items-center justify-between ${isRTL ? "flex-row-reverse" : "flex-row"}`}>
           {/* RTL: الرئيسية (يمين) | الشعار (يسار) */}
           {/* LTR: HOME (يسار) | الشعار (يمين) */}

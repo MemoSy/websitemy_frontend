@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, Bot, User, Loader2, Brain } from "lucide-react";
 import ReactMarkdown from "react-markdown";
@@ -14,6 +14,30 @@ import {
   updateChatSession,
 } from "../utils/chatService";
 import { getCachedUserLocation, LocationData } from "../utils/locationService";
+
+/**
+ * تحويل النصوص العادية إلى Markdown:
+ * - الروابط (example.com) → [example.com](https://example.com)
+ * - أرقام الهاتف/واتساب (+905...) → [+905...](https://wa.me/905...)
+ */
+function autoLinkText(text: string): string {
+  // تجنب معالجة نص مجرد روابط markdown موجودة مسبقاً
+  // 1. أرقام الهاتف: +9xxxxxxx أو 00xxx
+  text = text.replace(
+    /(?<!\[)(\+?(?:9\d{9,12}|00\d{10,13}))\b(?!\])/g,
+    (match) => {
+      const digits = match.replace(/[^0-9+]/g, '');
+      const wa = digits.startsWith('+') ? digits.slice(1) : digits.startsWith('00') ? digits.slice(2) : digits;
+      return `[${match}](https://wa.me/${wa})`;
+    }
+  );
+  // 2. روابط بدون http (example.com, sub.example.com) — تجنب الروابط التي هي داخل markdown مسبقاً
+  text = text.replace(
+    /(?<!\(|\/\/)(?<!\[)(?:^|(?<=\s|[\u0600-\u06FF]))([a-z0-9][a-z0-9\-]*\.(?:com|store|site|online|pro|app|io|net|org|co)(?:\/[^\s]*)?)/gi,
+    (_match, url) => `[${url}](https://${url})`
+  );
+  return text;
+}
 
 interface Message {
   id: string;
@@ -48,11 +72,20 @@ const AIChat = () => {
     timestamp: new Date(),
   };
 
-  const displayMessages: Message[] =
-    storedMessages.length > 0 ? storedMessages : [welcomeMsg];
-
   const [inputText, setInputText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [streamingText, setStreamingText] = useState("");
+
+  // أثناء الـ streaming: أخفِ آخر رسالة AI من الجلسة (لتجنب الـ flash)
+  // وبدلاً عنها سيُعرض streamingText المتحرك
+  const displayMessages: Message[] = useMemo(() => {
+    const base = storedMessages.length > 0 ? storedMessages : [welcomeMsg];
+    // أثناء الـ streaming — أخفِ آخر رسالة AI حتى ينتهي الـ streaming
+    if (isLoading && streamingText && base.length > 0 && !base[base.length - 1].isUser) {
+      return base.slice(0, -1);
+    }
+    return base;
+  }, [storedMessages.length, session.sessionId, i18n.language, isLoading, streamingText]);
 
   // تحديث التمرير عند وصول رسائل جديدة
   useEffect(() => {
@@ -112,18 +145,24 @@ const AIChat = () => {
     const userText = inputText.trim();
     setInputText("");
     setIsLoading(true);
+    setStreamingText("");
 
     // 1. حفظ رسالة المستخدم في الجلسة فوراً (للعرض + localStorage)
     const sessionWithUser = addMessage(session, "user", userText);
     setSession(sessionWithUser);
 
-    // 2. استدعاء الذكاء الاصطناعي — يقرأ التاريخ الكامل + وثيقة المعرفة
-    const aiText = await callAI(sessionWithUser.messages.slice(0, -1), userText);
+    // 2. استدعاء الذكاء الاصطناعي مع بث مباشر — النص يظهر فوراً كلمة بكلمة
+    const aiText = await callAI(
+      sessionWithUser.messages.slice(0, -1),
+      userText,
+      (partialText) => setStreamingText(partialText),
+    );
 
-    // 3. حفظ رد الذكاء الاصطناعي في الجلسة
+    // 3. حفظ رد الذكاء الاصطناعي في الجلسة بشكل متزامن مع إيقاف الـ streaming
+    //    نستخدم React batch — كلا التحديثين يحدثان في render واحد بدون flash
     const sessionWithAI = addMessage(sessionWithUser, "assistant", aiText || t("aiChat.errorMessage"));
     setSession(sessionWithAI);
-
+    setStreamingText("");
     setIsLoading(false);
   }, [inputText, isLoading, session, t]);
 
@@ -152,7 +191,7 @@ const AIChat = () => {
         />
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 sm:px-4 py-4 sm:py-8 max-w-4xl h-screen flex flex-col pt-24 sm:pt-24">
+      <div className="relative z-10 container mx-auto px-4 xl:px-0 py-4 sm:py-8 max-w-[1400px] h-screen flex flex-col pt-24 sm:pt-24">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -273,19 +312,25 @@ const AIChat = () => {
                                 {children}
                               </code>
                             ),
-                            a: ({ children, href }) => (
-                              <a
-                                href={href}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-cyan-400 hover:text-cyan-300 underline"
-                              >
-                                {children}
-                              </a>
-                            ),
+                            a: ({ children, href }) => {
+                              const isPhone = /^\+?[0-9\s\-().]{7,}$/.test(String(children));
+                              const waHref = isPhone
+                                ? `https://wa.me/${String(children).replace(/[^0-9+]/g, '')}`
+                                : href?.startsWith('http') ? href : href ? `https://${href}` : '#';
+                              return (
+                                <a
+                                  href={isPhone ? waHref : (href?.startsWith('http') ? href : `https://${href}`)}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className={isPhone ? "text-green-400 hover:text-green-300 underline font-medium" : "text-cyan-400 hover:text-cyan-300 underline"}
+                                >
+                                  {children}
+                                </a>
+                              );
+                            },
                           }}
                         >
-                          {message.text}
+                          {message.isUser ? message.text : autoLinkText(message.text)}
                         </ReactMarkdown>
                       </div>
                       <p className="text-xs opacity-70 mt-2">
@@ -300,8 +345,47 @@ const AIChat = () => {
               ))}
             </AnimatePresence>
 
-            {/* Loading indicator */}
-            {isLoading && (
+            {/* Streaming response — text appears word by word */}
+            {isLoading && streamingText && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex justify-start"
+              >
+                <div className="flex items-start space-x-2 sm:space-x-3 space-x-reverse">
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 flex items-center justify-center">
+                    <Bot className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" />
+                  </div>
+                  <div className="bg-gray-800 text-gray-100 border border-gray-700 rounded-2xl px-3 py-2.5 sm:px-4 sm:py-3 max-w-[85%] sm:max-w-[80%]">
+                    <div
+                      className={`prose prose-invert prose-sm max-w-none text-sm sm:text-base leading-relaxed ${
+                        isRTL ? "text-right" : "text-left"
+                      }`}
+                    >
+                      <ReactMarkdown
+                        components={{
+                          a: ({ children, href }) => {
+                            const isPhone = /^\+?[0-9\s\-().]{7,}$/.test(String(children));
+                            const finalHref = isPhone
+                              ? `https://wa.me/${String(children).replace(/[^0-9+]/g, '')}`
+                              : href?.startsWith('http') ? href : `https://${href}`;
+                            return (
+                              <a href={finalHref} target="_blank" rel="noopener noreferrer"
+                                className={isPhone ? "text-green-400 underline font-medium" : "text-cyan-400 underline"}>
+                                {children}
+                              </a>
+                            );
+                          },
+                        }}
+                      >{autoLinkText(streamingText)}</ReactMarkdown>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
+            {/* Loading indicator — only shows before first chunk arrives */}
+            {isLoading && !streamingText && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}

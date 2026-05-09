@@ -48,7 +48,7 @@ const CurrentProjectsSection = () => {
         <div className="floating-element absolute top-1/2 right-10 md:right-20 w-2 h-2 md:w-4 md:h-4 bg-gradient-to-r from-cyan-500 to-purple-500 rotate-45"></div>
       </div>
 
-      <div className="mx-auto w-full max-w-[1288px] px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="mx-auto w-full max-w-[1400px] px-4 xl:px-0 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">
           <h2
@@ -107,7 +107,7 @@ const CurrentProjectsSection = () => {
         </div>
 
         {/* Main Content Grid */}
-        <div className="flex flex-col-reverse sm:flex-row gap-8 lg:gap-12 items-start max-w-7xl mx-auto">
+        <div className="flex flex-col-reverse sm:flex-row gap-8 lg:gap-12 items-start max-w-[1400px] mx-auto">
           {/* Left Section - Technologies & Features */}
           <motion.div
             key={`left-${activeProject.id}`}

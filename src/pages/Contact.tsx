@@ -71,7 +71,7 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen py-20">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 xl:px-0">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}

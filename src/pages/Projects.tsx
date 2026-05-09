@@ -62,7 +62,7 @@ const Projects = () => {
         keywords={t('projects.seo.keywords')}
         url="/projects"
       />
-      <div className="mx-auto w-full max-w-[1288px] px-4 sm:px-8">
+      <div className="mx-auto w-full max-w-[1400px] px-4 xl:px-0">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}

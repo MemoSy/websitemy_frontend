@@ -3,7 +3,6 @@
 interface ImportMetaEnv {
   readonly VITE_GA_MEASUREMENT_ID: string
   readonly VITE_GSC_VERIFICATION: string
-  readonly VITE_OPENAI_API_KEY: string
   readonly VITE_BACKEND_URL: string
   readonly DEV: boolean
 }

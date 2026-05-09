@@ -99,7 +99,7 @@ const TestimonialsSection = () => {
         <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-[#00FFA3]/10 rounded-full blur-3xl"></div>
       </div>
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 xl:px-0 relative z-10">
         {/* العنوان */}
         <div className="text-center mb-20">
           <div className="inline-block px-4 py-2 bg-[#00FFA3]/10 border border-[#00FFA3]/30 rounded-full mb-6">
@@ -119,7 +119,7 @@ const TestimonialsSection = () => {
         </div>
 
         {/* البطاقات - Desktop */}
-        <div className="relative max-w-7xl mx-auto hidden md:block">
+        <div className="relative max-w-[1400px] mx-auto hidden md:block">
           <div className="flex items-center justify-center gap-8">
             {testimonials.map((testimonial, index) => {
               const isActive = index === activeIndex;

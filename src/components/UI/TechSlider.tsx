@@ -113,7 +113,7 @@ const TechSlider = () => {
 
   return (
     <section className="py-16 overflow-hidden md:inline-block hidden">
-      <div className="mx-auto mb-8 w-full max-w-[1288px] px-4 sm:px-8">
+      <div className="mx-auto mb-8 w-full max-w-[1400px] px-4 xl:px-0">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

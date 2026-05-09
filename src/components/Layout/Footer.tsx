@@ -17,7 +17,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-gray-900 border-t border-gray-800">
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 py-12 xl:px-0">
         <div
           className={`grid grid-cols-1 md:grid-cols-3 gap-8 ${
             isRTL ? "text-right" : "text-left"

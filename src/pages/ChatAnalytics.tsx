@@ -39,7 +39,7 @@ const ChatAnalytics = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 pt-20">
-      <div className="container mx-auto px-4 py-8 max-w-6xl">
+      <div className="container mx-auto px-4 py-8 xl:px-0 max-w-[1400px]">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}

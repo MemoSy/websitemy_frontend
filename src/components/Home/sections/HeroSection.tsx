@@ -53,7 +53,7 @@ const HeroSection = () => {
         <div className="absolute w-[350px] h-[350px] bg-[#00FFA3] rounded-full blur-[120px] opacity-30 bottom-[10%] left-[30%] animate-float-slow"></div>
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto px-4 xl:px-0 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Hero Text */}
           <div className={`space-y-5 ${isRTL ? "text-right" : "text-left"}`}>

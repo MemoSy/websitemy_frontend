@@ -8,7 +8,6 @@ const projects = [
   { id: 'alimni-platform' },
   { id: 'comprevende' },
   { id: 'ecommerce-luxury' },
-  { id: 'artwin-mobile' },
   { id: 'pro-camz' },
   { id: 'sharekna' },
   { id: 'business' },

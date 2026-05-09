@@ -29,14 +29,14 @@ export const getCurrentProjectsData = (): CurrentProject[] => {
 
   return [
     {
-      id: "mobilya-showroom",
-      shortTitle: t("currentProjects.projects.mobilyaShowroom.shortTitle"),
-      name: t("currentProjects.projects.mobilyaShowroom.name"),
-      status: t("currentProjects.projects.mobilyaShowroom.status"),
-      progress: 75,
-      startDate: "10 يناير 2026",
-      expectedDuration: "٤٥ يومًا",
-      tagline: t("currentProjects.projects.mobilyaShowroom.tagline"),
+      id: "economics-lessons",
+      shortTitle: t("currentProjects.projects.economicsLessons.shortTitle"),
+      name: t("currentProjects.projects.economicsLessons.name"),
+      status: t("currentProjects.projects.economicsLessons.status"),
+      progress: 30,
+      startDate: "15 نيسان 2026",
+      expectedDuration: " شهرين",
+      tagline: t("currentProjects.projects.economicsLessons.tagline"),
       technologies: [
         {
           name: "Next.js",
@@ -65,24 +65,24 @@ export const getCurrentProjectsData = (): CurrentProject[] => {
       ],
       features: [
         {
-          title: t("currentProjects.projects.mobilyaShowroom.features.feature1.title"),
-          desc: t("currentProjects.projects.mobilyaShowroom.features.feature1.desc"),
-          icon: "🔗",
+          title: t("currentProjects.projects.economicsLessons.features.feature1.title"),
+          desc: t("currentProjects.projects.economicsLessons.features.feature1.desc"),
+          icon: "⭐",
         },
         {
-          title: t("currentProjects.projects.mobilyaShowroom.features.feature2.title"),
-          desc: t("currentProjects.projects.mobilyaShowroom.features.feature2.desc"),
-          icon: "📂",
+          title: t("currentProjects.projects.economicsLessons.features.feature2.title"),
+          desc: t("currentProjects.projects.economicsLessons.features.feature2.desc"),
+          icon: "🔑",
         },
         {
-          title: t("currentProjects.projects.mobilyaShowroom.features.feature3.title"),
-          desc: t("currentProjects.projects.mobilyaShowroom.features.feature3.desc"),
-          icon: "📰",
+          title: t("currentProjects.projects.economicsLessons.features.feature3.title"),
+          desc: t("currentProjects.projects.economicsLessons.features.feature3.desc"),
+          icon: "📈",
         },
         {
-          title: t("currentProjects.projects.mobilyaShowroom.features.feature4.title"),
-          desc: t("currentProjects.projects.mobilyaShowroom.features.feature4.desc"),
-          icon: "✨",
+          title: t("currentProjects.projects.economicsLessons.features.feature4.title"),
+          desc: t("currentProjects.projects.economicsLessons.features.feature4.desc"),
+          icon: "🎬",
         },
       ],
     },
@@ -91,8 +91,8 @@ export const getCurrentProjectsData = (): CurrentProject[] => {
       shortTitle: t("currentProjects.projects.linkedinCoach.shortTitle"),
       name: t("currentProjects.projects.linkedinCoach.name"),
       status: t("currentProjects.projects.linkedinCoach.status"),
-      progress: 10,
-      startDate: "22 فبراير 2026",
+      progress: 30,
+      startDate: "22 نيسان 2026",
       expectedDuration: t("currentProjects.projects.linkedinCoach.expectedDuration"),
       tagline: t("currentProjects.projects.linkedinCoach.tagline"),
       technologies: [
@@ -125,12 +125,12 @@ export const getCurrentProjectsData = (): CurrentProject[] => {
         {
           title: t("currentProjects.projects.linkedinCoach.features.feature1.title"),
           desc: t("currentProjects.projects.linkedinCoach.features.feature1.desc"),
-          icon: "💼",
+          icon: "👤",
         },
         {
           title: t("currentProjects.projects.linkedinCoach.features.feature2.title"),
           desc: t("currentProjects.projects.linkedinCoach.features.feature2.desc"),
-          icon: "🖥️",
+          icon: "🗺️",
         },
         {
           title: t("currentProjects.projects.linkedinCoach.features.feature3.title"),
@@ -140,7 +140,7 @@ export const getCurrentProjectsData = (): CurrentProject[] => {
         {
           title: t("currentProjects.projects.linkedinCoach.features.feature4.title"),
           desc: t("currentProjects.projects.linkedinCoach.features.feature4.desc"),
-          icon: "🎥",
+          icon: "🎬",
         },
       ],
     },

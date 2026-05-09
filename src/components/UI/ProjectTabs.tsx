@@ -26,7 +26,23 @@ const ProjectTabs = () => {
   const tabsContainerRef = useRef<HTMLDivElement>(null);
 
   const activeCategory = serviceCategories.find((cat) => cat.id === activeTab);
-  const featuredProjects = activeCategory?.projects.slice(0, 3) || [];
+  const featuredProjects = (() => {
+    if (!activeCategory) return [];
+
+    if (activeCategory.id !== "saas") {
+      return activeCategory.projects.slice(0, 3);
+    }
+
+    const dukkanProjects = activeCategory.projects.filter(
+      (project) => project.id === "daftar-smart-ledger"
+    );
+    const otherStartupProjects = activeCategory.projects.filter(
+      (project) =>
+        project.id !== "daftar-smart-ledger" && project.id !== "alimni-platform"
+    );
+
+    return [...dukkanProjects, ...otherStartupProjects].slice(0, 3);
+  })();
 
   // Update categories when language changes
   useEffect(() => {
@@ -156,7 +172,7 @@ const ProjectTabs = () => {
         </div>
       </div>
 
-      <div className="mx-auto w-full max-w-[1288px] px-4 relative z-10 lg:px-8">
+      <div className="mx-auto w-full max-w-[1400px] px-4 relative z-10 xl:px-0">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -175,13 +191,13 @@ const ProjectTabs = () => {
 
         {/* Tabs Navigation - Fixed with Arrow Controls (Mobile Only) */}
         <div className="mb-12 relative w-full">
-          <div className="hidden md:flex flex-nowrap justify-center gap-3 mb-12 overflow-x-auto scrollbar-hide pb-1">
+          <div className="hidden lg:flex w-full items-center justify-between gap-5 xl:gap-6 mb-12">
             {/* Desktop View - Show all tabs without arrows */}
             {serviceCategories.map((category) => (
               <button
                 key={category.id}
                 onClick={() => handleTabChange(category.id)}
-                className={`relative px-3 py-2 md:px-4 md:py-2.5 rounded-xl font-medium transition-all duration-300 whitespace-nowrap flex-shrink-0 text-sm ${
+                className={`relative flex-1 min-w-0 px-4 py-2 md:px-6 md:py-3 rounded-xl font-medium transition-all duration-300 whitespace-nowrap text-center text-sm md:text-base lg:text-lg ${
                   activeTab === category.id
                     ? "text-white bg-gradient-to-r from-cyan-500 to-purple-500 shadow-lg shadow-cyan-500/25 scale-100"
                     : "text-gray-400 bg-gray-800/50 border border-gray-700 hover:text-cyan-300 hover:border-cyan-500/50 hover:scale-105"
@@ -205,7 +221,7 @@ const ProjectTabs = () => {
           </div>
 
           {/* Mobile View - Show tabs with arrows */}
-          <div className="md:hidden flex items-center gap-3">
+          <div className="lg:hidden flex items-center gap-3">
             {/* Previous Arrow Button */}
             <button
               onClick={() => scrollTabs("prev")}
@@ -286,7 +302,7 @@ const ProjectTabs = () => {
             >
               {/* Category Header with View More Button */}
               <div
-                className={`flex flex-col lg:flex-row lg:items-center lg:justify-between mb-12 gap-6 mx-auto max-w-[1288px]`}
+                className={`flex flex-col lg:flex-row lg:items-center lg:justify-between mb-12 gap-6 mx-auto max-w-[1400px]`}
               >
                 <div className="flex-1">
                   <h3
@@ -336,7 +352,7 @@ const ProjectTabs = () => {
                   <div
                     ref={projectsRef}
                     className={`
-                      mx-auto max-w-[1288px]
+                      mx-auto max-w-[1400px]
                       ${
                         featuredProjects.length === 1
                           ? "grid grid-cols-1 gap-6"

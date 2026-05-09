@@ -445,27 +445,27 @@
           }
         }
       },
-      "mobilyaShowroom": {
-        "shortTitle": "Mobilya Showroom",
-        "name": "Furniture & Decoration Showroom",
+      "economicsLessons": {
+        "shortTitle": "Economics Lessons Platform",
+        "name": "Integrated Economics Lessons Platform",
         "status": "In Development",
-        "tagline": "A website showcasing interior and exterior design works and decorations",
+        "tagline": "Advanced educational platform for economics lessons with subscription system and comprehensive academic progress tracking",
         "features": {
           "feature1": {
-            "title": "Link Materials & Styles",
-            "desc": "Ability to link materials, styles and design patterns together with ease"
+            "title": "Featured Homepage",
+            "desc": "Attractive user interface providing a great browsing experience for students"
           },
           "feature2": {
-            "title": "Old & New Display",
-            "desc": "Specialized sections to showcase old and new designs with smart categorization"
+            "title": "Subscription-Based Content",
+            "desc": "Subscription system that allows access to lessons based on the package"
           },
           "feature3": {
-            "title": "Articles & Content",
-            "desc": "Comprehensive section for articles and tips about modern decoration and furniture"
+            "title": "Academic Progress Tracking",
+            "desc": "Integrated roadmap to understand and track academic level"
           },
           "feature4": {
-            "title": "Amazing Visual Effects",
-            "desc": "Professional presentation of furniture and furnishings with advanced visual effects"
+            "title": "Video & Visual Content",
+            "desc": "Dedicated sections for publishing videos and visual explanations"
           }
         }
       }
@@ -1022,7 +1022,7 @@
   },
   "alimniPlatform": {
     "title": "Alimni - Comprehensive E-Learning Platform",
-    "description": "An integrated educational platform supporting Arabic and English and Turkey, connecting teachers, students, and administration in one digital environment. Includes class scheduling, assignments, reports, and a gamification system with points and achievements.",
+    "description": "An integrated educational platform supporting Arabic and English, connecting teachers, students, and administration in one digital environment. Includes class scheduling, assignments, reports, and a gamification system with points and achievements.",
     "fullDescription": "Alimni is a multi-tenant SaaS educational platform offering a comprehensive learning management system. Teachers can create classes, assignments, and track student progress in real time, while students access a personalized dashboard with points, achievements, and a digital library. The platform supports offline operation (PWA Offline), AI integration for auto-grading and performance analysis, with full Arabic (RTL) and English support.",
     "duration": "6+ months",
     "clientType": "Educational platform - private schools and learning centers",
@@ -1076,115 +1076,6 @@
       "feature18": "Full Arabic/English support with instant switching",
       "feature19": "100% responsive interface for mobile and tablet",
       "feature20": "Real-time messaging (Messaging / Chat)"
-    }
-  },
-  "goldCup": {
-    "title": "Gold Cup - Golden Beverage",
-    "description": "A luxury Turkish beverage platform offering 16 unique flavors. An advanced web application combining multi-language support, intelligent campaign systems, and AI-powered barcode detection.",
-    "fullDescription": "Gold Cup is a modern web platform dedicated to marketing and selling premium Turkish beverages with 16 diverse flavors. It supports Arabic, Turkish, and English languages with intelligent campaign systems featuring advanced barcode detection. It includes smart reward systems, geographical distribution maps, and modern user interface with interactive 3D effects. Designed to serve individuals and organizations with three defined packages: for students, for corporations, and for luxury gifts.",
-    "duration": "One month",
-    "clientType": "Commercial Company",
-    "complexity": "Medium",
-    "teamSize": "2 developers",
-    "clientFeedback": "An exceptional project combining quality and innovation with a premium user experience",
-    "keyFeatures": {
-      "feature1": "16 diverse flavors with interactive 3D effects",
-      "feature2": "Smart barcode detection from images with high accuracy",
-      "feature3": "Multi-language support (Arabic, Turkish, English) with full localization",
-      "feature4": "Campaign and contest system with attractive rewards",
-      "feature5": "AI-generated image detection",
-      "feature6": "High-performance interactive photo gallery",
-      "feature7": "Geographical distribution map with location identification",
-      "feature8": "Three-tier package system (for students, corporations, luxury gifts)",
-      "feature9": "Comprehensive administrative control panel with advanced analytics"
-    },
-    "objectives": {
-      "objective1": "Develop a digital marketing platform for premium Turkish beverages",
-      "objective2": "Support multiple languages with complete cultural localization",
-      "objective3": "Implement intelligent campaign systems with attractive rewards",
-      "objective4": "Use artificial intelligence for barcode and fake image detection",
-      "objective5": "Provide a premium and seamless user experience across all devices"
-    },
-    "challenges": {
-      "challenge1": "Barcode detection from multi-angle and lighting conditions",
-      "challenge2": "Multi-language support while maintaining compatibility",
-      "challenge3": "Efficient processing of large images",
-      "challenge4": "Accurate AI-generated image detection",
-      "challenge5": "Building a secure reward system with tracking capability"
-    },
-    "features": {
-      "feature1": "Modern homepage with dynamic product display",
-      "feature2": "Flavor display with interactive 3D effects and smooth transitions",
-      "feature3": "Dynamic carousel for product group showcase",
-      "feature4": "Three-tier package system with comprehensive details",
-      "feature5": "Interactive photo gallery with advanced hover effects",
-      "feature6": "Geographical distribution map with smart search",
-      "feature7": "Image upload form with smart verification",
-      "feature8": "Available rewards and prizes display",
-      "feature9": "News and updates section",
-      "feature10": "Advanced search and filtering system",
-      "feature11": "Administrative control panel with real-time statistics",
-      "feature12": "Campaign and promotion management",
-      "feature13": "Direct WhatsApp integration",
-      "feature14": "Smooth scrolling and seamless transitions",
-      "feature15": "Interactive preparation steps with detail",
-      "feature16": "Animated image slides with visual effects",
-      "feature17": "Social media sharing links",
-      "feature18": "Complete Arabic/Turkish/English support",
-      "feature19": "100% responsive design for all devices",
-      "feature20": "Real-time notification system"
-    }
-  },
-  "compreVende": {
-    "title": "Comprevende - Local Services Platform",
-    "description": "An electronic platform connecting local service providers with customers in Brazil",
-    "fullDescription": "A comprehensive local services platform in Brazil, similar to Fiverr or Thumbtack, where customers can search for service providers such as electricians, plumbers, and cleaners. Service providers can create profiles, receive requests, and manage bookings through an instant messaging system, a ratings system, and a rewards point system.",
-    "duration": "5 months",
-    "clientType": "Brazilian Company",
-    "complexity": "Advanced",
-    "teamSize": "3 developers",
-    "clientFeedback": "A professional and reliable platform that connects thousands of service providers and customers with ease",
-    "keyFeatures": {
-      "feature1": "Multi-role registration and login system (customer, service provider, organization)",
-      "feature2": "Interactive homepage with advanced search and filters",
-      "feature3": "Comprehensive service provider profiles with images and ratings",
-      "feature4": "Service request system",
-      "feature5": "Instant messaging between customers and service providers",
-      "feature6": "Notification system for requests and messages",
-      "feature7": "Ratings and reviews system",
-      "feature8": "Booking and request management",
-      "feature9": "Redeemable reward points system",
-      "feature10": "Paid subscription packages",
-      "feature11": "PWA mobile application",
-      "feature12": "Comprehensive SEO optimization with Schema Markup"
-    },
-    "objectives": {
-      "objective1": "Connect local service providers with customers safely and easily",
-      "objective2": "Provide a reliable platform for searching local services efficiently",
-      "objective3": "Improve user experience through a user-friendly and secure interface",
-      "objective4": "Build a strong rating system to help select the best service providers"
-    },
-    "challenges": {
-      "challenge1": "Subdirectory matching issues due to different data types (ObjectId vs string)",
-      "challenge2": "Fixed instant messaging system between service providers using Socket.io",
-      "challenge3": "Notification issues on tablets and smart devices",
-      "challenge4": "Email configuration with Hostinger and avoiding spam classification",
-      "challenge5": "Support for dual roles for service providers who also work as customers"
-    },
-    "features": {
-      "feature1": "Secure registration and login with email verification",
-      "feature2": "Separate control panel for customers, service providers, and organizations",
-      "feature3": "Advanced search by categories, cities, and neighborhoods",
-      "feature4": "Service request system with comprehensive step-by-step details",
-      "feature5": "Instant messaging with Socket.io support and real-time alerts",
-      "feature6": "Comprehensive ratings and reviews system",
-      "feature7": "Easy booking and request management",
-      "feature8": "Smart reward points system with redemption options",
-      "feature9": "Flexible paid subscription packages",
-      "feature10": "Advanced PWA mobile application",
-      "feature11": "Comprehensive SEO optimization with Schema Markup",
-      "feature12": "Real-time notification system",
-      "feature13": "Support for Portuguese and English languages"
     }
   }
 }

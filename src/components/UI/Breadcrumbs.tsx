@@ -60,7 +60,7 @@ const Breadcrumbs: React.FC = () => {
     <>
       <StructuredData data={getBreadcrumbSchema(schemaItems)} />
       <nav className="bg-gray-900/50 backdrop-blur-sm border-b border-gray-700">
-        <div className="container mx-auto px-4 py-3">
+        <div className="container mx-auto px-4 py-3 xl:px-0">
           <ol className="flex items-center space-x-2 space-x-reverse text-sm">
             {breadcrumbItems.map((item, index) => (
               <li key={item.path} className="flex items-center">
