@@ -27,7 +27,7 @@
   height: 100%;
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 0.62s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.58s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .maya-avatar--interactive:hover .maya-avatar__card,
@@ -40,123 +40,40 @@
   inset: 0;
   border-radius: 50%;
   backface-visibility: hidden;
+  overflow: hidden;
 }
 
 .maya-avatar__face--front {
-  background: radial-gradient(circle at 30% 30%, #0c1b2e 10%, #081321 65%, #050b14 100%);
-  border: 1px solid rgba(140, 220, 255, 0.45);
+  background: radial-gradient(circle at 28% 26%, #122742 10%, #0a1a2f 62%, #061020 100%);
+  border: 1px solid rgba(148, 220, 255, 0.5);
   display: grid;
   place-items: center;
-  overflow: hidden;
   box-shadow:
-    0 8px 20px rgba(3, 12, 22, 0.45),
-    inset 0 0 26px rgba(56, 189, 248, 0.18);
+    0 8px 18px rgba(3, 12, 22, 0.42),
+    inset 0 0 22px rgba(56, 189, 248, 0.16);
 }
 
 .maya-avatar__face--back {
   transform: rotateY(180deg);
-  background: linear-gradient(155deg, #1b4e8f 0%, #0f2d56 45%, #0a1e3b 100%);
-  border: 1px solid rgba(138, 185, 255, 0.58);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  background: linear-gradient(155deg, #1c4f92 0%, #12305d 48%, #0c2444 100%);
+  border: 1px solid rgba(138, 185, 255, 0.56);
+  display: grid;
+  place-items: center;
   color: #e6f5ff;
   box-shadow:
-    0 8px 22px rgba(10, 27, 50, 0.55),
-    inset 0 0 24px rgba(125, 211, 252, 0.2);
+    0 8px 20px rgba(10, 27, 50, 0.52),
+    inset 0 0 20px rgba(125, 211, 252, 0.14);
 }
 
 .maya-avatar__brand {
-  font-size: calc(var(--maya-size) * 0.24);
-  letter-spacing: 0.11em;
+  font-size: calc(var(--maya-size) * 0.25);
+  letter-spacing: 0.1em;
   font-weight: 700;
   line-height: 1;
 }
 
-.maya-avatar__role {
-  margin-top: 2px;
-  font-size: calc(var(--maya-size) * 0.13);
-  letter-spacing: 0.08em;
-  opacity: 0.85;
-  text-transform: uppercase;
-}
-
-.maya-avatar__halo {
-  position: absolute;
-  width: 86%;
-  height: 86%;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(125, 211, 252, 0.24) 0%, rgba(125, 211, 252, 0) 70%);
-  top: 7%;
-  left: 7%;
-}
-
-.maya-avatar__hair {
-  position: absolute;
-  width: 62%;
-  height: 40%;
-  top: 16%;
-  border-radius: 62% 62% 44% 44%;
-  background: linear-gradient(180deg, #1f2937 0%, #111827 70%, #0b1220 100%);
-  z-index: 2;
-}
-
-.maya-avatar__head {
-  position: absolute;
-  width: 44%;
-  height: 40%;
-  top: 24%;
-  border-radius: 50% 50% 46% 46%;
-  background: linear-gradient(180deg, #f6d6bd 0%, #efc6a6 72%, #e7b391 100%);
-  border: 1px solid rgba(15, 23, 42, 0.12);
-  z-index: 3;
-}
-
-.maya-avatar__eyes {
-  position: absolute;
-  top: 38%;
-  left: 22%;
-  right: 22%;
-  display: flex;
-  justify-content: space-between;
-}
-
-.maya-avatar__eyes span {
-  width: 12%;
-  height: 12%;
-  min-width: 3px;
-  min-height: 3px;
-  border-radius: 50%;
-  background: #0f172a;
-}
-
-.maya-avatar__smile {
-  position: absolute;
-  left: 36%;
-  right: 36%;
-  bottom: 24%;
-  height: 8%;
-  border-bottom: 2px solid rgba(190, 24, 93, 0.65);
-  border-radius: 0 0 999px 999px;
-}
-
-.maya-avatar__neck {
-  position: absolute;
-  width: 12%;
-  height: 8%;
-  top: 60%;
-  background: #e6b291;
-  border-radius: 999px;
-  z-index: 2;
-}
-
-.maya-avatar__suit {
-  position: absolute;
-  width: 66%;
-  height: 34%;
-  bottom: 8%;
-  border-radius: 58% 58% 42% 42%;
-  background: linear-gradient(180deg, #14b8a6 0%, #0d9488 45%, #0f766e 100%);
-  z-index: 1;
+.maya-avatar__illustration {
+  width: 100%;
+  height: 100%;
+  display: block;
 }

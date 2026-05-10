@@ -33,10 +33,22 @@ const welcomeByLanguage: Record<string, string> = {
   en: "Hello, I am Maya, WebSiteMy's secretary. I help clients with project questions, pricing, timelines, and the right technology path for each idea.",
 };
 
+const mayaNameByLanguage: Record<string, string> = {
+  ar: "مايا",
+  tr: "Maya",
+  en: "Maya",
+};
+
 const mayaIntroByLanguage: Record<string, string> = {
-  ar: "مايا - سكرتيرة العملاء: إجابات دقيقة، أسلوب بشري، ومساعدة سريعة نحو القرار المناسب.",
-  tr: "Maya - Müşteri Sekreteri: net cevaplar, insani üslup ve hızlı yönlendirme.",
-  en: "Maya - Client Secretary: precise answers, human tone, and quick guidance.",
+  ar: "سكرتيرة العملاء: ردود دقيقة وسريعة على استفسارات مشاريعك.",
+  tr: "Musteri sekreteri: proje sorulariniza hizli ve net yanitlar.",
+  en: "Client secretary: clear and fast answers for your project questions.",
+};
+
+const autoSaveByLanguage: Record<string, string> = {
+  ar: "المحادثة تحفظ تلقائيا",
+  tr: "Sohbet otomatik kaydedilir",
+  en: "Chat is auto-saved",
 };
 
 const quickQuestionsByLanguage: Record<string, string[]> = {
@@ -127,12 +139,6 @@ const projectUrlEntries = aiProjects.map((project) => {
     flexibleDomain: domain.split(".").map(escapeRegex).join("\\s*\\.\\s*"),
   };
 });
-
-const chatPolicyNoticeByLanguage: Record<string, string> = {
-  ar: "سياسة صارمة: 15 سؤال لكل جلسة، وكل سؤال بين 50-100 توكن حسب التعقيد.",
-  tr: "Katı politika: Oturum başına 15 soru, soru başına karmaşıklığa göre 50-100 token.",
-  en: "Strict policy: 15 questions per session, and each question is capped at 50-100 tokens by complexity.",
-};
 
 const sessionLimitMessageByLanguage: Record<string, string> = {
   ar: "تم الوصول إلى الحد الأقصى للجلسة (15 سؤال). لمتابعة الاستفسارات تواصل معنا مباشرة: +905313345111",
@@ -443,55 +449,46 @@ export default function AIChat() {
   return (
     <section
       dir={isPageRTL ? "rtl" : "ltr"}
-      className="h-dvh overflow-hidden bg-[#070b12] px-3 pb-3 pt-24 text-white sm:px-5 sm:pb-5"
+      className="h-[100dvh] overflow-hidden bg-[#070b12] px-2 pb-2 pt-20 text-white sm:px-5 sm:pb-5 sm:pt-24"
     >
-      <div className="mx-auto flex h-full w-full max-w-6xl flex-col gap-3 overflow-hidden">
-        <header className="shrink-0 border-b border-white/10 pb-3">
-          <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+      <div className="mx-auto flex h-full w-full max-w-6xl flex-col gap-2 overflow-hidden">
+        <header className="shrink-0 border-b border-white/10 pb-2">
           <div className="min-w-0">
-            <div className="mb-3 flex items-center gap-3">
-              <MayaAvatar size="sm" interactive className="ring-1 ring-cyan-300/35" />
+            <div className="mb-1 flex items-center gap-3">
+              <MayaAvatar size="sm" interactive />
               <div className="min-w-0">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-cyan-300/80">
-                  MAYA
-                </p>
-                <h1 className="text-2xl font-bold leading-tight sm:text-4xl">
-                  {t("aiChat.title")}
+                <h1 className="text-xl font-bold leading-tight sm:text-3xl">
+                  {mayaNameByLanguage[language]}
                 </h1>
               </div>
             </div>
-            <p className="text-sm leading-7 text-slate-300 sm:text-[15px]">
+            <p className="truncate whitespace-nowrap text-xs text-slate-300 sm:text-sm">
               {mayaIntroByLanguage[language]}
             </p>
-            {sessionStartedAt && (
-              <p className="mt-2 text-xs text-slate-500">
-                {language === "ar"
-                  ? `بدأت الجلسة: ${formatSessionTime(sessionStartedAt, i18n.language)}`
-                  : language === "tr"
-                  ? `Oturum başlangıcı: ${formatSessionTime(sessionStartedAt, i18n.language)}`
-                  : `Session started: ${formatSessionTime(sessionStartedAt, i18n.language)}`}
-              </p>
-            )}
-          </div>
-
-          <div className="hidden">
-            {chatPolicyNoticeByLanguage[language]}
-          </div>
+            <div className="mt-1 flex items-center justify-between gap-3 text-[11px] text-slate-500">
+              <span className="truncate">
+                {sessionStartedAt
+                  ? language === "ar"
+                    ? `بدأت الجلسة: ${formatSessionTime(sessionStartedAt, i18n.language)}`
+                    : language === "tr"
+                    ? `Oturum başlangıcı: ${formatSessionTime(sessionStartedAt, i18n.language)}`
+                    : `Session started: ${formatSessionTime(sessionStartedAt, i18n.language)}`
+                  : ""}
+              </span>
+              <span className={`shrink-0 whitespace-nowrap ${isSaved ? "text-emerald-300" : "text-slate-400"}`}>
+                {autoSaveByLanguage[language]}
+              </span>
+            </div>
           </div>
         </header>
 
         <div className="grid min-h-0 flex-1 gap-4 lg:grid-cols-[minmax(0,1fr)_300px]">
           <div className="flex min-h-0 flex-col overflow-hidden rounded-lg border border-white/10 bg-[#0d1320] shadow-2xl shadow-black/30">
-            <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
+            <div className="flex items-center border-b border-white/10 px-4 py-2">
               <div className="flex items-center gap-2 text-sm text-slate-300">
                 <MessageSquareText className="h-4 w-4 text-cyan-200" />
                 <span>{t("aiChat.subtitle")}</span>
               </div>
-              {isSaved && (
-                <span className="text-xs text-emerald-300">
-                  {t("aiChat.chatSaved")}
-                </span>
-              )}
             </div>
 
             <div className="min-h-0 flex-1 overflow-y-auto px-3 py-4 sm:px-5">
@@ -513,15 +510,15 @@ export default function AIChat() {
                           isUser ? "flex-row-reverse" : ""
                         }`}
                       >
-                        <div
-                          className={`mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-md ${
-                            isUser
-                              ? "bg-cyan-500 text-white"
-                              : "border border-white/10 bg-white/[0.06] text-cyan-100"
-                          }`}
-                        >
-                          {isUser ? <User className="h-4 w-4" /> : <MayaAvatar size="xs" />}
-                        </div>
+                        {isUser ? (
+                          <div className="mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-cyan-500 text-white">
+                            <User className="h-4 w-4" />
+                          </div>
+                        ) : (
+                          <div className="mt-1 shrink-0">
+                            <MayaAvatar size="xs" />
+                          </div>
+                        )}
                         <div
                           dir={rtl ? "rtl" : "ltr"}
                           className={`rounded-lg px-4 py-3 leading-8 tracking-[0.005em] [word-spacing:0.08em] ${
@@ -548,7 +545,7 @@ export default function AIChat() {
                   className="mb-4 flex justify-start"
                 >
                   <div className="flex max-w-[92%] items-start gap-3 sm:max-w-[78%]">
-                    <div className="mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-white/10 bg-white/[0.06] text-cyan-100">
+                    <div className="mt-1 shrink-0">
                       <MayaAvatar size="xs" />
                     </div>
                     <div

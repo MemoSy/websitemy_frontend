@@ -113,7 +113,7 @@ const AIAssistantButton: React.FC = () => {
   return (
     <div className="ai-assistant-container">
       <div className="ai-assistant-tooltip">
-        Maya is here - سكرتيرتك الذكية
+        مايا - سكرتيرة WebSiteMy
       </div>
       
       <button
@@ -126,10 +126,8 @@ const AIAssistantButton: React.FC = () => {
         title="تحدث مع Maya"
       >
         <div className="ai-assistant-content">
-          <MayaAvatar size="md" interactive />
+          <MayaAvatar size="lg" interactive />
         </div>
-
-        <span className="ai-assistant-badge">M</span>
       </button>
     </div>
   );

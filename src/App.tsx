@@ -35,6 +35,7 @@ const PageLoader = () => (
 const FloatingButtons = () => {
   const location = useLocation();
   const isAIChatPage = location.pathname === '/ai-chat';
+  const isHomePage = location.pathname === '/';
   
   // إخفاء الأزرار في صفحة AI Chat على الموبايل فقط
   if (isAIChatPage) {
@@ -46,6 +47,11 @@ const FloatingButtons = () => {
         </div>
       </>
     );
+  }
+
+  // في الصفحة الرئيسية نعرض أيقونة مايا فقط.
+  if (isHomePage) {
+    return <AIAssistantButton />;
   }
   
   // عرض الأزرار في باقي الصفحات
