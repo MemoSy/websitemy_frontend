@@ -57,6 +57,16 @@ const FloatingButtons = () => {
   );
 };
 
+const CursorLayer = () => {
+  const location = useLocation();
+
+  if (location.pathname === '/ai-chat') {
+    return null;
+  }
+
+  return <CustomCursor />;
+};
+
 function App() {
   // متغيرات التكوين - يمكنك تحديثها عند الحصول على IDs من Google
   const GOOGLE_ANALYTICS_ID = import.meta.env.VITE_GA_MEASUREMENT_ID || '';
@@ -75,7 +85,7 @@ function App() {
           
           {/* مؤشر مخصص - Lazy loaded */}
           <Suspense fallback={null}>
-            <CustomCursor />
+            <CursorLayer />
           </Suspense>
           
           {/* مراقب الأداء - Only in development */}

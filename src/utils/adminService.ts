@@ -1,4 +1,6 @@
-const API_BASE_URL = 'https://websitemy-backend.vercel.app'; // Adjust to your backend URL
+const API_BASE_URL = (
+  import.meta.env.VITE_BACKEND_URL || 'https://websitemy-backend.vercel.app'
+).replace(/\/$/, '');
 
 // Fetch with timeout
 const fetchWithTimeout = async (url: string, options: RequestInit, timeout = 10000) => {
@@ -32,6 +34,9 @@ export interface AdminLoginResponse {
 export interface ChatData {
   _id: string;
   sessionId: string;
+  visitorKey?: string;
+  clientFingerprint?: string;
+  deviceInfo?: Record<string, any>;
   userIP: string;
   userAgent: string;
   country: string;
@@ -47,6 +52,9 @@ export interface ChatData {
   updatedAt: string;
   totalMessages: number;
   lastActivity: string;
+  reviewStatus?: string;
+  adminNote?: string;
+  leadStatus?: string;
 }
 
 // Admin authentication
@@ -157,6 +165,37 @@ export const getAllChats = async (): Promise<ChatData[]> => {
   const result = await response.json();
   console.log('✅ Fetched', result.data?.length || 0, 'chats');
   return result.data || [];
+};
+
+export const updateChatReview = async (
+  sessionId: string,
+  data: Pick<ChatData, 'reviewStatus' | 'leadStatus' | 'adminNote'>
+): Promise<ChatData> => {
+  const token = localStorage.getItem('adminToken') || sessionStorage.getItem('adminToken');
+  if (!token) {
+    throw new Error('NO_TOKEN');
+  }
+
+  const response = await fetchWithTimeout(
+    `${API_BASE_URL}/admin/chats/${encodeURIComponent(sessionId)}/review`,
+    {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+      body: JSON.stringify(data),
+    },
+    15000
+  );
+
+  if (!response.ok) {
+    throw new Error(`Failed to update chat review: ${response.status}`);
+  }
+
+  const result = await response.json();
+  return result.data;
 };
 
 export const getAdminAnalytics = async () => {

@@ -57,22 +57,36 @@
         "member1": {
           "name": "Ahmed Al-Mubayed",
           "role": "Director",
-          "skills": ["General Manager"]
+          "skills": [
+            "General Manager"
+          ]
         },
         "member2": {
           "name": "Mahmoud Al-Mubayed",
           "role": "Full Stack Web Developer",
-          "skills": ["React", "Node.js", "MongoDB", "next.js"]
+          "skills": [
+            "React",
+            "Node.js",
+            "MongoDB",
+            "next.js"
+          ]
         },
         "member3": {
           "name": "Asma Al-Juma",
           "role": "UI/UX Designer",
-          "skills": ["Figma", "Adobe XD", "User Research"]
+          "skills": [
+            "Figma",
+            "Adobe XD",
+            "User Research"
+          ]
         },
         "member4": {
           "name": "Sara Hallaq",
           "role": "Frontend Developer",
-          "skills": ["React", "Javascript"]
+          "skills": [
+            "React",
+            "Javascript"
+          ]
         }
       }
     },
@@ -1076,6 +1090,102 @@
       "feature18": "Full Arabic/English support with instant switching",
       "feature19": "100% responsive interface for mobile and tablet",
       "feature20": "Real-time messaging (Messaging / Chat)"
+    }
+  },
+  "goldCup": {
+    "title": "Gold Cup - Golden Beverage",
+    "description": "A luxury Turkish beverage platform offering 16 unique flavors. An advanced web application combining multi-language support, intelligent campaign systems, and AI-powered barcode detection.",
+    "fullDescription": "Gold Cup is a modern web platform dedicated to marketing and selling premium Turkish beverages with 16 diverse flavors. It supports Arabic, Turkish, and English languages with intelligent campaign systems featuring advanced barcode detection. It includes smart reward systems, geographical distribution maps, and modern user interface with interactive 3D effects. Designed to serve individuals and organizations with three defined packages: for students, for corporations, and for luxury gifts.",
+    "duration": "One month",
+    "clientType": "Commercial Company",
+    "complexity": "Medium",
+    "teamSize": "2 developers",
+    "clientFeedback": "An exceptional project combining quality and innovation with a premium user experience",
+    "keyFeatures": {
+      "feature1": "16 diverse flavors with interactive 3D effects",
+      "feature2": "Smart barcode detection from images with high accuracy",
+      "feature3": "Multi-language support (Arabic, Turkish, English) with full localization",
+      "feature4": "Campaign and contest system with attractive rewards",
+      "feature5": "AI-generated image detection",
+      "feature6": "High-performance interactive photo gallery",
+      "feature7": "Geographical distribution map with location identification",
+      "feature8": "Three-tier package system (for students, corporations, luxury gifts)",
+      "feature9": "Comprehensive administrative control panel with advanced analytics"
+    },
+    "objectives": {
+      "objective1": "Develop a digital marketing platform for premium Turkish beverages",
+      "objective2": "Support multiple languages with complete cultural localization",
+      "objective3": "Implement intelligent campaign systems with attractive rewards",
+      "objective4": "Use artificial intelligence for barcode and fake image detection",
+      "objective5": "Provide a premium and seamless user experience across all devices"
+    },
+    "challenges": {
+      "challenge1": "Barcode detection from multi-angle and lighting conditions",
+      "challenge2": "Multi-language support while maintaining compatibility",
+      "challenge3": "Efficient processing of large images",
+      "challenge4": "Accurate AI-generated image detection",
+      "challenge5": "Building a secure reward system with tracking capability"
+    },
+    "features": {
+      "feature1": "Modern homepage with dynamic product display",
+      "feature2": "Flavor display with interactive 3D effects and smooth transitions",
+      "feature3": "Dynamic carousel for product group showcase",
+      "feature4": "Three-tier package system with comprehensive details",
+      "feature5": "Interactive photo gallery with advanced hover effects",
+      "feature6": "Geographical distribution map with smart search",
+      "feature7": "Image upload form with smart verification",
+      "feature8": "Available rewards and prizes display",
+      "feature9": "News and updates section",
+      "feature10": "Advanced search and filtering system",
+      "feature11": "Administrative control panel with real-time statistics",
+      "feature12": "Campaign and promotion management",
+      "feature13": "Direct WhatsApp integration",
+      "feature14": "Smooth scrolling and seamless transitions",
+      "feature15": "Interactive preparation steps with detail",
+      "feature16": "Animated image slides with visual effects",
+      "feature17": "Social media sharing links",
+      "feature18": "Complete Arabic/Turkish/English support",
+      "feature19": "100% responsive design for all devices",
+      "feature20": "Real-time notification system"
+    }
+  },
+  "emarHome": {
+    "title": "EMAR Interior Design & Contracting",
+    "description": "A luxury web platform for EMAR, specialized in interior design and contracting, featuring an elegant UI, an integrated CMS, and automatic bilingual support (Arabic/English).",
+    "fullDescription": "A comprehensive and advanced platform for EMAR to showcase the company's portfolio ranging from architectural projects, interior designs, furniture, and building materials. The project features a custom Admin Panel built with NestJS, allowing full management of all website sections. A key system highlight is an integrated automated translation service that translates content entered via the dashboard instantly to the user interface, along with an advanced Analytics tracking system, and direct high-quality media uploads ensuring blazing fast performance built on the latest Next.js and React technologies.",
+    "duration": "1.5 Months",
+    "clientType": "Interior Design, Architecture & Contracting Company",
+    "complexity": "Advanced - Includes custom CMS, automated translation, and built-in tracking.",
+    "teamSize": "Full-Stack Dev + Frontend Dev + UI/UX Designer",
+    "keyFeatures": {
+      "feature1": "Linking Materials & Styles: Ability to link materials, styles, and design patterns together seamlessly.",
+      "feature2": "Old vs. New Showcase: Specialized sections to display old and new designs with smart categorizations.",
+      "feature3": "Articles & Content: A comprehensive section for modern decor and furniture tips/articles.",
+      "feature4": "Stunning Visual Effects: Professional presentation of furniture with advanced and smooth visual effects.",
+      "feature5": "Build Services & Shop Drawings section.",
+      "feature6": "Catalog system for Furniture, Materials, and Kitchens.",
+      "feature7": "Blog System for publishing news and articles."
+    },
+    "objectives": {
+      "objective1": "Build a digital interface reflecting the luxury of the brand.",
+      "objective2": "Facilitate content updates for the client without coding via a comprehensive dashboard.",
+      "objective3": "Efficiently reach global and local audiences through automated text translation.",
+      "objective4": "Optimize loading speed for high-quality project images providing excellent user experience."
+    },
+    "challenges": {
+      "challenge1": "Automating dynamic data translation while admins save content.",
+      "challenge2": "Building robust data architecture to handle direct image uploads and avoid backend overloading.",
+      "challenge3": "Adapting UI and Framer Motion effects to run smoothly when switching between LTR and RTL.",
+      "challenge4": "Creating an accurate built-in analytics system natively."
+    },
+    "features": {
+      "feature1": "Linking Materials & Styles: Ability to link materials, styles, and design patterns together seamlessly.",
+      "feature2": "Old vs. New Showcase: Specialized sections to display old and new designs with smart categorizations.",
+      "feature3": "Articles & Content: A comprehensive section for modern decor and furniture tips/articles.",
+      "feature4": "Stunning Visual Effects: Professional presentation of furniture with advanced and smooth visual effects.",
+      "feature5": "Build Services & Shop Drawings section.",
+      "feature6": "Catalog system for Furniture, Materials, and Kitchens.",
+      "feature7": "Blog System for publishing news and articles."
     }
   }
 }

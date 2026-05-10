@@ -3,31 +3,31 @@
   <!-- Main Pages -->
   <url>
     <loc>https://www.websitemy.com/</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>https://www.websitemy.com/about</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.websitemy.com/projects</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.websitemy.com/ai-chat</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.websitemy.com/contact</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -35,73 +35,85 @@
   <!-- Individual Project Pages -->
   <url>
     <loc>https://www.websitemy.com/project/websitemy-portfolio</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.websitemy.com/project/alimni-platform</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.websitemy.com/project/comprevende</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.websitemy.com/project/ecommerce-luxury</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.websitemy.com/project/emar-home</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.websitemy.com/project/gold-cup</loc>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.websitemy.com/project/pro-camz</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.websitemy.com/project/sharekna</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.websitemy.com/project/business</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.websitemy.com/project/social-network</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.websitemy.com/project/aleppo-complaints</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.websitemy.com/project/national-network-media</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.websitemy.com/project/saas-platform</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.websitemy.com/project/syria-2030</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -109,37 +121,37 @@
   <!-- Project Categories -->
   <url>
     <loc>https://www.websitemy.com/projects?category=ecommerce</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.websitemy.com/projects?category=social</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.websitemy.com/projects?category=saas</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.websitemy.com/projects?category=news</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.websitemy.com/projects?category=service</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.websitemy.com/projects?category=opensource</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>

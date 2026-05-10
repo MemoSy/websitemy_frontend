@@ -1,481 +1,666 @@
-import { useState, useRef, useEffect, useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, Bot, User, Loader2, Brain } from "lucide-react";
+import {
+  Loader2,
+  MessageSquareText,
+  Send,
+  User,
+} from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { useTranslation } from "react-i18next";
+import { aiProjects } from "../data/aiKnowledgeBase";
+import MayaAvatar from "../components/UI/MayaAvatar";
 import { callAI } from "../utils/aiUtils";
 import {
-  getOrCreateSession,
   addMessage,
+  getOrCreateSession,
   type ChatSession,
 } from "../utils/sessionManager";
-import {
-  saveChatSession,
-  updateChatSession,
-} from "../utils/chatService";
-import { getCachedUserLocation, LocationData } from "../utils/locationService";
-
-/**
- * تحويل النصوص العادية إلى Markdown:
- * - الروابط (example.com) → [example.com](https://example.com)
- * - أرقام الهاتف/واتساب (+905...) → [+905...](https://wa.me/905...)
- */
-function autoLinkText(text: string): string {
-  // تجنب معالجة نص مجرد روابط markdown موجودة مسبقاً
-  // 1. أرقام الهاتف: +9xxxxxxx أو 00xxx
-  text = text.replace(
-    /(?<!\[)(\+?(?:9\d{9,12}|00\d{10,13}))\b(?!\])/g,
-    (match) => {
-      const digits = match.replace(/[^0-9+]/g, '');
-      const wa = digits.startsWith('+') ? digits.slice(1) : digits.startsWith('00') ? digits.slice(2) : digits;
-      return `[${match}](https://wa.me/${wa})`;
-    }
-  );
-  // 2. روابط بدون http (example.com, sub.example.com) — تجنب الروابط التي هي داخل markdown مسبقاً
-  text = text.replace(
-    /(?<!\(|\/\/)(?<!\[)(?:^|(?<=\s|[\u0600-\u06FF]))([a-z0-9][a-z0-9\-]*\.(?:com|store|site|online|pro|app|io|net|org|co)(?:\/[^\s]*)?)/gi,
-    (_match, url) => `[${url}](https://${url})`
-  );
-  return text;
-}
+import { saveChatSession, updateChatSession } from "../utils/chatService";
+import { getCachedUserLocation, type LocationData } from "../utils/locationService";
 
 interface Message {
   id: string;
-  text: string;
-  isUser: boolean;
-  timestamp: Date;
+  role: "user" | "assistant";
+  content: string;
+  timestamp: number;
+  pending?: boolean;
 }
 
-const AIChat = () => {
-  const { t, i18n } = useTranslation();
-  const isRTL = i18n.dir() === "rtl";
+const welcomeByLanguage: Record<string, string> = {
+  ar: "مرحباً، أنا مايا سكرتيرة WebSiteMy. أنا هنا لمساعدة العملاء والرد على استفساراتهم حول المشاريع، الأسعار، مدة التنفيذ، والتقنيات المناسبة لكل فكرة.",
+  tr: "Merhaba, ben Maya - WebSiteMy sekreteriniz. Projeler, fiyatlar, teslim süresi ve teknoloji tercihleri konusunda memnuniyetle yardımcı olurum.",
+  en: "Hello, I am Maya, WebSiteMy's secretary. I help clients with project questions, pricing, timelines, and the right technology path for each idea.",
+};
 
-  // جلسة المستخدم — مبنية على بصمة الجهاز، مستمرة عبر الزيارات
-  const [session, setSession] = useState<ChatSession>(() => getOrCreateSession());
-  const [userLocation, setUserLocation] = useState<LocationData | null>(null);
-  const [isChatSaved, setIsChatSaved] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+const mayaIntroByLanguage: Record<string, string> = {
+  ar: "مايا - سكرتيرة العملاء: إجابات دقيقة، أسلوب بشري، ومساعدة سريعة نحو القرار المناسب.",
+  tr: "Maya - Müşteri Sekreteri: net cevaplar, insani üslup ve hızlı yönlendirme.",
+  en: "Maya - Client Secretary: precise answers, human tone, and quick guidance.",
+};
 
-  // تحويل تاريخ الجلسة المحفوظ إلى رسائل للعرض
-  const storedMessages: Message[] = session.messages.map((m) => ({
-    id: String(m.timestamp),
-    text: m.content,
-    isUser: m.role === "user",
-    timestamp: new Date(m.timestamp),
-  }));
+const quickQuestionsByLanguage: Record<string, string[]> = {
+  ar: [
+    "ما هي أسعار المشاريع؟",
+    "كم يستغرق تنفيذ متجر إلكتروني؟",
+    "ما التقنيات التي تستخدمونها؟",
+    "أريد موقعاً لشركتي، من أين أبدأ؟",
+  ],
+  tr: [
+    "Proje fiyatları nedir?",
+    "Bir online mağaza ne kadar sürer?",
+    "Hangi teknolojileri kullanıyorsunuz?",
+    "Şirketim için web sitesi istiyorum.",
+  ],
+  en: [
+    "What are the project prices?",
+    "How long does an online store take?",
+    "Which technologies do you use?",
+    "I need a website for my company.",
+  ],
+};
 
-  // الرسالة الترحيبية تظهر فقط إذا لم تكن هناك محادثة سابقة
-  const welcomeMsg: Message = {
-    id: "welcome",
-    text: t("aiChat.welcomeMessage"),
-    isUser: false,
-    timestamp: new Date(),
-  };
+const MAX_SESSION_QUESTIONS = 15;
+const SIMPLE_QUESTION_TOKEN_LIMIT = 50;
+const COMPLEX_QUESTION_TOKEN_LIMIT = 100;
 
-  const [inputText, setInputText] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [streamingText, setStreamingText] = useState("");
+const isRTLText = (text: string) => /[\u0600-\u06ff]/.test(text);
 
-  // أثناء الـ streaming: أخفِ آخر رسالة AI من الجلسة (لتجنب الـ flash)
-  // وبدلاً عنها سيُعرض streamingText المتحرك
-  const displayMessages: Message[] = useMemo(() => {
-    const base = storedMessages.length > 0 ? storedMessages : [welcomeMsg];
-    // أثناء الـ streaming — أخفِ آخر رسالة AI حتى ينتهي الـ streaming
-    if (isLoading && streamingText && base.length > 0 && !base[base.length - 1].isUser) {
-      return base.slice(0, -1);
-    }
-    return base;
-  }, [storedMessages.length, session.sessionId, i18n.language, isLoading, streamingText]);
+const estimateTokens = (text: string) =>
+  Math.max(1, Math.ceil((text || "").trim().length / 4));
 
-  // تحديث التمرير عند وصول رسائل جديدة
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [displayMessages.length, isLoading]);
-
-  // Get user location on component mount
-  useEffect(() => {
-    const getLocation = async () => {
-      try {
-        const location = await getCachedUserLocation();
-        setUserLocation(location);
-      } catch (error) {
-        console.error("Error getting user location:", error);
-        setUserLocation({ country: "Unknown", city: "Unknown" });
-      }
-    };
-    getLocation();
-  }, []);
-
-  // حفظ المحادثة في قاعدة البيانات للتحليلات (analytics فقط)
-  useEffect(() => {
-    const saveChat = async () => {
-      if (session.messages.length > 0 && userLocation) {
-        if (!isChatSaved) {
-          await saveChatSession({
-            sessionId: session.sessionId,
-            messages: session.messages.map((m) => ({
-              id: String(m.timestamp),
-              text: m.content,
-              isUser: m.role === "user",
-              timestamp: new Date(m.timestamp),
-            })),
-            country: userLocation.country,
-            city: userLocation.city,
-          });
-          setIsChatSaved(true);
-        } else {
-          await updateChatSession(
-            session.sessionId,
-            session.messages.map((m) => ({
-              id: String(m.timestamp),
-              text: m.content,
-              isUser: m.role === "user",
-              timestamp: new Date(m.timestamp),
-            })),
-          );
-        }
-      }
-    };
-    saveChat();
-  }, [session.messages.length, session.sessionId, isChatSaved, userLocation]);
-
-  const handleSendMessage = useCallback(async () => {
-    if (!inputText.trim() || isLoading) return;
-
-    const userText = inputText.trim();
-    setInputText("");
-    setIsLoading(true);
-    setStreamingText("");
-
-    // 1. حفظ رسالة المستخدم في الجلسة فوراً (للعرض + localStorage)
-    const sessionWithUser = addMessage(session, "user", userText);
-    setSession(sessionWithUser);
-
-    // 2. استدعاء الذكاء الاصطناعي مع بث مباشر — النص يظهر فوراً كلمة بكلمة
-    const aiText = await callAI(
-      sessionWithUser.messages.slice(0, -1),
-      userText,
-      (partialText) => setStreamingText(partialText),
-    );
-
-    // 3. حفظ رد الذكاء الاصطناعي في الجلسة بشكل متزامن مع إيقاف الـ streaming
-    //    نستخدم React batch — كلا التحديثين يحدثان في render واحد بدون flash
-    const sessionWithAI = addMessage(sessionWithUser, "assistant", aiText || t("aiChat.errorMessage"));
-    setSession(sessionWithAI);
-    setStreamingText("");
-    setIsLoading(false);
-  }, [inputText, isLoading, session, t]);
-
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      handleSendMessage();
-    }
-  };
+const isComplexQuestion = (text: string) => {
+  const normalized = (text || "").toLowerCase();
+  const complexityIndicators = [
+    "تفصيل",
+    "بالتفصيل",
+    "شرح",
+    "خطة",
+    "خطوات",
+    "مقارنة",
+    "compare",
+    "details",
+    "step",
+    "roadmap",
+    "شرح",
+    "نطاق",
+  ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 relative overflow-hidden">
-      {/* Animated Background */}
-      <div className="absolute inset-0 overflow-hidden">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.3 }}
-          transition={{ duration: 2 }}
-          className="absolute top-20 left-10 w-64 h-64 bg-cyan-500 rounded-full blur-3xl"
-        />
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.3 }}
-          transition={{ duration: 2, delay: 0.5 }}
-          className="absolute bottom-20 right-10 w-64 h-64 bg-purple-500 rounded-full blur-3xl"
-        />
-      </div>
-
-      <div className="relative z-10 container mx-auto px-4 xl:px-0 py-4 sm:py-8 max-w-[1400px] h-screen flex flex-col pt-24 sm:pt-24">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-4 sm:mb-6 flex-shrink-0"
-        >
-          <div
-            className={`flex items-center justify-center gap-2 sm:gap-3 ${
-              isRTL ? "space-x-reverse" : ""
-            } mb-2 sm:mb-3`}
-          >
-            <div className="w-10 h-10 sm:w-16 sm:h-16 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-2xl flex items-center justify-center">
-              <Brain className="w-5 h-5 sm:w-8 sm:h-8 text-white" />
-            </div>
-            <div className={isRTL ? "text-right" : "text-left"}>
-              <h1 className="text-xl sm:text-3xl md:text-4xl font-bold text-white">
-                {t("aiChat.title")}
-              </h1>
-              <p className="text-cyan-400 text-xs sm:text-base">
-                {t("aiChat.subtitle")}
-              </p>
-            </div>
-          </div>
-          <p
-            className={`text-gray-400 max-w-2xl mx-auto text-xs sm:text-base px-2 ${
-              isRTL ? "text-right" : "text-left"
-            }`}
-          >
-            {t("aiChat.description")}
-          </p>
-          {isChatSaved && (
-            <p className="text-green-400 text-xs mt-2 opacity-75">
-              💾 {t("aiChat.chatSaved")}
-            </p>
-          )}
-        </motion.div>
-
-        {/* Chat Container - ملء الشاشة على الموبايل */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="bg-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-3xl overflow-hidden flex-1 flex flex-col"
-        >
-          {/* Messages */}
-          <div className="flex-1 w-full overflow-y-auto p-4 sm:p-6 space-y-4 sm:space-y-4">
-            <AnimatePresence>
-              {displayMessages.map((message) => (
-                <motion.div
-                  key={message.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  className={`flex ${
-                    message.isUser ? "justify-end" : "justify-start"
-                  }`}
-                >
-                  <div
-                    className={`flex items-start gap-2 sm:gap-3 space-x-reverse max-w-[85%] sm:max-w-[80%] ${
-                      message.isUser ? "flex-row-reverse" : ""
-                    }`}
-                  >
-                    <div
-                      className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
-                        message.isUser
-                          ? "bg-cyan-500"
-                          : "bg-gradient-to-r from-purple-500 to-cyan-500"
-                      }`}
-                    >
-                      {message.isUser ? (
-                        <User className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" />
-                      ) : (
-                        <Bot className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" />
-                      )}
-                    </div>
-                    <div
-                      className={`rounded-2xl px-3 py-2.5 sm:px-4 sm:py-3 ${
-                        message.isUser
-                          ? "bg-cyan-500 text-white"
-                          : "bg-gray-800 text-gray-100 border border-gray-700"
-                      }`}
-                    >
-                      <div className="prose prose-sm sm:prose-base prose-invert max-w-none">
-                        <ReactMarkdown
-                          components={{
-                            p: ({ children }) => (
-                              <p className="text-sm sm:text-base mb-2 last:mb-0 leading-relaxed">
-                                {children}
-                              </p>
-                            ),
-                            strong: ({ children }) => (
-                              <strong className="font-bold text-cyan-400">
-                                {children}
-                              </strong>
-                            ),
-                            em: ({ children }) => (
-                              <em className="italic text-gray-300">
-                                {children}
-                              </em>
-                            ),
-                            ul: ({ children }) => (
-                              <ul className="list-disc list-inside my-2 space-y-1.5">
-                                {children}
-                              </ul>
-                            ),
-                            ol: ({ children }) => (
-                              <ol className="list-decimal list-inside my-2 space-y-1.5">
-                                {children}
-                              </ol>
-                            ),
-                            li: ({ children }) => (
-                              <li className="text-sm sm:text-base leading-relaxed">
-                                {children}
-                              </li>
-                            ),
-                            code: ({ children }) => (
-                              <code className="bg-gray-900 px-1.5 py-0.5 rounded text-cyan-400 text-xs sm:text-sm">
-                                {children}
-                              </code>
-                            ),
-                            a: ({ children, href }) => {
-                              const isPhone = /^\+?[0-9\s\-().]{7,}$/.test(String(children));
-                              const waHref = isPhone
-                                ? `https://wa.me/${String(children).replace(/[^0-9+]/g, '')}`
-                                : href?.startsWith('http') ? href : href ? `https://${href}` : '#';
-                              return (
-                                <a
-                                  href={isPhone ? waHref : (href?.startsWith('http') ? href : `https://${href}`)}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className={isPhone ? "text-green-400 hover:text-green-300 underline font-medium" : "text-cyan-400 hover:text-cyan-300 underline"}
-                                >
-                                  {children}
-                                </a>
-                              );
-                            },
-                          }}
-                        >
-                          {message.isUser ? message.text : autoLinkText(message.text)}
-                        </ReactMarkdown>
-                      </div>
-                      <p className="text-xs opacity-70 mt-2">
-                        {message.timestamp.toLocaleTimeString("ar-SA", {
-                          hour: "2-digit",
-                          minute: "2-digit",
-                        })}
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </AnimatePresence>
-
-            {/* Streaming response — text appears word by word */}
-            {isLoading && streamingText && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="flex justify-start"
-              >
-                <div className="flex items-start space-x-2 sm:space-x-3 space-x-reverse">
-                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 flex items-center justify-center">
-                    <Bot className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" />
-                  </div>
-                  <div className="bg-gray-800 text-gray-100 border border-gray-700 rounded-2xl px-3 py-2.5 sm:px-4 sm:py-3 max-w-[85%] sm:max-w-[80%]">
-                    <div
-                      className={`prose prose-invert prose-sm max-w-none text-sm sm:text-base leading-relaxed ${
-                        isRTL ? "text-right" : "text-left"
-                      }`}
-                    >
-                      <ReactMarkdown
-                        components={{
-                          a: ({ children, href }) => {
-                            const isPhone = /^\+?[0-9\s\-().]{7,}$/.test(String(children));
-                            const finalHref = isPhone
-                              ? `https://wa.me/${String(children).replace(/[^0-9+]/g, '')}`
-                              : href?.startsWith('http') ? href : `https://${href}`;
-                            return (
-                              <a href={finalHref} target="_blank" rel="noopener noreferrer"
-                                className={isPhone ? "text-green-400 underline font-medium" : "text-cyan-400 underline"}>
-                                {children}
-                              </a>
-                            );
-                          },
-                        }}
-                      >{autoLinkText(streamingText)}</ReactMarkdown>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-
-            {/* Loading indicator — only shows before first chunk arrives */}
-            {isLoading && !streamingText && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="flex justify-start"
-              >
-                <div className="flex items-start space-x-2 sm:space-x-3 space-x-reverse">
-                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 flex items-center justify-center">
-                    <Bot className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" />
-                  </div>
-                  <div className="bg-gray-800 text-gray-100 border border-gray-700 rounded-2xl px-3 py-2.5 sm:px-4 sm:py-3">
-                    <div
-                      className={`flex items-center ${
-                        isRTL ? "space-x-reverse" : ""
-                      } space-x-2`}
-                    >
-                      <Loader2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 animate-spin" />
-                      <span className="text-sm sm:text-base">
-                        {t("aiChat.typing")}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-            <div ref={messagesEndRef} />
-          </div>
-
-          {/* Input */}
-          <div className="border-t border-gray-700 p-3 sm:p-4 flex-shrink-0">
-            <div
-              className={`flex items-start gap-2 sm:gap-3 ${
-                isRTL ? "space-x-reverse" : ""
-              } space-x-2 sm:space-x-3`}
-            >
-              <button
-                onClick={handleSendMessage}
-                disabled={!inputText.trim() || isLoading}
-                className="bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-600 hover:to-purple-600 disabled:opacity-50 disabled:cursor-not-allowed p-2.5 sm:p-3 rounded-xl transition-all transform hover:scale-105 flex-shrink-0"
-              >
-                <Send className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-              </button>
-              <div className="flex-1 relative">
-                <textarea
-                  value={inputText}
-                  onChange={(e) => setInputText(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                  placeholder={t("aiChat.inputPlaceholder")}
-                  className={`w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-2.5 sm:px-4 sm:py-3 text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-500 focus:border-transparent resize-none max-h-32 text-sm sm:text-base leading-relaxed ${
-                    isRTL ? "text-right" : "text-left"
-                  }`}
-                  rows={1}
-                />
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Quick Actions - سؤالين فقط جنباً إلى جنب */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="mt-3 sm:mt-6 flex-shrink-0"
-        >
-          <p
-            className={`text-gray-400 text-center mb-2 sm:mb-3 text-xs sm:text-base ${
-              isRTL ? "text-right" : "text-left"
-            }`}
-          >
-            {t("aiChat.quickQuestions.title")}
-          </p>
-          <div className="grid grid-cols-2 gap-2 sm:gap-3">
-            {[t("aiChat.quickQuestions.q1"), t("aiChat.quickQuestions.q2")].map(
-              (question, index) => (
-                <button
-                  key={index}
-                  onClick={() => setInputText(question)}
-                  className={`bg-gray-800 hover:bg-gray-700 border border-gray-700 hover:border-cyan-500/50 rounded-xl px-3 py-2.5 sm:px-4 sm:py-3 text-gray-300 hover:text-cyan-300 transition-all text-xs sm:text-sm font-medium ${
-                    isRTL ? "text-right" : "text-left"
-                  }`}
-                >
-                  {question}
-                </button>
-              )
-            )}
-          </div>
-        </motion.div>
-      </div>
-    </div>
+    normalized.length > 170 ||
+    normalized.includes("\n") ||
+    complexityIndicators.some((keyword) => normalized.includes(keyword))
   );
 };
 
-export default AIChat;
+const getQuestionTokenLimit = (text: string) =>
+  isComplexQuestion(text)
+    ? COMPLEX_QUESTION_TOKEN_LIMIT
+    : SIMPLE_QUESTION_TOKEN_LIMIT;
+
+const escapeRegex = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+const normalizeAssistantText = (text: string): string => {
+  if (!text) return text;
+
+  return text
+    .replace(/\r\n/g, "\n")
+    .replace(/[\u200e\u200f]/g, "")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+};
+
+const projectUrlEntries = aiProjects.map((project) => {
+  const url = project.url.replace(/\/$/, "");
+  const domain = (() => {
+    try {
+      return new URL(url).hostname.replace(/^www\./, "");
+    } catch {
+      return url.replace(/^https?:\/\//, "").replace(/^www\./, "").replace(/\/$/, "");
+    }
+  })();
+
+  return {
+    name: project.name,
+    url,
+    domain,
+    flexibleDomain: domain.split(".").map(escapeRegex).join("\\s*\\.\\s*"),
+  };
+});
+
+const chatPolicyNoticeByLanguage: Record<string, string> = {
+  ar: "سياسة صارمة: 15 سؤال لكل جلسة، وكل سؤال بين 50-100 توكن حسب التعقيد.",
+  tr: "Katı politika: Oturum başına 15 soru, soru başına karmaşıklığa göre 50-100 token.",
+  en: "Strict policy: 15 questions per session, and each question is capped at 50-100 tokens by complexity.",
+};
+
+const sessionLimitMessageByLanguage: Record<string, string> = {
+  ar: "تم الوصول إلى الحد الأقصى للجلسة (15 سؤال). لمتابعة الاستفسارات تواصل معنا مباشرة: +905313345111",
+  tr: "Oturum limiti doldu (15 soru). Devam etmek için doğrudan bizimle iletişime geçin: +905313345111",
+  en: "Session limit reached (15 questions). For more requests, please contact us directly: +905313345111",
+};
+
+const questionTooLongMessage = (
+  language: string,
+  estimatedTokens: number,
+  tokenLimit: number,
+) => {
+  if (language === "ar") {
+    return `سؤالك طويل جداً لهذه الجلسة المجانية. الحد الحالي ${tokenLimit} توكن تقريباً، بينما سؤالك يساوي ${estimatedTokens} توكن تقريباً. اختصر سؤالك أو قسّمه إلى أكثر من رسالة.`;
+  }
+
+  if (language === "tr") {
+    return `Sorunuz ücretsiz oturum için çok uzun. Mevcut sınır yaklaşık ${tokenLimit} token, sorunuz ise yaklaşık ${estimatedTokens} token. Lütfen soruyu kısaltın veya birkaç mesaja bölün.`;
+  }
+
+  return `Your question is too long for this free session. Current limit is about ${tokenLimit} tokens, while your question is about ${estimatedTokens} tokens. Please shorten it or split it into multiple messages.`;
+};
+
+const autolink = (text: string): string => {
+  return text
+    .replace(
+      /(^|[\s(])(\+?(?:90)?5\d{9})(?=$|[\s).,])/g,
+      (_match, prefix, phone) => {
+        const clean = phone.replace(/\D/g, "");
+        return `${prefix}[${phone}](https://wa.me/${clean})`;
+      },
+    )
+    .replace(
+      /(^|[\s(])([a-z0-9][a-z0-9-]*\.(?:com|net|org|io|app|site|store|co)(?:\/[^\s)]*)?)/gi,
+      (_match, prefix, url) => `${prefix}[${url}](https://${url})`,
+    );
+};
+
+const normalizeProjectLinks = (text: string): string => {
+  const markdownLinkPattern = /(\[[^\]]+\]\([^)]+\))/g;
+
+  return text
+    .split(markdownLinkPattern)
+    .map((segment) => {
+      if (markdownLinkPattern.test(segment)) {
+        markdownLinkPattern.lastIndex = 0;
+        let fixed = segment;
+        for (const project of projectUrlEntries) {
+          fixed = fixed.replace(
+            new RegExp(`\\((https?:\\/\\/(?:www\\.)?${project.flexibleDomain}\\/?[^)]*)\\)`, "gi"),
+            `(${project.url})`,
+          );
+        }
+        return fixed;
+      }
+
+      let fixed = segment;
+      for (const project of projectUrlEntries) {
+        fixed = fixed.replace(
+          new RegExp(`https?:\\/\\/(?:www\\.)?${project.flexibleDomain}\\/?`, "gi"),
+          `[${project.domain}](${project.url})`,
+        );
+        fixed = fixed.replace(
+          new RegExp(`(^|[\\s(])(?:www\\.)?${project.flexibleDomain}(?=$|[\\s).,،])`, "gi"),
+          (_match, prefix) => `${prefix}[${project.domain}](${project.url})`,
+        );
+      }
+      return fixed;
+    })
+    .join("");
+};
+
+const getVisibleLanguage = (language: string) => {
+  if (language.startsWith("ar")) return "ar";
+  if (language.startsWith("tr")) return "tr";
+  return "en";
+};
+
+const formatSessionTime = (timestamp: number, language: string) =>
+  new Intl.DateTimeFormat(language, {
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(new Date(timestamp));
+
+function MarkdownMessage({ text, isUser }: { text: string; isUser: boolean }) {
+  const normalizedText = isUser ? text : normalizeProjectLinks(normalizeAssistantText(text));
+
+  return (
+    <ReactMarkdown
+      components={{
+        p: ({ children }) => (
+          <p className="mb-3 last:mb-0 whitespace-pre-wrap break-words leading-8 text-[15px] [word-spacing:0.08em] sm:text-base">
+            {children}
+          </p>
+        ),
+        strong: ({ children }) => (
+          <strong className={isUser ? "font-semibold text-white" : "font-semibold text-cyan-200"}>
+            {children}
+          </strong>
+        ),
+        ul: ({ children }) => (
+          <ul className="my-3 space-y-2 ps-0">{children}</ul>
+        ),
+        ol: ({ children }) => (
+          <ol className="my-3 list-decimal space-y-2 ps-5">{children}</ol>
+        ),
+        li: ({ children }) => <li className="leading-8">{children}</li>,
+        code: ({ children }) => (
+          <code className="rounded bg-black/35 px-1.5 py-0.5 text-sm text-cyan-100">
+            {children}
+          </code>
+        ),
+        a: ({ href, children }) => (
+          <a
+            href={href}
+            target="_blank"
+            rel="noreferrer"
+            className="font-semibold text-cyan-200 underline decoration-cyan-300/50 underline-offset-4 transition hover:text-white"
+          >
+            {children}
+          </a>
+        ),
+      }}
+    >
+      {isUser ? normalizedText : autolink(normalizedText)}
+    </ReactMarkdown>
+  );
+}
+
+export default function AIChat() {
+  const { t, i18n } = useTranslation();
+  const language = getVisibleLanguage(i18n.language);
+  const isPageRTL = i18n.dir() === "rtl";
+
+  const [session, setSession] = useState<ChatSession>(() => getOrCreateSession());
+  const [input, setInput] = useState("");
+  const [streamingText, setStreamingText] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
+  const [location, setLocation] = useState<LocationData | null>(null);
+  const [isOnline, setIsOnline] = useState(() => navigator.onLine);
+
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const endRef = useRef<HTMLDivElement | null>(null);
+
+  const messages = useMemo<Message[]>(() => {
+    const stored = session.messages.map((message) => ({
+      id: String(message.timestamp),
+      role: message.role,
+      content: message.content,
+      timestamp: message.timestamp,
+    }));
+
+    if (stored.length > 0) return stored;
+
+    return [
+      {
+        id: "welcome",
+        role: "assistant",
+        content: welcomeByLanguage[language],
+        timestamp: Date.now(),
+      },
+    ];
+  }, [language, session.messages]);
+
+  const quickQuestions = quickQuestionsByLanguage[language];
+  const remainingQuestions = Math.max(0, MAX_SESSION_QUESTIONS - session.userTurns);
+  const estimatedInputTokens = estimateTokens(input);
+  const activeInputTokenLimit = getQuestionTokenLimit(input);
+  const sessionStartedAt = session.messages[0]?.timestamp;
+
+  useEffect(() => {
+    const onOnline = () => setIsOnline(true);
+    const onOffline = () => setIsOnline(false);
+    window.addEventListener("online", onOnline);
+    window.addEventListener("offline", onOffline);
+    return () => {
+      window.removeEventListener("online", onOnline);
+      window.removeEventListener("offline", onOffline);
+    };
+  }, []);
+
+  useEffect(() => {
+    document.body.classList.add("native-cursor-page");
+    document.body.style.cursor = "auto";
+
+    return () => {
+      document.body.classList.remove("native-cursor-page");
+      document.body.style.cursor = "";
+    };
+  }, []);
+
+  useEffect(() => {
+    getCachedUserLocation()
+      .then(setLocation)
+      .catch(() => setLocation({ country: "Unknown", city: "Unknown" }));
+  }, []);
+
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+  }, [messages.length, streamingText, isLoading]);
+
+  useEffect(() => {
+    if (!location || session.messages.length === 0) return;
+
+    const payloadMessages = session.messages.map((message) => ({
+      id: String(message.timestamp),
+      text: message.content,
+      isUser: message.role === "user",
+      timestamp: new Date(message.timestamp),
+    }));
+
+    const save = isSaved
+      ? updateChatSession(session.sessionId, payloadMessages)
+      : saveChatSession({
+          sessionId: session.sessionId,
+          messages: payloadMessages,
+          country: location.country,
+          city: location.city,
+        }).then(() => setIsSaved(true));
+
+    save.catch(() => undefined);
+  }, [isSaved, location, session.messages, session.sessionId]);
+
+  useEffect(() => {
+    if (!textareaRef.current) return;
+    textareaRef.current.style.height = "0px";
+    textareaRef.current.style.height = `${Math.min(textareaRef.current.scrollHeight, 144)}px`;
+  }, [input]);
+
+  const sendMessage = useCallback(
+    async (forcedText?: string) => {
+      const text = (forcedText ?? input).trim();
+      if (!text || isLoading) return;
+
+      if (session.userTurns >= MAX_SESSION_QUESTIONS) {
+        setSession(
+          addMessage(
+            session,
+            "assistant",
+            sessionLimitMessageByLanguage[language],
+          ),
+        );
+        setStreamingText("");
+        setInput("");
+        textareaRef.current?.focus();
+        return;
+      }
+
+      const estimatedQuestionTokens = estimateTokens(text);
+      const questionTokenLimit = getQuestionTokenLimit(text);
+
+      if (estimatedQuestionTokens > questionTokenLimit) {
+        setSession(
+          addMessage(
+            session,
+            "assistant",
+            questionTooLongMessage(language, estimatedQuestionTokens, questionTokenLimit),
+          ),
+        );
+        setStreamingText("");
+        textareaRef.current?.focus();
+        return;
+      }
+
+      const withUserMessage = addMessage(session, "user", text);
+      setSession(withUserMessage);
+      setInput("");
+      setStreamingText("");
+      setIsLoading(true);
+
+      try {
+        const answer = await callAI(
+          withUserMessage.messages.slice(0, -1),
+          text,
+          (partial) => setStreamingText(partial),
+          {
+            sessionId: withUserMessage.sessionId,
+            userTurns: withUserMessage.userTurns,
+            estimatedQuestionTokens,
+            questionTokenLimit,
+          },
+        );
+
+        const finalAnswer = answer.trim() || t("aiChat.errorMessage");
+        setSession(addMessage(withUserMessage, "assistant", finalAnswer));
+      } catch (error) {
+        console.error("AI chat error:", error);
+        setSession(addMessage(withUserMessage, "assistant", t("aiChat.errorMessage")));
+      } finally {
+        setIsLoading(false);
+        setStreamingText("");
+        textareaRef.current?.focus();
+      }
+    },
+    [input, isLoading, language, session, t],
+  );
+
+  const canSend =
+    input.trim().length > 0 &&
+    !isLoading &&
+    isOnline &&
+    session.userTurns < MAX_SESSION_QUESTIONS &&
+    estimatedInputTokens <= activeInputTokenLimit;
+
+  return (
+    <section
+      dir={isPageRTL ? "rtl" : "ltr"}
+      className="h-dvh overflow-hidden bg-[#070b12] px-3 pb-3 pt-24 text-white sm:px-5 sm:pb-5"
+    >
+      <div className="mx-auto flex h-full w-full max-w-6xl flex-col gap-3 overflow-hidden">
+        <header className="shrink-0 border-b border-white/10 pb-3">
+          <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+          <div className="min-w-0">
+            <div className="mb-3 flex items-center gap-3">
+              <MayaAvatar size="sm" interactive className="ring-1 ring-cyan-300/35" />
+              <div className="min-w-0">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-cyan-300/80">
+                  MAYA
+                </p>
+                <h1 className="text-2xl font-bold leading-tight sm:text-4xl">
+                  {t("aiChat.title")}
+                </h1>
+              </div>
+            </div>
+            <p className="text-sm leading-7 text-slate-300 sm:text-[15px]">
+              {mayaIntroByLanguage[language]}
+            </p>
+            {sessionStartedAt && (
+              <p className="mt-2 text-xs text-slate-500">
+                {language === "ar"
+                  ? `بدأت الجلسة: ${formatSessionTime(sessionStartedAt, i18n.language)}`
+                  : language === "tr"
+                  ? `Oturum başlangıcı: ${formatSessionTime(sessionStartedAt, i18n.language)}`
+                  : `Session started: ${formatSessionTime(sessionStartedAt, i18n.language)}`}
+              </p>
+            )}
+          </div>
+
+          <div className="hidden">
+            {chatPolicyNoticeByLanguage[language]}
+          </div>
+          </div>
+        </header>
+
+        <div className="grid min-h-0 flex-1 gap-4 lg:grid-cols-[minmax(0,1fr)_300px]">
+          <div className="flex min-h-0 flex-col overflow-hidden rounded-lg border border-white/10 bg-[#0d1320] shadow-2xl shadow-black/30">
+            <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
+              <div className="flex items-center gap-2 text-sm text-slate-300">
+                <MessageSquareText className="h-4 w-4 text-cyan-200" />
+                <span>{t("aiChat.subtitle")}</span>
+              </div>
+              {isSaved && (
+                <span className="text-xs text-emerald-300">
+                  {t("aiChat.chatSaved")}
+                </span>
+              )}
+            </div>
+
+            <div className="min-h-0 flex-1 overflow-y-auto px-3 py-4 sm:px-5">
+              <AnimatePresence initial={false}>
+                {messages.map((message) => {
+                  const isUser = message.role === "user";
+                  const rtl = isRTLText(message.content);
+                  return (
+                    <motion.div
+                      key={message.id}
+                      initial={{ opacity: 0, y: 16, scale: 0.985, filter: "blur(6px)" }}
+                      animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+                      exit={{ opacity: 0, y: -8, scale: 0.99, filter: "blur(3px)" }}
+                      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                      className={`mb-4 flex ${isUser ? "justify-end" : "justify-start"}`}
+                    >
+                      <div
+                        className={`flex max-w-[92%] items-start gap-3 sm:max-w-[78%] ${
+                          isUser ? "flex-row-reverse" : ""
+                        }`}
+                      >
+                        <div
+                          className={`mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-md ${
+                            isUser
+                              ? "bg-cyan-500 text-white"
+                              : "border border-white/10 bg-white/[0.06] text-cyan-100"
+                          }`}
+                        >
+                          {isUser ? <User className="h-4 w-4" /> : <MayaAvatar size="xs" />}
+                        </div>
+                        <div
+                          dir={rtl ? "rtl" : "ltr"}
+                          className={`rounded-lg px-4 py-3 leading-8 tracking-[0.005em] [word-spacing:0.08em] ${
+                            rtl ? "font-arabic readable-arabic" : "mixed-content"
+                          } ${
+                            isUser
+                              ? "bg-cyan-600 text-white"
+                              : "border border-white/10 bg-white/[0.055] text-slate-100"
+                          }`}
+                        >
+                          <MarkdownMessage text={message.content} isUser={isUser} />
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </AnimatePresence>
+
+              {isLoading && (
+                <motion.div
+                  initial={{ opacity: 0, y: 16, scale: 0.985, filter: "blur(6px)" }}
+                  animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+                  transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                  className="mb-4 flex justify-start"
+                >
+                  <div className="flex max-w-[92%] items-start gap-3 sm:max-w-[78%]">
+                    <div className="mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-white/10 bg-white/[0.06] text-cyan-100">
+                      <MayaAvatar size="xs" />
+                    </div>
+                    <div
+                      dir={isRTLText(streamingText) ? "rtl" : "ltr"}
+                      className="rounded-lg border border-cyan-300/20 bg-cyan-300/[0.06] px-4 py-3 text-slate-100"
+                    >
+                      {streamingText ? (
+                        <div className="relative pr-4">
+                          <MarkdownMessage text={streamingText} isUser={false} />
+                          <motion.span
+                            initial={{ opacity: 0.2 }}
+                            animate={{ opacity: [0.2, 1, 0.2] }}
+                            transition={{ duration: 0.9, repeat: Infinity, ease: "easeInOut" }}
+                            className="pointer-events-none absolute bottom-1 right-0 text-cyan-200"
+                          >
+                            ▍
+                          </motion.span>
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-2 text-sm text-slate-300">
+                          <Loader2 className="h-4 w-4 animate-spin text-cyan-200" />
+                          {t("aiChat.typing")}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+              <div ref={endRef} />
+            </div>
+
+            <form
+              className="shrink-0 border-t border-white/10 bg-[#0a101b] p-3 sm:p-4"
+              onSubmit={(event) => {
+                event.preventDefault();
+                sendMessage();
+              }}
+            >
+              <div className="flex items-end gap-2">
+                <textarea
+                  ref={textareaRef}
+                  value={input}
+                  onChange={(event) => setInput(event.target.value)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" && !event.shiftKey) {
+                      event.preventDefault();
+                      sendMessage();
+                    }
+                  }}
+                  rows={1}
+                  placeholder={t("aiChat.inputPlaceholder")}
+                  className="min-h-[48px] flex-1 resize-none rounded-lg border border-white/10 bg-white/[0.055] px-4 py-3 text-sm leading-6 text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-300/60 focus:ring-2 focus:ring-cyan-300/15 sm:text-base"
+                  disabled={isLoading}
+                />
+                <button
+                  type="submit"
+                  disabled={!canSend}
+                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-cyan-500 text-white transition hover:bg-cyan-400 disabled:cursor-not-allowed disabled:bg-slate-700 disabled:text-slate-400"
+                  aria-label="Send message"
+                >
+                  {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : <Send className="h-5 w-5" />}
+                </button>
+              </div>
+              <div className="mt-2 flex items-center justify-between text-[11px] leading-5 text-slate-400">
+                <span>
+                  {language === "ar"
+                    ? `الأسئلة المتبقية: ${remainingQuestions}/${MAX_SESSION_QUESTIONS}`
+                    : language === "tr"
+                    ? `Kalan soru: ${remainingQuestions}/${MAX_SESSION_QUESTIONS}`
+                    : `Remaining questions: ${remainingQuestions}/${MAX_SESSION_QUESTIONS}`}
+                </span>
+                <span
+                  className={
+                    estimatedInputTokens > activeInputTokenLimit
+                      ? "font-medium text-rose-300"
+                      : "text-slate-400"
+                  }
+                >
+                  {language === "ar"
+                    ? `توكنات السؤال: ${estimatedInputTokens}/${activeInputTokenLimit}`
+                    : language === "tr"
+                    ? `Soru tokeni: ${estimatedInputTokens}/${activeInputTokenLimit}`
+                    : `Question tokens: ${estimatedInputTokens}/${activeInputTokenLimit}`}
+                </span>
+              </div>
+            </form>
+          </div>
+
+          <aside className="hidden rounded-lg border border-white/10 bg-[#0d1320] p-4 lg:block lg:self-start">
+            <h2 className="mb-3 text-sm font-semibold text-white">
+              {t("aiChat.quickQuestions.title")}
+            </h2>
+            <div className="grid gap-2">
+              {quickQuestions.map((question) => (
+                <button
+                  key={question}
+                  type="button"
+                  onClick={() => sendMessage(question)}
+                  disabled={isLoading || !isOnline || session.userTurns >= MAX_SESSION_QUESTIONS}
+                  className="rounded-md border border-white/10 bg-white/[0.04] px-3 py-3 text-start text-sm leading-5 text-slate-200 transition hover:border-cyan-300/45 hover:bg-cyan-300/[0.08] disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  {question}
+                </button>
+              ))}
+            </div>
+            <div className="mt-4 rounded-md border border-emerald-300/15 bg-emerald-300/[0.06] px-3 py-3 text-xs leading-5 text-emerald-100">
+              ChatGPT is routed through the backend, so your OpenAI key stays on the server.
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  );
+}

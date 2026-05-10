@@ -1,48 +1,27 @@
 import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { MessageCircle, Sparkles } from 'lucide-react';
 import gsap from 'gsap';
 import './AIAssistantButton.css';
+import MayaAvatar from './MayaAvatar';
 
 const AIAssistantButton: React.FC = () => {
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const sparkleRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!buttonRef.current) return;
 
-    // تأثير النبضة المستمر مع حركة عمودية خفيفة
+    // حركة خفيفة مستمرة بدون إزعاج.
     gsap.to(buttonRef.current, {
-      scale: 1.08,
-      y: -3,
+      scale: 1.04,
+      y: -2,
       duration: 2.5,
       repeat: -1,
       yoyo: true,
       ease: "power2.inOut"
     });
 
-    // تأثير البريق المتحرك مع تغيير الشفافية
-    if (sparkleRef.current) {
-      gsap.to(sparkleRef.current, {
-        rotation: 360,
-        duration: 3.5,
-        repeat: -1,
-        ease: "none"
-      });
-
-      // تأثير الظهور والاختفاء للبريق بشكل أكثر وضوحاً
-      gsap.to(sparkleRef.current, {
-        opacity: 0.2,
-        scale: 0.8,
-        duration: 1.8,
-        repeat: -1,
-        yoyo: true,
-        ease: "power2.inOut"
-      });
-    }
-
-    // تأثيرات الدوائر المتموجة في الخلفية - محسنة
+    // تموجات دقيقة لجذب الانتباه.
     const createRipple = () => {
       if (!buttonRef.current) return;
       
@@ -56,52 +35,45 @@ const AIAssistantButton: React.FC = () => {
           opacity: 0.8
         },
         {
-          scale: 2.2,
+          scale: 2,
           opacity: 0,
-          duration: 2.5,
+          duration: 2.2,
           ease: "power2.out",
           onComplete: () => ripple.remove()
         }
       );
     };
 
-    // إنشاء تأثير التموج كل 2.5 ثانية لجذب الانتباه أكثر
-    const rippleInterval = setInterval(createRipple, 2500);
+    const rippleInterval = setInterval(createRipple, 3200);
 
-    // تأثير حركة إضافية كل فترة لجذب الانتباه
     const attentionAnimation = () => {
       if (!buttonRef.current) return;
       
       gsap.to(buttonRef.current, {
-        rotation: 8,
-        duration: 0.3,
+        rotation: 4,
+        duration: 0.24,
         yoyo: true,
-        repeat: 3,
+        repeat: 1,
         ease: "power2.inOut",
         onComplete: () => {
           gsap.to(buttonRef.current, {
             rotation: 0,
-            duration: 0.2
+            duration: 0.16
           });
         }
       });
     };
 
-    // تشغيل حركة لفت الانتباه كل 8 ثوان
-    const attentionInterval = setInterval(attentionAnimation, 8000);
+    const attentionInterval = setInterval(attentionAnimation, 9000);
 
     return () => {
       clearInterval(rippleInterval);
       clearInterval(attentionInterval);
       gsap.killTweensOf(buttonRef.current);
-      if (sparkleRef.current) {
-        gsap.killTweensOf(sparkleRef.current);
-      }
     };
   }, []);
 
   const handleClick = () => {
-    // تأثير النقر
     if (buttonRef.current) {
       gsap.to(buttonRef.current, {
         scale: 0.95,
@@ -110,7 +82,6 @@ const AIAssistantButton: React.FC = () => {
         repeat: 1,
         ease: "power2.inOut",
         onComplete: () => {
-          // التوجه إلى صفحة الدردشة
           navigate('/ai-chat');
         }
       });
@@ -141,32 +112,24 @@ const AIAssistantButton: React.FC = () => {
 
   return (
     <div className="ai-assistant-container">
-      {/* تلميح النص */}
       <div className="ai-assistant-tooltip">
-        🤖 اسأل المساعد الذكي عن الأسعار
+        Maya is here - سكرتيرتك الذكية
       </div>
       
-      {/* الزر الرئيسي */}
       <button
         ref={buttonRef}
         className="ai-assistant-button"
         onClick={handleClick}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        aria-label="فتح المساعد الذكي"
-        title="تحدث مع المساعد الذكي"
+        aria-label="فتح دردشة مايا سكرتيرة WebSiteMy"
+        title="تحدث مع Maya"
       >
         <div className="ai-assistant-content">
-          <MessageCircle size={24} strokeWidth={2} />
-          <div style={{ fontSize: '8px', marginTop: '2px', fontWeight: '600' }}>
-            AI
-          </div>
+          <MayaAvatar size="md" interactive />
         </div>
-        
-        {/* أيقونة البريق */}
-        <div ref={sparkleRef} className="ai-assistant-sparkle">
-          <Sparkles size={12} />
-        </div>
+
+        <span className="ai-assistant-badge">M</span>
       </button>
     </div>
   );

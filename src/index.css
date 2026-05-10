@@ -25,6 +25,23 @@ body {
   /* direction will be set dynamically by i18n */
 }
 
+body.native-cursor-page,
+body.native-cursor-page * {
+  cursor: auto !important;
+}
+
+body.native-cursor-page input,
+body.native-cursor-page textarea,
+body.native-cursor-page [contenteditable="true"] {
+  cursor: text !important;
+}
+
+body.native-cursor-page button,
+body.native-cursor-page a,
+body.native-cursor-page [role="button"] {
+  cursor: pointer !important;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

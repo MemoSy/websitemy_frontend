@@ -1,318 +1,685 @@
-﻿import { projects, serviceCategories } from "../data/projects";
-import { faqData } from "../data/faqData";
 import {
-  generateAdvancedSystemPrompt,
-  validateAIResponse,
-  trackOffTopicAttempts,
-} from "./aiSystemPrompt";
-import { searchFAQ } from "../data/faqData";
+  buildKnowledgePayload,
+  buildSecretarySystemPrompt,
+  selectRelevantKnowledge,
+} from "../data/aiKnowledgeBase";
+import { faqData } from "../data/faqData";
+import { getDeviceFingerprint, getDeviceInfo } from "./sessionManager";
 
 const API_BASE_URL = (
   import.meta.env.VITE_BACKEND_URL || "https://websitemy-backend.vercel.app"
 ).replace(/\/$/, "");
 const AI_PROXY_URL = `${API_BASE_URL}/chat/ai-proxy`;
+const FAST_OPENAI_MODEL = import.meta.env.VITE_OPENAI_MODEL || "gpt-4o";
+const ENABLE_AI_STREAMING = (import.meta.env.VITE_ENABLE_AI_STREAMING || "false").toLowerCase() === "true";
+const ENABLE_RESPONSE_AUDIT = (import.meta.env.VITE_ENABLE_RESPONSE_AUDIT || "true").toLowerCase() !== "false";
+const ENABLE_AUDIT_REPAIR = (import.meta.env.VITE_ENABLE_AUDIT_REPAIR || "true").toLowerCase() !== "false";
 
-export interface CompanyInfo {
-  name: string;
-  expertise: string;
-  experience: string;
-  satisfaction: string;
-  completedProjects: string;
-  technologies: string[];
-  specialties: string[];
+const MAX_SESSION_QUESTIONS = 15;
+
+export interface AISessionUsage {
+  sessionId: string;
+  visitorId?: string;
+  deviceInfo?: Record<string, any>;
+  userTurns: number;
+  estimatedQuestionTokens: number;
+  questionTokenLimit: number;
 }
 
-export interface AIKnowledgeBase {
-  companyInfo: CompanyInfo;
-  projects: any[];
-  categories: any[];
-  commonQuestions: {
-    question: string;
-    answer: string;
-  }[];
-}
-
-export const companyInfo: CompanyInfo = {
-  name: "WebSiteMy",
-  expertise: "تطوير مواقع الويب والتطبيقات الحديثة باستخدام أحدث التقنيات",
-  experience: "5+ سنوات خبرة في تطوير المشاريع الاحترافية",
-  satisfaction: "98% من عملائنا راضون عن خدماتنا",
-  completedProjects: "9+ مشاريع منجزة ومنشورة",
-  technologies: [
-    "React.js",
-    "Next.js",
-    "NestJS",
-    "MongoDB",
-    "TypeScript",
-    "JavaScript",
-    "Tailwind CSS",
-    "Prisma",
-    "Vercel",
-  ],
-  specialties: [
-    "المواقع التعريفية الشخصية والاحترافية",
-    "متاجر الكترونية",
-    "المنصات التعليمية والأكاديميات",
-    "منصات اجتماعية",
-    "موقع أعمالي",
-    "مواقع خدمية",
-  ],
+type AIHistoryMessage = {
+  role: "user" | "assistant";
+  content: string;
 };
 
-export const commonQuestions = [
-  {
-    question: "ما هي أسعار المشاريع؟",
-    answer: `أسعار مشاريعنا تبدأ من 500$ وتصل إلى 3000$ حسب التعقيد والميزات المطلوبة. إليك أمثلة:
+type ProxyMessage = {
+  role: "system" | "user" | "assistant";
+  content: string;
+};
 
-• المشاريع البسيطة: 500$ - 1000$ (صفحات شخصية، مواقع تعريفية)
-• المشاريع المتوسطة: 1000$ - 2000$ (متاجر إلكترونية بسيطة، منصات تعليمية)
-• المشاريع المتقدمة: 2000$ - 3000$ (أنظمة إدارة معقدة، منصات SaaS)
+const withDeviceUsage = (sessionUsage?: AISessionUsage) => ({
+  ...(sessionUsage || {}),
+  visitorId: getDeviceFingerprint(),
+  deviceInfo: getDeviceInfo(),
+});
 
-السعر النهائي يعتمد على:
-- عدد الصفحات والميزات
-- التقنيات المستخدمة
-- التصميم المخصص
-- التكامل مع أنظمة خارجية`,
-  },
-  {
-    question: "كم تستغرق مدة التطوير؟",
-    answer: `مدة التطوير تعتمد على حجم وتعقيد المشروع:
+const compactText = (text: string, maxChars: number) => {
+  const normalized = (text || "").replace(/\s+/g, " ").trim();
+  if (normalized.length <= maxChars) return normalized;
+  return `${normalized.slice(0, Math.max(0, maxChars - 1))}…`;
+};
 
-• المشاريع البسيطة: 1-2 أسبوع
-• المشاريع المتوسطة: 3-8 أسابيع  
-• المشاريع المعقدة: 2-6 أشهر
+const detectLanguage = (text: string): "ar" | "en" | "tr" => {
+  const cleanText = text.replace(/[0-9\s.,!?@#$%^&*()_+\-=[\]{};:'"\\|<>/?]/g, "");
+  const arabicChars = (cleanText.match(/[\u0600-\u06ff]/g) || []).length;
+  const turkishChars = (cleanText.match(/[çğıöşüÇĞİÖŞÜ]/g) || []).length;
+  const latinChars = (cleanText.match(/[a-zA-Z]/g) || []).length;
+  const totalChars = arabicChars + turkishChars + latinChars;
 
-نحن نلتزم بالمواعيد المحددة ونقدم تحديثات دورية حول تقدم العمل.`,
-  },
-  {
-    question: "ما هي التقنيات التي تستخدمونها؟",
-    answer: `نحن نستخدم أحدث التقنيات الموجودة فعلياً في مشاريعنا المنشورة:
+  if (totalChars === 0) return "ar";
+  if (arabicChars / totalChars > 0.3) return "ar";
+  if (turkishChars > 1) return "tr";
+  return "en";
+};
 
-**Frontend (الواجهة الأمامية):**
-• React.js - مكتبة قوية لبناء واجهات تفاعلية
-• Next.js - إطار عمل React متقدم للأداء العالي والـ SEO
-• TypeScript & JavaScript - للكود الآمن والمنظم
-• Tailwind CSS - لتصاميم عصرية ومتجاوبة
+const languageInstruction = (language: "ar" | "en" | "tr") => {
+  if (language === "ar") return "اكتب الرد كاملاً باللغة العربية فقط.";
+  if (language === "tr") return "Yanıtı tamamen Türkçe yaz.";
+  return "Write the entire answer in English only.";
+};
 
-**Backend (الخادم):**
-• NestJS - إطار عمل Node.js احترافي للـ Backend
-• MongoDB - قاعدة بيانات NoSQL مرنة وسريعة
-• Prisma - ORM حديث لإدارة قواعد البيانات
+const hasOffTopicPattern = (text: string) => {
+  const normalized = (text || "").toLowerCase();
+  const blocked = [
+    "سياسة",
+    "حرب",
+    "دين",
+    "طقس",
+    "رياضة",
+    "بورصة",
+    "اختراق",
+    "هكر",
+    "ignore previous",
+    "forget your instructions",
+    "you are now",
+    "act as",
+    "developer mode",
+    "jailbreak",
+    "تجاهل تعليماتك",
+    "انت الآن",
+    "أنت الآن",
+    "تصرف ك",
+  ];
 
-**Hosting (الاستضافة):**
-• Vercel - استضافة سريعة وموثوقة
+  return blocked.some((word) => normalized.includes(word));
+};
 
-**لماذا هذه التقنيات بالذات؟**
-• ✅ مستخدمة فعلياً في جميع مشاريعنا المنشورة
-• ✅ سريعة وآمنة ومثبتة في الإنتاج
-• ✅ سهلة الصيانة والتطوير المستقبلي
-• ✅ مدعومة بمجتمع كبير ومستمرة التحديث
+const countOffTopicAttempts = (history: AIHistoryMessage[]) =>
+  history.filter((message) => message.role === "user" && hasOffTopicPattern(message.content)).length;
 
-يمكنك معاينة مشاريعنا الحية لترى هذه التقنيات تعمل في الواقع!`,
-  },
-];
+const offTopicFallback = (language: "ar" | "en" | "tr") => {
+  if (language === "tr") {
+    return "Ben Maya, WebSiteMy sekreteriyim. Genel sohbet çok tatlı ama uzmanlık alanım web projeleri 🙂 Web sitesi, e-ticaret, SaaS ve fiyatlandırma konusunda net destek verebilirim.";
+  }
 
-export const generateKnowledgeBase = (): AIKnowledgeBase => {
+  if (language === "en") {
+    return "I am Maya, WebSiteMy's secretary. Casual chat is fun, but my superpower is project guidance. I can help with websites, e-commerce, SaaS platforms, pricing, timelines, and project examples.";
+  }
+
+  return "أنا مايا، سكرتيرة WebSiteMy. الدردشة العامة ممتعة، لكن قوتي الحقيقية في توجيه المشاريع 🙂 أقدر أساعدك في المواقع والمتاجر والمنصات والأسعار والمدة مع أمثلة حقيقية.";
+};
+
+const normalizeIntentText = (text: string) =>
+  (text || "")
+    .toLowerCase()
+    .replace(/[أإآ]/g, "ا")
+    .replace(/ة/g, "ه")
+    .replace(/ى/g, "ي")
+    .replace(/[^\p{L}\p{N}\s$+.-]/gu, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+type IntentFocus =
+  | "ownership"
+  | "payment"
+  | "pricing"
+  | "timeline"
+  | "tech"
+  | "examples"
+  | "contact"
+  | "general";
+
+type IntentAnalysis = {
+  focus: IntentFocus;
+  confidence: "high" | "medium" | "low";
+  hasRecentContext: boolean;
+  recentUserSummary: string;
+};
+
+type ConversationTone = "business" | "chatty";
+
+type ResponseAuditResult = {
+  isValid: boolean;
+  reasons: string[];
+  intent: IntentAnalysis;
+};
+
+const MAX_AUDIT_REPAIR_ATTEMPTS = 1;
+
+const includesAnyTerm = (message: string, terms: string[]) => {
+  const normalized = normalizeIntentText(message);
+  return terms.some((term) => normalized.includes(normalizeIntentText(term)));
+};
+
+const buildRecentUserSummary = (conversationHistory: AIHistoryMessage[]) =>
+  conversationHistory
+    .filter((message) => message.role === "user")
+    .slice(-3)
+    .map((message) => compactText(message.content, 100))
+    .join(" | ");
+
+const analyzeIntent = (
+  currentMessage: string,
+  conversationHistory: AIHistoryMessage[] = [],
+): IntentAnalysis => {
+  const compositeText = [
+    buildRecentUserSummary(conversationHistory),
+    currentMessage,
+  ].join(" ");
+
+  const ownershipTerms = [
+    "من هو المسؤول",
+    "مين المسؤول",
+    "المسؤول",
+    "من ينفذ",
+    "مين ينفذ",
+    "من نفذ",
+    "الفريق المسؤول",
+    "المسؤول عن التنفيذ",
+    "who is responsible",
+    "who executes",
+    "owner",
+  ];
+
+  const paymentTerms = [
+    "بوابة دفع",
+    "بوابه دفع",
+    "بوابات الدفع",
+    "payment gateway",
+    "stripe",
+    "paypal",
+    "checkout",
+    "2checkout",
+  ];
+
+  const pricingTerms = ["سعر", "اسعار", "أسعار", "تكلفة", "price", "cost", "budget"];
+  const timelineTerms = ["مدة", "مده", "وقت", "كم يستغرق", "timeline", "duration"];
+  const techTerms = ["تقنيات", "stack", "technology", "framework", "backend", "frontend"];
+  const exampleTerms = ["مثال", "أمثلة", "نماذج", "مشاريع مشابهة", "portfolio", "examples"];
+  const contactTerms = ["تواصل", "واتساب", "اتصال", "رقم", "contact", "whatsapp"];
+
+  if (includesAnyTerm(compositeText, ownershipTerms)) {
+    return {
+      focus: "ownership",
+      confidence: "high",
+      hasRecentContext: conversationHistory.length > 0,
+      recentUserSummary: buildRecentUserSummary(conversationHistory),
+    };
+  }
+
+  if (includesAnyTerm(compositeText, paymentTerms)) {
+    return {
+      focus: "payment",
+      confidence: "high",
+      hasRecentContext: conversationHistory.length > 0,
+      recentUserSummary: buildRecentUserSummary(conversationHistory),
+    };
+  }
+
+  if (includesAnyTerm(compositeText, pricingTerms)) {
+    return {
+      focus: "pricing",
+      confidence: "high",
+      hasRecentContext: conversationHistory.length > 0,
+      recentUserSummary: buildRecentUserSummary(conversationHistory),
+    };
+  }
+
+  if (includesAnyTerm(compositeText, timelineTerms)) {
+    return {
+      focus: "timeline",
+      confidence: "high",
+      hasRecentContext: conversationHistory.length > 0,
+      recentUserSummary: buildRecentUserSummary(conversationHistory),
+    };
+  }
+
+  if (includesAnyTerm(compositeText, techTerms)) {
+    return {
+      focus: "tech",
+      confidence: "medium",
+      hasRecentContext: conversationHistory.length > 0,
+      recentUserSummary: buildRecentUserSummary(conversationHistory),
+    };
+  }
+
+  if (includesAnyTerm(compositeText, exampleTerms)) {
+    return {
+      focus: "examples",
+      confidence: "medium",
+      hasRecentContext: conversationHistory.length > 0,
+      recentUserSummary: buildRecentUserSummary(conversationHistory),
+    };
+  }
+
+  if (includesAnyTerm(compositeText, contactTerms)) {
+    return {
+      focus: "contact",
+      confidence: "high",
+      hasRecentContext: conversationHistory.length > 0,
+      recentUserSummary: buildRecentUserSummary(conversationHistory),
+    };
+  }
+
   return {
-    companyInfo,
-    projects: projects.map((project) => ({
-      id: project.id,
-      title: project.title,
-      description: project.description,
-      fullDescription: project.fullDescription,
-      category: project.category,
-      technologies: project.technologies,
-      duration: project.duration,
-      rating: project.rating,
-      features: project.features,
-      liveUrl: project.liveUrl,
-      githubUrl: project.githubUrl,
-      objectives: project.objectives,
-      challenges: project.challenges,
-      ...project.aiData,
-    })),
-    categories: serviceCategories.map((cat) => ({
-      id: cat.id,
-      title: cat.title,
-      subtitle: cat.subtitle,
-      description: cat.description,
-      projectCount: cat.projects.length,
-      projects: cat.projects.map((p) => ({
-        id: p.id,
-        title: p.title,
-        price: p.aiData?.price,
-        complexity: p.aiData?.complexity,
-      })),
-    })),
-    commonQuestions: faqData.map((faq) => ({
-      question: faq.question,
-      answer: faq.shortAnswer || faq.answer.substring(0, 200),
-    })),
+    focus: "general",
+    confidence: "low",
+    hasRecentContext: conversationHistory.length > 0,
+    recentUserSummary: buildRecentUserSummary(conversationHistory),
   };
 };
 
-// دالة لتحليل السياق واستخراج المعلومات المهمة
-const analyzeContext = (
-  conversationHistory: Array<{ text: string; isUser: boolean }>
-) => {
-  let currentTopic = "";
-  let lastMentionedProject = "";
+const detectConversationTone = (
+  currentMessage: string,
+  conversationHistory: AIHistoryMessage[],
+  intent: IntentAnalysis,
+): ConversationTone => {
+  const normalized = normalizeIntentText(currentMessage);
+  const recentContext = normalizeIntentText(buildRecentUserSummary(conversationHistory));
 
-  // البحث عن آخر موضوع تم مناقشته
-  for (let i = conversationHistory.length - 1; i >= 0; i--) {
-    const message = conversationHistory[i];
-    if (message.isUser) {
-      const text = message.text.toLowerCase();
+  const chattyTerms = [
+    "دردشه",
+    "دردشة",
+    "سولف",
+    "فضول",
+    "احكي",
+    "حكي",
+    "مزحه",
+    "نكت",
+    "joke",
+    "chat",
+    "curious",
+    "just talking",
+    "small talk",
+    "who are you",
+    "tell me more",
+  ];
 
-      // تحديد نوع المشروع المطلوب
-      if (
-        text.includes("أخبار") ||
-        text.includes("إعلام") ||
-        text.includes("صحافة")
-      ) {
-        currentTopic = "news";
-      } else if (
-        text.includes("متجر") ||
-        text.includes("تجارة") ||
-        text.includes("متجر إلكتروني")
-      ) {
-        currentTopic = "ecommerce";
-      } else if (
-        text.includes("تعليم") ||
-        text.includes("منصة تعليمية") ||
-        text.includes("دورات")
-      ) {
-        currentTopic = "education";
-      } else if (
-        text.includes("شخصي") ||
-        text.includes("بروفايل") ||
-        text.includes("سيرة ذاتية")
-      ) {
-        currentTopic = "personal";
-      } else if (text.includes("اجتماعي") || text.includes("شبكة اجتماعية")) {
-        currentTopic = "social";
-      }
+  const directBusinessTerms = [
+    "سعر",
+    "تكلفه",
+    "project",
+    "pricing",
+    "timeline",
+    "duration",
+    "payment",
+    "تقنيات",
+  ];
 
-      if (currentTopic) break;
-    } else {
-      // البحث عن اسم المشروع في رد المساعد
-      const assistantText = message.text;
-      if (assistantText.includes("الشبكة الوطنية للإعلام")) {
-        lastMentionedProject = "الشبكة الوطنية للإعلام";
-      } else if (assistantText.includes("المتجر الذكي")) {
-        lastMentionedProject = "المتجر الذكي";
-      } else if (assistantText.includes("أكاديمية التعلم")) {
-        lastMentionedProject = "أكاديمية التعلم الرقمي";
+  const hasChattySignal = chattyTerms.some(
+    (term) => normalized.includes(normalizeIntentText(term)) || recentContext.includes(normalizeIntentText(term)),
+  );
+
+  const hasDirectBusinessSignal = directBusinessTerms.some((term) =>
+    normalized.includes(normalizeIntentText(term)),
+  );
+
+  if (hasChattySignal && !hasDirectBusinessSignal) {
+    return "chatty";
+  }
+
+  if (intent.focus === "general" && normalized.length < 70 && !hasDirectBusinessSignal) {
+    return "chatty";
+  }
+
+  return "business";
+};
+
+const focusExpectedTerms: Record<IntentFocus, string[]> = {
+  ownership: ["مسؤول", "المسؤول", "قيادة", "يقود", "الفريق", "تنفيذ", "احمد", "مدير", "team", "lead"],
+  payment: ["بوابة", "دفع", "payment", "gateway", "stripe", "paypal", "checkout"],
+  pricing: ["سعر", "تكلفة", "price", "cost", "budget", "$"],
+  timeline: ["مدة", "وقت", "اسبوع", "شهر", "timeline", "duration"],
+  tech: ["تقنيات", "stack", "technology", "framework", "react", "next", "nestjs"],
+  examples: ["مثال", "أمثلة", "مشروع", "projects", "example"],
+  contact: ["واتساب", "تواصل", "اتصال", "رقم", "contact", "whatsapp"],
+  general: [],
+};
+
+const hasIncompleteSentenceSignals = (text: string) => {
+  const value = (text || "").trim();
+  if (!value) return true;
+
+  const danglingLabel = /(^|\n)\s*(المشروع|السعر|المدة|الفريق|التقنيات|الرابط|project|price|timeline|team|technologies|link)\s*:?\s*($|\n)/i;
+  const danglingSeparator = /(^|\n)\s*[^\n]{0,60}[:\-]\s*($|\n)/;
+  const brokenToken = /(^|\n)\s*ابط\s*($|\n)/i;
+
+  return danglingLabel.test(value) || danglingSeparator.test(value) || brokenToken.test(value);
+};
+
+const auditAssistantResponse = (
+  currentMessage: string,
+  conversationHistory: AIHistoryMessage[],
+  response: string,
+): ResponseAuditResult => {
+  const reasons: string[] = [];
+  const intent = analyzeIntent(currentMessage, conversationHistory);
+  const normalizedResponse = normalizeIntentText(response || "");
+
+  if ((response || "").trim().length < 24) {
+    reasons.push("response_too_short");
+  }
+
+  if (hasIncompleteSentenceSignals(response || "")) {
+    reasons.push("incomplete_sentence_signal");
+  }
+
+  if (intent.focus !== "general") {
+    const expectedTerms = focusExpectedTerms[intent.focus] || [];
+    const hasExpected = expectedTerms.some((term) =>
+      normalizedResponse.includes(normalizeIntentText(term)),
+    );
+
+    if (!hasExpected) {
+      reasons.push("intent_mismatch");
+    }
+
+    if (intent.focus === "ownership") {
+      const timelineHints = ["مده", "اسبوع", "شهر", "timeline", "duration"];
+      const hasTimelineOnly =
+        timelineHints.some((term) => normalizedResponse.includes(normalizeIntentText(term))) &&
+        !["مسؤول", "المسؤول", "فريق", "يقود", "مدير"].some((term) =>
+          normalizedResponse.includes(normalizeIntentText(term)),
+        );
+
+      if (hasTimelineOnly) {
+        reasons.push("ownership_replaced_by_timeline");
       }
     }
   }
 
-  return { currentTopic, lastMentionedProject };
+  return {
+    isValid: reasons.length === 0,
+    reasons,
+    intent,
+  };
 };
 
-// دالة لاكتشاف لغة النص
-const detectLanguage = (text: string): "ar" | "en" | "tr" => {
-  // تنظيف النص من الأرقام والرموز
-  const cleanText = text.replace(
-    /[0-9\s\.,!?@#$%^&*()_+\-=\[\]{};:'"\|,.<>\/?]/g,
-    ""
-  );
+const fetchAICompletion = async (
+  messages: ProxyMessage[],
+  currentMessage: string,
+  sessionUsage?: AISessionUsage,
+) => {
+  const apiResponse = await fetch(AI_PROXY_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-Requested-With": "XMLHttpRequest",
+    },
+    body: JSON.stringify({
+      provider: "openai",
+      model: FAST_OPENAI_MODEL,
+      stream: false,
+      question: currentMessage,
+      sessionUsage: withDeviceUsage(sessionUsage),
+      messages,
+    }),
+  });
 
-  // الأحرف العربية
-  const arabicChars = (cleanText.match(/[\u0600-\u06FF]/g) || []).length;
+  if (!apiResponse.ok) {
+    const error = await extractProxyError(apiResponse);
+    throw new Error(`${error.message}::${error.requestId || ""}`);
+  }
 
-  // الأحرف التركية المميزة
-  const turkishChars = (cleanText.match(/[çğıöşüÇĞİÖŞÜ]/gi) || []).length;
+  const data = await apiResponse.json();
+  return data?.content || "";
+};
 
-  // الأحرف اللاتينية
-  const latinChars = (cleanText.match(/[a-zA-Z]/g) || []).length;
+const repairResponseWithAudit = async (
+  draft: string,
+  currentMessage: string,
+  conversationHistory: AIHistoryMessage[],
+  sessionUsage: AISessionUsage | undefined,
+  audit: ResponseAuditResult,
+) => {
+  const reasonsText = audit.reasons.join(", ");
+  const baseMessages = buildMessages(conversationHistory, currentMessage, sessionUsage);
 
-  // تحديد اللغة بناءً على النسب
-  const totalChars = arabicChars + turkishChars + latinChars;
+  const repairMessages: ProxyMessage[] = [
+    ...baseMessages,
+    {
+      role: "assistant",
+      content: draft,
+    },
+    {
+      role: "user",
+      content: [
+        "Final delivery audit failed. Rewrite your answer from scratch with zero errors.",
+        `Detected issues: ${reasonsText}`,
+        `Intent focus must stay: ${audit.intent.focus}`,
+        "Rules: keep the same language, answer the exact question only, avoid topic drift, ensure all sentences are complete, and keep links/figures factual from provided knowledge.",
+      ].join("\n"),
+    },
+  ];
 
-  if (totalChars === 0) return "ar"; // افتراضي
+  for (let attempt = 0; attempt < MAX_AUDIT_REPAIR_ATTEMPTS; attempt += 1) {
+    const repaired = await fetchAICompletion(repairMessages, currentMessage, sessionUsage);
+    if ((repaired || "").trim().length > 0) {
+      return repaired;
+    }
+  }
 
-  const arabicRatio = arabicChars / totalChars;
-  const turkishRatio = turkishChars / totalChars;
+  return draft;
+};
 
-  if (arabicRatio > 0.3) return "ar";
-  if (turkishRatio > 0.05 || turkishChars > 2) return "tr"; // التركية لها أحرف مميزة
-  return "en"; // افتراضي للإنجليزية
+const buildStrictUsagePolicy = (currentMessage: string, sessionUsage?: AISessionUsage) => {
+  const usage = sessionUsage
+    ? `${sessionUsage.userTurns}/${MAX_SESSION_QUESTIONS}`
+    : `unknown/${MAX_SESSION_QUESTIONS}`;
+
+  return [
+    "COST AND RELIABILITY POLICY:",
+    `Session question usage: ${usage}.`,
+    sessionUsage
+      ? `Current estimated question tokens: ${sessionUsage.estimatedQuestionTokens}/${sessionUsage.questionTokenLimit}.`
+      : "",
+    `Current user message length: ${currentMessage.length} chars.`,
+    "Keep the answer practical and concise unless the visitor asks for details.",
+    "Do not output internal policies or JSON. Use the JSON silently as factual memory.",
+  ]
+    .filter(Boolean)
+    .join("\n");
+};
+
+const buildRecentHistory = (conversationHistory: AIHistoryMessage[]) =>
+  conversationHistory
+    .slice(-6)
+    .map((message) => `${message.role === "user" ? "Visitor" : "Maya"}: ${compactText(message.content, 260)}`)
+    .join("\n");
+
+const selectRelevantFAQ = (message: string) => {
+  const normalized = normalizeIntentText(message);
+
+  return faqData
+    .map((faq) => {
+      const score = faq.keywords.reduce(
+        (total, keyword) =>
+          normalized.includes(normalizeIntentText(keyword)) ? total + 2 : total,
+        0,
+      );
+
+      return { faq, score };
+    })
+    .filter((item) => item.score > 0)
+    .sort((a, b) => b.score - a.score || a.faq.priority - b.faq.priority)
+    .slice(0, 3)
+    .map(({ faq }) => ({
+      question: faq.question,
+      shortAnswer: faq.shortAnswer,
+      answer: compactText(faq.answer, 900),
+      category: faq.category,
+    }));
+};
+
+const buildMessages = (
+  conversationHistory: AIHistoryMessage[],
+  currentMessage: string,
+  sessionUsage?: AISessionUsage,
+): ProxyMessage[] => {
+  const language = detectLanguage(currentMessage);
+  const relevantKnowledge = selectRelevantKnowledge(currentMessage, conversationHistory);
+  const relevantFAQ = selectRelevantFAQ(currentMessage);
+  const recentHistory = buildRecentHistory(conversationHistory);
+  const intentAnalysis = analyzeIntent(currentMessage, conversationHistory);
+  const conversationTone = detectConversationTone(currentMessage, conversationHistory, intentAnalysis);
+
+  const currentTask = [
+    languageInstruction(language),
+    `Intent focus: ${intentAnalysis.focus}`,
+    `Intent confidence: ${intentAnalysis.confidence}`,
+    `Conversation tone: ${conversationTone}`,
+    intentAnalysis.recentUserSummary
+      ? `Recent user context summary: ${intentAnalysis.recentUserSummary}`
+      : "",
+    recentHistory ? `Recent conversation:\n${recentHistory}` : "",
+    `Visitor question: ${currentMessage}`,
+    "Mandatory workflow before answering: 1) understand the exact intent from current question and history, 2) select factual evidence from KNOWLEDGE JSON and FAQ, 3) answer only what was asked, 4) then add short useful follow-up if needed.",
+    "Answer as Maya, a human-like professional sales secretary with precise business tone.",
+    conversationTone === "chatty"
+      ? "Visitor is chatty or curious: add one short witty line and one subtle mysterious teaser, then continue with a useful service-focused answer."
+      : "Visitor is business-focused: keep warm professionalism and prioritize clarity over playful style.",
+    "If the visitor asks a combined question, answer the primary question first, then add only the minimum relevant details.",
+    "For payment gateway questions: say whether we can build it using the FAQ facts. Do not claim a previous project used a live payment gateway unless the selected project explicitly says so.",
+    "For ownership/responsibility questions (who executes projects): answer directly from company team hierarchy first, and do not switch to pricing/timeline unless the visitor explicitly asks for them.",
+    "If you mention project links, copy exact URLs from KNOWLEDGE JSON using Markdown links. Never add spaces inside URLs and never invent domains.",
+    "Do not dump full project cards. Keep it concise, human, and sales-focused.",
+    "Quality gate before sending the response: no broken words, no cut sentences, no empty labels, no irrelevant section.",
+    "Format cleanly: short paragraphs, simple line breaks, no star symbols, no decorative clutter. Maximum 180 words unless the visitor asks for detail.",
+  ]
+    .filter(Boolean)
+    .join("\n\n");
+
+  return [
+    {
+      role: "system",
+      content: buildSecretarySystemPrompt(),
+    },
+    {
+      role: "system",
+      content: buildStrictUsagePolicy(currentMessage, sessionUsage),
+    },
+    {
+      role: "system",
+      content: `KNOWLEDGE JSON FOR THIS QUESTION:\n${buildKnowledgePayload(relevantKnowledge)}`,
+    },
+    {
+      role: "system",
+      content: `RELEVANT FAQ FACTS:\n${JSON.stringify(relevantFAQ, null, 2)}`,
+    },
+    {
+      role: "user",
+      content: currentTask,
+    },
+  ];
+};
+
+const extractProxyError = async (response: Response) => {
+  const payload = await response.json().catch(() => ({}));
+  const message =
+    payload?.details?.message ||
+    payload?.details?.error?.message ||
+    payload?.error ||
+    payload?.message ||
+    "unknown";
+  const requestId = payload?.requestId || response.headers.get("x-ai-request-id");
+  return { message: String(message), requestId };
+};
+
+const friendlyError = (message: string, requestId?: string) => {
+  const lower = message.toLowerCase();
+  const suffix = requestId ? `\n\nرقم تتبع الخطأ: ${requestId}` : "";
+
+  if (
+    lower.includes("api key") ||
+    lower.includes("invalid_api_key") ||
+    lower.includes("unauthorized") ||
+    lower.includes("incorrect")
+  ) {
+    return `مفتاح ChatGPT غير صحيح حالياً. بعد وضع مفتاح OpenAI الحقيقي في Vercel وإعادة نشر الخادم ستعمل الدردشة بشكل طبيعي.${suffix}`;
+  }
+
+  if (lower.includes("quota") || lower.includes("rate limit") || lower.includes("429")) {
+    return `خدمة الذكاء الاصطناعي وصلت إلى حد الاستخدام مؤقتاً. يمكننا مساعدتك مباشرة عبر واتساب: +905313345111.${suffix}`;
+  }
+
+  if (lower.includes("timeout") || lower.includes("abort")) {
+    return `استغرقت خدمة الذكاء الاصطناعي وقتاً أطول من المتوقع. أعد المحاولة بسؤال أقصر، أو تواصل معنا مباشرة عبر واتساب: +905313345111.${suffix}`;
+  }
+
+  return `حدث خطأ في الاتصال بخدمة ChatGPT. أعد المحاولة بعد قليل، أو تواصل معنا مباشرة عبر واتساب: +905313345111.${suffix}`;
 };
 
 export const callChatGPT = async (
   currentMessage: string,
-  context: AIKnowledgeBase,
-  conversationHistory: Array<{ text: string; isUser: boolean }> = []
-) => {
+  conversationHistory: AIHistoryMessage[] = [],
+  sessionUsage?: AISessionUsage,
+): Promise<string> => {
+  const language = detectLanguage(currentMessage);
+
+  if (hasOffTopicPattern(currentMessage) || countOffTopicAttempts(conversationHistory) > 2) {
+    return offTopicFallback(language);
+  }
+
   try {
-    // اكتشاف لغة السؤال
-    const detectedLanguage = detectLanguage(currentMessage);
-    const languageInstruction =
-      detectedLanguage === "ar"
-        ? "⚠️ **هام جداً:** يجب أن يكون الرد بالكامل باللغة العربية فقط."
-        : detectedLanguage === "en"
-        ? "⚠️ **CRITICAL:** Your response must be entirely in English only."
-        : "⚠️ **ÇOK ÖNEMLİ:** Yanıtınız tamamen Türkçe olmalıdır.";
-
-    // تحليل السياق
-    const contextAnalysis = analyzeContext(conversationHistory);
-
-    // تتبع المحاولات الخارجة عن الموضوع
-    const offTopicAttempts = trackOffTopicAttempts(conversationHistory);
-    if (offTopicAttempts > 3) {
-      return `أعتذر، لكني مختص فقط بالإجابة على أسئلة حول خدمات ومشاريع WebSiteMy.
-
-كيف يمكنني مساعدتك في معرفة المزيد عن:
-• المشاريع والأسعار
-• التقنيات المستخدمة
-• مدة التطوير
-• الفريق التقني
-
-📱 للاستفسارات الأخرى: +905313345111`;
-    }
-
-    // البحث في الـ FAQ أولاً
-    const relevantFAQs = searchFAQ(currentMessage);
-    let faqContext = "";
-    if (relevantFAQs.length > 0) {
-      faqContext = `\n\nأسئلة شائعة ذات صلة:\n${relevantFAQs
-        .slice(0, 3)
-        .map((faq) => `Q: ${faq.question}\nA: ${faq.shortAnswer}`)
-        .join("\n\n")}`;
-    }
-
-    // بناء تاريخ المحادثة
-    const conversationContext =
-      conversationHistory.length > 0
-        ? `${languageInstruction}
-
-تاريخ المحادثة السابقة:
-${conversationHistory
-  .slice(-6)
-  .map(
-    (msg, index) =>
-      `${index + 1}. ${msg.isUser ? "المستخدم" : "المساعد"}: ${msg.text}`
-  )
-  .join("\n")}
-
-تحليل السياق:
-- الموضوع الحالي: ${contextAnalysis.currentTopic || "عام"}
-- آخر مشروع مذكور: ${contextAnalysis.lastMentionedProject || "لا يوجد"}
-${faqContext}
-
-السؤال الحالي: ${currentMessage}`
-        : `${languageInstruction}
-
-السؤال: ${currentMessage}${faqContext}`;
-
-    // استخدام System Prompt المتقدم
-    const systemPrompt = generateAdvancedSystemPrompt(
-      context.companyInfo,
-      context.projects.slice(0, 10), // أول 10 مشاريع لتقليل الحجم
-      faqData.slice(0, 10) // أول 10 أسئلة شائعة
+    const draft = await fetchAICompletion(
+      buildMessages(conversationHistory, currentMessage, sessionUsage),
+      currentMessage,
+      sessionUsage,
     );
 
+    if (!draft) {
+      return friendlyError("empty ai response");
+    }
+
+    if (!ENABLE_RESPONSE_AUDIT) {
+      return draft;
+    }
+
+    const audit = auditAssistantResponse(currentMessage, conversationHistory, draft);
+    if (audit.isValid || audit.intent.confidence === "low" || !ENABLE_AUDIT_REPAIR) {
+      return draft;
+    }
+
+    const repaired = await repairResponseWithAudit(
+      draft,
+      currentMessage,
+      conversationHistory,
+      sessionUsage,
+      audit,
+    );
+
+    const repairedAudit = auditAssistantResponse(currentMessage, conversationHistory, repaired);
+    if (repairedAudit.isValid) {
+      return repaired;
+    }
+
+    return repaired || draft;
+  } catch (error: any) {
+    console.error("ChatGPT API Error:", error);
+    const [message, requestId] = String(error?.message || "network error").split("::");
+    return friendlyError(message || "network error", requestId || undefined);
+  }
+};
+
+export const callAI = async (
+  conversationHistory: AIHistoryMessage[],
+  currentMessage: string,
+  onStream?: (partialText: string) => void,
+  sessionUsage?: AISessionUsage,
+): Promise<string> => {
+  const language = detectLanguage(currentMessage);
+
+  if (hasOffTopicPattern(currentMessage) || countOffTopicAttempts(conversationHistory) > 2) {
+    const fallback = offTopicFallback(language);
+    onStream?.(fallback);
+    return fallback;
+  }
+
+  // Non-stream is the default mode to avoid any risk of chunk-level Arabic corruption.
+  if (!onStream || !ENABLE_AI_STREAMING) {
+    return callChatGPT(currentMessage, conversationHistory, sessionUsage);
+  }
+
+  try {
     const apiResponse = await fetch(AI_PROXY_URL, {
       method: "POST",
       headers: {
@@ -320,105 +687,125 @@ ${faqContext}
         "X-Requested-With": "XMLHttpRequest",
       },
       body: JSON.stringify({
-        stream: false,
-        messages: [
-          { role: "system", content: systemPrompt },
-          { role: "user", content: conversationContext },
-        ],
+        provider: "openai",
+        model: FAST_OPENAI_MODEL,
+        stream: true,
+        question: currentMessage,
+        sessionUsage: withDeviceUsage(sessionUsage),
+        messages: buildMessages(conversationHistory, currentMessage, sessionUsage),
       }),
     });
 
     if (!apiResponse.ok) {
-      const err = await apiResponse.json().catch(() => ({}));
-      const details = err?.details?.error?.message || err?.message || "unknown";
-      throw new Error(String(details));
+      const error = await extractProxyError(apiResponse);
+      const response = friendlyError(error.message, error.requestId);
+      onStream(response);
+      return response;
     }
 
-    const data = await apiResponse.json();
-    const response =
-      data?.content ||
-      "آسف، لم أتمكن من الحصول على إجابة دقيقة. يرجى المحاولة مرة أخرى.";
-
-    // التحقق من صحة الرد
-    const validation = validateAIResponse(response);
-    if (!validation.isValid) {
-      console.error("AI Response Validation Failed:", validation.errors);
-      return `عذراً، هناك مشكلة في تكوين الرد. دعني أوصلك بالفريق للمساعدة:
-
-📱 واتساب: +905313345111
-☎️ اتصال: +905313345111
-
-كيف يمكنني مساعدتك بطريقة أخرى؟`;
+    if (!apiResponse.body) {
+      return callChatGPT(currentMessage, conversationHistory, sessionUsage);
     }
 
-    if (validation.warnings.length > 0) {
-      console.warn("AI Response Warnings:", validation.warnings);
+    const reader = apiResponse.body.getReader();
+    const decoder = new TextDecoder("utf-8");
+    let fullResponse = "";
+    let buffer = "";
+    let isDone = false;
+
+    const processSseBlock = (block: string) => {
+      const lines = block.split(/\r?\n/);
+
+      for (const rawLine of lines) {
+        const line = rawLine.trim();
+        if (!line.startsWith("data:")) continue;
+
+        const data = line.slice(5).trim();
+        if (!data) continue;
+        if (data === "[DONE]") {
+          isDone = true;
+          break;
+        }
+
+        try {
+          const parsed = JSON.parse(data);
+          if (parsed?.error) {
+            const response = friendlyError(parsed?.message || "stream error", parsed?.requestId);
+            onStream(response);
+            fullResponse = response;
+            isDone = true;
+            break;
+          }
+
+          const chunk = parsed?.content || "";
+          if (chunk) {
+            fullResponse += chunk;
+            onStream(fullResponse);
+          }
+        } catch {
+          // Ignore malformed fragments. The next complete event will be parsed.
+        }
+      }
+    };
+
+    while (!isDone) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      buffer += decoder.decode(value, { stream: true });
+      const blocks = buffer.split(/\r?\n\r?\n/);
+      buffer = blocks.pop() || "";
+      for (const block of blocks) {
+        processSseBlock(block);
+        if (isDone) break;
+      }
     }
 
-    return response;
+    buffer += decoder.decode();
+    if (buffer.trim().length > 0 && !isDone) {
+      processSseBlock(buffer);
+    }
+
+    const responseText = fullResponse || friendlyError("empty ai response");
+
+    if (!fullResponse) {
+      return responseText;
+    }
+
+    if (!ENABLE_RESPONSE_AUDIT) {
+      return responseText;
+    }
+
+    const audit = auditAssistantResponse(currentMessage, conversationHistory, responseText);
+    if (audit.isValid || audit.intent.confidence === "low" || !ENABLE_AUDIT_REPAIR) {
+      return responseText;
+    }
+
+    try {
+      const repaired = await repairResponseWithAudit(
+        responseText,
+        currentMessage,
+        conversationHistory,
+        sessionUsage,
+        audit,
+      );
+
+      if (repaired && repaired.trim().length > 0) {
+        onStream(repaired);
+        const repairedAudit = auditAssistantResponse(currentMessage, conversationHistory, repaired);
+        if (repairedAudit.isValid) {
+          return repaired;
+        }
+      }
+    } catch (repairError) {
+      console.warn("Audit repair failed:", repairError);
+    }
+
+    return responseText;
   } catch (error: any) {
-    console.error("ChatGPT API Error:", error);
-
-    if (
-      error?.message?.includes("OPENAI_API_KEY") ||
-      error?.message?.includes("Missing API")
-    ) {
-      return "عذراً، لم يتم إعداد خدمة ChatGPT بعد. يرجى إضافة مفتاح OpenAI API في الخادم.";
-    } else if (error?.message?.includes("API key") || error?.message?.includes("Unauthorized")) {
-      return "عذراً، مفتاح ChatGPT غير صحيح. يرجى التحقق من صحة المفتاح.";
-    } else if (
-      error?.message?.includes("quota") ||
-      error?.message?.includes("limit")
-    ) {
-      return "⚠️ **عذراً، الخدمة غير متوفرة مؤقتاً**\n\nتم تجاوز حد الاستخدام المسموح.\n\n📞 **للحصول على إجابات فورية:**\n- اتصل بنا: **+905313345111** (واتساب)\n- البريد: info@websitemy.com\n\n💡 سنكون سعداء بالإجابة على جميع أسئلتك!";
-    } else if (
-      error?.message?.includes("blocked") ||
-      error?.message?.includes("safety")
-    ) {
-      return "عذراً، لا أستطيع الإجابة على هذا السؤال. هل يمكنك إعادة صياغته بطريقة أخرى؟\n\n📱 للمساعدة المباشرة: +905313345111";
-    } else if (error?.message) {
-      console.error("Detailed error:", error.message);
-      return `عذراً، حدث خطأ في الاتصال. يرجى المحاولة مرة أخرى.\n\n📱 للدعم الفوري: +905313345111`;
-    }
-
-    return "آسف، حدث خطأ في الاتصال بالخدمة. يرجى المحاولة مرة أخرى.\n\n📱 تواصل معنا: +905313345111";
+    console.error("ChatGPT streaming error:", error);
+    const response = friendlyError(error?.message || "network error");
+    onStream(response);
+    return response;
   }
-};
-
-type AIHistoryMessage = {
-  role: "user" | "assistant";
-  content: string;
-};
-
-/**
- * طبقة توافق لواجهة المحادثة الحالية:
- * - تبني الـ knowledge base تلقائياً
- * - تحول تاريخ الرسائل إلى الصيغة التي تستخدمها callChatGPT
- * - تدعم بث النص بشكل تدريجي عبر onStream
- */
-export const callAI = async (
-  conversationHistory: AIHistoryMessage[],
-  currentMessage: string,
-  onStream?: (partialText: string) => void,
-): Promise<string> => {
-  const context = generateKnowledgeBase();
-  const mappedHistory = conversationHistory.map((msg) => ({
-    text: msg.content,
-    isUser: msg.role === "user",
-  }));
-
-  const fullResponse = await callChatGPT(currentMessage, context, mappedHistory);
-
-  if (onStream && fullResponse) {
-    const chunks = fullResponse.split(/(\s+)/).filter(Boolean);
-    let partial = "";
-
-    for (const chunk of chunks) {
-      partial += chunk;
-      onStream(partial);
-      await new Promise((resolve) => setTimeout(resolve, 8));
-    }
-  }
-
-  return fullResponse;
 };

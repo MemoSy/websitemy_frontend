@@ -57,22 +57,36 @@
         "member1": {
           "name": "Ahmed Al-Mubayed",
           "role": "Müdür",
-          "skills": ["Genel Müdür"]
+          "skills": [
+            "Genel Müdür"
+          ]
         },
         "member2": {
           "name": "Mahmut Elmabit",
           "role": "Full Stack Web Geliştirici",
-          "skills": ["React", "Node.js", "MongoDB", "next.js"]
+          "skills": [
+            "React",
+            "Node.js",
+            "MongoDB",
+            "next.js"
+          ]
         },
         "member3": {
           "name": "Asma Al-Juma",
           "role": "UI/UX Tasarımcı",
-          "skills": ["Figma", "Adobe XD", "User Research"]
+          "skills": [
+            "Figma",
+            "Adobe XD",
+            "User Research"
+          ]
         },
         "member4": {
           "name": "Sara Hallaq",
           "role": "Frontend Geliştirici",
-          "skills": ["React", "Javascript"]
+          "skills": [
+            "React",
+            "Javascript"
+          ]
         }
       }
     },
@@ -1076,6 +1090,102 @@
       "feature18": "Anında geçişle tam Arapça/İngilizce desteği",
       "feature19": "Mobil ve tablet için %100 duyarlı arayüz",
       "feature20": "Gerçek zamanlı mesajlaşma (Mesajlaşma / Sohbet)"
+    }
+  },
+  "goldCup": {
+    "title": "Altın Fincan - Meşrubat Markası",
+    "description": "Türk ve Arap meşrubat endüstrisi için profesyonel e-ticaret platformu, gelişmiş ürün yönetimi, envanter sistemi ve müşteri bağlantı yönetimi ile",
+    "fullDescription": "Altın Fincan, Türkiye ve Arap ülkelerinde meşrubat satışını yapan başarılı bir marka için geliştirilmiş profesyonel e-ticaret platformudur. Platform, ürün kataloğu yönetimi, envanter takibi, müşteri yönetimi, satış analitiği ve entegre sipariş sistemi ile tam kapsamlı bir çözüm sunmaktadır. Platform Türkçe, Arapça ve İngilizce dillerini desteklemekte, mobil-friendly tasarıma ve hızlı yükleme performansına sahiptir.",
+    "duration": "6 hafta",
+    "clientType": "Meşrubat Mağazası - E-Ticaret",
+    "complexity": "Orta",
+    "teamSize": "2 geliştirici",
+    "clientFeedback": "Müşteri memnuniyeti %95 ve sipariş oranında %125 artış",
+    "keyFeatures": {
+      "feature1": "Ürün kategorileri ve alt kategoriler ile gelişmiş ürün yönetimi",
+      "feature2": "Gerçek zamanlı envanter takibi sistemi",
+      "feature3": "Perakende ve toptan fiyatlandırma seçenekleri",
+      "feature4": "Müşteri yönetimi ve sipariş geçmişi",
+      "feature5": "Güvenli çoklu ödeme geçitleri (Kredi kartı, havale, kapıda ödeme)",
+      "feature6": "Kargo entegrasyonu ve otomatik takibi",
+      "feature7": "Canlı satış analitiği ve raporlar",
+      "feature8": "Kupon ve promosyon sistemi",
+      "feature9": "Müşteri yorumları ve derecelendirmeler"
+    },
+    "objectives": {
+      "objective1": "Altın Fincan markasının çevrimiçi satış varlığını güçlendirmek",
+      "objective2": "Müşteri deneyimini iyileştirerek sipariş sayısını artırmak",
+      "objective3": "Verimli ürün ve sipariş yönetimi sağlamak",
+      "objective4": "Türk ve Arap pazarlarına etkin erişim sağlamak",
+      "objective5": "Marka bilinirliğini artırmak ve müşteri sadakatini güçlendirmek"
+    },
+    "challenges": {
+      "challenge1": "Türkçe, Arapça ve İngilizce desteğinde dil seçimini düzgün yönetmek",
+      "challenge2": "Ürün görselleri ve video içeriği için performansı optimize etmek",
+      "challenge3": "Çoklu para birimleri (TL, Ş.P., USD) ile fiyat güncellemelerini senkronize etmek",
+      "challenge4": "Türk ve Arap bölgelerinden farklı kargo hizmetleri ile entegrasyonu sağlamak",
+      "challenge5": "Yüksek hacimli sipariş dönemlerinde sistem stabilitesini korumak"
+    },
+    "features": {
+      "feature1": "Ürün kategorileri ve alt kategoriler ile gelişmiş ürün yönetimi",
+      "feature2": "Gerçek zamanlı envanter ve stok takibi",
+      "feature3": "Perakende ve toptan fiyatlandırma seçenekleri",
+      "feature4": "Müşteri hesapları ve sipariş geçmişi",
+      "feature5": "Kredi kartı, banka havalesi ve kapıda ödeme seçenekleri",
+      "feature6": "Kargo hizmetleri ile otomatik takip sistemi",
+      "feature7": "Satış, gelir ve müşteri analitiği paneli",
+      "feature8": "Belirli zamanlara ve ürünlere kupon kodları",
+      "feature9": "Müşteri yorumları ve 5 yıldızlı derecelendirme sistemi",
+      "feature10": "Müşteri hizmetleri için WebSocket tabanlı canlı destek",
+      "feature11": "E-mail ve SMS bildirimleri sipariş durumu için",
+      "feature12": "Mobil uygulama API uyumluluğu",
+      "feature13": "Ürün görselleri için CDN entegrasyonu",
+      "feature14": "İleri arama ve filtreleme sistemi",
+      "feature15": "Sosyal medya entegrasyonu ve paylaşım seçenekleri",
+      "feature16": "Flash haddi ve haftalık özellikleri",
+      "feature17": "Yönetici paneli ile tam kontrol",
+      "feature18": "Türkçe, Arapça, İngilizce tam destek (RTL/LTR)",
+      "feature19": "Mobil ve tablet cihazlar için tam duyarlı tasarım",
+      "feature20": "Google Analytics ve SEO optimizasyonu"
+    }
+  },
+  "emarHome": {
+    "title": "EMAR İç Mimarlık ve Müteahhitlik",
+    "description": "İç mimarlık ve müteahhitlik alanında uzmanlaşmış \"EMAR\" için zarif bir kullanıcı arayüzü, entegre bir CMS ve otomatik iki dilli (Arapça/İngilizce) destek sunan lüks bir web platformu.",
+    "fullDescription": "Mimari projeler, iç mimari tasarımlar, mobilya ve yapı malzemelerini sergilemek için EMAR platformu. Projede, NestJS ile oluşturulmuş özel bir Yönetici Paneli içerir. Yönetim panelinden girilen içeriği kullanıcı arayüzüne anında çeviren entegre otomatik çeviri sistemi, gelişmiş izleme (Analytics) sistemi ve doğrudan yüksek kaliteli medya yüklemeleri sistemin öne çıkan özellikleridir.",
+    "duration": "1.5 Ay",
+    "clientType": "İç Mimarlık, Mimari ve Müteahhitlik Şirketi",
+    "complexity": "Gelişmiş - Yönetici paneli, otomatik çeviri ve yerleşik izleme sistemi.",
+    "teamSize": "Full-Stack Geliştirici + Frontend Geliştirici + UI/UX Tasarımcı",
+    "keyFeatures": {
+      "feature1": "Malzemeleri ve Stilleri Bağlama: Malzemeleri, stilleri ve tasarım kalıplarını birbirine kolayca bağlama yeteneği.",
+      "feature2": "Eski ve Yeni Vitrin: Eski ve yeni tasarımları akıllı kategorilerle sergilemek için özel bölümler.",
+      "feature3": "Makaleler ve İçerik: Modern dekorasyon ve mobilya ipuçları için kapsamlı bir bölüm.",
+      "feature4": "Çarpıcı Görsel Efektler: Mobilyaların uzman görsel efektlerle profesyonel sunumu.",
+      "feature5": "Yapı Hizmetleri ve Shop Drawing (Uygulama Projeleri) bölümü.",
+      "feature6": "Mobilya, Malzemeler ve Mutfaklar için Katalog sistemi.",
+      "feature7": "Haber ve makale yayınlamak için Blog Sistemi."
+    },
+    "objectives": {
+      "objective1": "Şirket markasının lüksünü yansıtan dijital arayüz oluşturmak.",
+      "objective2": "Kapsamlı bir kontrol paneli üzerinden yazılımsız içerik güncellemelerini kolaylaştırmak.",
+      "objective3": "Otomatik çeviriyle hedef kitleye verimli şekilde ulaşmak.",
+      "objective4": "Harika kullanıcı deneyimi sağlamak için yüksek kaliteli proje resimleri sunmak."
+    },
+    "challenges": {
+      "challenge1": "Yöneticiler içerik kaydederken dinamik veri çevirisini otomatikleştirmek.",
+      "challenge2": "Doğrudan görsel yüklemelerini yönetmek ve sistemi aşırı yüklemekten kaçınmak için mimari oluşturmak.",
+      "challenge3": "Harika arayüz ve efektlerin (LTR/RTL) geçişlerde sorunsuz çalışması.",
+      "challenge4": "Doğrudan analiz sistemi kurmak."
+    },
+    "features": {
+      "feature1": "Malzemeleri ve Stilleri Bağlama: Malzemeleri, stilleri ve tasarım kalıplarını birbirine kolayca bağlama yeteneği.",
+      "feature2": "Eski ve Yeni Vitrin: Eski ve yeni tasarımları akıllı kategorilerle sergilemek için özel bölümler.",
+      "feature3": "Makaleler ve İçerik: Modern dekorasyon ve mobilya ipuçları için kapsamlı bir bölüm.",
+      "feature4": "Çarpıcı Görsel Efektler: Mobilyaların uzman görsel efektlerle profesyonel sunumu.",
+      "feature5": "Yapı Hizmetleri ve Shop Drawing (Uygulama Projeleri) bölümü.",
+      "feature6": "Mobilya, Malzemeler ve Mutfaklar için Katalog sistemi.",
+      "feature7": "Haber ve makale yayınlamak için Blog Sistemi."
     }
   }
 }

@@ -8,8 +8,8 @@
 
 const LS_KEY = 'ws_chat_session';
 
-/** الحد الأقصى لعدد الرسائل المحفوظة في التاريخ (10 أزواج = 20 رسالة) */
-const MAX_HISTORY = 20;
+/** الحد الأقصى لعدد الرسائل المحفوظة في التاريخ (20 زوجاً = 40 رسالة) */
+const MAX_HISTORY = 40;
 
 export interface StoredMessage {
   role: 'user' | 'assistant';
@@ -20,13 +20,20 @@ export interface StoredMessage {
 export interface ChatSession {
   sessionId: string;
   messages: StoredMessage[];
+  userTurns: number;
+}
+
+function countUserTurns(messages: StoredMessage[]): number {
+  return messages.reduce((total, message) => {
+    return message.role === 'user' ? total + 1 : total;
+  }, 0);
 }
 
 /**
  * توليد بصمة الجهاز — نفس الجهاز يعطي نفس الرقم دائماً.
  * لا تعتمد على IP (يتغير) بل على خصائص الجهاز والمتصفح.
  */
-function generateDeviceFingerprint(): string {
+export function getDeviceFingerprint(): string {
   try {
     const parts = [
       navigator.userAgent,
@@ -50,6 +57,24 @@ function generateDeviceFingerprint(): string {
   }
 }
 
+export function getDeviceInfo(): Record<string, string | number> {
+  try {
+    return {
+      language: navigator.language,
+      languages: navigator.languages?.join(',') || navigator.language,
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || '',
+      timezoneOffset: new Date().getTimezoneOffset(),
+      screen: `${screen.width}x${screen.height}`,
+      colorDepth: screen.colorDepth,
+      hardwareConcurrency: navigator.hardwareConcurrency ?? 0,
+      maxTouchPoints: navigator.maxTouchPoints ?? 0,
+      platform: navigator.platform || '',
+    };
+  } catch {
+    return {};
+  }
+}
+
 /**
  * تحميل الجلسة الموجودة أو إنشاء جديدة.
  * نفس الجهاز = نفس الجلسة = نفس التاريخ.
@@ -58,9 +83,16 @@ export function getOrCreateSession(): ChatSession {
   try {
     const raw = localStorage.getItem(LS_KEY);
     if (raw) {
-      const parsed = JSON.parse(raw) as ChatSession;
+      const parsed = JSON.parse(raw) as Partial<ChatSession>;
       if (parsed?.sessionId && Array.isArray(parsed?.messages)) {
-        return parsed;
+        return {
+          sessionId: parsed.sessionId,
+          messages: parsed.messages,
+          userTurns:
+            typeof parsed.userTurns === 'number' && Number.isFinite(parsed.userTurns)
+              ? Math.max(parsed.userTurns, countUserTurns(parsed.messages))
+              : countUserTurns(parsed.messages),
+        };
       }
     }
   } catch {
@@ -68,8 +100,9 @@ export function getOrCreateSession(): ChatSession {
   }
 
   const session: ChatSession = {
-    sessionId: `ws_${generateDeviceFingerprint()}`,
+    sessionId: `ws_${getDeviceFingerprint()}`,
     messages: [],
+    userTurns: 0,
   };
   saveSession(session);
   return session;
@@ -80,9 +113,11 @@ export function getOrCreateSession(): ChatSession {
  */
 export function saveSession(session: ChatSession): void {
   try {
+    const preservedTurns = Math.max(session.userTurns || 0, countUserTurns(session.messages));
     const trimmed: ChatSession = {
       ...session,
       messages: session.messages.slice(-MAX_HISTORY),
+      userTurns: preservedTurns,
     };
     localStorage.setItem(LS_KEY, JSON.stringify(trimmed));
   } catch {
@@ -101,6 +136,7 @@ export function addMessage(
 ): ChatSession {
   const updated: ChatSession = {
     ...session,
+    userTurns: role === 'user' ? session.userTurns + 1 : session.userTurns,
     messages: [
       ...session.messages,
       { role, content, timestamp: Date.now() },

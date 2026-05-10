@@ -125,19 +125,20 @@ React, Next.js, TypeScript, Tailwind CSS, NestJS, Node.js, MongoDB, GSAP, Framer
 - تعليقات بدون تسجيل
 رأي العميل: "تجربة ممتازة وزيادة في المبيعات بنسبة 40%"
 
-### [6] Artwin — معرض أثاث تركي
-النوع: متجر إلكتروني / معرض
-الرابط: artwin.store
-السعر: $650 | المدة: شهرين | الفريق: 4 مطورين | التقييم: ★4.8
-التقنيات: Next.js, MongoDB, Tailwind CSS, TypeScript
-العميل: شركة أثاث تركية
+### [6] EMAR — التصميم الداخلي والمقاولات
+النوع: منصة أعمال / موقع عرض مشاريع
+الرابط: emarhome.com
+السعر: $1,200 | المدة: شهر ونصف | الفريق: 3 مطورين | التقييم: ★5.0
+التقنيات: Next.js, React, Tailwind CSS, TypeScript, NestJS, MongoDB, Cloudinary
+العميل: شركة تصميم داخلي ومقاولات
 الميزات الرئيسية:
-- كتالوج منتجات تفاعلي ثلاثي الأبعاد 3D
-- نظام تحكم ذكي
-- دعم التركية والإنجليزية والعربية
-- تصميم متجاوب مع كل الشاشات
-- نظام إدارة الإحصائيات
-رأي العميل: "زيادة الطلبات الدولية بنسبة 60%"
+- منصة فاخرة لعرض المشاريع
+- لوحة تحكم متكاملة لإدارة المحتوى
+- ترجمة تلقائية عربي/إنجليزي
+- أقسام قبل/بعد للعرض
+- نظام كتالوجات للأثاث والمواد
+- تحليلات أداء متقدمة
+رأي العميل: "منصة احترافية عززت صورة العلامة وسهّلت إدارة المحتوى بشكل كبير"
 
 ### [7] Pro Camz — متجر كاميرات
 النوع: متجر إلكتروني
@@ -279,7 +280,7 @@ React, Next.js, TypeScript, Tailwind CSS, NestJS, Node.js, MongoDB, GSAP, Framer
 - سوريا 2030 (syria-2030.vercel.app) — منصة رؤية تفاعلية
 
 **س: هل عندكم أمثلة متاجر إلكترونية؟**
-ج: نعم! ShapeShop (shapeshop.store)، Artwin (artwin.store)، Pro Camz (camera-shop-teal.vercel.app)، جولد كاب (gold-cup.vercel.app).
+ج: نعم! ShapeShop (shapeshop.store)، Pro Camz (camera-shop-teal.vercel.app)، جولد كاب (gold-cup.vercel.app).
 
 **س: هل عندكم أمثلة منصات SaaS؟**
 ج: نعم! علمني (allimnii.site)، شاركنا (sharekna.online)، CodeLam (codelam.site)، Comprevende (comprevende.com).

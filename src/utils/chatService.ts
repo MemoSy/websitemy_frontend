@@ -1,4 +1,8 @@
-const API_BASE_URL = 'https://websitemy-backend.vercel.app'; // Adjust to your backend URL
+import { getDeviceFingerprint, getDeviceInfo } from './sessionManager';
+
+const API_BASE_URL = (
+  import.meta.env.VITE_BACKEND_URL || 'https://websitemy-backend.vercel.app'
+).replace(/\/$/, '');
 
 export interface ChatMessage {
   id: string;
@@ -58,6 +62,8 @@ export const saveChatSession = async (sessionData: ChatSession): Promise<void> =
       },
       body: JSON.stringify({
         sessionId: sessionData.sessionId,
+        clientFingerprint: getDeviceFingerprint(),
+        deviceInfo: getDeviceInfo(),
         messages: sessionData.messages,
         keywords,
         country: sessionData.country,
@@ -85,6 +91,8 @@ export const updateChatSession = async (sessionId: string, messages: ChatMessage
         'X-Requested-With': 'XMLHttpRequest',
       },
       body: JSON.stringify({
+        clientFingerprint: getDeviceFingerprint(),
+        deviceInfo: getDeviceInfo(),
         messages,
         keywords,
       }),

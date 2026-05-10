@@ -1,15 +1,17 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   LogOut, 
   MessageSquare, 
   Search,
   Filter,
-  RefreshCw
+  RefreshCw,
+  Save
 } from "lucide-react";
 import { 
   getAllChats, 
   adminLogout,
+  updateChatReview,
   ChatData 
 } from "../utils/adminService";
 
@@ -24,6 +26,8 @@ const AdminDashboard = ({ onLogout }: AdminDashboardProps) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterBy, setFilterBy] = useState<'all' | 'today' | 'week'>('all');
   const [error, setError] = useState<string | null>(null);
+  const [reviewSaving, setReviewSaving] = useState(false);
+  const [reviewError, setReviewError] = useState<string | null>(null);
 
   useEffect(() => {
     // Fetch data on mount
@@ -72,12 +76,40 @@ const AdminDashboard = ({ onLogout }: AdminDashboardProps) => {
     }
   };
 
+  const updateSelectedChat = (patch: Partial<ChatData>) => {
+    setSelectedChat((chat) => (chat ? { ...chat, ...patch } : chat));
+  };
+
+  const handleReviewSave = async () => {
+    if (!selectedChat) return;
+
+    setReviewSaving(true);
+    setReviewError(null);
+
+    try {
+      const updated = await updateChatReview(selectedChat.sessionId, {
+        reviewStatus: selectedChat.reviewStatus || 'unreviewed',
+        leadStatus: selectedChat.leadStatus || 'unknown',
+        adminNote: selectedChat.adminNote || '',
+      });
+      setSelectedChat(updated);
+      setChats((items) =>
+        items.map((chat) => (chat.sessionId === updated.sessionId ? updated : chat)),
+      );
+    } catch (error) {
+      console.error('Review save error:', error);
+      setReviewError('تعذر حفظ تقييم المحادثة. حاول مرة أخرى.');
+    } finally {
+      setReviewSaving(false);
+    }
+  };
+
   const filteredChats = chats.filter(chat => {
     // Search filter
     const matchesSearch = searchTerm === '' || 
       chat.sessionId.toLowerCase().includes(searchTerm.toLowerCase()) ||
       chat.messages.some(msg => msg.text.toLowerCase().includes(searchTerm.toLowerCase())) ||
-      chat.keywords.some(keyword => keyword.toLowerCase().includes(searchTerm.toLowerCase()));
+      (chat.keywords || []).some(keyword => keyword.toLowerCase().includes(searchTerm.toLowerCase()));
 
     // Date filter
     const now = new Date();
@@ -200,6 +232,7 @@ const AdminDashboard = ({ onLogout }: AdminDashboardProps) => {
                   <MessageSquare className="w-12 h-12 mx-auto mb-3 opacity-50" />
                   <p className="text-sm">لا توجد محادثات</p>
                 </div>
+
               </div>
             ) : (
               filteredChats.map((chat) => (
@@ -223,6 +256,9 @@ const AdminDashboard = ({ onLogout }: AdminDashboardProps) => {
                     <span>📍</span>
                     <span>{chat.city}, {chat.country}</span>
                   </div>
+                  <span className="text-[11px] text-cyan-200 bg-cyan-950/60 border border-cyan-800 rounded px-2 py-0.5">
+                    {chat.reviewStatus || 'unreviewed'}
+                  </span>
                 </div>
                 <div className="text-sm text-gray-300 mb-2 line-clamp-2">
                   {chat.messages[chat.messages.length - 1]?.text.substring(0, 100)}...
@@ -230,7 +266,7 @@ const AdminDashboard = ({ onLogout }: AdminDashboardProps) => {
                 <div className="flex items-center justify-between text-xs text-gray-500">
                   <span>{new Date(chat.createdAt).toLocaleDateString('us-US')}</span>
                   <div className="flex space-x-1 space-x-reverse">
-                    {chat.keywords.slice(0, 2).map((keyword) => (
+                    {(chat.keywords || []).slice(0, 2).map((keyword) => (
                       <span key={keyword} className="bg-gray-700 px-2 py-1 rounded">
                         {keyword}
                       </span>
@@ -264,12 +300,15 @@ const AdminDashboard = ({ onLogout }: AdminDashboardProps) => {
 
                       <div>تاريخ الإنشاء: {new Date(selectedChat.createdAt).toLocaleString('us-US')}</div>
                       <div>آخر نشاط: {new Date(selectedChat.lastActivity).toLocaleString('us-US')}</div>
+                      <div>Visitor key: {selectedChat.visitorKey || 'not saved yet'}</div>
+                      <div>IP: {selectedChat.userIP || 'unknown'}</div>
+                      <div className="break-all">User agent: {selectedChat.userAgent || 'unknown'}</div>
                     </div>
                   </div>
                   <div className="text-left">
                     <div className="text-sm text-gray-400 mb-2">الكلمات المفتاحية:</div>
                     <div className="flex flex-wrap gap-1">
-                      {selectedChat.keywords.map((keyword) => (
+                      {(selectedChat.keywords || []).map((keyword) => (
                         <span
                           key={keyword}
                           className="bg-cyan-900/50 text-cyan-300 px-2 py-1 rounded text-xs"
@@ -280,7 +319,60 @@ const AdminDashboard = ({ onLogout }: AdminDashboardProps) => {
                     </div>
                   </div>
                 </div>
-              </div>
+                <div className="mt-4 grid gap-3 lg:grid-cols-[180px_180px_1fr_auto]">
+                  <label className="text-sm text-gray-300">
+                    <span className="mb-1 block text-gray-400">حالة المراجعة</span>
+                    <select
+                      value={selectedChat.reviewStatus || 'unreviewed'}
+                      onChange={(event) => updateSelectedChat({ reviewStatus: event.target.value })}
+                      className="w-full rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-white focus:border-cyan-500 focus:outline-none"
+                    >
+                      <option value="unreviewed">غير مراجع</option>
+                      <option value="good">جيد</option>
+                      <option value="needs_review">يحتاج مراجعة</option>
+                      <option value="bad">سيئ</option>
+                    </select>
+                  </label>
+
+                  <label className="text-sm text-gray-300">
+                    <span className="mb-1 block text-gray-400">حالة العميل</span>
+                    <select
+                      value={selectedChat.leadStatus || 'unknown'}
+                      onChange={(event) => updateSelectedChat({ leadStatus: event.target.value })}
+                      className="w-full rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-white focus:border-cyan-500 focus:outline-none"
+                    >
+                      <option value="unknown">غير معروف</option>
+                      <option value="lead">عميل محتمل</option>
+                      <option value="contacted">تم التواصل</option>
+                      <option value="not_lead">ليس عميلاً</option>
+                    </select>
+                  </label>
+
+                  <label className="text-sm text-gray-300">
+                    <span className="mb-1 block text-gray-400">ملاحظة إدارية</span>
+                    <input
+                      value={selectedChat.adminNote || ''}
+                      onChange={(event) => updateSelectedChat({ adminNote: event.target.value })}
+                      placeholder="اكتب ملاحظة مختصرة عن جودة الرد أو العميل..."
+                      className="w-full rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none"
+                    />
+                  </label>
+
+                  <button
+                    onClick={handleReviewSave}
+                    disabled={reviewSaving}
+                    className="mt-6 inline-flex items-center justify-center gap-2 rounded-lg bg-cyan-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-cyan-500 disabled:cursor-not-allowed disabled:opacity-60"
+                  >
+                    <Save className="h-4 w-4" />
+                    {reviewSaving ? 'جار الحفظ' : 'حفظ'}
+                  </button>
+                </div>
+
+                {reviewError && (
+                  <div className="mt-3 rounded-lg border border-red-700 bg-red-950/40 px-3 py-2 text-sm text-red-200">
+                    {reviewError}
+                  </div>
+                )}              </div>
 
               {/* Messages */}
               <div className="flex-1 overflow-y-auto p-4 space-y-4">
@@ -325,3 +417,4 @@ const AdminDashboard = ({ onLogout }: AdminDashboardProps) => {
 };
 
 export default AdminDashboard;
+
