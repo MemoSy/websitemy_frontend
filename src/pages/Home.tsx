@@ -1,5 +1,6 @@
 import SEO from "../components/SEO/SEO";
 import ProjectTabs from "../components/UI/ProjectTabs";
+import ClientTestimonialsSection from "../components/UI/ClientTestimonialsSection";
 import TestimonialsSection from "../components/UI/TestimonialsSection";
 import StackCards from "../components/UI/StackCards";
 import { Helmet } from "react-helmet-async";
@@ -92,7 +93,10 @@ const HomeNew = () => {
       {/* Current Projects Section - المشاريع الحالية */}
       <CurrentProjectsSection />
 
-      {/* Testimonials - آراء العملاء */}
+      {/* Client Testimonials - آراء عملاء المشاريع */}
+      <ClientTestimonialsSection />
+
+      {/* Programming Experts Testimonials - آراء خبراء البرمجة */}
       <TestimonialsSection />
 
       {/* FAQ Section - الأسئلة الشائعة */}

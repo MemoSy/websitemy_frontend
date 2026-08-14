@@ -1,4 +1,4 @@
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import Header from './components/Layout/Header';
@@ -73,6 +73,16 @@ const CursorLayer = () => {
   return <CustomCursor />;
 };
 
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
+
 function App() {
   // متغيرات التكوين - يمكنك تحديثها عند الحصول على IDs من Google
   const GOOGLE_ANALYTICS_ID = import.meta.env.VITE_GA_MEASUREMENT_ID || '';
@@ -81,6 +91,7 @@ function App() {
   return (
     <HelmetProvider>
       <Router>
+        <ScrollToTop />
         {/* Google Analytics */}
         {GOOGLE_ANALYTICS_ID && <GoogleAnalytics measurementId={GOOGLE_ANALYTICS_ID} />}
         
