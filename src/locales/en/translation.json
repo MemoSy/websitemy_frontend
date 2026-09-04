@@ -434,32 +434,32 @@
           }
         }
       },
-      "linkedinCoach": {
-        "shortTitle": "LinkedIn Pro",
-        "name": "LinkedIn Coach Professional Website",
+      "dokan": {
+        "shortTitle": "Smart Dokan Platform",
+        "name": "Dokan Cloud System for Local Commerce",
         "status": "In Development",
-        "expectedDuration": "2 months",
-        "tagline": "Professional personal website for a LinkedIn coach with roadmap and interactive tips",
+        "expectedDuration": "4 months",
+        "tagline": "Comprehensive local commerce platform connecting shops with customers, managing sales and delivery intelligently.",
         "features": {
           "feature1": {
-            "title": "Professional Personal Page",
-            "desc": "Professional design reflecting the coach's identity and expertise attractively"
+            "title": "Smart Geospatial Discovery Map",
+            "desc": "Browse nearby shops and products in real time via interactive maps based on buyer location."
           },
           "feature2": {
-            "title": "LinkedIn Roadmap",
-            "desc": "Step-by-step guide to building a strong and professional LinkedIn profile"
+            "title": "POS & Inventory Management",
+            "desc": "Record direct sales and invoices with cash drawer session management and automated stock tracking."
           },
           "feature3": {
-            "title": "Client Reviews & Testimonials",
-            "desc": "Real testimonials from clients who benefited from training sessions"
+            "title": "Smart Exchange-Rate Pricing",
+            "desc": "Link product prices to USD exchange rates and bulk-update them accurately according to custom rounding rules."
+          },
+          "feature4": {
+            "title": "Live Order Tracking",
+            "desc": "Track delivery progress step-by-step with courier and communicate instantly via integrated live chat."
           },
           "feature5": {
-            "title": "Professional Articles Page",
-            "desc": "Publish well-formatted, engaging articles that enhance site content and SEO"
-          },
-          "feature6": {
-            "title": "Advanced Dashboard",
-            "desc": "Full content and user management through a powerful, easy-to-use dashboard"
+            "title": "Store Analytics & Smart Assistant",
+            "desc": "Detailed profit and sales reports with an AI assistant delivering actionable insights for business growth."
           }
         }
       },

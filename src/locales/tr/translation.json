@@ -434,32 +434,32 @@
           }
         }
       },
-      "linkedinCoach": {
-        "shortTitle": "LinkedIn Pro",
-        "name": "LinkedIn Koç Profesyonel Web Sitesi",
+      "dokan": {
+        "shortTitle": "Akıllı Dokan Platformu",
+        "name": "Yerel Ticaret İçin Dokan Bulut Sistemi",
         "status": "Geliştirme Aşamasında",
-        "expectedDuration": "2 ay",
-        "tagline": "Yol haritası ve etkileşimli ipuçları içeren bir LinkedIn koçu için profesyonel kişisel web sitesi",
+        "expectedDuration": "4 ay",
+        "tagline": "Mağazaları müşterilerle buluşturan, satış ve teslimatı akıllıca yöneten entegre yerel ticaret platformu.",
         "features": {
           "feature1": {
-            "title": "Profesyonel Kişisel Sayfa",
-            "desc": "Koçun kimliğini ve deneyimini çekici biçimde yansıtan profesyonel tasarım"
+            "title": "Akıllı Coğrafi Keşif Haritası",
+            "desc": "Alıcının konumuna göre etkileşimli haritalarla yakındaki mağazaları ve ürünleri anında inceleyin."
           },
           "feature2": {
-            "title": "LinkedIn Yol Haritası",
-            "desc": "Güçlü ve profesyonel bir LinkedIn profili oluşturmak için adım adım rehber"
+            "title": "Satış Noktası (POS) ve Stok Yönetimi",
+            "desc": "Kasa oturumu yönetimi ve otomatik stok takibi ile doğrudan satış ve fatura kaydı."
           },
           "feature3": {
-            "title": "Müşteri Yorumları ve Referanslar",
-            "desc": "Eğitim oturumlarından faydalanan müşterilerden gerçek referanslar"
+            "title": "Döviz Kurlu Akıllı Fiyatlandırma",
+            "desc": "Ürün fiyatlarını dolar kuruna bağlayıp belirleme kurallarına göre toplu ve hassas güncelleyin."
+          },
+          "feature4": {
+            "title": "Canlı Sipariş Takibi",
+            "desc": "Kurye ile teslimat rotasını anlık izleyin ve entegre canlı sohbetle anında iletişim kurun."
           },
           "feature5": {
-            "title": "Profesyonel Makale Sayfası",
-            "desc": "Site içeriğini ve SEO'yu güçlendiren, iyi biçimlendirilmiş ilgi çekici makaleler yayınlayın"
-          },
-          "feature6": {
-            "title": "Gelişmiş Yönetim Paneli",
-            "desc": "Güçlü ve kullanımı kolay bir panel ile eksiksiz içerik ve kullanıcı yönetimi"
+            "title": "Mağaza Analitiği ve Akıllı Asistan",
+            "desc": "Ticari büyüme için eyleme dönüştürülebilir öneriler sunan yapay zeka asistanı ve ayrıntılı raporlar."
           }
         }
       },
