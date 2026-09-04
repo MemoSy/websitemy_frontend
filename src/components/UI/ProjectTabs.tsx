@@ -26,6 +26,10 @@ const ProjectTabs = () => {
   const tabsContainerRef = useRef<HTMLDivElement>(null);
 
   const activeCategory = serviceCategories.find((cat) => cat.id === activeTab);
+  const totalProjectsCount = serviceCategories.reduce(
+    (acc, cat) => acc + (cat.projects?.length || 0),
+    0
+  );
   const featuredProjects = (() => {
     if (!activeCategory) return [];
 
@@ -186,9 +190,20 @@ const ProjectTabs = () => {
           viewport={{ once: true }}
           className="text-center md:mb-16 mb-8"
         >
-          <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-6">
-            {t("projectTabs.title")}
-          </h2>
+          <div className="inline-flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-3">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 via-sky-300 to-purple-400 bg-clip-text text-transparent pt-3 pb-2 md:pt-4 md:pb-3 leading-snug md:leading-tight">
+              {t("projectTabs.title")}
+            </h2>
+            <div className="inline-flex items-center gap-2 px-3 py-1 md:px-3.5 md:py-1.5 rounded-full bg-gradient-to-r from-cyan-500/15 via-purple-500/10 to-purple-500/20 border border-cyan-500/30 text-cyan-300 text-xs sm:text-sm font-bold shadow-lg shadow-cyan-500/10 backdrop-blur-md">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"></span>
+              </span>
+              <span>
+                {t("projectTabs.totalBadge", { count: totalProjectsCount })}
+              </span>
+            </div>
+          </div>
           <p className="text-sm md:text-xl text-gray-400 max-w-2xl mx-auto">
             {t("projectTabs.subtitle")}
           </p>
@@ -196,19 +211,28 @@ const ProjectTabs = () => {
 
         {/* Tabs Navigation - Fixed with Arrow Controls (Mobile Only) */}
         <div className="mb-12 relative w-full">
-          <div className="hidden lg:flex w-full items-center justify-between gap-5 xl:gap-6 mb-12">
+          <div className="hidden lg:flex w-full items-center justify-between gap-3 xl:gap-4 mb-12">
             {/* Desktop View - Show all tabs without arrows */}
             {serviceCategories.map((category) => (
               <button
                 key={category.id}
                 onClick={() => handleTabChange(category.id)}
-                className={`relative flex-1 min-w-0 px-4 py-2 md:px-6 md:py-3 rounded-xl font-medium transition-all duration-300 whitespace-nowrap text-center text-sm md:text-base lg:text-lg ${
+                className={`group relative flex-1 min-w-0 px-3 py-2.5 xl:px-4 xl:py-3 rounded-xl font-medium transition-all duration-300 flex items-center justify-between gap-2 text-xs sm:text-sm lg:text-base ${
                   activeTab === category.id
                     ? "text-white bg-gradient-to-r from-cyan-500 to-purple-500 shadow-lg shadow-cyan-500/25 scale-100"
-                    : "text-gray-400 bg-gray-800/50 border border-gray-700 hover:text-cyan-300 hover:border-cyan-500/50 hover:scale-105"
+                    : "text-gray-400 bg-gray-800/50 border border-gray-700 hover:text-cyan-300 hover:border-cyan-500/50 hover:scale-[1.02]"
                 }`}
               >
-                {category.title}
+                <span className="truncate font-semibold">{category.title}</span>
+                <span
+                  className={`flex-shrink-0 text-[11px] lg:text-xs font-bold px-2 py-0.5 rounded-full transition-all duration-300 ${
+                    activeTab === category.id
+                      ? "bg-white/25 text-white border border-white/30 shadow-sm"
+                      : "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 group-hover:bg-cyan-500/20 group-hover:border-cyan-500/40"
+                  }`}
+                >
+                  {category.projects?.length || 0}
+                </span>
 
                 {activeTab === category.id && (
                   <motion.div
@@ -250,22 +274,31 @@ const ProjectTabs = () => {
                 WebkitOverflowScrolling: "touch",
               }}
             >
-              <div className="flex gap-3 md:gap-4 px-2 py-1 min-w-min">
+              <div className="flex gap-2.5 sm:gap-3 px-2 py-1 min-w-min">
                 {serviceCategories.map((category) => (
                   <button
                     key={category.id}
                     onClick={() => handleTabChange(category.id)}
-                    className={`relative px-4 py-2 md:px-6 md:py-3 rounded-xl font-medium transition-all duration-300 whitespace-nowrap flex-shrink-0 text-sm md:text-base lg:text-lg ${
+                    className={`group relative px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl font-medium transition-all duration-300 whitespace-nowrap flex-shrink-0 text-xs sm:text-sm flex items-center gap-2 ${
                       activeTab === category.id
                         ? "text-white bg-gradient-to-r from-cyan-500 to-purple-500 shadow-lg shadow-cyan-500/25 scale-100"
-                        : "text-gray-400 bg-gray-800/50 border border-gray-700 hover:text-cyan-300 hover:border-cyan-500/50 hover:scale-105"
+                        : "text-gray-400 bg-gray-800/50 border border-gray-700 hover:text-cyan-300 hover:border-cyan-500/50"
                     }`}
                   >
-                    {category.title}
+                    <span>{category.title}</span>
+                    <span
+                      className={`text-[10px] sm:text-xs font-bold px-1.5 py-0.5 rounded-full transition-all duration-300 ${
+                        activeTab === category.id
+                          ? "bg-white/25 text-white border border-white/30 shadow-sm"
+                          : "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 group-hover:bg-cyan-500/20"
+                      }`}
+                    >
+                      {category.projects?.length || 0}
+                    </span>
 
                     {activeTab === category.id && (
                       <motion.div
-                        layoutId="activeTab"
+                        layoutId="activeTabMobile"
                         className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-xl -z-10"
                         transition={{
                           type: "spring",

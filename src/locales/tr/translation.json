@@ -492,6 +492,7 @@
   "projectTabs": {
     "title": "Teknik Başarılarımız Galerisi",
     "subtitle": "Geliştirdiğimiz çeşitli projeler koleksiyonu",
+    "totalBadge": "{{count}}+ Tamamlanan Proje",
     "viewMore": "Daha Fazla Görüntüle",
     "categories": {
       "opensource": {

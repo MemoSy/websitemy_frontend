@@ -492,6 +492,7 @@
   "projectTabs": {
     "title": "Our Technical Achievements Gallery",
     "subtitle": "A diverse collection of projects we've developed",
+    "totalBadge": "{{count}}+ Completed Projects",
     "viewMore": "View More",
     "categories": {
       "opensource": {

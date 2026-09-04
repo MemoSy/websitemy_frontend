@@ -437,6 +437,7 @@
   "projectTabs": {
     "title": "معرض إنجازاتنا التقنية",
     "subtitle": "مجموعة متنوعة من المشاريع التي طورناها",
+    "totalBadge": "{{count}}+ مشروعاً مُنجزاً",
     "viewMore": "عرض المزيد",
     "categories": {
       "opensource": {
