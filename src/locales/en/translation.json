@@ -438,7 +438,7 @@
         "shortTitle": "LinkedIn Pro",
         "name": "LinkedIn Coach Professional Website",
         "status": "In Development",
-        "expectedDuration": "3-4 weeks",
+        "expectedDuration": "2 months",
         "tagline": "Professional personal website for a LinkedIn coach with roadmap and interactive tips",
         "features": {
           "feature1": {
@@ -453,9 +453,13 @@
             "title": "Client Reviews & Testimonials",
             "desc": "Real testimonials from clients who benefited from training sessions"
           },
-          "feature4": {
-            "title": "Videos & LinkedIn Tips",
-            "desc": "Interactive educational content to boost your LinkedIn presence"
+          "feature5": {
+            "title": "Professional Articles Page",
+            "desc": "Publish well-formatted, engaging articles that enhance site content and SEO"
+          },
+          "feature6": {
+            "title": "Advanced Dashboard",
+            "desc": "Full content and user management through a powerful, easy-to-use dashboard"
           }
         }
       },
@@ -1186,6 +1190,100 @@
       "feature5": "Build Services & Shop Drawings section.",
       "feature6": "Catalog system for Furniture, Materials, and Kitchens.",
       "feature7": "Blog System for publishing news and articles."
+    }
+  },
+  "akkkrRealEstate": {
+    "title": "Akkkr — Smart Real Estate",
+    "description": "Smart real estate platform featuring lightning-fast property browsing, an interactive AI negotiation assistant, and a high-security admin dashboard.",
+    "fullDescription": "Akkkr Real Estate was developed to provide a comprehensive technical solution combining direct property showcase (Sale, Rent, Mortgage, Investment) and modern client request management. It solves large-scale property cataloging and geo-filtering, automates visitor negotiations via an interactive AI assistant, and offers multi-layered security for admin controls with seamless database migrations.",
+    "duration": "6 Weeks",
+    "clientType": "Real Estate Brokerage & Property Development Companies, Commercial & Residential Property Management",
+    "complexity": "Advanced",
+    "teamSize": "Single Lead Full-Stack Engineer",
+    "clientFeedback": "Akkkr platform created a qualitative leap in our property marketing. Thanks to the AI assistant, we automated dozens of negotiations daily effortlessly, while the secure admin dashboard gave us instant full control.",
+    "keyFeatures": {
+      "feature1": "Smart Real Estate AI Assistant: Interactive mediation understanding search criteria, pricing, and turning chats into admin leads",
+      "feature2": "Smart Auth & Migration: Seamless in-app migration from Environment Fallback to MongoDB",
+      "feature3": "Direct Presigned Uploads: Ultra-fast direct media uploading to Vercel Blob without server bottlenecks",
+      "feature4": "Live Session Management & sessionVersion: Invalidate all other active sessions with a single click",
+      "feature5": "Central WhatsApp Integration: Instant contact and demo requests via unified configuration",
+      "feature6": "Blazing fast SSR performance powered by Next.js 16 & React 19"
+    },
+    "objectives": {
+      "objective1": "Automate inquiries and negotiations with an intelligent AI chatbot",
+      "objective2": "Deliver ultra-fast browsing and micro-second filtering by price, location, and village",
+      "objective3": "Establish bulletproof admin security with dual-mode authentication",
+      "objective4": "Enable direct large video and high-resolution photo uploads via presigned URLs",
+      "objective5": "Track customer leads, search requests, and negotiations in real-time"
+    },
+    "challenges": {
+      "challenge1": "Zero-downtime admin migration from environment variables to MongoDB",
+      "challenge2": "Edge-based session verification on proxy.js to prevent redundant database queries",
+      "challenge3": "Direct-to-cloud large media uploads with server-side validation and presigned URLs",
+      "challenge4": "Securing sensitive credentials and preventing passwordHash leaks in API serializations",
+      "challenge5": "Atomic session revocation using sessionVersion across database and tokens"
+    },
+    "features": {
+      "feature1": "Modern property showcase categorised by listing type (Sale, Rent, Mortgage, Investment)",
+      "feature2": "Advanced filtering engine by price, area, rooms, region, and village",
+      "feature3": "Interactive AI conversation assistant for visitor queries and requirement extraction",
+      "feature4": "Encrypted secure negotiation follow-up links (/follow-up/[token])",
+      "feature5": "Comprehensive admin dashboard for property and media management",
+      "feature6": "Location and village management system",
+      "feature7": "Real-time client request management and lead tracking",
+      "feature8": "High-resolution video/photo uploads to Vercel Blob using presigned URLs",
+      "feature9": "Admin security settings to change credentials directly from UI",
+      "feature10": "One-click termination of all other active sessions",
+      "feature11": "One-click in-app database migration for admin accounts",
+      "feature12": "Signed visitor counter system with tamper-proof cookies",
+      "feature13": "Suspicious visitor and offer blocking system",
+      "feature14": "100% responsive design with native RTL & LTR support"
+    }
+  },
+  "alaaAlmasriPlatform": {
+    "title": "Alaa Al-Masry — Professional Empowerment",
+    "description": "Digital platform for Ms. Alaa Al-Masry for executive empowerment, combining training programs, articles, and lead generation with an inline visual editor.",
+    "fullDescription": "Custom digital ecosystem for Ms. Alaa Al-Masry designed to consolidate professional presence and engage audiences through interactive training tracks. Features a refined Arabic UI and an inline visual CMS to edit content directly on the live site, paired with automated lead funnels and direct WhatsApp integration.",
+    "duration": "6 Weeks",
+    "clientType": "Ms. Alaa Al-Masry — Executive Marketing & Career Empowerment Consultant",
+    "complexity": "Advanced",
+    "teamSize": "2 Developers (Lead Full-Stack + UI/UX)",
+    "clientFeedback": "The platform was a game changer for my digital presence and corporate outreach. Social engagement now turns into real community members, and I can manage all site content myself in minutes.",
+    "keyFeatures": {
+      "feature1": "Inline Visual CMS: Edit text and content directly from the live interface with zero coding",
+      "feature2": "Specialized Training Tracks: Tailored pages for individual and corporate training with high-converting CTAs",
+      "feature3": "Integrated Lead Funnel: Interactive modals to download resources and capture subscriber data seamlessly",
+      "feature4": "YouTube Shorts Media Hub: Native support for vertical 9:16 videos with ambient background glow",
+      "feature5": "Instant WhatsApp Integration: Smart floating buttons and interactive cards for immediate community access",
+      "feature6": "Ultra-fast Hybrid SSG/ISR: Smart caching and tag invalidation delivering sub-second page loads"
+    },
+    "objectives": {
+      "objective1": "Establish thought leadership and a rapid digital presence reflecting executive authority",
+      "objective2": "Automate lead capture and professional guide distribution into a centralized database",
+      "objective3": "Achieve complete software independence without reliance on slow third-party CMS solutions",
+      "objective4": "Integrate real-time channels directing visitors to WhatsApp communities and LinkedIn in one click",
+      "objective5": "Meet top performance standards with under-a-second load times and 100% mobile responsiveness"
+    },
+    "challenges": {
+      "challenge1": "Real-time cache management via unstable_cache and updateTag without requiring rebuilds",
+      "challenge2": "Displaying vertical YouTube Shorts without black bars using aspect-[9/16] and ambient glow",
+      "challenge3": "Building a zero-cost inline visual editor with interaction guards during live editing",
+      "challenge4": "Securing rich article content against XSS attacks using strict sanitization allowlists",
+      "challenge5": "Handling mobile safe-area insets dynamically for floating buttons to avoid UI collisions"
+    },
+    "features": {
+      "feature1": "Inline Visual Editor for previewing and modifying content on the fly",
+      "feature2": "Full-featured article publishing system with rich formatting via Tiptap",
+      "feature3": "Dedicated media hub supporting vertical YouTube Shorts seamlessly",
+      "feature4": "Smart floating WhatsApp button responsive to safe areas and auto-hidden on admin pages",
+      "feature5": "Interactive cards for joining WhatsApp communities and social channels",
+      "feature6": "Interactive lead magnet modal for capturing guide requests into PostgreSQL",
+      "feature7": "Custom admin dashboard for managing articles, subscribers, and platform settings",
+      "feature8": "Secure session authentication with HMAC-SHA256 protecting admin routes",
+      "feature9": "Structured training program tracks for individuals and organizations",
+      "feature10": "Before & After visual showcase highlighting real client metric transformations",
+      "feature11": "Blazing-fast caching system with instant revalidation on update",
+      "feature12": "Centralized social links management and dynamic OpenGraph image generation"
     }
   }
 }

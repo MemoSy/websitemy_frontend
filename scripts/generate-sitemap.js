@@ -4,6 +4,10 @@ import path from 'path';
 
 // مؤقتاً سنقوم بإنشاء البيانات يدوياً
 const projects = [
+  { id: 'alaa-almasri-platform' },
+  { id: 'akkkr-real-estate' },
+  { id: 'arabia-swim' },
+  { id: 'daftar-smart-ledger' },
   { id: 'websitemy-portfolio' },
   { id: 'alimni-platform' },
   { id: 'comprevende' },

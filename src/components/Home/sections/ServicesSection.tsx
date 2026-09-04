@@ -638,7 +638,7 @@ const ServicesSection = () => {
                   {t("services.cta.details")}
                 </button>
                 <Link
-                  to="https://www.nationalsy.com/"
+                  to="https://podcasts-nu.vercel.app/"
                   className={`w-full py-2.5 flex items-center justify-center gap-2 text-[#A0AEC0] hover:text-[#00D9FF] text-xs font-medium transition-all group ${
                     isRTL ? "flex-row" : "flex-row-reverse"
                   }`}

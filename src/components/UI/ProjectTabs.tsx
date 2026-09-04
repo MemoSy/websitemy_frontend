@@ -33,15 +33,20 @@ const ProjectTabs = () => {
       return activeCategory.projects.slice(0, 3);
     }
 
-    const dukkanProjects = activeCategory.projects.filter(
-      (project) => project.id === "daftar-smart-ledger"
-    );
-    const otherStartupProjects = activeCategory.projects.filter(
-      (project) =>
-        project.id !== "daftar-smart-ledger" && project.id !== "alimni-platform"
-    );
+    // Featured Startup projects - displayed in this specific order
+    const featuredStartupIds = [
+      "comprevende",
+      "daftar-smart-ledger",
+      "alimni-platform",
+    ];
 
-    return [...dukkanProjects, ...otherStartupProjects].slice(0, 3);
+    const startupProjects = featuredStartupIds
+      .map((id) => activeCategory.projects.find((project) => project.id === id))
+      .filter(
+        (project): project is NonNullable<typeof project> => Boolean(project)
+      );
+
+    return startupProjects.slice(0, 3);
   })();
 
   // Update categories when language changes

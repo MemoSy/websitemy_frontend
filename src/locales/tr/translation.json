@@ -438,7 +438,7 @@
         "shortTitle": "LinkedIn Pro",
         "name": "LinkedIn Koç Profesyonel Web Sitesi",
         "status": "Geliştirme Aşamasında",
-        "expectedDuration": "3-4 hafta",
+        "expectedDuration": "2 ay",
         "tagline": "Yol haritası ve etkileşimli ipuçları içeren bir LinkedIn koçu için profesyonel kişisel web sitesi",
         "features": {
           "feature1": {
@@ -453,9 +453,13 @@
             "title": "Müşteri Yorumları ve Referanslar",
             "desc": "Eğitim oturumlarından faydalanan müşterilerden gerçek referanslar"
           },
-          "feature4": {
-            "title": "Videolar ve LinkedIn İpuçları",
-            "desc": "LinkedIn varlığınızı güçlendirmek için etkileşimli eğitim içeriği"
+          "feature5": {
+            "title": "Profesyonel Makale Sayfası",
+            "desc": "Site içeriğini ve SEO'yu güçlendiren, iyi biçimlendirilmiş ilgi çekici makaleler yayınlayın"
+          },
+          "feature6": {
+            "title": "Gelişmiş Yönetim Paneli",
+            "desc": "Güçlü ve kullanımı kolay bir panel ile eksiksiz içerik ve kullanıcı yönetimi"
           }
         }
       },
@@ -1186,6 +1190,100 @@
       "feature5": "Yapı Hizmetleri ve Shop Drawing (Uygulama Projeleri) bölümü.",
       "feature6": "Mobilya, Malzemeler ve Mutfaklar için Katalog sistemi.",
       "feature7": "Haber ve makale yayınlamak için Blog Sistemi."
+    }
+  },
+  "akkkrRealEstate": {
+    "title": "Akkkr — Akıllı Emlak",
+    "description": "Hızlı mülk listeleme, yapay zeka müzakere asistanı ve yüksek güvenlikli yönetim paneli sunan akıllı gayrimenkul platformu.",
+    "fullDescription": "Akkkr Emlak, doğrudan gayrimenkul vitrini (Satılık, Kiralık, İpotek, Yatırım) ile modern müşteri talep yönetimini bir araya getiren kapsamlı bir teknik çözüm olarak geliştirilmiştir. Büyük ölçekli emlak listeleme ve coğrafi filtreleme sorunlarını çözer, yapay zeka asistanı aracılığıyla ziyaretçi müzakerelerini otomatikleştirir ve yönetim kontrolleri için çok katmanlı güvenlik sağlar.",
+    "duration": "6 Hafta",
+    "clientType": "Gayrimenkul Aracılık ve Geliştirme Şirketleri, Ticari ve Konut Mülk Yönetimi",
+    "complexity": "Gelişmiş",
+    "teamSize": "1 Kıdemli Full-Stack Geliştirici",
+    "clientFeedback": "Akkkr platformu gayrimenkul pazarlamamızda niteliksel bir sıçrama yarattı. Yapay zeka asistanı sayesinde her gün onlarca müzakereyi zahmetsizce otomatikleştirdik.",
+    "keyFeatures": {
+      "feature1": "Akıllı Emlak Yapay Zeka Asistanı: Arama kriterlerini ve fiyatları anlayan interaktif arabuluculuk",
+      "feature2": "Akıllı Kimlik Doğrulama ve Geçiş: Ortam değişkenlerinden MongoDB'ye kesintisiz geçiş",
+      "feature3": "Doğrudan Önceden İmzalı Yüklemeler: Sunucu darboğazı olmadan Vercel Blob'a hızlı medya yükleme",
+      "feature4": "Canlı Oturum Yönetimi ve sessionVersion: Tek tıklamayla diğer tüm aktif oturumları geçersiz kılma",
+      "feature5": "Merkezi WhatsApp Entegrasyonu: Birleşik yapılandırma üzerinden anında iletişim ve demo talebi",
+      "feature6": "Next.js 16 ve React 19 ile güçlendirilmiş yıldırım hızında SSR performansı"
+    },
+    "objectives": {
+      "objective1": "Akıllı yapay zeka sohbet robotu ile talepleri ve müzakereleri otomatikleştirme",
+      "objective2": "Fiyat, konum ve köye göre anlık filtreleme ve ultra hızlı gezinme sağlama",
+      "objective3": "Çift modlu kimlik doğrulama ile sağlam yönetim güvenliği oluşturma",
+      "objective4": "Önceden imzalanmış URL'ler aracılığıyla büyük video ve yüksek çözünürlüklü fotoğraf yüklemelerini etkinleştirme",
+      "objective5": "Müşteri adaylarını, arama taleplerini ve müzakereleri gerçek zamanlı olarak izleme"
+    },
+    "challenges": {
+      "challenge1": "Ortam değişkenlerinden MongoDB'ye sıfır kesinti süresiyle yönetici hesabı geçişi",
+      "challenge2": "Gereksiz veritabanı sorgularını önlemek için proxy.js üzerinde Edge tabanlı oturum doğrulaması",
+      "challenge3": "Sunucu tarafı doğrulama ve önceden imzalanmış URL'ler ile doğrudan buluta medya yükleme",
+      "challenge4": "API serileştirmelerinde passwordHash sızıntılarını önleme ve hassas kimlik bilgilerini koruma",
+      "challenge5": "sessionVersion kullanarak veritabanı ve tokenlar genelinde atomik oturum iptali"
+    },
+    "features": {
+      "feature1": "İlan türüne göre kategorize edilmiş modern gayrimenkul vitrini (Satılık, Kiralık, İpotek, Yatırım)",
+      "feature2": "Fiyat, alan, oda sayısı, bölge ve köye göre gelişmiş filtreleme motoru",
+      "feature3": "Ziyaretçi soruları ve gereksinim çıkarma için etkileşimli yapay zeka sohbet asistanı",
+      "feature4": "Şifreli güvenli müzakere takip bağlantıları (/follow-up/[token])",
+      "feature5": "Gayrimenkul ve medya yönetimi için kapsamlı yönetim paneli",
+      "feature6": "Konum ve köy yönetim sistemi",
+      "feature7": "Gerçek zamanlı müşteri talepleri ve müşteri adayı takibi",
+      "feature8": "Önceden imzalanmış URL'ler kullanarak Vercel Blob'a yüksek çözünürlüklü video/fotoğraf yüklemeleri",
+      "feature9": "Kimlik bilgilerini doğrudan arayüzden değiştirmek için yönetici güvenlik ayarları",
+      "feature10": "Diğer tüm aktif oturumları tek tıklamayla sonlandırma",
+      "feature11": "Yönetici hesapları için tek tıklamayla uygulama içi veritabanı geçişi",
+      "feature12": "Tahrifata dayanıklı çerezlerle imzalı ziyaretçi sayacı sistemi",
+      "feature13": "Şüpheli ziyaretçi ve teklif engelleme sistemi",
+      "feature14": "Doğal RTL ve LTR desteğine sahip %100 duyarlı tasarım"
+    }
+  },
+  "alaaAlmasriPlatform": {
+    "title": "Alaa Al-Masry — Mesleki Güçlendirme",
+    "description": "Yönetici kişisel markalaşması, eğitim yönetimi, makaleler ve canlı görsel düzenleyici ile otomatik müşteri adayı oluşturmayı birleştiren dijital platform.",
+    "fullDescription": "Alaa Al-Masry platformu, yönetici varlığını pekiştirmek ve 45.000'den fazla profesyonelden oluşan bir kitleyi özel eğitim programlarına ve organize bir topluluğa dönüştürmek için geliştirilmiştir. Doğrudan canlı sitede içeriği düzenlemek için yerleşik bir görsel düzenleyici ile birinci sınıf bir kullanıcı arayüzünü birleştirir.",
+    "duration": "6 Hafta",
+    "clientType": "Sn. Alaa Al-Masry — Yönetici Pazarlama ve Kariyer Güçlendirme Danışmanı",
+    "complexity": "Gelişmiş",
+    "teamSize": "2 Geliştirici (Kıdemli Full-Stack + UI/UX)",
+    "clientFeedback": "Platform dijital varlığım ve kurumsal iletişimim için bir dönüm noktası oldu. Sosyal medya etkileşimi artık gerçek topluluk üyelerine dönüşüyor ve tüm içeriği kendim yönetebiliyorum.",
+    "keyFeatures": {
+      "feature1": "Satır İçi Görsel CMS: Sıfır kodlama ile içeriği doğrudan canlı arayüzden düzenleyin",
+      "feature2": "Özel Eğitim Parkurları: Bireysel ve kurumsal eğitimler için özel sayfalar",
+      "feature3": "Entegre Müşteri Adayı Hunisi: Kaynakları indirmek ve abone verilerini yakalamak için etkileşimli modallar",
+      "feature4": "YouTube Shorts Medya Merkezi: Ortam parıltısı ile dikey 9:16 videolar için yerel destek",
+      "feature5": "Anında WhatsApp Entegrasyonu: Doğrudan topluluk erişimi için akıllı kayan düğmeler",
+      "feature6": "Ultra Hızlı Hibrit SSG/ISR: Bir saniyenin altında sayfa yüklemeleri sunan akıllı önbelleğe alma"
+    },
+    "objectives": {
+      "objective1": "Düşünce liderliği ve yönetici otoritesini yansıtan hızlı bir dijital varlık oluşturma",
+      "objective2": "Merkezi veritabanına müşteri adayı yakalama ve profesyonel rehber dağıtımını otomatikleştirme",
+      "objective3": "Yavaş üçüncü taraf CMS çözümlerine bağımlı olmadan tam yazılım bağımsızlığı elde etme",
+      "objective4": "Ziyaretçileri tek tıklamayla WhatsApp ve LinkedIn'e yönlendiren kanalları entegre etme",
+      "objective5": "Bir saniyenin altında yükleme süreleri ve %100 mobil duyarlılık sağlama"
+    },
+    "challenges": {
+      "challenge1": "Yeniden oluşturma gerektirmeden unstable_cache ve updateTag aracılığıyla gerçek zamanlı önbellek yönetimi",
+      "challenge2": "aspect-[9/16] ve ortam parıltısı kullanarak dikey YouTube Shorts'ları siyah çubuklar olmadan görüntüleme",
+      "challenge3": "Canlı düzenleme sırasında etkileşim korumalarına sahip satır içi görsel düzenleyici oluşturma",
+      "challenge4": "Katı temizleme izin listelerini kullanarak zengin makale içeriğini XSS saldırılarına karşı koruma",
+      "challenge5": "Arayüz çakışmalarını önlemek için kayan düğmeler için mobil safe-area insets dinamik olarak işleme"
+    },
+    "features": {
+      "feature1": "İçeriği anında önizlemek ve değiştirmek için Satır İçi Görsel Düzenleyici",
+      "feature2": "Tiptap aracılığıyla zengin biçimlendirmeye sahip tam özellikli makale yayınlama sistemi",
+      "feature3": "Dikey YouTube Shorts'ları sorunsuz bir şekilde destekleyen özel medya merkezi",
+      "feature4": "Güvenli alanlara duyarlı ve yönetici sayfalarında otomatik olarak gizlenen akıllı kayan WhatsApp düğmesi",
+      "feature5": "WhatsApp topluluklarına ve sosyal kanallara katılmak için etkileşimli kartlar",
+      "feature6": "Rehber taleplerini PostgreSQL'e kaydetmek için etkileşimli müşteri adayı modalı",
+      "feature7": "Makaleleri, aboneleri ve ayarları yönetmek için özel yönetim paneli",
+      "feature8": "Yönetici rotalarını koruyan HMAC-SHA256 ile güvenli oturum kimlik doğrulaması",
+      "feature9": "Bireyler ve kuruluşlar için yapılandırılmış eğitim programı parkurları",
+      "feature10": "Gerçek müşteri dönüşümlerini vurgulayan Öncesi ve Sonrası görsel vitrini",
+      "feature11": "Güncellemede anında yeniden doğrulama ile yıldırım hızında önbelleğe alma sistemi",
+      "feature12": "Merkezi sosyal bağlantı yönetimi ve dinamik OpenGraph görsel oluşturma"
     }
   }
 }
