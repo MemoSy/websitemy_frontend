@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ArrowLeft, ArrowRight, Sparkles, Zap, Target } from "lucide-react";
+import { ArrowLeft, Sparkles, Zap, Target } from "lucide-react";
 import { getServiceCategories } from "../../data/projects";
 import ProjectCard from "./ProjectCard";
 import { gsap } from "gsap";
@@ -19,7 +19,6 @@ const ProjectTabs = () => {
     getServiceCategories()
   );
   const [activeTab, setActiveTab] = useState("saas");
-  const [tabScrollPosition, setTabScrollPosition] = useState(0);
   const projectsRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const backgroundRef = useRef<HTMLDivElement>(null);
@@ -58,45 +57,7 @@ const ProjectTabs = () => {
     setServiceCategories(getServiceCategories());
   }, [i18n.language]);
 
-  // Handle tab navigation with arrow keys
-  const scrollTabs = (direction: "next" | "prev") => {
-    if (!tabsContainerRef.current) return;
 
-    const container = tabsContainerRef.current;
-    const scrollAmount = 300; // pixels to scroll per click
-    const isScrolling = isRTL ? direction === "prev" : direction === "next";
-    const newPosition = isScrolling
-      ? tabScrollPosition + scrollAmount
-      : tabScrollPosition - scrollAmount;
-
-    // Ensure we don't scroll beyond bounds
-    const maxScroll =
-      container.scrollWidth - container.clientWidth;
-    const finalPosition = Math.max(0, Math.min(newPosition, maxScroll));
-
-    setTabScrollPosition(finalPosition);
-
-    // Smooth scroll without animation library
-    container.scrollTo({
-      left: isRTL ? -finalPosition : finalPosition,
-      behavior: "smooth",
-    });
-  };
-
-  // Check if we can scroll in each direction
-  const canScrollNext = (() => {
-    if (!tabsContainerRef.current) return false;
-    const container = tabsContainerRef.current;
-    const maxScroll = container.scrollWidth - container.clientWidth;
-    return isRTL
-      ? tabScrollPosition > 0
-      : tabScrollPosition < maxScroll;
-  })();
-
-  const canScrollPrev = (() => {
-    if (!tabsContainerRef.current) return false;
-    return isRTL ? tabScrollPosition < (tabsContainerRef.current.scrollWidth - tabsContainerRef.current.clientWidth) : tabScrollPosition > 0;
-  })();
 
   useEffect(() => {
     if (projectsRef.current) {
@@ -206,14 +167,14 @@ const ProjectTabs = () => {
             {t("projectTabs.title")}
           </h2>
 
-          {/* Section Subtitle */}
-          <p className="text-sm md:text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
+          {/* Section Subtitle - Hidden on mobile */}
+          <p className="hidden md:block text-sm md:text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
             {t("projectTabs.subtitle")}
           </p>
         </motion.div>
 
-        {/* Tabs Navigation - Fixed with Arrow Controls (Mobile Only) */}
-        <div className="mb-12 relative w-full">
+        {/* Tabs Navigation */}
+        <div className="mb-8 md:mb-12 relative w-full">
           <div className="hidden lg:flex w-full items-center justify-between gap-3 xl:gap-4 mb-12">
             {/* Desktop View - Show all tabs without arrows */}
             {serviceCategories.map((category) => (
@@ -252,40 +213,39 @@ const ProjectTabs = () => {
             ))}
           </div>
 
-          {/* Mobile View - Show tabs with arrows */}
-          <div className="lg:hidden flex items-center gap-3">
-            {/* Previous Arrow Button */}
-            <button
-              onClick={() => scrollTabs("prev")}
-              disabled={!canScrollPrev}
-              className={`flex-shrink-0 p-2 md:p-3 rounded-lg transition-all duration-200 ${
-                canScrollPrev
-                  ? "bg-cyan-500/20 border border-cyan-500/50 text-cyan-400 hover:bg-cyan-500/30 hover:border-cyan-400 cursor-pointer hover:scale-105"
-                  : "bg-gray-800/30 border border-gray-700/50 text-gray-600 cursor-not-allowed opacity-50"
-              }`}
-              aria-label={isRTL ? "Next category" : "Previous category"}
-            >
-              <ArrowLeft className="w-5 h-5 md:w-6 md:h-6" />
-            </button>
+          {/* Mobile View - Full-bleed Swipeable Tabs with Edge Fades */}
+          <div className="lg:hidden relative w-full overflow-hidden">
+            {/* Left Edge Fade Mask */}
+            <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-8 z-10 bg-gradient-to-r from-black via-black/50 to-transparent" />
 
-            {/* Tabs Container - Fixed, No Auto-Scroll */}
+            {/* Right Edge Fade Mask */}
+            <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-8 z-10 bg-gradient-to-l from-black via-black/50 to-transparent" />
+
+            {/* Tabs Container */}
             <div
               ref={tabsContainerRef}
-              className="flex-1 overflow-x-auto scrollbar-hide"
+              className="w-full overflow-x-auto scrollbar-hide py-2 px-4 touch-pan-x"
               style={{
                 scrollBehavior: "smooth",
                 WebkitOverflowScrolling: "touch",
               }}
             >
-              <div className="flex gap-2.5 sm:gap-3 px-2 py-1 min-w-min">
+              <div className="flex gap-2.5 px-2 py-1 min-w-max items-center">
                 {serviceCategories.map((category) => (
                   <button
                     key={category.id}
-                    onClick={() => handleTabChange(category.id)}
-                    className={`group relative px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl font-medium transition-all duration-300 whitespace-nowrap flex-shrink-0 text-xs sm:text-sm flex items-center gap-2 ${
+                    onClick={(e) => {
+                      handleTabChange(category.id);
+                      e.currentTarget.scrollIntoView({
+                        behavior: "smooth",
+                        block: "nearest",
+                        inline: "center",
+                      });
+                    }}
+                    className={`group relative px-4 py-2 sm:px-4 sm:py-2.5 rounded-xl font-medium transition-all duration-300 whitespace-nowrap flex-shrink-0 text-xs sm:text-sm flex items-center gap-2 ${
                       activeTab === category.id
                         ? "text-white bg-gradient-to-r from-cyan-500 to-purple-500 shadow-lg shadow-cyan-500/25 scale-100"
-                        : "text-gray-400 bg-gray-800/50 border border-gray-700 hover:text-cyan-300 hover:border-cyan-500/50"
+                        : "text-gray-400 bg-gray-800/60 border border-gray-700/70 hover:text-cyan-300 hover:border-cyan-500/40"
                     }`}
                   >
                     <span>{category.title}</span>
@@ -314,20 +274,6 @@ const ProjectTabs = () => {
                 ))}
               </div>
             </div>
-
-            {/* Next Arrow Button */}
-            <button
-              onClick={() => scrollTabs("next")}
-              disabled={!canScrollNext}
-              className={`flex-shrink-0 p-2 md:p-3 rounded-lg transition-all duration-200 ${
-                canScrollNext
-                  ? "bg-cyan-500/20 border border-cyan-500/50 text-cyan-400 hover:bg-cyan-500/30 hover:border-cyan-400 cursor-pointer hover:scale-105"
-                  : "bg-gray-800/30 border border-gray-700/50 text-gray-600 cursor-not-allowed opacity-50"
-              }`}
-              aria-label={isRTL ? "Previous category" : "Next category"}
-            >
-              <ArrowRight className="w-5 h-5 md:w-6 md:h-6" />
-            </button>
           </div>
         </div>
 
@@ -343,18 +289,18 @@ const ProjectTabs = () => {
             >
               {/* Category Header with View More Button */}
               <div
-                className={`flex flex-col lg:flex-row lg:items-center lg:justify-between mb-12 gap-6 mx-auto max-w-[1400px]`}
+                className={`flex flex-col lg:flex-row lg:items-center lg:justify-between mb-8 md:mb-12 gap-4 md:gap-6 mx-auto max-w-[1400px]`}
               >
                 <div className="flex-1">
                   <h3
-                    className={`text-xl md:text-4xl font-bold text-white mb-4 text-center ${
+                    className={`text-2xl md:text-4xl font-bold text-white mb-2 md:mb-4 text-center ${
                       isRTL ? "lg:text-right" : "lg:text-left"
                     }`}
                   >
                     {activeCategory.title}
                   </h3>
                   <p
-                    className={`text-gray-400 text-xs md:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed text-center ${
+                    className={`hidden md:block text-gray-400 text-xs md:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed text-center ${
                       isRTL ? "lg:text-right" : "lg:text-left"
                     }`}
                   >
