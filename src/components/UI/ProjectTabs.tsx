@@ -188,23 +188,26 @@ const ProjectTabs = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center md:mb-16 mb-8"
+          className="text-center md:mb-16 mb-10"
         >
-          <div className="inline-flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-3">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 via-sky-300 to-purple-400 bg-clip-text text-transparent pt-3 pb-2 md:pt-4 md:pb-3 leading-snug md:leading-tight">
-              {t("projectTabs.title")}
-            </h2>
-            <div className="inline-flex items-center gap-2 px-3 py-1 md:px-3.5 md:py-1.5 rounded-full bg-gradient-to-r from-cyan-500/15 via-purple-500/10 to-purple-500/20 border border-cyan-500/30 text-cyan-300 text-xs sm:text-sm font-bold shadow-lg shadow-cyan-500/10 backdrop-blur-md">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"></span>
-              </span>
-              <span>
-                {t("projectTabs.totalBadge", { count: totalProjectsCount })}
-              </span>
-            </div>
+          {/* Eyebrow Total Projects Badge */}
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#0A0E27]/90 border border-cyan-500/30 text-cyan-300 text-xs sm:text-sm font-semibold mb-4 shadow-[0_0_20px_rgba(0,217,255,0.15)] backdrop-blur-md hover:border-cyan-400/50 transition-all duration-300">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400 shadow-[0_0_8px_#00D9FF]"></span>
+            </span>
+            <span className="tracking-wide">
+              {t("projectTabs.totalBadge", { count: totalProjectsCount })}
+            </span>
           </div>
-          <p className="text-sm md:text-xl text-gray-400 max-w-2xl mx-auto">
+
+          {/* Section Main Title */}
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-cyan-400 via-sky-300 to-purple-400 bg-clip-text text-transparent pt-1 pb-3 leading-snug tracking-tight">
+            {t("projectTabs.title")}
+          </h2>
+
+          {/* Section Subtitle */}
+          <p className="text-sm md:text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
             {t("projectTabs.subtitle")}
           </p>
         </motion.div>
@@ -225,10 +228,10 @@ const ProjectTabs = () => {
               >
                 <span className="truncate font-semibold">{category.title}</span>
                 <span
-                  className={`flex-shrink-0 text-[11px] lg:text-xs font-bold px-2 py-0.5 rounded-full transition-all duration-300 ${
+                  className={`flex-shrink-0 text-[11px] lg:text-xs font-black px-2.5 py-0.5 rounded-full transition-all duration-300 ${
                     activeTab === category.id
-                      ? "bg-white/25 text-white border border-white/30 shadow-sm"
-                      : "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 group-hover:bg-cyan-500/20 group-hover:border-cyan-500/40"
+                      ? "bg-[#0A0E27]/90 text-cyan-200 border border-cyan-300/50 shadow-[inset_0_1px_3px_rgba(0,0,0,0.6)]"
+                      : "bg-gray-900/80 text-gray-400 border border-gray-700/60 group-hover:text-cyan-300 group-hover:border-cyan-500/40 group-hover:bg-cyan-500/10"
                   }`}
                 >
                   {category.projects?.length || 0}
@@ -287,10 +290,10 @@ const ProjectTabs = () => {
                   >
                     <span>{category.title}</span>
                     <span
-                      className={`text-[10px] sm:text-xs font-bold px-1.5 py-0.5 rounded-full transition-all duration-300 ${
+                      className={`text-[10px] sm:text-xs font-black px-2 py-0.5 rounded-full transition-all duration-300 ${
                         activeTab === category.id
-                          ? "bg-white/25 text-white border border-white/30 shadow-sm"
-                          : "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 group-hover:bg-cyan-500/20"
+                          ? "bg-[#0A0E27]/90 text-cyan-200 border border-cyan-300/50 shadow-[inset_0_1px_3px_rgba(0,0,0,0.6)]"
+                          : "bg-gray-900/80 text-gray-400 border border-gray-700/60 group-hover:text-cyan-300 group-hover:border-cyan-500/20"
                       }`}
                     >
                       {category.projects?.length || 0}
