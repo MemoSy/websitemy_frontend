@@ -68,10 +68,11 @@ const ServicesSection = () => {
     const isRTLDir = currentDir === "rtl";
 
     // إعداد الحاوية والبطاقات
+    const isMobile = window.innerWidth < 768;
     gsap.set(container, {
       display: "flex",
       flexDirection: "row",
-      gap: "2rem",
+      gap: isMobile ? "1.5rem" : "5rem",
       width: "100%",
       overflowX: "visible",
       x: 0, // إعادة تعيين الموقع عند تغيير اللغة
@@ -88,14 +89,21 @@ const ServicesSection = () => {
       ease: "none",
       scrollTrigger: {
         trigger: section,
-        start: "center center",
-        end: () => `+=${scrollDistance}`,
-        scrub: 1,
+        start: isMobile ? "top 76px" : "center center",
+        end: () => (isMobile ? `+=${window.innerHeight * 1.5}` : `+=${scrollDistance}`),
+        scrub: isMobile ? 0.6 : 1,
         pin: true,
         pinSpacing: true,
         anticipatePin: 1,
         invalidateOnRefresh: true,
         markers: false,
+        snap: isMobile
+          ? {
+              snapTo: [0, 0.25, 0.5, 0.75, 1],
+              duration: { min: 0.2, max: 0.4 },
+              ease: "power1.out",
+            }
+          : undefined,
         onEnter: () => setIsInView(true),
         onLeave: () => setIsInView(false),
         onEnterBack: () => setIsInView(true),
@@ -162,7 +170,7 @@ const ServicesSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="py-20 md:py-24 bg-[#131829] relative overflow-x-hidden"
+      className="pt-28 pb-10 sm:pt-32 sm:pb-16 md:py-24 bg-[#131829] relative overflow-x-hidden"
       id="services"
     >
       {/* Background Effects */}
@@ -219,29 +227,27 @@ const ServicesSection = () => {
       <div className="container mx-auto px-4 xl:px-0 relative z-10">
         {/* Section Header */}
         <div
-          className={`text-center mb-12 md:mb-16 max-w-3xl mx-auto ${
-            isRTL ? "" : ""
-          }`}
+          className="text-center mb-6 sm:mb-8 md:mb-16 max-w-3xl mx-auto"
         >
-          <span className="inline-block px-6 py-2 bg-[#00D9FF]/10 border border-[#00D9FF]/30 rounded-full text-[#00D9FF] font-semibold text-sm uppercase tracking-wider mb-4">
+          <span className="inline-block px-5 py-1.5 sm:px-6 sm:py-2 bg-[#00D9FF]/10 border border-[#00D9FF]/30 rounded-full text-[#00D9FF] font-semibold text-xs sm:text-sm uppercase tracking-wider mb-2 sm:mb-4">
             {t("services.badge")}
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-4 leading-tight">
+          <h2 className="text-[1.3rem] xs:text-[1.45rem] sm:text-4xl md:text-5xl font-extrabold text-white mb-2 sm:mb-4 leading-tight whitespace-nowrap sm:whitespace-normal">
             {t("services.title")}
             <span className="bg-gradient-to-r from-[#00D9FF] to-[#6C5CE7] bg-clip-text text-transparent">
               {" "}
               {t("services.highlight")}
             </span>
           </h2>
-          <p className="text-[#A0AEC0] text-base sm:text-lg leading-relaxed">
+          <p className="hidden md:block text-[#A0AEC0] text-base sm:text-lg leading-relaxed">
             {t("services.subtitle")}
           </p>
         </div>
 
-        {/* Services Grid - 6 خدمات في صف أفقي */}
+        {/* Services Grid - 5 خدمات في صف أفقي */}
         <div
           ref={cardsContainerRef}
-          className={`relative mb-12 flex flex-nowrap !gap-20 overflow-visible ${
+          className={`relative mb-6 sm:mb-8 md:mb-12 flex flex-nowrap gap-5 sm:gap-8 md:!gap-20 overflow-visible ${
             isRTL ? "flex-row" : "flex-row"
           }`}
           style={{
