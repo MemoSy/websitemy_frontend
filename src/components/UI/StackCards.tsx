@@ -11,6 +11,7 @@ import {
   ChevronRight,
   MousePointer,
 } from "lucide-react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,6 +23,7 @@ interface Card {
   gradient: string;
   iconColor: string;
   bgGradient: string;
+  highlights: string[];
 }
 
 const StackCards: React.FC = () => {
@@ -38,14 +40,60 @@ const StackCards: React.FC = () => {
   const activeStepRef = useRef(0);
   activeStepRef.current = activeStep;
 
+  const shouldReduceMotion = useReducedMotion();
+  const prevStepRef = useRef(activeStep);
+  const directionRef = useRef(1);
+
+  if (activeStep !== prevStepRef.current) {
+    directionRef.current = activeStep >= prevStepRef.current ? 1 : -1;
+    prevStepRef.current = activeStep;
+  }
+  const direction = directionRef.current;
+
+  // Directional text transition variants (28px displacement, premium cubic-bezier easing)
+  const displacement = 28;
+  const titleVariants = {
+    enter: (dir: number) => ({
+      x: shouldReduceMotion ? 0 : dir >= 0 ? -displacement : displacement,
+      opacity: 0,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+      transition: {
+        duration: shouldReduceMotion ? 0.15 : 0.3,
+        ease: [0.16, 1, 0.3, 1],
+      },
+    },
+    exit: (dir: number) => ({
+      x: shouldReduceMotion ? 0 : dir >= 0 ? displacement : -displacement,
+      opacity: 0,
+      transition: {
+        duration: shouldReduceMotion ? 0.1 : 0.2,
+        ease: [0.4, 0, 0.2, 1],
+      },
+    }),
+  };
+
   const isWheelingRef = useRef(false);
+
+  const getHighlights = (cardKey: string, fallback: string[]): string[] => {
+    const res = t(`stackCards.cards.${cardKey}.highlights`, {
+      returnObjects: true,
+    });
+    return Array.isArray(res) ? (res as string[]) : fallback;
+  };
 
   const cards: Card[] = [
     {
       id: 1,
-      icon: <MessageSquare className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12" />,
+      icon: <MessageSquare className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9" />,
       title: t("stackCards.cards.card1.title"),
       description: t("stackCards.cards.card1.description"),
+      highlights: getHighlights("card1", [
+        "دراسة المتطلبات",
+        "خارطة الطريق",
+      ]),
       gradient: "from-[#6C5CE7] to-[#00D9FF]",
       iconColor: "#6C5CE7",
       bgGradient:
@@ -53,9 +101,13 @@ const StackCards: React.FC = () => {
     },
     {
       id: 2,
-      icon: <Palette className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12" />,
+      icon: <Palette className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9" />,
       title: t("stackCards.cards.card2.title"),
       description: t("stackCards.cards.card2.description"),
+      highlights: getHighlights("card2", [
+        "نماذج Wireframes",
+        "تصاميم Figma UI/UX",
+      ]),
       gradient: "from-[#00D9FF] to-[#00FFA3]",
       iconColor: "#00D9FF",
       bgGradient:
@@ -63,9 +115,13 @@ const StackCards: React.FC = () => {
     },
     {
       id: 3,
-      icon: <Code className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12" />,
+      icon: <Code className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9" />,
       title: t("stackCards.cards.card3.title"),
       description: t("stackCards.cards.card3.description"),
+      highlights: getHighlights("card3", [
+        "أكواد نظيفة وسريعة",
+        "تهيئة السيو SEO",
+      ]),
       gradient: "from-[#00FFA3] to-[#6C5CE7]",
       iconColor: "#00FFA3",
       bgGradient:
@@ -73,9 +129,13 @@ const StackCards: React.FC = () => {
     },
     {
       id: 4,
-      icon: <Rocket className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12" />,
+      icon: <Rocket className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9" />,
       title: t("stackCards.cards.card4.title"),
       description: t("stackCards.cards.card4.description"),
+      highlights: getHighlights("card4", [
+        "إطلاق واختبار شامل",
+        "دعم فني مستمر",
+      ]),
       gradient: "from-[#6C5CE7] to-[#00D9FF]",
       iconColor: "#6C5CE7",
       bgGradient:
@@ -94,15 +154,20 @@ const StackCards: React.FC = () => {
     const ctx = gsap.context(() => {
       const getStepX = () => {
         const w = window.innerWidth;
-        if (w < 640) return 140;
-        if (w < 1024) return 260;
+        if (w < 640) return 60;
+        if (w < 1024) return 220;
         return 380;
       };
 
       const updateCardsPosition = (progress: number) => {
         const virtualIndex = progress * maxIndex;
         const currentNearest = Math.round(virtualIndex);
-        setActiveStep(currentNearest);
+        
+        // Guard state updates so React re-renders only on actual step changes
+        if (activeStepRef.current !== currentNearest) {
+          activeStepRef.current = currentNearest;
+          setActiveStep(currentNearest);
+        }
 
         // Dynamic background update
         if (bgRef.current && cards[currentNearest]) {
@@ -111,6 +176,7 @@ const StackCards: React.FC = () => {
 
         const stepX = getStepX();
         const dir = isRTL ? -1 : 1;
+        const isMobile = window.innerWidth < 640;
 
         cardsRef.current.forEach((cardEl, i) => {
           if (!cardEl) return;
@@ -118,16 +184,22 @@ const StackCards: React.FC = () => {
           const diff = i - virtualIndex;
           const absDiff = Math.abs(diff);
 
+          if (isMobile && absDiff > 1.1) {
+            gsap.set(cardEl, { display: "none" });
+            return;
+          }
+
           // 3D Cylindrical Transformation
           const x = dir * diff * stepX;
-          const z = -Math.min(absDiff, 2.5) * 160;
-          const rotateY = dir * -diff * 22;
-          const scale = Math.max(0.68, 1 - absDiff * 0.14);
+          const z = -Math.min(absDiff, 2.5) * (isMobile ? 70 : 160);
+          const rotateY = dir * -diff * (isMobile ? 12 : 22);
+          const scale = Math.max(isMobile ? 0.82 : 0.68, 1 - absDiff * (isMobile ? 0.1 : 0.14));
           const opacity = Math.max(0.06, 1 - absDiff * 0.46);
-          const blur = Math.min(absDiff * 2.2, 5);
+          const blur = isMobile ? 0 : Math.min(absDiff * 2.2, 5);
           const zIndex = Math.round(30 - absDiff * 8);
 
           gsap.set(cardEl, {
+            display: "block",
             x,
             z,
             rotateY,
@@ -245,6 +317,16 @@ const StackCards: React.FC = () => {
     };
   }, [cards.length]);
 
+  // Support direct hash navigation to #process
+  useEffect(() => {
+    if (window.location.hash === "#process" && sectionRef.current) {
+      const timer = setTimeout(() => {
+        sectionRef.current?.scrollIntoView({ behavior: "instant" as ScrollBehavior });
+      }, 400);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
   // Click navigation to jump directly to any step
   const scrollToStep = (index: number) => {
     if (!triggerRef.current) return;
@@ -268,11 +350,11 @@ const StackCards: React.FC = () => {
   const active = cards[activeStep] || cards[0];
 
   return (
-    <div ref={sectionRef} className="relative bg-[#0F1729]">
+    <div ref={sectionRef} id="process" className="relative bg-[#0F1729] overflow-x-clip">
       {/* Pinned Viewport Container - Takes full viewport with generous top spacing below fixed Header */}
       <div
         ref={pinTargetRef}
-        className="h-screen w-full relative flex flex-col justify-between overflow-hidden pt-28 sm:pt-32 md:pt-36 pb-8 select-none"
+        className="h-screen w-full relative flex flex-col justify-between overflow-hidden pt-20 sm:pt-24 md:pt-28 pb-4 sm:pb-6 select-none"
       >
         {/* Dynamic Background Glow */}
         <div
@@ -290,21 +372,19 @@ const StackCards: React.FC = () => {
           <div className="absolute bottom-1/4 -right-32 w-96 h-96 rounded-full blur-3xl bg-[#00D9FF] opacity-15" />
         </div>
 
-        {/* Section Header with generous margin below Header */}
+        {/* Section Header */}
         <div className="container mx-auto px-4 xl:px-0 relative z-10">
           <div
             className={`text-center max-w-4xl mx-auto ${isRTL ? "rtl" : "ltr"}`}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#6C5CE7]/15 border border-[#6C5CE7]/35 rounded-full mb-3 shadow-md backdrop-blur-md">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#6C5CE7]/15 border border-[#6C5CE7]/35 rounded-full mb-4 sm:mb-5 shadow-md backdrop-blur-md">
               <span className="w-2 h-2 rounded-full bg-[#00D9FF] animate-pulse" />
               <span className="text-[#00D9FF] font-semibold text-xs sm:text-sm tracking-wide">
                 {t("stackCards.badge")}
               </span>
             </div>
             <h2
-              className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white mb-2 leading-tight px-4 ${
-                isRTL ? "text-right md:text-center" : "text-left md:text-center"
-              }`}
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white mb-3 sm:mb-4 leading-tight px-4 text-center"
             >
               {t("stackCards.title.part1")}{" "}
               <span className="bg-gradient-to-r from-[#6C5CE7] via-[#00D9FF] to-[#00FFA3] bg-clip-text text-transparent">
@@ -313,18 +393,39 @@ const StackCards: React.FC = () => {
               {t("stackCards.title.part2")}
             </h2>
             <p
-              className={`text-[#A0AEC0] text-xs sm:text-sm md:text-base leading-relaxed max-w-2xl mx-auto px-4 ${
-                isRTL ? "text-right md:text-center" : "text-left md:text-center"
-              }`}
+              className="text-[#A0AEC0] text-xs sm:text-sm md:text-base leading-relaxed max-w-2xl mx-auto px-4 text-center"
             >
               {t("stackCards.subtitle")}
             </p>
           </div>
         </div>
 
+        {/* Central Dynamic Step Title (Directional Smooth Transition) */}
+        <div className="relative z-20 container mx-auto px-4 my-auto py-2 sm:py-3">
+          <div className="flex items-center justify-center text-center max-w-3xl mx-auto min-h-[44px] sm:min-h-[52px] overflow-hidden">
+            <AnimatePresence mode="wait" custom={direction} initial={false}>
+              <motion.h3
+                key={`title-${activeStep}`}
+                custom={direction}
+                variants={titleVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-white tracking-tight whitespace-nowrap px-4 select-none"
+                style={{
+                  textShadow: `0 2px 10px rgba(0,0,0,0.85), 0 0 25px ${active.iconColor}35`,
+                  WebkitFontSmoothing: "antialiased",
+                }}
+              >
+                {active.title}
+              </motion.h3>
+            </AnimatePresence>
+          </div>
+        </div>
+
         {/* 3D Circular Horizontal Carousel Stage */}
         <div
-          className="relative w-full max-w-6xl mx-auto px-4 sm:px-6 my-auto flex items-center justify-center h-[340px] sm:h-[370px] md:h-[400px]"
+          className="relative w-full max-w-5xl mx-auto px-4 sm:px-6 my-auto flex items-center justify-center h-[280px] sm:h-[300px] md:h-[320px] overflow-x-clip"
           style={{
             perspective: "1200px",
           }}
@@ -340,9 +441,9 @@ const StackCards: React.FC = () => {
                 style={{
                   transformStyle: "preserve-3d",
                 }}
-                className="absolute w-[90vw] sm:w-[82vw] md:w-[620px] max-w-2xl cursor-pointer will-change-transform"
+                className="absolute left-0 right-0 mx-auto w-[90vw] sm:w-[82vw] md:w-[620px] max-w-2xl cursor-pointer will-change-transform"
               >
-                <div className="relative bg-gradient-to-br from-[#1A1F3A]/95 to-[#0F1729]/95 backdrop-blur-2xl rounded-3xl p-6 sm:p-8 md:p-9 transition-all duration-300 border border-white/10">
+                <div className="relative bg-gradient-to-br from-[#1A1F3A]/95 to-[#0F1729]/95 backdrop-blur-2xl rounded-3xl p-6 sm:p-7 md:p-8 transition-all duration-300 border border-white/10">
                   {/* Top glowing accent line */}
                   <div
                     className="absolute -top-px left-12 right-12 h-px"
@@ -359,7 +460,7 @@ const StackCards: React.FC = () => {
                   >
                     {/* Icon container */}
                     <div
-                      className="w-14 h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 rounded-2xl flex items-center justify-center shadow-lg transition-transform duration-300"
+                      className="w-11 h-11 sm:w-13 sm:h-13 md:w-14 md:h-14 rounded-2xl flex items-center justify-center shadow-lg transition-transform duration-300"
                       style={{
                         background: `linear-gradient(135deg, ${card.iconColor}25, ${card.iconColor}08)`,
                         border: `2px solid ${card.iconColor}40`,
@@ -371,39 +472,54 @@ const StackCards: React.FC = () => {
                     {/* Step number badge */}
                     <div className="flex flex-col items-center">
                       <span
-                        className="text-4xl sm:text-5xl md:text-5xl font-black transition-all duration-300 tracking-tight"
+                        className="text-3xl sm:text-4xl md:text-4xl font-black transition-all duration-300 tracking-tight"
                         style={{
                           color: card.iconColor,
                           textShadow:
                             activeStep === index
-                              ? `0 0 30px ${card.iconColor}80, 0 0 50px ${card.iconColor}40`
+                              ? `0 0 25px ${card.iconColor}70, 0 0 45px ${card.iconColor}30`
                               : "none",
                         }}
                       >
                         {String(index + 1).padStart(2, "0")}
                       </span>
-                      <span className="text-white/40 text-[10px] sm:text-xs font-bold tracking-wider uppercase -mt-1">
+                      <span className="text-white/40 text-[10px] sm:text-xs font-semibold tracking-wider uppercase -mt-0.5">
                         {isRTL ? "خطوة" : "Step"}
                       </span>
                     </div>
                   </div>
 
-                  {/* Card Content */}
-                  <div className="space-y-2 sm:space-y-3">
-                    <h3
-                      className={`text-xl sm:text-2xl md:text-2xl font-bold text-white leading-tight ${
-                        isRTL ? "text-right" : "text-left"
-                      }`}
-                    >
-                      {card.title}
-                    </h3>
+                  {/* Card Content: Exactly 1 line on desktop + Exactly 2 Tags */}
+                  <div className="space-y-4">
                     <p
-                      className={`card-desc text-[#A0AEC0] text-xs sm:text-sm md:text-base leading-relaxed transition-opacity duration-300 ${
+                      className={`card-desc text-slate-200 text-xs sm:text-sm md:text-base leading-relaxed transition-opacity duration-300 font-medium md:whitespace-nowrap overflow-hidden text-ellipsis ${
                         isRTL ? "text-right" : "text-left"
                       }`}
                     >
                       {card.description}
                     </p>
+
+                    {/* Exactly 2 Tags */}
+                    {card.highlights && card.highlights.length > 0 && (
+                      <div
+                        className={`flex items-center gap-2 sm:gap-2.5 pt-3 border-t border-white/10 ${
+                          isRTL ? "justify-start" : "justify-start"
+                        }`}
+                      >
+                        {card.highlights.slice(0, 2).map((item, hIdx) => (
+                          <span
+                            key={hIdx}
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-white/5 border border-white/10 text-slate-300 shadow-sm"
+                          >
+                            <span
+                              className="w-1.5 h-1.5 rounded-full"
+                              style={{ backgroundColor: card.iconColor }}
+                            />
+                            {item}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </div>
 
                   {/* Bottom Divider Line */}
@@ -417,7 +533,7 @@ const StackCards: React.FC = () => {
         </div>
 
         {/* Bottom Controls: Navigation + Step Dots + Progress */}
-        <div className="container mx-auto px-4 relative z-20 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
+        <div className="container mx-auto px-4 relative z-20 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6">
           {/* Navigation Arrows + Dots in a unified Glassmorphism Bar */}
           <div className="flex items-center gap-3 bg-black/40 backdrop-blur-xl px-4 py-2 rounded-2xl border border-white/10 shadow-2xl">
             <button
@@ -448,7 +564,7 @@ const StackCards: React.FC = () => {
                     }`}
                     style={{
                       backgroundColor: isSelected ? card.iconColor : undefined,
-                      boxShadow: isSelected ? `0 0 14px ${card.iconColor}` : undefined,
+                      boxShadow: isSelected ? `0 0 10px ${card.iconColor}80` : undefined,
                     }}
                     aria-label={`Go to step ${index + 1}`}
                   />
@@ -470,13 +586,15 @@ const StackCards: React.FC = () => {
             </button>
           </div>
 
-          {/* User Hint */}
-          <div className="flex items-center gap-2 text-xs text-white/50 bg-black/30 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/10 shadow-sm">
+          {/* Refined User Hint */}
+          <div className="hidden sm:flex items-center gap-2 text-xs text-white/50 bg-black/30 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/10 shadow-sm">
             <MousePointer className="w-3.5 h-3.5 text-cyan-400 animate-bounce" />
             <span>
-              {isRTL
-                ? "حركة سكرول واحدة للتنقل بين المراحل، أو انقر على الكارت"
-                : "One scroll to transition steps, or click any card"}
+              {t("stackCards.hint", {
+                defaultValue: isRTL
+                  ? "مرّر للتنقل بين المراحل أو اختر البطاقة"
+                  : "Scroll to transition between steps or select a card",
+              })}
             </span>
           </div>
         </div>

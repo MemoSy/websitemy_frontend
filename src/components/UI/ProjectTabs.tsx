@@ -106,6 +106,7 @@ const ProjectTabs = () => {
 
   return (
     <section
+      id="projects"
       ref={sectionRef}
       className="py-20 md:py-24 relative overflow-hidden"
     >

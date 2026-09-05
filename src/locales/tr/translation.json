@@ -266,30 +266,37 @@
     }
   },
   "hero": {
-    "badge": "Web Geliştirmede En Güvenilir",
+    "badge": "Modern Web Tasarım ve Mühendislik Ajansı",
     "title": {
-      "part1": "Fikirlerinizi",
-      "highlight": "Web Sitelerine",
-      "part2": "Dönüştürüyoruz ve Karınızı",
-      "percentage": "40%"
+      "line1": "Profesyonel Web Siteleri Geliştiriyoruz",
+      "line2": "Fikrinizi dönüştürüyoruz:",
+      "highlight": "Etkili Dijital Varlık"
     },
     "subtitle": {
-      "main": "Hızlı ve Güvenli Web Çözümleri Oluşturmada Güvenilir Teknoloji Ortağınız",
-      "services": "Geliştirme + Tasarım + Hosting + Bakım"
+      "compact": "Kullanıcı deneyimi, performans ve dönüşüme odaklanan hızlı ve modern web siteleri tasarlıyor ve geliştiriyoruz."
     },
     "features": {
-      "delivery": "Zamanında Teslimat veya Para İade Garantisi",
-      "quality": "Kalite Güvencesi",
-      "support": "7/24 Sürekli Teknik Destek"
+      "design": "Özel ve Modern UI/UX",
+      "performance": "Üstün Performans ve Hızlı Yükleme",
+      "support": "Temiz Kod ve Kesintisiz Destek"
     },
     "cta": {
       "consultation": "Ücretsiz Danışmanlık Alın",
-      "calculator": "Proje Maliyetinizi Hesaplayın"
+      "portfolio": "Çalışmalarımızı İnceleyin",
+      "calculator": "Proje Maliyetini Hesaplayın"
     },
-    "trust": {
-      "projects": "12+ Başarılı Proje",
-      "rating": "4.8/5 Müşteri Değerlendirmesi",
-      "support": "Sürekli Destek"
+    "stats": {
+      "projectsCount": "19+",
+      "projectsLabel": "Başarılı Proje",
+      "clientsCount": "8",
+      "clientsLabel": "Müşteri",
+      "openSourceCount": "5",
+      "openSourceLabel": "Açık Kaynaklı Proje"
+    },
+    "lighthouse": {
+      "performance": "Performans",
+      "accessibility": "Erişilebilirlik",
+      "seo": "SEO"
     }
   },
   "services": {
@@ -351,22 +358,27 @@
       "part2": "Dönüştürüyoruz?"
     },
     "subtitle": "Baştan sona net ve düzenli bir süreç ile teslim tarihlerine tam bağlılık",
+    "hint": "Aşamalar arasında geçiş yapmak için kaydırın veya bir kart seçin",
     "cards": {
       "card1": {
         "title": "Proje Analizi ve Planlama",
-        "description": "İş gereksinimlerinizi ve hedef pazarınızı derinlemesine inceleyerek, hedeflerinize ulaşmanızı ve rakiplerinizin önüne geçmenizi sağlayacak hassas bir dijital strateji geliştiriyoruz."
+        "description": "Başarınızı garantilemek için hedeflerinizi ve pazarınızı analiz ediyoruz.",
+        "highlights": ["Gereksinim Analizi", "Dijital Yol Haritası"]
       },
       "card2": {
-        "title": "Modern Arayüz Tasarımı",
-        "description": "Müşteri deneyimine (UI/UX) odaklanan, marka kimliğinizi güçlendiren ve dönüşüm oranlarını artıran çekici ve kullanıcı dostu tasarımlar oluşturuyoruz."
+        "title": "Modern UI/UX Tasarımı",
+        "description": "Markanızı güçlendiren, modern ve dönüşüm odaklı UI/UX tasarlıyoruz.",
+        "highlights": ["Wireframe", "Figma UI/UX"]
       },
       "card3": {
         "title": "İleri Web Geliştirme",
-        "description": "Tüm cihazlarla uyumlu, hızlı ve güvenli web siteleri oluşturmak için en son programlama teknolojilerini kullanıyor, arama sonuçlarında üst sıralarda yer almanızı sağlamak için SEO standartlarına uyuyoruz."
+        "description": "En son teknolojilerle hızlı, güvenli ve SEO uyumlu web siteleri kodluyoruz.",
+        "highlights": ["Temiz ve Hızlı Kod", "SEO Uyumluluğu"]
       },
       "card4": {
         "title": "Yayınlama ve Sürekli Destek",
-        "description": "Rolümüz yayınlama ile bitmiyor; sitenizin istikrarını sağlamak için bakım ve teknik destek sunuyor, işinizin büyümesine ve pazar değişikliklerine ayak uyduran sürekli iyileştirmeler sağlıyoruz."
+        "description": "Kusursuz yayınlama ve istikrarınızı koruyan sürekli destek sağlıyoruz.",
+        "highlights": ["Kalite Güvencesi", "Sürekli Destek"]
       }
     }
   },

@@ -266,30 +266,37 @@
     }
   },
   "hero": {
-    "badge": "Most Trusted in Web Development",
+    "badge": "Modern Web Design & Engineering Agency",
     "title": {
-      "part1": "We Transform Your Ideas into",
-      "highlight": "Websites",
-      "part2": "that Increase Your Profits by",
-      "percentage": "40%"
+      "line1": "We Build Professional Websites",
+      "line2": "Turning your idea into an",
+      "highlight": "Effective Digital Presence"
     },
     "subtitle": {
-      "main": "Your Trusted Tech Partner in Building Fast and Secure Web Solutions",
-      "services": "Development + Design + Hosting + Maintenance"
+      "compact": "We design and develop fast, modern websites focused on user experience, performance, and conversion."
     },
     "features": {
-      "delivery": "On-Time Delivery or Money Back Guarantee",
-      "quality": "Quality Assurance",
-      "support": "24/7 Continuous Technical Support"
+      "design": "Custom & Modern UI/UX",
+      "performance": "Peak Performance & Fast Loading",
+      "support": "Clean Code & Ongoing Support"
     },
     "cta": {
       "consultation": "Get Free Consultation",
-      "calculator": "Calculate Your Project Cost"
+      "portfolio": "View Our Work",
+      "calculator": "Calculate Project Cost"
     },
-    "trust": {
-      "projects": "12+ Successful Projects",
-      "rating": "4.8/5 Client Rating",
-      "support": "Continuous Support"
+    "stats": {
+      "projectsCount": "19+",
+      "projectsLabel": "Successful Projects",
+      "clientsCount": "8",
+      "clientsLabel": "Clients",
+      "openSourceCount": "5",
+      "openSourceLabel": "Open Source Projects"
+    },
+    "lighthouse": {
+      "performance": "Performance",
+      "accessibility": "Accessibility",
+      "seo": "SEO"
     }
   },
   "services": {
@@ -351,22 +358,27 @@
       "part2": "?"
     },
     "subtitle": "A clear and organized process from start to finish with complete commitment to deadlines",
+    "hint": "Scroll to transition between steps or select a card",
     "cards": {
       "card1": {
         "title": "Project Analysis & Planning",
-        "description": "We start with an in-depth study of your business requirements and target market to develop a precise digital strategy that ensures achieving your goals and outperforming competitors."
+        "description": "We analyze your goals and market to create a winning digital roadmap.",
+        "highlights": ["Requirements Study", "Strategic Roadmap"]
       },
       "card2": {
         "title": "Modern UI/UX Design",
-        "description": "We create attractive, user-friendly designs focused on customer experience (UI/UX), enhancing your brand identity and increasing conversion rates."
+        "description": "We craft modern, intuitive UI/UX that elevates your brand and conversion.",
+        "highlights": ["Wireframes", "Figma UI/UX"]
       },
       "card3": {
         "title": "Advanced Web Development",
-        "description": "We use the latest programming technologies to build fast, secure, and responsive websites for all devices, adhering to SEO standards to ensure top search results."
+        "description": "We build fast, secure, and SEO-optimized websites using modern code.",
+        "highlights": ["Clean Fast Code", "SEO Optimized"]
       },
       "card4": {
         "title": "Launch & Continuous Support",
-        "description": "Our role doesn't end at launch; we provide maintenance and technical support to ensure your site's stability, with continuous improvements to keep up with your business growth and market changes."
+        "description": "We launch seamlessly and provide ongoing support to keep you growing.",
+        "highlights": ["Quality Assurance", "Ongoing Support"]
       }
     }
   },
